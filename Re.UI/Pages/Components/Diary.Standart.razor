@@ -1,0 +1,168 @@
+﻿<div>Стандартный дневник</div>
+
+
+<h3>Дата</h3>
+<input type="date" @bind="selectedDate" />
+
+<h3>Время</h3>
+<input type="time" @bind="SelectedTime" />
+
+<h3>Состояние</h3>
+<p>
+    <select @bind="selectedState">
+        <option value=""> </option>
+        <option value="">удовлетворительное.</option>
+        <option value="">средней тяжести.</option>
+        <option value="">тяжелое.</option>
+        <option value="">крайне тяжелое.</option>
+        <option value="">терминальное.</option>
+        <option value="">клинической смерти.</option>
+    </select>
+</p>
+
+<h3>Жалобы</h3>
+<p>
+    <select @bind="selectedComplaint">
+        <option value=""> </option>
+        <option value="">Жалоб нет.</option>
+        <option value="">Жалобы не предъявляет из-за тяжести состояния.</option>
+        <option value="">Не предъявляет жалоб из-за седации.</option>
+        <option value="">Жалобы прежние.</option>
+        <option value="">Предъявляет жалобы на</option>
+        <option value="">Жалобы на боли в области операции.</option>
+    </select>
+    <input type="text" @bind="InputText" />
+    <input type="text" @bind="InputText2" />
+
+    <select @bind="selectedComplaintBall">
+        <option value=""> </option>
+        <option value="">1 б.</option>
+        <option value="">2 б.</option>
+        <option value="">3 б.</option>
+        <option value="">4 б.</option>
+        <option value="">5 б.</option>
+        <option value="">6 б.</option>
+        <option value="">7 б.</option>
+        <option value="">8 б.</option>
+        <option value="">9 б.</option>
+        <option value="">10 б.</option>
+    </select>
+</p>
+
+<h3>Сознание - </h3>
+<p>
+    <select @bind="selectedCons">
+        <option value=""> </option>
+        <option value="">ясное.</option>
+        <option value="">оглушение.</option>
+        <option value="">глубокое оглушение.</option>
+        <option value="">сопор.</option>
+        <option value="">кома I.</option>
+        <option value="">кома II.</option>
+        <option value="">кома III.</option>
+        <option value="">медикаментозная седация.</option>
+    </select>
+</p>
+
+<h3>RASS</h3>
+<p>
+    <select @bind="selectedRASS">
+        <option value=""> </option>
+        <option value="">-5 баллов по шкале RASS.</option>
+        <option value="">-4 балла по шкале RASS.</option>
+        <option value="">-3 балла по шкале RASS.</option>
+        <option value="">-2 балла по шкале RASS.</option>
+        <option value="">-1 балл по шкале RASS.</option>
+        <option value="">0 баллов по шкале RASS.</option>
+        <option value="">+1 балл по шкале RASS.</option>
+        <option value="">+2 балла по шкале RASS.</option>
+        <option value="">+3 балла по шкале RASS.</option>
+        <option value="">+4 балла по шкале RASS.</option>
+    </select>
+    <input type="text" @bind="InputTextRASS" />
+</p>
+
+
+<h3>Кожные покровы</h3>
+<p>
+    <select @bind="selectedLeather">
+        <option value=""> </option>
+        <option value="">теплые,</option>
+        <option value="">холодные,</option>
+    </select>
+    <h3>(влажность)</h3>
+    <select @bind="selectedMoisture">
+        <option value=""> </option>
+        <option value="">сухие,</option>
+        <option value="">влажные,</option>
+        <option value="">естественной влажности,</option>
+    </select>
+    <h3>(цвет)</h3>
+    <select @bind="selectedColor">
+        <option value=""> </option>
+        <option value="">естественной окраски.</option>
+        <option value="">бледные.</option>
+        <option value="">бледно-розовые.</option>
+    </select>
+</p>
+
+<h3>Дыхание через</h3>
+<p>
+    <select @bind="selectedBreathing">
+        <option value=""> </option>
+        <option value="">естественные дыхательные пути.</option>
+        <option value="">эндотрахеальную трубку.</option>
+        <option value="">ларингеальную маску.</option>
+        <option value="">трахеостомическую канюлю.</option>
+        <option value="">воздуховод.</option>
+    </select>
+
+</p>
+
+@code {
+    //Дата
+    private DateTime? selectedDate;
+
+    protected override void OnInitialized()
+    {
+        selectedDate = null; // Устанавливаем начальное значение выбранной даты
+        selectedState = string.Empty; //Устанавливаем значение выбранного состояния
+        selectedComplaint = string.Empty; //Устанавливаем значение выбранной жалобы
+        selectedComplaintBall = string.Empty; //Устанавливаем значение выбранного балла
+        selectedCons = string.Empty; //Устанавливаем значение выбранного сознания
+        selectedRASS = string.Empty; //Устанавливаем значение выбранного балла RASS
+        selectedLeather = string.Empty; //Устанавливаем значение выбранного состояния кожного покрова
+        selectedMoisture = string.Empty; //Устанавливаем значение выбранного состояния влажности кожного покрова
+        selectedColor = string.Empty; //Устанавливаем значение выбранного состояния цвета кожного покрова
+        selectedBreathing = string.Empty; //Устанавливаем значение выбранного дыхания
+    }
+    //Время
+    private DateTime SelectedTime { get; set; }
+
+    //Список состояния
+    private string selectedState;
+
+    //Список жалоб
+    private string selectedComplaint; 
+    private string InputText { get; set; } //поле ввода
+    private string InputText2 = "  ,ВАШ - "; 
+    private string selectedComplaintBall;
+
+    //Сознание
+    private string selectedCons;
+
+    //RASS
+    private string selectedRASS;
+    private string InputTextRASS = "С целью потенцирования эффекта анальгетической терапии вводится в/в микроструйно Дексмедетомидин в дозировке 0.7 мкг/кг/час.";
+
+    //Кожные покровы
+    private string selectedLeather;
+    private string selectedMoisture; //влажность
+    private string selectedColor; //влажность
+
+    //Дыхание 
+    private string selectedBreathing;
+
+}
+
+
