@@ -1,8 +1,17 @@
 @page "/protocols"
+@using Re.UI.Pages.Components
 
-<div>
-
-</div>
+<MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary">
+    <MudTabPanel  Text="Стандартные протоколы">
+        <Prot_Standard />
+    </MudTabPanel>
+    <MudTabPanel Text="СЛР">
+        <Prot_SLR />
+    </MudTabPanel>
+    <MudTabPanel Text="Протокол факта смерти">
+        <Prot_DeathFact />
+    </MudTabPanel>
+</MudTabs>
 
 @code{
     
