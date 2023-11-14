@@ -14,7 +14,7 @@ public class StandardProtocol
     public TimeOnly Time { get; set; }
     public string Name { get; set; }
     
-    public bool LocalAnesthesy { get; set; }
+    public bool IsLocalAnesthesyNeeded { get; set; }
     public string[] LocalAnesthesyType { get; set; }
     public string LocalAnesthesyDose { get; set; }
     
