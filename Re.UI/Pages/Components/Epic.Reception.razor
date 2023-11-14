@@ -1,5 +1,6 @@
-﻿
+﻿@using Re.Core.Models
 @using Re.UI.Data
+
 
 <MudCard>
     <MudCardContent style="width: 1000px;">
@@ -12,14 +13,14 @@
                 <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
             </MudItem>
         </MudGrid>
-        <MudText Align="Align.Center" Typo="Typo.h5">Приемный стастус</MudText>
+        <MudText Align="Align.Center" Typo="Typo.h5">@re.Name</MudText>
         <MudGrid Spacing="0" Justify="Justify.SpaceBetween">
             <MudItem Class="d-flex justify-start align-center" xs="6">
                 <MudText>Пациент доставлен в реанимационное отделение из</MudText>
             </MudItem>
             <MudItem Class="d-flex justify-start align-center" xs="6">
                 <select style="width: 200px;">
-                @foreach (var item in deliveredFrom)
+                @foreach (var item in re.DeliveredFrom)
                 {
                     <option value="@item">@item</option>
                 }
@@ -32,7 +33,7 @@
             </MudItem>
             <MudItem Class="d-flex justify-start align-center" xs="6">
                 <select style="width: 200px;">
-                    @foreach (var item in ivl)
+                    @foreach (var item in re.AVLDueTransportation)
                     {
                         <option value="@item">@item</option>
                     }
@@ -72,16 +73,7 @@
 
 
 @code {
+    ReceptionEpicrisis re = new ReceptionEpicrisis();
     DateTime? date = DateTime.Now;
     TimeSpan? time = DateTime.Now.TimeOfDay;
-
-    private string[] deliveredFrom =
-    {
-        "операционной", "премного отделения", "поликлиники"
-    };
-
-    private string[] ivl =
-    {
-        "нет", "мешком", "поликлиники"
-    };
 }
