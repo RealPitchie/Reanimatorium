@@ -1,5 +1,87 @@
-﻿<h3>Epic.Reception</h3>
+﻿
+@using Re.UI.Data
+
+<MudCard>
+    <MudCardContent style="width: 1000px;">
+        <MudText Align="Align.Center">Отделение анестезиологии-реанимации</MudText>
+        <MudGrid Spacing="10" Justify="Justify.Center">
+            <MudItem>
+                <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
+            </MudItem>
+            <MudItem>
+                <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
+            </MudItem>
+        </MudGrid>
+        <MudText Align="Align.Center" Typo="Typo.h5">Приемный стастус</MudText>
+        <MudGrid Spacing="0" Justify="Justify.SpaceBetween">
+            <MudItem Class="d-flex justify-start align-center" xs="6">
+                <MudText>Пациент доставлен в реанимационное отделение из</MudText>
+            </MudItem>
+            <MudItem Class="d-flex justify-start align-center" xs="6">
+                <select style="width: 200px;">
+                @foreach (var item in deliveredFrom)
+                {
+                    <option value="@item">@item</option>
+                }
+                </select>
+            </MudItem>
+        </MudGrid>
+        <MudGrid Spacing="0" Justify="Justify.SpaceBetween">
+            <MudItem xs="6">
+                <MudText>ИВЛ при транспортировке</MudText>
+            </MudItem>
+            <MudItem Class="d-flex justify-start align-center" xs="6">
+                <select style="width: 200px;">
+                    @foreach (var item in ivl)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+            </MudItem>
+        </MudGrid>
+    </MudCardContent>
+    
+</MudCard>
+
+
+
+<MudGrid>
+    <MudItem xs="6">
+        <div class="row" style="justify-content: space-between;">
+            <div class="col">
+                <MudToggleIconButton Icon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="@Color.Error" Title="Выкл"
+                                     ToggledIcon="@Icons.Material.Filled.CheckBox" ToggledColor="@Color.Success" ToggledTitle="Вкл" />
+                <span>Протокол катетеризации центральной вены</span>
+            </div>
+            <div class="col">
+                <MudToggleIconButton Icon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="@Color.Error"  Title="Выкл"
+                                     ToggledIcon="@Icons.Material.Filled.CheckBox" ToggledColor="@Color.Success" ToggledTitle="Вкл" />
+                <span>Протокол катетеризации артерии</span>
+            </div>
+            <div class="col">
+                <MudToggleIconButton Icon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="@Color.Error" Title="Выкл"
+                                     ToggledIcon="@Icons.Material.Filled.CheckBox" ToggledColor="@Color.Success" ToggledTitle="Вкл" />
+                <span>Протокол катетеризации эпидурального пространства</span>
+            </div>
+
+        </div>
+
+    </MudItem>
+</MudGrid>
+
+
 
 @code {
+    DateTime? date = DateTime.Now;
+    TimeSpan? time = DateTime.Now.TimeOfDay;
 
+    private string[] deliveredFrom =
+    {
+        "операционной", "премного отделения", "поликлиники"
+    };
+
+    private string[] ivl =
+    {
+        "нет", "мешком", "поликлиники"
+    };
 }
