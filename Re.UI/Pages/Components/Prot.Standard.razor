@@ -158,8 +158,8 @@
         @* протокол эпидурального пространства *@
         @if(isEpidural && esProtocol != null)
         {
-            <MudPaper>
-                <MudText style="margin-top: 15px; margin: 15px 0">
+            <MudPaper Style="padding: 10px; margin: 15px 0">
+                <MudText style="margin-top: 15px;  font-weight: bolder;">
                     @date.ToDateOnly().ToString() &nbsp; &nbsp;&nbsp;&nbsp; @string.Format("{0}:{1}", time.Value.Hours,time.Value.Minutes)
                 </MudText>
             </MudPaper>
