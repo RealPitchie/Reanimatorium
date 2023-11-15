@@ -1,5 +1,17 @@
-﻿<h3>Стандартный дневник</h3>
+﻿@using Re.Core.Models
+@using Re.UI.Data
+
+<MudGrid Spacing="10" Justify="Justify.FlexStart">
+    <MudItem>
+        <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
+    </MudItem>
+    <MudItem>
+        <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
+    </MudItem>
+</MudGrid>
+
 
 @code {
-
+        DateTime? date = DateTime.Now; //Дата
+        TimeSpan? time = DateTime.Now.TimeOfDay; //Время
 }
