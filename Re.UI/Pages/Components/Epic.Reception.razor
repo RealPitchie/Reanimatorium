@@ -1,0 +1,86 @@
+﻿@using Re.Core.Models
+@using Re.UI.Data
+@using CColor = System.Drawing.Color
+
+
+<MudGrid>
+    <MudItem xs="7">
+        <MudText Align="Align.Center">Отделение анестезиологии-реанимации</MudText>
+        <MudGrid Spacing="10" Justify="Justify.Center">
+            <MudItem>
+                <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
+            </MudItem>
+            <MudItem>
+                <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
+            </MudItem>
+        </MudGrid>
+        <MudText Align="Align.Center" Typo="Typo.h5">@re.Name</MudText>
+        <MudPaper Elevation="0" Class="d-flex justify-space-between align-center">
+            <MudItem xs="8">
+                <MudText>Пациент доставлен в реанимационное отделение из</MudText>
+            </MudItem>
+            <MudItem xs="4">
+                <select style="width: 100%;">
+                    @foreach (var item in re.DeliveredFrom)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+            </MudItem>
+        </MudPaper>
+        <MudPaper Elevation="0" Class="d-flex justify-space-between align-center">
+            <MudItem xs="4">
+                <MudText>ИВЛ при транспортировке</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <select style="width: 100%;">
+                    @foreach (var item in re.AVLDueTransportation)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+            </MudItem>
+        </MudPaper>
+        <MudPaper Elevation="0" Class="d-flex justify-space-between align-center">
+            <MudItem Class="d-flex justify-start align-center" xs="2">
+                <MudText>Жалобы:</MudText>
+            </MudItem>
+            <MudItem Class="d-flex justify-start align-center" xs="10">
+                <select style="width: 100%;">
+                    @foreach (var item in re.Complaints)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+            </MudItem>
+        </MudPaper>
+        <MudPaper Elevation="0" Class="d-flex justify-space-between align-center">
+            <MudItem xs="9">
+                <input style="border: 1px dashed; width: 100%;" type="text" />
+            </MudItem>
+            <MudItem Class="d-flex justify-end align-center" xs="3">
+
+                <MudItem Class="d-flex justify-space-around align-center" xs="12">
+                    <MudText Color="@(IsVashOn ? Color.Dark : Color.Transparent)">ВАШ -</MudText>
+                    <select style="width: 50%;">
+                        @foreach (var item in re.Vash)
+                        {
+                            <option value="@item">@item</option>
+                        }
+                    </select>
+                </MudItem>
+                <MudToggleIconButton style="padding: 0; justify-content: flex-end;" @bind-Toggled="@IsVashOn" Icon="@Icons.Material.Filled.CheckBoxOutlineBlank"
+                                     Color="@Color.Error" Title="Выкл" ToggledIcon="@Icons.Material.Filled.CheckBox" ToggledColor="@Color.Success" ToggledTitle="Вкл" />
+            </MudItem>
+        </MudPaper>
+    </MudItem>
+    
+</MudGrid>
+
+@code {
+    ReceptionEpicrisis re = new ReceptionEpicrisis();
+    DateTime? date = DateTime.Now;
+    TimeSpan? time = DateTime.Now.TimeOfDay;
+
+    public bool IsVashOn { get; set; } = false;
+}
