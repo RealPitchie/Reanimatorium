@@ -2,8 +2,9 @@
 @using Re.UI.Data
 @using CColor = System.Drawing.Color
 
+
 <MudGrid>
-    <MudItem xs="8">
+    <MudItem xs="7">
         <MudText Align="Align.Center">Отделение анестезиологии-реанимации</MudText>
         <MudGrid Spacing="10" Justify="Justify.Center">
             <MudItem>
@@ -14,122 +15,63 @@
             </MudItem>
         </MudGrid>
         <MudText Align="Align.Center" Typo="Typo.h5">@re.Name</MudText>
-        <MudPaper Style="padding: 10px; margin: 15px 0">
-            <MudSelect T="string" Label="Пациент доставлен в реанимационное отделение из" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in re.DeliveredFrom)
-                {
-                    <MudSelectItem Value="@item"/>
-                }
-            </MudSelect>
-            <MudSelect T="string" Label="ИВЛ при транспортировке" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in re.AVLDueTransportation)
-                {
-                    <MudSelectItem Value="@item"/>
-                }
-            </MudSelect>
-            <MudSelect T="string" Label="Жалобы:" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in re.Complaints)
-                {
-                    <MudSelectItem Value="@item" />
-                }
-            </MudSelect>
-            <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
-                <MudItem xs="7">
-                    <MudTextField T="string" Label="Жалобы на" Variant="Variant.Text" Text="@re.Features" />
-                </MudItem>
-                <MudItem Style="padding: 12px 0;" xs="2">
-                    <MudSwitch Class="d-flex justify-end" @bind-Checked="@IsVashOn" Color="Color.Primary"
-                                Label="ВАШ - "></MudSwitch>
-                </MudItem>
-                @if (IsVashOn)
-                {
-                    <MudItem xs="3">
-                    <MudSelect T="string">
+        <MudPaper Elevation="0" Class="d-flex justify-space-between align-center">
+            <MudItem xs="8">
+                <MudText>Пациент доставлен в реанимационное отделение из</MudText>
+            </MudItem>
+            <MudItem xs="4">
+                <select style="width: 100%;">
+                    @foreach (var item in re.DeliveredFrom)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+            </MudItem>
+        </MudPaper>
+        <MudPaper Elevation="0" Class="d-flex justify-space-between align-center">
+            <MudItem xs="4">
+                <MudText>ИВЛ при транспортировке</MudText>
+            </MudItem>
+            <MudItem xs="8">
+                <select style="width: 100%;">
+                    @foreach (var item in re.AVLDueTransportation)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+            </MudItem>
+        </MudPaper>
+        <MudPaper Elevation="0" Class="d-flex justify-space-between align-center">
+            <MudItem Class="d-flex justify-start align-center" xs="2">
+                <MudText>Жалобы:</MudText>
+            </MudItem>
+            <MudItem Class="d-flex justify-start align-center" xs="10">
+                <select style="width: 100%;">
+                    @foreach (var item in re.Complaints)
+                    {
+                        <option value="@item">@item</option>
+                    }
+                </select>
+            </MudItem>
+        </MudPaper>
+        <MudPaper Elevation="0" Class="d-flex justify-space-between align-center">
+            <MudItem xs="9">
+                <input style="border: 1px dashed; width: 100%;" type="text" />
+            </MudItem>
+            <MudItem Class="d-flex justify-end align-center" xs="3">
+
+                <MudItem Class="d-flex justify-space-around align-center" xs="12">
+                    <MudText Color="@(IsVashOn ? Color.Dark : Color.Transparent)">ВАШ -</MudText>
+                    <select style="width: 50%;">
                         @foreach (var item in re.Vash)
                         {
-                            <MudSelectItem Style="margin-bottom: 15px;" Value="@item" />
+                            <option value="@item">@item</option>
                         }
-                    </MudSelect>
-                    </MudItem>
-                }
-            </MudGrid>
-            <MudText Style="font-weight: bold; padding-top: 10px;" >Объективно</MudText>
-            <MudSelect T="string" Label="Состояние" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in re.Condition)
-                {
-                    <MudSelectItem Value="@item" />
-                }
-            </MudSelect>
-            <MudGrid>
-                <MudItem xs="6">
-                    <MudSelect T="string" Label="Сознание:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.Conscience)
-                        {
-                            <MudSelectItem Value="@item" />
-                        }
-                    </MudSelect>
+                    </select>
                 </MudItem>
-                <MudItem xs="6">
-                    <MudSelect T="string" Label="Ramsey:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.Ramsey)
-                        {
-                            <MudSelectItem Value="@item" />
-                        }
-                    </MudSelect>
-                </MudItem>
-            </MudGrid>
-            <MudSelect T="string" Label="Мышечный тонус" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in re.MuscleTone)
-                {
-                    <MudSelectItem Value="@item" />
-                }
-            </MudSelect>
-            <MudGrid>
-                <MudItem Style="width: 21%" Class="d-flex flex-column justify-end"><MudText>Кожные покровы</MudText></MudItem>
-                <MudItem Style="width: 32%">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.SkinCovers[0])
-                        {
-                            <MudSelectItem Value="@item" />
-                        }
-                    </MudSelect>
-                </MudItem>
-                <MudItem Style="width: 17%">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.SkinCovers[1])
-                        {
-                            <MudSelectItem Value="@item" />
-                        }
-                    </MudSelect>
-                </MudItem>
-                <MudItem Style="width: 30%">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.SkinCovers[2])
-                        {
-                            <MudSelectItem Value="@item" />
-                        }
-                    </MudSelect>
-                </MudItem>
-            </MudGrid>
-
-            <MudGrid>
-                <MudItem xs="6">
-                    <MudSelect T="string" Label="Цианоз:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.Cyanosis)
-                        {
-                            <MudSelectItem Value="@item" />
-                        }
-                    </MudSelect>
-                </MudItem>
-                <MudItem xs="6">
-                    <MudSelect T="string" Label="Мраморность:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.Marbling)
-                        {
-                            <MudSelectItem Value="@item" />
-                        }
-                    </MudSelect>
-                </MudItem>
-            </MudGrid>
+                <MudToggleIconButton style="padding: 0; justify-content: flex-end;" @bind-Toggled="@IsVashOn" Icon="@Icons.Material.Filled.CheckBoxOutlineBlank"
+                                     Color="@Color.Error" Title="Выкл" ToggledIcon="@Icons.Material.Filled.CheckBox" ToggledColor="@Color.Success" ToggledTitle="Вкл" />
+            </MudItem>
         </MudPaper>
     </MudItem>
     
