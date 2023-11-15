@@ -60,12 +60,14 @@ public class CentralVeinProtocol : StandardProtocol
 public class ArteriaProtocol : StandardProtocol
 {
     public ArteriaIndications Indications { get; set; }
-    public string[] ArteriaToBeCatheterized { get; set; }
+    public string ArteriaToBeCatheterized { get; set; }
+    public string[] ArteriasToBeCatheterized { get; set; }
     public ArteriaProtocol()
     {
         Indications = new();
+        CathetersUsed = new string[] { "B|Braun Certofix mono S215", "B|Braun Certofix mono S220","B|Braun Certofix mono S315","B|Braun Certofix mono S330" };
         LocalAnesthesyTypes = new string[] { "Лидокаином 1%", "Новокаином 0,25%" };
-        ArteriaToBeCatheterized = new string[] {
+        ArteriasToBeCatheterized = new string[] {
             "a.radialis dext.",
             "a.radialis sin.",
             "a.femoralis dext.",
