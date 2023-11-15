@@ -1,0 +1,18 @@
+﻿@using Re.Core.Models
+@using Re.UI.Data
+
+<MudGrid Spacing="10" Justify="Justify.FlexStart">
+    <MudItem>
+        <MudDatePicker style="width: 150px;" Label="Дата"  @bind-Date="date"/>
+    </MudItem>
+    <MudItem>
+        <MudTimePicker style="width: 150px;" Label="Время"  @bind-Time="time"/>
+    </MudItem> 
+</MudGrid>
+
+@code{
+
+    List<Doctor> Doctors = new();
+    DateTime? date = DateTime.Now;
+    TimeSpan? time = DateTime.Now.TimeOfDay;
+}
