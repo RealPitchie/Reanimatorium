@@ -85,8 +85,8 @@
                 }
             </MudSelect>
             <MudGrid>
-                <MudItem Style="width: 21%" Class="d-flex flex-column justify-end"><MudText>Кожные покровы</MudText></MudItem>
-                <MudItem Style="width: 32%">
+                <MudItem Style="width: 20%; padding-right: 6px;" Class="d-flex flex-column justify-end"><MudText>Кожные покровы</MudText></MudItem>
+                <MudItem Style="width: 33%; padding: 12px 6px;">
                     <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in re.SkinCovers[0])
                         {
@@ -94,7 +94,7 @@
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 17%">
+                <MudItem Style="width: 16%; padding: 12px 6px;">
                     <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in re.SkinCovers[1])
                         {
@@ -102,7 +102,7 @@
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 30%">
+                <MudItem Style="width: 31%;">
                     <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in re.SkinCovers[2])
                         {
