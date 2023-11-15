@@ -15,12 +15,14 @@ public class StandardProtocol
     public string Name { get; set; }
     
     public bool IsLocalAnesthesyNeeded { get; set; }
-    public string[] LocalAnesthesyType { get; set; }
-    public string LocalAnesthesyDose { get; set; }
+    public string LocalAnesthesyType { get; set; }
+    public string[] LocalAnesthesyTypes { get; set; }
+    public decimal LocalAnesthesyDose { get; set; }
     
     public string CatheterUsed { get; set; } //создать таблицу катетеров в ДБ
+    public string[] CathetersUsed { get; set; } //создать таблицу катетеров в ДБ
     public int TriesNo { get; set; }
-    public string CatheterInsertedCentimetres { get; set; }
+    public int CatheterInsertedCentimetres { get; set; }
     
     public string Features { get; set; }
     public string Complications { get; set; }
@@ -32,15 +34,17 @@ public class StandardProtocol
 public class CentralVeinProtocol : StandardProtocol
 {
     public CentralVeinIndications Indications { get; set; }
-    public string[] VeinToBeCatheterized { get; set; }
-    public string CVD { get; set; } //ЦВД см.водн.ст
+    public string VeinToBeCatheterized { get; set; }
+    public string[] VeinsToBeCatheterized { get; set; }
+    public int CVD { get; set; } //ЦВД см.водн.ст
     public bool IsRgControlNeeded { get; set; }
     public DateOnly RgControlDate { get; set; }
     public CentralVeinProtocol()
     {
-        
-        LocalAnesthesyType = new string[] { "Лидокаином 1%", "Новокаином 0,25%" };
-        VeinToBeCatheterized = new string[] {
+        Indications = new();
+        CathetersUsed = new string[] { "B|Braun Certofix mono S215", "B|Braun Certofix mono S220","B|Braun Certofix mono S315","B|Braun Certofix mono S330" };
+        LocalAnesthesyTypes = new string[] { "Лидокаином 1%", "Новокаином 0,25%" };
+        VeinsToBeCatheterized = new string[] {
             "v.subclavia dext.",
             "v.subclavia sin.",
             "v.jugularis int. dext.",
@@ -49,6 +53,8 @@ public class CentralVeinProtocol : StandardProtocol
             "v.femoralis sin."
         };
         Name = "Протокол катетеризации центральной вены";
+
+
     }
 }
 public class ArteriaProtocol : StandardProtocol
@@ -57,7 +63,8 @@ public class ArteriaProtocol : StandardProtocol
     public string[] ArteriaToBeCatheterized { get; set; }
     public ArteriaProtocol()
     {
-        LocalAnesthesyType = new string[] { "Лидокаином 1%", "Новокаином 0,25%" };
+        Indications = new();
+        LocalAnesthesyTypes = new string[] { "Лидокаином 1%", "Новокаином 0,25%" };
         ArteriaToBeCatheterized = new string[] {
             "a.radialis dext.",
             "a.radialis sin.",
@@ -74,7 +81,8 @@ public class EpiduralSpaceProtocol : StandardProtocol
     public string Notes { get; set; }
     public EpiduralSpaceProtocol()
     {
-        LocalAnesthesyType = new string[] { "Лидокаином 1%", "Новокаином 0,25%" };
+        
+        LocalAnesthesyTypes = new string[] { "Лидокаином 1%", "Новокаином 0,25%" };
         PunctionLevel = new string[] {
             "Th 1-2","Th 2-3","Th 3-4","Th 4-5","Th 5-6","Th 6-7","Th 7-8","Th 8-9","Th 9-10","Th 10-11",
             "Th 11 - L 1", "L 1-2","L 2-3","L 3-4"

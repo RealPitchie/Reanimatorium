@@ -13,52 +13,188 @@
 
 
 <MudGrid>
-    <MudItem xs="6">
-        @if(cvProtocol != null)
+    <MudItem xs="8">
+        @* протокол центральной вены *@
+        @if(isCentralVein && cvProtocol != null)
         {
-            <MudPaper>
-                <MudText style="margin-top: 15px">
+            <MudPaper Style="padding: 10px; margin: 15px 0">
+                <MudText style="margin-top: 15px; font-weight: bolder;">
                     @date.ToDateOnly().ToString() &nbsp; &nbsp;&nbsp;&nbsp; @string.Format("{0}:{1}", time.Value.Hours,time.Value.Minutes)
                 </MudText>
+                <MudText Typo="Typo.h6" style="text-align: center;">@cvProtocol.Name.ToUpper()</MudText>
+                <MudText Typo="Typo.body1" style="text-align: left; margin-bottom: 10px">Показания для: </MudText>
+                <MudGrid Style="margin-bottom: 25px;">
+                    <MudItem xs="6" style="padding: 0 15px;">
+                        <MudSwitch @bind-Checked="@cvProtocol.Indications.AllowVenoseAccess" Color="Color.Primary" 
+                            Label="обеспечения венозного доступа и контроля ЦВД"></MudSwitch>
+                    </MudItem>
+                    <MudItem xs="6" style="padding: 0 15px;">
+                        <MudSwitch @bind-Checked="@cvProtocol.Indications.AllowInfusionTherapy" Color="Color.Primary"  
+                            Label="длительной инфузионной терапии"></MudSwitch>
+                    </MudItem>
+                    <MudItem xs="6" style="padding: 0 15px;">
+                        <MudSwitch @bind-Checked="@cvProtocol.Indications.AllowParenteralNutrition" Color="Color.Primary"  
+                            Label="проведения парентерального питания"></MudSwitch>
+                    </MudItem>
+                    <MudItem xs="6" style="padding: 0 15px;">
+                        <MudSwitch @bind-Checked="@cvProtocol.Indications.AllowHemocorrection" Color="Color.Primary"  
+                            Label="проведения экстракорпоральной гемокоррекции"></MudSwitch>
+                    </MudItem>
+                </MudGrid> 
+                <MudDivider />
+                <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+                    <MudItem xs="4">
+                        <MudSwitch @bind-Checked="@cvProtocol.IsLocalAnesthesyNeeded" Color="Color.Primary"  
+                            Label="под м.анестезией"></MudSwitch>
+                    </MudItem>
+                    @if(cvProtocol.IsLocalAnesthesyNeeded)
+                    {
+                        <MudItem xs="4">
+                            <MudSelect T="string" Label="Выберите препарат" AnchorOrigin="Origin.BottomCenter">
+                                @foreach(var item in cvProtocol.LocalAnesthesyTypes)
+                                {
+                                    <MudSelectItem Value="@item"/>
+                                }
+                            </MudSelect>
+                        </MudItem>
+                        <MudItem xs="2">
+                            <MudNumericField HideSpinButtons="true" @bind-Value="cvProtocol.LocalAnesthesyDose" Label="Доза" Variant="Variant.Text" Min="0" Step=".2M" />
+                        </MudItem>
+                        <MudItem xs="2">
+                            <MudText Typo="Typo.body2">мл.</MudText>
+                        </MudItem>
+                    }
+                </MudGrid>
+                
+                <MudGrid>
+                    <MudItem>
+                        <MudSelect HelperText="методом Сельдингера" Style="max-width:250px" T="string" Label="Катетеризирована вена" AnchorOrigin="Origin.BottomCenter">
+                        @foreach(var vein in cvProtocol.VeinsToBeCatheterized)
+                        {
+                            <MudSelectItem Value="@vein"/>
+                        }
+                    </MudSelect>
+                    </MudItem>
+                    <MudItem>
+                        <MudSelect Style="max-width:250px" T="string" Label="Катетером" AnchorOrigin="Origin.BottomCenter">
+                            @foreach(var catheter in cvProtocol.CathetersUsed)
+                            {
+                                <MudSelectItem Value="@catheter"/>
+                            }
+                        </MudSelect>
+                    </MudItem>
+                </MudGrid>
+               
+                
+                <MudDivider Style="margin: 15px 0"/>
+                <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+                    <MudItem >
+                        <MudText Typo="Typo.body2">Количество попыток</MudText>
+                    </MudItem>
+                    <MudItem xs="1">
+                        <MudNumericField Style="text-align: right;" HideSpinButtons="true" @bind-Value="cvProtocol.TriesNo" Variant="Variant.Text" Min="0" />
+                    </MudItem>
+                    <MudItem >
+                        <MudText Typo="Typo.body2">Катетер заведен на</MudText>
+                    </MudItem>
+                    <MudItem xs="1">
+                        <MudNumericField HideSpinButtons="true" @bind-Value="cvProtocol.CatheterInsertedCentimetres" Variant="Variant.Text" Min="0" />
+                    </MudItem>
+                    <MudItem xs="1">
+                        <MudText Typo="Typo.body2">см.</MudText>
+                    </MudItem>
+                    <MudItem xs="1">
+                        <MudText Typo="Typo.body2">ЦВД = </MudText>
+                    </MudItem>
+                    <MudItem xs="1">
+                        <MudNumericField HideSpinButtons="true" @bind-Value="cvProtocol.CVD" Variant="Variant.Text" Min="0" />
+                    </MudItem>
+                    <MudItem xs="2">
+                        <MudText Typo="Typo.body2">см.водн.ст.</MudText>
+                    </MudItem>
+                </MudGrid>
+                <MudDivider Style="margin: 15px 0"/>
+                <MudTextField T="string" Label="Особенности" Variant="Variant.Text" Text="@cvProtocol.Features" />
+                <MudTextField T="string" Label="Осложнения" Variant="Variant.Text" Text="@cvProtocol.Complications" Lines="5" />
+                <MudGrid Justify="Justify.FlexStart" Style="align-items: center;">
+                    <MudItem>
+                        <MudSwitch @bind-Checked="@cvProtocol.IsRgControlNeeded" Color="Color.Primary" 
+                            Label="Rg-контроль"></MudSwitch>
+                    </MudItem>
+                    @if(cvProtocol.IsRgControlNeeded)
+                    {
+                        <MudItem>
+                            <MudText Typo="Typo.body2">на: </MudText>
+                        </MudItem>
+                        <MudItem>
+                            <MudText Typo="Typo.body2"> @date.ToDateOnly().ToString()</MudText>
+                        </MudItem>
+                    }
+                    
+                </MudGrid>
+                <MudDivider Style="margin: 15px 0"/>
+                <MudGrid>
+                    <MudItem xs="6">
+                        <MudSelect T="Doctor" @bind-Value="@cvProtocol.Doctor" ToStringFunc="@converter" Label="Врач">
+                            @foreach(var doc in Doctors)
+                            {
+                                <MudSelectItem Value="@doc" />
+                            }
+                        </MudSelect>
+                    </MudItem>
+                </MudGrid>
             </MudPaper>
 
         }
-        @if(arProtocol != null)
+        @* протокол артерии *@
+        @if(isArteria && arProtocol != null)
         {
-            <MudPaper>
-                <MudText style="margin-top: 15px">
+            <MudPaper Style="padding: 10px; margin: 15px 0">
+                <MudText style="margin-top: 15px; font-weight: bolder;">
                     @date.ToDateOnly().ToString() &nbsp; &nbsp;&nbsp;&nbsp; @string.Format("{0}:{1}", time.Value.Hours,time.Value.Minutes)
                 </MudText>
             </MudPaper>
         }
-        @if(esProtocol != null)
+        @* протокол эпидурального пространства *@
+        @if(isEpidural && esProtocol != null)
         {
             <MudPaper>
-                <MudText style="margin-top: 15px">
+                <MudText style="margin-top: 15px; margin: 15px 0">
                     @date.ToDateOnly().ToString() &nbsp; &nbsp;&nbsp;&nbsp; @string.Format("{0}:{1}", time.Value.Hours,time.Value.Minutes)
                 </MudText>
             </MudPaper>
         }
     </MudItem>
-    <MudItem xs="6">
-         <div class="row" style="justify-content: space-between;">
-            <div class="col">
+    <MudItem xs="4">
+        <MudGrid>
+            <MudItem xs="2">
                 <MudToggleIconButton Icon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="@Color.Error" Title="Выкл"
                     ToggledIcon="@Icons.Material.Filled.CheckBox" ToggledColor="@Color.Success" ToggledChanged="CentralToggled" ToggledTitle="Вкл"/>
-                    <span>Протокол катетеризации центральной вены</span>
-            </div>
-             <div class="col">
+            </MudItem>
+            <MudItem xs="10">
+                <span>Протокол катетеризации центральной вены</span>
+            </MudItem>
+        </MudGrid>
+        <MudGrid>
+            <MudItem xs="2">
                 <MudToggleIconButton Icon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="@Color.Error" ToggledChanged="ArteriaToggled" Title="Выкл"
                     ToggledIcon="@Icons.Material.Filled.CheckBox" ToggledColor="@Color.Success" ToggledTitle="Вкл"/>
-                    <span>Протокол катетеризации артерии</span>
-            </div>
-             <div class="col">
+            </MudItem>
+            <MudItem xs="10">
+                <span>Протокол катетеризации артерии</span>
+            </MudItem>
+        </MudGrid>
+        <MudGrid>
+            <MudItem xs="2">
                 <MudToggleIconButton Icon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="@Color.Error" ToggledChanged="EpiduralToggled" Title="Выкл"
                     ToggledIcon="@Icons.Material.Filled.CheckBox" ToggledColor="@Color.Success" ToggledTitle="Вкл"/>
-                    <span>Протокол катетеризации эпидурального пространства</span>
-            </div>
-             
-         </div>
+            </MudItem>
+            <MudItem xs="10">
+                <span>Протокол катетеризации эпидурального пространства</span>
+            </MudItem>
+        </MudGrid>
+        
+          
          
     </MudItem>
 </MudGrid>
@@ -67,6 +203,7 @@
 
 @code{
 
+    List<Doctor> Doctors = new();
     DateTime? date = DateTime.Now;
     TimeSpan? time = DateTime.Now.TimeOfDay;
     CentralVeinProtocol? cvProtocol;
@@ -77,7 +214,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        
+        Doctors.Add(new Doctor { Name = "Test Doctor", Id = Guid.NewGuid().ToString(), Position = "Test position" });
     } 
     void CentralToggled(bool value)
     {
@@ -112,4 +249,5 @@
         }
         isEpidural = value;
     }
+    Func<Doctor,string> converter = d => d?.Name;
 }
