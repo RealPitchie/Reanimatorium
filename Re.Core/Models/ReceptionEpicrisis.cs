@@ -15,6 +15,8 @@ namespace Re.Core.Models
         public string[] DeliveredFrom { get; set; }
         public string[] AVLDueTransportation { get; set; }
         public string[] Complaints { get; set; }
+        public string[] Vash { get; set; }
+        
         public ReceptionEpicrisis()
         {
             Name = "Приемный статус";
@@ -41,6 +43,12 @@ namespace Re.Core.Models
                 "Жалоб нет.", "Жалобы не предъявляет из-за тяжести состояния.",
                 "Не предъявляет жалоб из-за седации.", "Жалобы прежние.",
                 "Предъявляет жалобы на", "Жалобы на боли в области операции."
+            };
+
+            Vash = new string[]
+            {
+                "1 б.", "2 б.", "3 б.", "4 б.", "5 б.",
+                "6 б.", "7 б.", "8 б.", "9 б.", "10 б.",
             };
         }
     }
