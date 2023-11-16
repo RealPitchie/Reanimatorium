@@ -1,0 +1,128 @@
+@using Re.Core.Models
+@using Re.UI.Data
+
+<MudPaper Style="padding: 20px; margin: 15px 0">
+    <MudText style="margin-top: 15px; font-weight: bolder;">
+        @date.ToDateOnly().ToString() &nbsp; &nbsp;&nbsp;&nbsp; @string.Format("{0}:{1}", time.Value.Hours,time.Value.Minutes)
+    </MudText>
+    <MudText Typo="Typo.h6" style="text-align: center;">@Protocol.Name.ToUpper()</MudText>
+    <MudText Typo="Typo.body1" style="text-align: left; margin-bottom: 10px">Показания для: </MudText>
+    <MudGrid Style="margin-bottom: 25px;">
+        <MudItem xs="6" style="padding: 0 15px;">
+            <MudSwitch @bind-Checked="@Protocol.Indications.AllowPostoperativeAnesthesia" Color="Color.Primary" 
+                Label="интра- и послеоперационного обезболивания"></MudSwitch>
+        </MudItem>
+        <MudItem xs="6" style="padding: 0 15px;">
+            <MudSwitch @bind-Checked="@Protocol.Indications.AllowPainSyndromeTreatment" Color="Color.Primary"  
+                Label="лечения болевого синдрома"></MudSwitch>
+        </MudItem>
+        <MudItem xs="6" style="padding: 0 15px;">
+            <MudSwitch @bind-Checked="@Protocol.Indications.AllowAcutePancreatitisTreatment" Color="Color.Primary"  
+                Label="лечения острого панкреатита"></MudSwitch>
+        </MudItem>
+        <MudItem xs="6" style="padding: 0 15px;">
+            <MudSwitch @bind-Checked="@Protocol.Indications.AllowIntestinalStimulation" Color="Color.Primary"  
+                Label="стимуляции перестальтики кишечника"></MudSwitch>
+        </MudItem>
+    </MudGrid>  
+    <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+        <MudItem xs="4">
+            <MudSwitch @bind-Checked="@Protocol.IsLocalAnesthesyNeeded" Color="Color.Primary"  
+                Label="под м.анестезией"></MudSwitch>
+        </MudItem>
+        @if(Protocol.IsLocalAnesthesyNeeded)
+        {
+            <MudItem xs="4">
+                <MudSelect Value="Protocol.LocalAnesthesyType" Dense="true" T="string" Label="Выберите препарат" AnchorOrigin="Origin.BottomCenter">
+                    @foreach(var item in Protocol.LocalAnesthesyTypes)
+                    {
+                        <MudSelectItem Value="@item"/>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="2">
+                <MudNumericField HideSpinButtons="true" @bind-Value="Protocol.LocalAnesthesyDose" Label="Доза" Variant="Variant.Text" Min="0" Step=".2M" />
+            </MudItem>
+            <MudItem xs="2">
+                <MudText Typo="Typo.body2">мл.</MudText>
+            </MudItem>
+        }
+    </MudGrid>
+    
+    <MudGrid>
+        <MudItem xs="6">
+            <MudSelect Value="Protocol.PunctionLevel" Dense="true" T="string" Label="Уровень пункции" AnchorOrigin="Origin.BottomCenter">
+            @foreach(var level in Protocol.PunctionLevels)
+            {
+                <MudSelectItem Value="@level"/>
+            }
+        </MudSelect>
+        </MudItem>
+        <MudItem xs="6">
+            <MudSelect Value="Protocol.CatheterUsed" Dense="true" T="string" Label="Катетер" AnchorOrigin="Origin.BottomCenter">
+                @foreach(var catheter in Protocol.CathetersUsed)
+                { 
+                    <MudSelectItem Value="@catheter"/>
+                }
+            </MudSelect>
+        </MudItem>
+    </MudGrid>
+    
+    
+    
+    <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+        <MudItem >
+            <MudText Typo="Typo.body2">Количество попыток</MudText>
+        </MudItem>
+        <MudItem xs="1">
+            <MudNumericField Style="text-align: right;" HideSpinButtons="true" @bind-Value="Protocol.TriesNo" Variant="Variant.Text" Min="0" />
+        </MudItem> 
+        <MudItem >
+             <MudSelect Value="Protocol.CatheterInserted" Dense="true" T="string" Label="Катетер заведен" AnchorOrigin="Origin.BottomCenter">
+                @foreach(var catheter in Protocol.CathetersInserted)
+                { 
+                    <MudSelectItem Value="@catheter"/>
+                }
+            </MudSelect>
+        </MudItem>
+        <MudItem >
+            <MudText Typo="Typo.body2"> на </MudText>
+        </MudItem>
+        <MudItem xs="1">
+            <MudNumericField HideSpinButtons="true" @bind-Value="Protocol.CatheterInsertedCentimetres" Variant="Variant.Text" Min="0" />
+        </MudItem>
+        <MudItem xs="1">
+            <MudText Typo="Typo.body2">см.</MudText>
+        </MudItem> 
+        
+    </MudGrid>
+    
+    <MudTextField T="string" Label="Особенности" Variant="Variant.Text" Text="@Protocol.Features" />
+    <MudTextField T="string" Label="Осложнения" Variant="Variant.Text" Text="@Protocol.Complications" Lines="3" />
+    <MudTextField T="string" Label="Примечание" Variant="Variant.Text" Text="@Protocol.Notes" /> 
+    
+    <MudGrid>
+        <MudItem xs="6">
+            <MudSelect Value="Protocol.Doctor" Dense="true" T="Doctor" ToStringFunc="@converter" Label="Врач">
+                @foreach(var doc in Doctors)
+                {
+                    <MudSelectItem Value="@doc" />
+                }
+            </MudSelect>
+        </MudItem>
+    </MudGrid>
+</MudPaper>
+
+@code{
+    [Parameter]
+    public EpiduralSpaceProtocol Protocol { get; set; }
+    public List<Doctor> Doctors = new();
+    DateTime? date = DateTime.Now;
+    TimeSpan? time = DateTime.Now.TimeOfDay;
+    Func<Doctor,string> converter = d => d?.Name;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Doctors.Add(new Doctor { Name = "Test Doctor", Id = Guid.NewGuid().ToString(), Position = "Test position" });
+    }
+}
