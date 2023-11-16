@@ -1,6 +1,19 @@
-﻿@page "/epicrisis"
+@page "/Epicrisis"
 
-<h3>Epicrisis</h3>
+@using Re.UI.Pages.Components
+
+<MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary" PanelClass="pa-6">
+    <MudTabPanel Text="Приемный эпикриз">
+        <Epic_Reception />
+    </MudTabPanel>
+    <MudTabPanel Text="Переводной эпикриз">
+        <Epic_Transferable />
+    </MudTabPanel>
+    <MudTabPanel Text="Рентген/КТ">
+        <Epic_RoentgenKT />
+    </MudTabPanel>
+</MudTabs>
+ 
 
 @code {
 

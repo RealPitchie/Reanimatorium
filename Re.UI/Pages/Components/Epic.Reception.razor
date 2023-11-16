@@ -1,0 +1,144 @@
+﻿@using Re.Core.Models
+@using Re.UI.Data
+@using CColor = System.Drawing.Color
+
+<MudGrid>
+    <MudItem xs="8">
+        <MudText Align="Align.Center">Отделение анестезиологии-реанимации</MudText>
+        <MudGrid Spacing="10" Justify="Justify.Center">
+            <MudItem>
+                <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
+            </MudItem>
+            <MudItem>
+                <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
+            </MudItem>
+        </MudGrid>
+        <MudPaper Style="padding: 10px; margin: 15px 0">
+            <MudText Align="Align.Center" Typo="Typo.h5">@re.Name</MudText>
+            <MudSelect T="string" Label="Пациент доставлен в реанимационное отделение из" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var item in re.DeliveredFrom)
+                {
+                    <MudSelectItem Value="@item" />
+                }
+            </MudSelect>
+            <MudSelect T="string" Label="ИВЛ при транспортировке" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var item in re.AVLDueTransportation)
+                {
+                    <MudSelectItem Value="@item" />
+                }
+            </MudSelect>
+            <MudSelect T="string" Label="Жалобы:" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var item in re.Complaints)
+                {
+                    <MudSelectItem Value="@item" />
+                }
+            </MudSelect>
+            <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+                <MudItem xs="7">
+                    <MudTextField T="string" Label="Жалобы на" Variant="Variant.Text" Text="@re.Features" />
+                </MudItem>
+                <MudItem Style="padding: 12px 0;" xs="2">
+                    <MudSwitch Class="d-flex justify-end" @bind-Checked="@IsVashOn" Color="Color.Primary"
+                               Label="ВАШ - "></MudSwitch>
+                </MudItem>
+                @if (IsVashOn)
+                {
+                    <MudItem xs="3">
+                        <MudSelect T="string">
+                            @foreach (var item in re.Vash)
+                            {
+                                <MudSelectItem Style="margin-bottom: 15px;" Value="@item" />
+                            }
+                        </MudSelect>
+                    </MudItem>
+                }
+            </MudGrid>
+            <MudText Style="font-weight: bold; padding-top: 10px;">Объективно</MudText>
+            <MudSelect T="string" Label="Состояние" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var item in re.Condition)
+                {
+                    <MudSelectItem Value="@item" />
+                }
+            </MudSelect>
+            <MudGrid>
+                <MudItem xs="6">
+                    <MudSelect T="string" Label="Сознание:" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in re.Conscience)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="6">
+                    <MudSelect T="string" Label="Ramsey:" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in re.Ramsey)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+            <MudSelect T="string" Label="Мышечный тонус" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var item in re.MuscleTone)
+                {
+                    <MudSelectItem Value="@item" />
+                }
+            </MudSelect>
+            <MudGrid>
+                <MudItem Style="width: 20%; padding-right: 6px;" Class="d-flex flex-column justify-end"><MudText>Кожные покровы</MudText></MudItem>
+                <MudItem Style="width: 33%; padding: 12px 6px;">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in re.SkinCovers[0])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem Style="width: 16%; padding: 12px 6px;">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in re.SkinCovers[1])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem Style="width: 31%;">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in re.SkinCovers[2])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+
+            <MudGrid>
+                <MudItem xs="6">
+                    <MudSelect T="string" Label="Цианоз:" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in re.Cyanosis)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="6">
+                    <MudSelect T="string" Label="Мраморность:" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in re.Marbling)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+    </MudItem>
+
+</MudGrid>
+
+@code {
+    ReceptionEpicrisis re = new ReceptionEpicrisis();
+    DateTime? date = DateTime.Now;
+    TimeSpan? time = DateTime.Now.TimeOfDay;
+
+    public bool IsVashOn { get; set; } = false;
+}
