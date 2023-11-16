@@ -13,8 +13,11 @@ namespace Re.Core.Models
         public DateOnly Date { get; set; } //Дата
         public TimeOnly Time { get; set; } //Время
 
-        public string[] condition { get; set; } // состояние
+        public string[] conditions { get; set; } // состояние
         public string[] complaints { get; set; } //жалобы
+        public string complaintAbout { get; set; } //жалобы на
+        public string RASSthis { get; set; } //RASS
+        public string[] VASH { get; set; } //жалобы
         public string[] conscience { get; set; } //сознание
         public string[] RASS { get; set; } //сознание
         public string[] skin { get; set; } //кожные покровы
@@ -28,7 +31,7 @@ namespace Re.Core.Models
         public ConditionHuman()
         {
 
-            condition = new string[] {
+            conditions = new string[] {
                 "удовлетворительное.",
                 "средней тяжести.",
                 "тяжелое.",
@@ -46,6 +49,18 @@ namespace Re.Core.Models
                 "Жалобы на боли в области операции."
             };
 
+            VASH = new string[] {
+            "1 б.",
+            "2 б.",
+            "3 б.",
+            "4 б.",
+            "5 б.",
+            "6 б.",
+            "7 б.",
+            "8 б.",
+            "9 б.",
+            "10 б.",
+            };
             conscience = new string[] {
                 "ясное.",
                 "оглушение.",
@@ -69,31 +84,31 @@ namespace Re.Core.Models
                 "+ 3 балла по шкале RASS.",
                 "+ 4 балла по шкале RASS."
             };
-        }
-        public class Skin : StandartDiary
-        {
-            public Skin()
+
+            RASSthis = " С целью потенцирования эффекта анальгетической терапии вводится в/в микроструйно Дексмедетомидин в дозировке 0.7 мкг/кг/час.";
+
+            skin = new string[]
             {
-                skin = new string[]
-                {
                 "теплые.",
                 "холодные."
-                };
+            };
 
-                humidity = new string[]
-                {
+            humidity = new string[]
+            {
                 "сухие,",
                 "влажные,",
                 "естественной влажности,"
-                };
+            };
 
-                colorskin = new string[]
-               {
+            colorskin = new string[]
+           {
                 "естественной окраски.",
                 "бледные.",
                 "бледно-розовые."
-               };
-            }
+           };
+
         }
+
     }
+
 }
