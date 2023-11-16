@@ -5,35 +5,19 @@
 <MudText Style="text-decoration: underline;" Align="Align.Center">
     Отделение анестезиологии и реанимации с интенсивной терапией (лист назначений)
 </MudText>
-<MudGrid Style="margin-left: 18px;">
-    <MudItem Style="margin: -10px;  display: flex; align-items: center;">
-        <label for="fio" style="margin-bottom: -20px; margin-right: 10px; font-size: 12px;">ФИО</label>
-        <MudTextField Id="fio" T="string" Style="font-size: 12px; width: 300px;" />
-
-        <label for="age" style="margin-bottom: -20px; margin-right: 10px; font-size: 12px; margin-left: 20px;">Возраст</label>
-        <MudTextField Id="age" T="string" Style="font-size: 12px; width: 100px;" />
-
-        <label for="number" style="margin-bottom: -20px; margin-right: 10px; font-size: 12px; margin-left: 20px;">№ и/б.</label>
-        <MudTextField Id="number" T="string" Style="font-size: 12px; width: 100px;" />
-
-        <label for="date" style="margin-bottom: -20px; margin-right: 10px; font-size: 12px; margin-left: 20px;">Дата</label>
-        <MudDatePicker Id="date" Style="font-size: 12px; width: 100px;" />
-    </MudItem>
+<MudDivider Style="margin: 1px 0" />
+<MudGrid Class="d-flex justify-start gap-1">
+    <MudTextField T="string" Label="ФИО"></MudTextField>
+    <MudTextField T="string" Label="Возраст"></MudTextField>
+    <MudTextField T="string" Label="№ и/б."></MudTextField>
+    <MudDatePicker Label="Дата" bind-Date="date"></MudDatePicker>
 </MudGrid>
-<MudGrid>
-    <MudItem Style="margin: -10px; display: flex; align-items: center;">
-        <label for="allergy" style="margin-bottom: -20px; margin-right: 10px; font-size: 12px;">Аллергия</label>
-        <MudTextField Id="allergy" T="string" Style="font-size: 12px; width: 300px;" />
-
-        <label for="day" style="margin-bottom: -20px; margin-right: 10px; font-size: 12px; margin-left: 20px;">Сутки</label>
-        <MudTextField Id="day" T="string" Style="font-size: 12px; width: 100px;" />
-
-        <label for="diet" style="margin-bottom: -20px; margin-right: 10px; font-size: 12px; margin-left: 20px;">Стол</label>
-        <MudTextField Id="diet" T="string" Style="font-size: 12px; width: 100px;" />
-
-        <label for="blood" style="margin-bottom: -20px; margin-right: 10px; font-size: 12px; margin-left: 20px;">Гр. крови</label>
-        <MudTextField Id="blood" T="string" Style="font-size: 12px; width: 100px;" />
-    </MudItem>
+<MudDivider Style="margin: 8px 0" />
+<MudGrid Class="d-flex justify-start gap-1">
+    <MudTextField T="string" Label="Аллергия"></MudTextField>
+    <MudTextField T="string" Label="Сутки"></MudTextField>
+    <MudTextField T="string" Label="Стол"></MudTextField>
+    <MudTextField T="string" Label="Гр.крови"></MudTextField>
 </MudGrid>
 
 @code {
