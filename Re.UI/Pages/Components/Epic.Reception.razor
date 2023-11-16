@@ -13,8 +13,8 @@
                 <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
             </MudItem>
         </MudGrid>
-        <MudText Align="Align.Center" Typo="Typo.h5">@re.Name</MudText>
         <MudPaper Style="padding: 10px; margin: 15px 0">
+            <MudText Align="Align.Center" Typo="Typo.h5">@re.Name</MudText>
             <MudSelect T="string" Label="Пациент доставлен в реанимационное отделение из" AnchorOrigin="Origin.BottomCenter">
                 @foreach (var item in re.DeliveredFrom)
                 {
