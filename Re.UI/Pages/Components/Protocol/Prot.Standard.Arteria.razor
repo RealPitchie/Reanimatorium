@@ -3,7 +3,7 @@
 
 <MudPaper Style="padding: 20px; margin: 15px 0">
     <MudText style="margin-top: 15px; font-weight: bolder;">
-        @date.ToDateOnly().ToString() &nbsp; &nbsp;&nbsp;&nbsp; @string.Format("{0}:{1}", time.Value.Hours,time.Value.Minutes)
+        @date.ToDateOnly().ToString() &nbsp; &nbsp;&nbsp;&nbsp; @string.Format("{0}:{1}", time.Value.Hours.ToString("D2"),time.Value.Minutes.ToString("D2"))
     </MudText>
     <MudText Typo="Typo.h6" style="text-align: center;">@Protocol.Name.ToUpper()</MudText>
     <MudText Typo="Typo.body1" style="text-align: left; margin-bottom: 10px">Показания для: </MudText>

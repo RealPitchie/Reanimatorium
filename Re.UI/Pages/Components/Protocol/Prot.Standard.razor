@@ -30,9 +30,9 @@
         {
              <Prot_Standard_Epidural Protocol="esProtocol" />
         }
-    </MudItem>
+    </MudItem> 
     <MudItem xs="4">
-        <MudGrid>
+        <MudGrid Style="position: sticky; top: 100px; right: 50px">
             <MudItem xs="2">
                 <MudToggleIconButton Icon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="@Color.Error" Title="Выкл"
                     ToggledIcon="@Icons.Material.Filled.CheckBox" ToggledColor="@Color.Success" ToggledChanged="CentralToggled" ToggledTitle="Вкл"/>
@@ -41,7 +41,7 @@
                 <span>Протокол катетеризации центральной вены</span>
             </MudItem>
         </MudGrid> 
-        <MudGrid>
+        <MudGrid Style="position: sticky; top: 150px; right: 50px">
             <MudItem xs="2">
                 <MudToggleIconButton Icon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="@Color.Error" ToggledChanged="ArteriaToggled" Title="Выкл"
                     ToggledIcon="@Icons.Material.Filled.CheckBox" ToggledColor="@Color.Success" ToggledTitle="Вкл"/>
@@ -49,8 +49,8 @@
             <MudItem xs="10">
                 <span>Протокол катетеризации артерии</span>
             </MudItem>
-        </MudGrid>
-        <MudGrid>
+        </MudGrid >
+        <MudGrid Style="position: sticky; top: 200px; right: 50px">
             <MudItem xs="2">
                 <MudToggleIconButton Icon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="@Color.Error" ToggledChanged="EpiduralToggled" Title="Выкл"
                     ToggledIcon="@Icons.Material.Filled.CheckBox" ToggledColor="@Color.Success" ToggledTitle="Вкл"/>
@@ -60,9 +60,10 @@
             </MudItem>
         </MudGrid>
         
-          
-         
+        
+        
     </MudItem>
+    
 </MudGrid>
 
  
