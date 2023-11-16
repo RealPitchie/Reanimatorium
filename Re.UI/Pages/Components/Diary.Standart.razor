@@ -17,37 +17,31 @@
 
         <MudPaper Style="padding: 10px; margin: 15px 0; width:150%">
 
-            @if (cond != null)
-            {
-                <MudSelect Style="width:50%" T="string" Label="Состояние" AnchorOrigin="Origin.BottomCenter">
-                    @foreach (var condit in cond.conditions)
-                    {
-                        <MudSelectItem Value="@condit" />
-                    }
-                </MudSelect>
-
-            }
+            <MudSelect Style="width:50%" T="string" Label="Состояние" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var condit in standart.conditions)
+                {
+                    <MudSelectItem Value="@condit" />
+                }
+            </MudSelect>
 
             <MudGrid>
 
                 <MudItem Style="width: 10%;padding: 66px 25px;" Class="d-flex flex-column justify-end"><MudText>Жалобы</MudText></MudItem>
 
-                @if (complaint != null)
-                {
-                    <MudItem Style="width: 30%; padding: 35px 6px;">
 
-                        <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
-                            @foreach (var comp in complaint.complaints)
-                            {
-                                <MudSelectItem Value="@comp" />
-                            }
-                        </MudSelect>
+                <MudItem Style="width: 30%; padding: 35px 6px;">
 
-                    </MudItem>
-                }
+                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var comp in standart.complaints)
+                        {
+                            <MudSelectItem Value="@comp" />
+                        }
+                    </MudSelect>
+
+                </MudItem>
                 <MudItem Style="width: 40%; padding: 35px 6px;">
 
-                    <MudTextField T="string" Label="Жалобы на" Variant="Variant.Text" Text="@complaint.complaintAbout" />
+                    <MudTextField T="string" Label="Жалобы на" Variant="Variant.Text" Text="@standart.complaintAbout" />
 
                 </MudItem>
 
@@ -70,72 +64,57 @@
 
             </MudGrid>
 
-            @if (Consience != null)
-            {
-                <MudSelect Style="width:50%" T="string" Label="Сознание" AnchorOrigin="Origin.BottomCenter">
-                    @foreach (var cons in Consience.conscience)
-                    {
-                        <MudSelectItem Value="@cons" />
-                    }
-                </MudSelect>
-
-            }
+            <MudSelect Style="width:50%" T="string" Label="Сознание" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var cons in standart.conscience)
+                {
+                    <MudSelectItem Value="@cons" />
+                }
+            </MudSelect>
 
 
             <MudGrid>
 
                 <MudItem Style="width: 10%;padding: 66px 25px;" Class="d-flex flex-column justify-end"><MudText>RASS</MudText></MudItem>
 
-                @if (rass != null)
-                {
-                    <MudItem Style="width: 25%; padding: 35px 6px;">
+                <MudItem Style="width: 25%; padding: 35px 6px;">
 
-                        <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
-                            @foreach (var rs in rass.RASS)
-                            {
-                                <MudSelectItem Value="@rs" />
-                            }
-                        </MudSelect>
+                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var rs in standart.RASS)
+                        {
+                            <MudSelectItem Value="@rs" />
+                        }
+                    </MudSelect>
 
-                    </MudItem>
-                }
+                </MudItem>
                 <MudItem Style="width: 65%; padding: 35px 6px;">
 
-                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@rass.RASSthis" />
+                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@standart.RASSthis" />
 
                 </MudItem>
 
             </MudGrid>
 
-            @if (skins != null)
-            {
-                <MudSelect Style="width:50%" T="string" Label="Кожные покровы" AnchorOrigin="Origin.BottomCenter">
-                    @foreach (var sk in skins.skin)
-                    {
-                        <MudSelectItem Value="@sk" />
-                    }
-                </MudSelect>
+            <MudSelect Style="width:50%" T="string" Label="Кожные покровы" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var sk in standart.skin)
+                {
+                    <MudSelectItem Value="@sk" />
+                }
+            </MudSelect>
 
-            }
 
-            @if (hymd != null)
-            {
-                <MudSelect Style="width:50%" T="string" Label="Влажность" AnchorOrigin="Origin.BottomCenter">
-                    @foreach (var hm in hymd.humidity)
-                    {
-                        <MudSelectItem Value="@hm" />
-                    }
-                </MudSelect>
-            }
-            @if (clr != null)
-            {
-                <MudSelect Style="width:50%" T="string" Label="Цвет" AnchorOrigin="Origin.BottomCenter">
-                    @foreach (var cl in clr.colorskin)
-                    {
-                        <MudSelectItem Value="@cl" />
-                    }
-                </MudSelect>
-            }
+            <MudSelect Style="width:50%" T="string" Label="Влажность" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var hm in standart.humidity)
+                {
+                    <MudSelectItem Value="@hm" />
+                }
+            </MudSelect>
+            <MudSelect Style="width:50%" T="string" Label="Цвет" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var cl in standart.colorskin)
+                {
+                    <MudSelectItem Value="@cl" />
+                }
+            </MudSelect>
+
 
         </MudPaper>
 
@@ -149,32 +128,11 @@
 
 
 @code {
+    StandartDiary standart = new StandartDiary();
 
     DateTime? date = DateTime.Now; //Дата
     TimeSpan? time = DateTime.Now.TimeOfDay; //Время
-    ConditionHuman? cond;
-    ConditionHuman? complaint;
-    ConditionHuman? standart;
-    ConditionHuman? Consience;
-    ConditionHuman? rass;
-    ConditionHuman? skins;
-    ConditionHuman? hymd;
-    ConditionHuman? clr;
 
     public bool vash { get; set; } = false;
-    bool IsSkin;
-    protected override async Task OnInitializedAsync()
-    {
-        cond = new ConditionHuman();
-        complaint = new ConditionHuman();
-        standart = new ConditionHuman();
-        Consience = new ConditionHuman();
-        rass = new ConditionHuman();
-        skins = new ConditionHuman();
-        hymd = new ConditionHuman();
-        clr = new ConditionHuman();
-    }
-
-
 
 }

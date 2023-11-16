@@ -23,12 +23,9 @@ namespace Re.Core.Models
         public string[] skin { get; set; } //кожные покровы
         public string[] humidity { get; set; } //влажность кожных покровов
         public string[] colorskin { get; set; } //цвет кожных покровов
-    }
 
 
-    public class ConditionHuman : StandartDiary
-    {
-        public ConditionHuman()
+        public StandartDiary()
         {
 
             conditions = new string[] {
@@ -108,7 +105,7 @@ namespace Re.Core.Models
            };
 
         }
-
     }
 
 }
+
