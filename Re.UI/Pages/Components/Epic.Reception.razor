@@ -113,7 +113,7 @@
             </MudGrid>
 
             <MudGrid>
-                <MudItem xs="6">
+                <MudItem Style="padding-top: 0;" xs="6">
                     <MudSelect T="string" Label="Цианоз:" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in re.Cyanosis)
                         {
@@ -121,7 +121,7 @@
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem xs="6">
+                <MudItem Style="padding-top: 0;" xs="6">
                     <MudSelect T="string" Label="Мраморность:" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in re.Marbling)
                         {
@@ -130,6 +130,69 @@
                     </MudSelect>
                 </MudItem>
             </MudGrid>
+            <MudSelect T="string" Label="Периферические отеки:" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var item in re.PeripheralEdema)
+                {
+                    <MudSelectItem Value="@item" />
+                }
+            </MudSelect>
+            <MudGrid>
+                <MudItem xs="2" Class="d-flex flex-column justify-end"><MudText>В/в катетер -</MudText></MudItem>
+                <MudItem xs="5">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in re.VeinsToBeCatheterized[0])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="5">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in re.VeinsToBeCatheterized[1])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="padding-top: 0;" xs="7">
+                    <MudSelect T="string" Label="Признаки воспаления в области катетера:" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in re.InflammationInCatheter)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem Style="padding-top: 0;" xs="5">
+                    <MudSelect T="string" Label="Спонтанное дыхание:" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in re.SpontaneousBreathing)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="padding-top: 0;" xs="6">
+                    <MudSelect T="string" Label="Дыхание через:" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in re.BreathingThrough)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem Style="padding-top: 0;" xs="6">
+                    <MudSelect T="string" Label="Нарушение дыхания:" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in re.BreathingDisorder)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+            
         </MudPaper>
     </MudItem>
 

@@ -27,6 +27,16 @@ namespace Re.Core.Models
 
         public string[] Cyanosis { get; set; }
         public string[] Marbling { get; set; }
+        public string[] PeripheralEdema { get; set; }
+
+        public List<string[]> VeinsToBeCatheterized { get; set; }
+        private string[] catheterType;
+        private string[] catheterValue;
+
+        public string[] InflammationInCatheter { get; set; }
+        public string[] SpontaneousBreathing { get; set; }
+        public string[] BreathingThrough { get; set; }
+        public string[] BreathingDisorder { get; set; }
         public string Features { get; set; }
         public ReceptionEpicrisis()
         {
@@ -120,7 +130,39 @@ namespace Re.Core.Models
                 "нет.", "конечностей.", "грудной клетки.","живота.",
             };
 
+            PeripheralEdema = new string[]
+            {
+                "нет.", "нижних конечностей.", "лица.",
+                "боковых поверхностей туловища.", "анасакра."
+            };
 
+            catheterType = new string[] 
+            {
+                "периферическая вена.", "центральная вена.",
+                "центральный венозный порт."
+            };
+            catheterValue = new string[]
+            {
+                "v.subclavia dext.",
+                "v.subclavia sin.",
+                "v.jugularis int. dext.",
+                "v.jugularis in. sin.",
+                "v.femoralis dext.",
+                "v.femoralis sin."
+            };
+            VeinsToBeCatheterized = new List<string[]>() { catheterType, catheterValue, };
+
+            InflammationInCatheter = new string[] { "есть.", "нет." };
+            SpontaneousBreathing = new string[] { "эффективно.", "неэффективно." };
+            BreathingThrough = new string[] 
+            { 
+                "естественные пути.", "эндотрахеальную трубку.",
+                "ларингеальную маску.", "трахеостомическую канюлю.", "воздуховод.",
+            };
+            BreathingDisorder = new string[] 
+            {  
+                "нет.", "апноэ.", "трахипноэ.", "брадипноэ.", "периодизация." 
+            };
         }
     }
 }
