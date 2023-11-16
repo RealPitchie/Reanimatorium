@@ -196,15 +196,26 @@
         </MudPaper>
     </MudItem>
     <MudItem xs="4">
-        <MudBadge Color="Color.Error" Origin="Origin.TopCenter" Overlap="true" Content="@robodoc">
-            <MudPaper Style="background-color: #D9D9D9; border: 1px solid #C00000;"
-                      Height="150px" Width="180px">
-                <MudButtonGroup Style="margin-top: 2rem; width: 100%" Variant="Variant.Outlined" Size="Size.Large" VerticalAlign="true">
-                    <MudButton Style="padding: 7px 30px" StartIcon="@Icons.Material.Filled.Dock">Без ИВЛ</MudButton>
-                    <MudButton StartIcon="@Icons.Material.Filled.DocumentScanner">С ИВЛ</MudButton>
-                </MudButtonGroup>
-            </MudPaper>
-        </MudBadge>
+        <MudGrid>
+            <MudItem>
+                <MudBadge Color="Color.Error" Origin="Origin.TopCenter" Overlap="true" Content="@robodoc">
+                    <MudPaper Class="d-flex flex-column justify-center" Style="background-color: #D9D9D9; border: 1px solid #C00000;"
+                              Height="140px" Width="180px">
+                        <MudButtonGroup Style="margin: 1rem;" Variant="Variant.Outlined" Size="Size.Large" VerticalAlign="true">
+                            <MudButton Style="justify-content: space-between">
+                                <MudImage Width="20" Src="../img/robot.png" />
+                                Без ИВЛ
+                            </MudButton>
+                            <MudButton Style="justify-content: space-between">
+                                <MudImage Width="20" Src="../img/robot.png" />
+                                С ИВЛ
+                            </MudButton>
+                        </MudButtonGroup>
+                    </MudPaper>
+                </MudBadge>
+            </MudItem>
+        </MudGrid>
+        
         
     </MudItem>
 </MudGrid>
@@ -214,7 +225,6 @@
     DateTime? date = DateTime.Now;
     TimeSpan? time = DateTime.Now.TimeOfDay;
 
-    public string path = @"C:\Users\futbk\source\repos\Reanimatorium\Re.UI\wwwroot\img\robot.png";
     public bool IsVashOn { get; set; } = false;
     public string robodoc = "\t ROBODOC \t";
 }
