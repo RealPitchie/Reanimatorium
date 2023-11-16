@@ -1,0 +1,26 @@
+﻿@using Re.Core.Models
+@using Re.UI.Data
+@using CColor = System.Drawing.Color
+
+<MudText Style="text-decoration: underline;" Align="Align.Center">
+    Отделение анестезиологии и реанимации с интенсивной терапией (лист назначений)
+</MudText>
+<MudDivider Style="margin: 1px 0" />
+<MudGrid Class="d-flex justify-start gap-1">
+    <MudTextField T="string" Label="ФИО" @bind-Value="Data.Fio"></MudTextField>
+    <MudTextField T="string" Label="Возраст" @bind-Value="Data.Age"></MudTextField>
+    <MudTextField T="string" Label="№ и/б." @bind-Value="Data.Number"></MudTextField>
+    <MudDatePicker Label="Дата" @bind-Date="date"></MudDatePicker>
+</MudGrid>
+<MudDivider Style="margin: 8px 0" />
+<MudGrid Class="d-flex justify-start gap-1">
+    <MudTextField T="string" Label="Аллергия" @bind-Value="Data.Allergy"></MudTextField>
+    <MudTextField T="string" Label="Сутки" @bind-Value="Data.Days"></MudTextField>
+    <MudTextField T="string" Label="Стол" @bind-Value="Data.Diet"></MudTextField>
+    <MudTextField T="string" Label="Гр.крови" @bind-Value="Data.BloodType"></MudTextField>
+</MudGrid>
+
+@code {
+    DateTime? date = DateTime.Now;
+    public Information Data { get; set; } = new();
+}
