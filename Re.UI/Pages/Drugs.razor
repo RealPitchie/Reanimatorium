@@ -1,15 +1,18 @@
 ﻿@page "/drugs"
 
-@using Re.UI.Pages.Components
+@using Re.UI.Pages.Components.Drugs
+@using Re.Core.Models
 
 <MudTabs Elevation="4" Rounded="true" Style="max-width: 500px;" Centered="true" Color="@Color.Primary" PanelClass="pa-6">
     <MudTabPanel Text="Назначение учетных препаратов">
-        <Drugs_Purpose />
+        <Re.UI.Pages.Components.Drugs.Drugs_Purpose/>
     </MudTabPanel>
     <MudTabPanel Text="Наркотики-1">
-        <Drugs_Drugs1 />
+        <Re.UI.Pages.Components.Drugs.Drugs_Drugs1 />
     </MudTabPanel>
 </MudTabs>
+
+
 
 @code {
 

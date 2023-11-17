@@ -10,9 +10,52 @@
     </MudItem> 
 </MudGrid>
 
+MudGrid>
+    <MudItem xs="8">
+        @* Опциональная вкладка "Пациент доставлен в ...." *@
+        @if(isPatient && patient != null)
+        {
+            <Prot_Standard_CentralVein Protocol="Patient" />
+
+        }
+        @* Опциональная вкладка "Синдро ВАШ..." *@
+        @if(isSyndrom && syndrom != null)
+        {
+           <Prot_Standard_Arteria Protocol="Syndrom" />
+        }
+    </MudItem> 
+    
+
 @code{
 
-    List<Doctor> Doctors = new();
+    Syndrom? syndrom;
+    Patient? patient;
     DateTime? date = DateTime.Now;
     TimeSpan? time = DateTime.Now.TimeOfDay;
+
+    bool isPatient, isSyndrom;
+
+     void PatientToggled(bool value)
+    {
+       if(value)
+       {
+            if(patient == null)
+            {
+                patient = new Patient();
+            }
+       }
+       isPatient = value;
+    }
+
+    void SyndromToggled(bool value)
+    {
+       if(value)
+       {
+            if(syndrom == null)
+            {
+                syndrom = new Syndrom();
+            }
+       }
+       isSyndrom = value;
+    }
 }
