@@ -78,18 +78,22 @@ public class ArteriaProtocol : StandardProtocol
 }
 public class EpiduralSpaceProtocol : StandardProtocol
 {
-    public string[] PunctionLevel { get; set; }
-    public string[] CatheterInserted { get; set; }
+    public EpiduralSpaceIndications Indications { get; set; }
+    public string[] PunctionLevels { get; set; }
+    public string PunctionLevel { get; set; }
+    public string[] CathetersInserted { get; set; }
+    public string CatheterInserted { get; set; }
     public string Notes { get; set; }
     public EpiduralSpaceProtocol()
     {
-        
+        Indications = new();
         LocalAnesthesyTypes = new string[] { "Лидокаином 1%", "Новокаином 0,25%" };
-        PunctionLevel = new string[] {
+        PunctionLevels = new string[] {
             "Th 1-2","Th 2-3","Th 3-4","Th 4-5","Th 5-6","Th 6-7","Th 7-8","Th 8-9","Th 9-10","Th 10-11",
             "Th 11 - L 1", "L 1-2","L 2-3","L 3-4"
         };
-        CatheterInserted = new string[] { "краниально", "каудально" };
+        CathetersInserted = new string[] { "краниально", "каудально" };
+        CathetersUsed = new string[] { "набором B|Braun Perifix mono S215", "набором B|Braun Perifix mono S220","набором B|Braun Perifix mono S315","набором B|Braun Perifix mono S330" };
         Name = "Протокол катетеризации эпидурального пространства";
     }
 }

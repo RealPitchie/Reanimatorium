@@ -1,0 +1,123 @@
+@using Re.Core.Models
+@using Re.UI.Data
+
+<MudGrid Spacing="10" Justify="Justify.FlexStart">
+    <MudItem>
+        <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date"/>
+    </MudItem>
+    <MudItem>
+        <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
+    </MudItem> 
+</MudGrid>
+
+
+
+<MudGrid>
+    <MudItem xs="8">
+        @* протокол центральной вены *@
+        @if(isCentralVein && cvProtocol != null)
+        {
+            <Prot_Standard_CentralVein Protocol="cvProtocol" />
+
+        }
+        @* протокол артерии *@
+        @if(isArteria && arProtocol != null)
+        {
+           <Prot_Standard_Arteria Protocol="arProtocol" />
+        }
+        @* протокол эпидурального пространства *@
+        @if(isEpidural && esProtocol != null)
+        {
+             <Prot_Standard_Epidural Protocol="esProtocol" />
+        }
+    </MudItem> 
+    <MudItem xs="4">
+        <MudGrid Style="position: sticky; top: 100px; right: 50px">
+            <MudItem xs="2">
+                <MudToggleIconButton Icon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="@Color.Error" Title="Выкл"
+                    ToggledIcon="@Icons.Material.Filled.CheckBox" ToggledColor="@Color.Success" ToggledChanged="CentralToggled" ToggledTitle="Вкл"/>
+            </MudItem>
+            <MudItem xs="10">
+                <span>Протокол катетеризации центральной вены</span>
+            </MudItem>
+        </MudGrid> 
+        <MudGrid Style="position: sticky; top: 150px; right: 50px">
+            <MudItem xs="2">
+                <MudToggleIconButton Icon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="@Color.Error" ToggledChanged="ArteriaToggled" Title="Выкл"
+                    ToggledIcon="@Icons.Material.Filled.CheckBox" ToggledColor="@Color.Success" ToggledTitle="Вкл"/>
+            </MudItem>
+            <MudItem xs="10">
+                <span>Протокол катетеризации артерии</span>
+            </MudItem>
+        </MudGrid >
+        <MudGrid Style="position: sticky; top: 200px; right: 50px">
+            <MudItem xs="2">
+                <MudToggleIconButton Icon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="@Color.Error" ToggledChanged="EpiduralToggled" Title="Выкл"
+                    ToggledIcon="@Icons.Material.Filled.CheckBox" ToggledColor="@Color.Success" ToggledTitle="Вкл"/>
+            </MudItem>
+            <MudItem xs="10">
+                <span>Протокол катетеризации эпидурального пространства</span>
+            </MudItem>
+        </MudGrid>
+        
+        
+        
+    </MudItem>
+    
+</MudGrid>
+
+ 
+
+@code{
+ 
+    List<Doctor> Doctors = new();
+    DateTime? date = DateTime.Now;
+    TimeSpan? time = DateTime.Now.TimeOfDay;
+    CentralVeinProtocol? cvProtocol;
+    ArteriaProtocol? arProtocol;
+    EpiduralSpaceProtocol? esProtocol;
+
+
+    Func<Doctor,string> converter = d => d?.Name;
+
+    bool isCentralVein, isArteria, isEpidural;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Doctors.Add(new Doctor { Name = "Test Doctor", Id = Guid.NewGuid().ToString(), Position = "Test position" });
+    } 
+    void CentralToggled(bool value)
+    {
+       if(value)
+       {
+            if(cvProtocol == null)
+            {
+                cvProtocol = new CentralVeinProtocol();
+            }
+       }
+       isCentralVein = value;
+    }
+    void ArteriaToggled(bool value)
+    {
+        if(value)
+        {
+                if(arProtocol == null)
+                {
+                    arProtocol = new ArteriaProtocol();
+                }
+        }
+        isArteria = value;
+    }
+    void EpiduralToggled(bool value)
+    {
+        if(value)
+        {
+                if(esProtocol == null)
+                {
+                    esProtocol = new EpiduralSpaceProtocol();
+                }
+        }
+        isEpidural = value;
+    }
+    
+}

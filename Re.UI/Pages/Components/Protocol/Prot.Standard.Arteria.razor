@@ -1,0 +1,107 @@
+@using Re.Core.Models
+@using Re.UI.Data
+
+<MudPaper Style="padding: 20px; margin: 15px 0">
+    <MudText style="margin-top: 15px; font-weight: bolder;">
+        @date.ToDateOnly().ToString() &nbsp; &nbsp;&nbsp;&nbsp; @string.Format("{0}:{1}", time.Value.Hours.ToString("D2"),time.Value.Minutes.ToString("D2"))
+    </MudText>
+    <MudText Typo="Typo.h6" style="text-align: center;">@Protocol.Name.ToUpper()</MudText>
+    <MudText Typo="Typo.body1" style="text-align: left; margin-bottom: 10px">Показания для: </MudText>
+    <MudGrid Style="margin-bottom: 25px;"> 
+        <MudItem xs="6" style="padding: 0 15px;">
+            <MudSwitch @bind-Checked="@Protocol.Indications.AllowControl" Color="Color.Primary" 
+                Label="контроля КЩС"></MudSwitch>
+        </MudItem>
+        <MudItem xs="6" style="padding: 0 15px;">
+            <MudSwitch @bind-Checked="@Protocol.Indications.AllowPressureMonitoring" Color="Color.Primary"  
+                Label="мониторинга инвазивного давления"></MudSwitch>
+        </MudItem>
+        <MudItem xs="6" style="padding: 0 15px;">
+            <MudSwitch @bind-Checked="@Protocol.Indications.AllowPiccoMonitoring" Color="Color.Primary"  
+                Label="мониторинга центральной гемодинамики системой PICCO"></MudSwitch>
+        </MudItem>
+    </MudGrid> 
+    <MudDivider />
+    <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+        <MudItem xs="4">
+            <MudSwitch @bind-Checked="@Protocol.IsLocalAnesthesyNeeded" Color="Color.Primary"  
+                Label="под м.анестезией"></MudSwitch>
+        </MudItem>
+        @if(Protocol.IsLocalAnesthesyNeeded)
+        {
+            <MudItem xs="4">
+                <MudSelect Value="Protocol.LocalAnesthesyType" Dense="true" T="string" Label="Выберите препарат" AnchorOrigin="Origin.BottomCenter">
+                    @foreach(var item in Protocol.LocalAnesthesyTypes)
+                    {
+                        <MudSelectItem Value="@item"/>
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="2">
+                <MudNumericField HideSpinButtons="true" @bind-Value="Protocol.LocalAnesthesyDose" Label="Доза" Variant="Variant.Text" Min="0" Step=".2M" />
+            </MudItem>
+            <MudItem xs="2">
+                <MudText Typo="Typo.body2">мл.</MudText>
+            </MudItem>
+        }
+    </MudGrid>
+    
+    <MudGrid>
+        <MudItem xs="6">
+            <MudSelect Value="Protocol.ArteriaToBeCatheterized" Dense="true" T="string" Label="Катетеризирована артерия" AnchorOrigin="Origin.BottomCenter">
+                @foreach(var arteria in Protocol.ArteriasToBeCatheterized)
+                {
+                    <MudSelectItem Value="@arteria"/>
+                }
+            </MudSelect>
+        </MudItem>
+        <MudItem xs="6">
+            <MudSelect Value="Protocol.CatheterUsed" Dense="true" T="string" Label="Катетером" AnchorOrigin="Origin.BottomCenter">
+                @foreach(var catheter in Protocol.CathetersUsed)
+                {
+                    <MudSelectItem Value="@catheter"/>
+                }
+            </MudSelect>
+        </MudItem>
+    </MudGrid>
+    
+    
+    <MudDivider Style="margin: 15px 0"/>
+    <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+        <MudItem >
+            <MudText Typo="Typo.body2">Количество попыток</MudText>
+        </MudItem>
+        <MudItem xs="1">
+            <MudNumericField Style="text-align: right;" HideSpinButtons="true" @bind-Value="Protocol.TriesNo" Variant="Variant.Text" Min="0" />
+        </MudItem>
+    </MudGrid>
+    <MudDivider Style="margin: 15px 0"/>
+    <MudTextField T="string" Label="Особенности" Variant="Variant.Text" Text="@Protocol.Features" />
+    <MudTextField T="string" Label="Осложнения" Variant="Variant.Text" Text="@Protocol.Complications" Lines="3" />
+        
+    <MudDivider Style="margin: 15px 0"/>
+    <MudGrid>
+        <MudItem xs="6">
+            <MudSelect Value="Protocol.Doctor" Dense="true" T="Doctor" ToStringFunc="@converter" Label="Врач">
+                @foreach(var doc in Doctors)
+                {
+                    <MudSelectItem Value="@doc" />
+                }
+            </MudSelect>
+        </MudItem>
+    </MudGrid>
+</MudPaper>
+
+@code{
+    [Parameter]
+    public ArteriaProtocol Protocol { get; set; }
+    public List<Doctor> Doctors = new();
+    DateTime? date = DateTime.Now;
+    TimeSpan? time = DateTime.Now.TimeOfDay;
+    Func<Doctor,string> converter = d => d?.Name;
+
+    protected override async Task OnInitializedAsync()
+    {
+        Doctors.Add(new Doctor { Name = "Test Doctor", Id = Guid.NewGuid().ToString(), Position = "Test position" });
+    }
+}
