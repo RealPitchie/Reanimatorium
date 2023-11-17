@@ -4,27 +4,29 @@
 <MudGrid Justify="Justify.FlexStart">
     <MudItem>
         <MudDatePicker style="width: 150px;" Label="Дата"  @bind-Date="date"/>
-    </MudItem>
-    <MudItem>
         <MudTimePicker style="width: 150px;" Label="Время"  @bind-Time="time"/>
-    </MudItem> 
+    </MudItem>    
+    <MudItem xs="6">
+        <MudCheckBox style="width: 150px;" @bind-Checked="@Basic_CheckBox1" Color="Color.Primary"><span>Пациент</span></MudCheckBox>
+        <MudCheckBox style="width: 150px;" @bind-Checked="@Basic_CheckBox2" Color="Color.Primary"><span>Синдром</span></MudCheckBox>
+    </MudItem>
 </MudGrid>
-
-MudGrid>
-    <MudItem xs="8">
+    <MudItem>
+    
         @* Опциональная вкладка "Пациент доставлен в ...." *@
-        @if(isPatient && patient != null)
+        @if(Basic_CheckBox1 == true)
         {
-            <Prot_Standard_CentralVein Protocol="Patient" />
+            <Re.UI.Pages.Components.Drugs.Puspose.Drugs_Purpose_Patient />
 
         }
         @* Опциональная вкладка "Синдро ВАШ..." *@
-        @if(isSyndrom && syndrom != null)
+        @if(Basic_CheckBox2 == true)
         {
-           <Prot_Standard_Arteria Protocol="Syndrom" />
+            <Re.UI.Pages.Components.Drugs.Puspose.Drugs_Purpose_Syndrom />
         }
-    </MudItem> 
-    
+        
+    </MudItem>
+
 
 @code{
 
@@ -33,29 +35,8 @@ MudGrid>
     DateTime? date = DateTime.Now;
     TimeSpan? time = DateTime.Now.TimeOfDay;
 
-    bool isPatient, isSyndrom;
 
-     void PatientToggled(bool value)
-    {
-       if(value)
-       {
-            if(patient == null)
-            {
-                patient = new Patient();
-            }
-       }
-       isPatient = value;
-    }
+     public bool Basic_CheckBox1 { get; set; } = false;
+    public bool Basic_CheckBox2 { get; set; } = false;
 
-    void SyndromToggled(bool value)
-    {
-       if(value)
-       {
-            if(syndrom == null)
-            {
-                syndrom = new Syndrom();
-            }
-       }
-       isSyndrom = value;
-    }
 }
