@@ -1,19 +1,18 @@
 ﻿@using Re.Core.Models
 @using Re.UI.Data
 
+<MudGrid>
+    <MudItem>
+        <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
+    </MudItem> 
+    <MudItem>
+        <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
+    </MudItem>
+</MudGrid>
 
 <MudGrid>
     <MudItem xs="8">
-        <MudGrid Spacing="10" Justify="Justify.FlexStart">
-            <MudItem>
-                <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
-            </MudItem>
-        </MudGrid>
-        <MudGrid Spacing="10" Justify="Justify.FlexStart">
-            <MudItem>
-                <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
-            </MudItem>
-        </MudGrid>
+        
 
         <MudPaper Style="padding: 10px; margin: 15px 0; width:150%">
 
