@@ -8,19 +8,19 @@
     <MudText Typo="Typo.h6" style="text-align: center;">@Protocol.Name.ToUpper()</MudText>
     <MudText Typo="Typo.body1" style="text-align: left; margin-bottom: 10px">Показания для: </MudText>
     <MudGrid Style="margin-bottom: 25px;">
-        <MudItem xs="6" style="padding: 0 15px;">
+        <MudItem style="padding: 0 15px;">
             <MudSwitch @bind-Checked="@Protocol.Indications.AllowPostoperativeAnesthesia" Color="Color.Primary" 
                 Label="интра- и послеоперационного обезболивания"></MudSwitch>
         </MudItem>
-        <MudItem xs="6" style="padding: 0 15px;">
+        <MudItem style="padding: 0 15px;">
             <MudSwitch @bind-Checked="@Protocol.Indications.AllowPainSyndromeTreatment" Color="Color.Primary"  
                 Label="лечения болевого синдрома"></MudSwitch>
         </MudItem>
-        <MudItem xs="6" style="padding: 0 15px;">
+        <MudItem style="padding: 0 15px;">
             <MudSwitch @bind-Checked="@Protocol.Indications.AllowAcutePancreatitisTreatment" Color="Color.Primary"  
                 Label="лечения острого панкреатита"></MudSwitch>
         </MudItem>
-        <MudItem xs="6" style="padding: 0 15px;">
+        <MudItem style="padding: 0 15px;">
             <MudSwitch @bind-Checked="@Protocol.Indications.AllowIntestinalStimulation" Color="Color.Primary"  
                 Label="стимуляции перестальтики кишечника"></MudSwitch>
         </MudItem>

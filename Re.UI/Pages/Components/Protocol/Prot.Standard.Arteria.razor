@@ -8,15 +8,15 @@
     <MudText Typo="Typo.h6" style="text-align: center;">@Protocol.Name.ToUpper()</MudText>
     <MudText Typo="Typo.body1" style="text-align: left; margin-bottom: 10px">Показания для: </MudText>
     <MudGrid Style="margin-bottom: 25px;"> 
-        <MudItem xs="6" style="padding: 0 15px;">
+        <MudItem style="padding: 0 15px;">
             <MudSwitch @bind-Checked="@Protocol.Indications.AllowControl" Color="Color.Primary" 
                 Label="контроля КЩС"></MudSwitch>
         </MudItem>
-        <MudItem xs="6" style="padding: 0 15px;">
+        <MudItem style="padding: 0 15px;">
             <MudSwitch @bind-Checked="@Protocol.Indications.AllowPressureMonitoring" Color="Color.Primary"  
                 Label="мониторинга инвазивного давления"></MudSwitch>
         </MudItem>
-        <MudItem xs="6" style="padding: 0 15px;">
+        <MudItem style="padding: 0 15px;">
             <MudSwitch @bind-Checked="@Protocol.Indications.AllowPiccoMonitoring" Color="Color.Primary"  
                 Label="мониторинга центральной гемодинамики системой PICCO"></MudSwitch>
         </MudItem>
