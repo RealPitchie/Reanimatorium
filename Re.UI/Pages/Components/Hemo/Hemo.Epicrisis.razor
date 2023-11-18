@@ -1,0 +1,40 @@
+﻿@using Re.Core.Models
+@using Re.UI.Data
+
+<MudGrid>
+    <MudItem xs="8">
+        <MudGrid Style="margin-left:180px; margin-top:-55px;" Spacing="10" Justify="Justify.Center">
+            <MudItem><MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" /></MudItem>
+            <MudItem> <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" /></MudItem>
+        </MudGrid>
+    </MudItem>
+    <MudDivider Style="margin: 35px 0;"></MudDivider>
+        <MudText Align="Align.Center" Typo="Typo.h6" Style="margin: auto;">@ep.Name</MudText>
+        <MudGrid style="margin-top: 5px">
+            <MudPaper Style="width: 70%" Class="mx-auto">
+                <MudTextField T="string" Label="Больной(-ая)" Variant="Variant.Text" Text="@ep.FIO"></MudTextField>
+                <MudTextField T="string" Label="Возраст" Variant="Variant.Text" Text="@ep.Age"></MudTextField>
+                <MudTextField T="string" Label="История болезни №" Variant="Variant.Text" Text="@ep.Number"></MudTextField>
+                <MudSelect T="string" Label="Группа крови и Rh-принадлежность:" AnchorOrigin="Origin.BottomCenter">
+                    @foreach (var item in ep.GroupRh)
+                    {
+                        <MudSelectItem Value="@item" />
+                    }
+                </MudSelect>
+                <MudTextField T="string" Label="Диагноз:" Variant="Variant.Text" Text="@ep.Diagnosis" Lines="3"></MudTextField>
+                <MudSelect T="string" Label="Показания к переливанию компонентов крови:" AnchorOrigin="Origin.BottomCenter">
+                    @foreach (var item in ep.Indications)
+                    {
+                        <MudSelectItem Value="@item" />
+                    }
+                </MudSelect>
+                <MudTextField T="string" Label="Ранее гемотрансфузии:" Variant="Variant.Text" Text="@ep.Hemotransfusion" Lines="3"></MudTextField>
+            </MudPaper>
+        </MudGrid>
+</MudGrid>
+
+@code{
+    Hemo ep = new Hemo();
+    DateTime? date = DateTime.Now; 
+    TimeSpan? time = DateTime.Now.TimeOfDay;
+}
