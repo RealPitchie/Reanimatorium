@@ -2,25 +2,25 @@
 @using Re.UI.Data
 
 <MudPaper Style="padding: 20px; margin: 15px 0">
-    <MudText style="margin-top: 15px; font-weight: bolder;">
+    <MudText style="margin-top: 15px; font-weight: bolder;"> 
         @date.ToDateOnly().ToString() &nbsp; &nbsp;&nbsp;&nbsp; @string.Format("{0}:{1}", time.Value.Hours.ToString("D2"),time.Value.Minutes.ToString("D2"))
     </MudText>
     <MudText Typo="Typo.h6" style="text-align: center;">@Protocol.Name.ToUpper()</MudText>
     <MudText Typo="Typo.body1" style="text-align: left; margin-bottom: 10px">Показания для: </MudText>
     <MudGrid Style="margin-bottom: 25px;">
-        <MudItem xs="6" style="padding: 0 15px;">
+        <MudItem style="padding: 0 15px;">
             <MudSwitch @bind-Checked="@Protocol.Indications.AllowVenoseAccess" Color="Color.Primary" 
                 Label="обеспечения венозного доступа и контроля ЦВД"></MudSwitch>
         </MudItem>
-        <MudItem xs="6" style="padding: 0 15px;">
+        <MudItem style="padding: 0 15px;">
             <MudSwitch @bind-Checked="@Protocol.Indications.AllowInfusionTherapy" Color="Color.Primary"  
                 Label="длительной инфузионной терапии"></MudSwitch>
         </MudItem>
-        <MudItem xs="6" style="padding: 0 15px;">
+        <MudItem style="padding: 0 15px;">
             <MudSwitch @bind-Checked="@Protocol.Indications.AllowParenteralNutrition" Color="Color.Primary"  
                 Label="проведения парентерального питания"></MudSwitch>
         </MudItem>
-        <MudItem xs="6" style="padding: 0 15px;">
+        <MudItem style="padding: 0 15px;">
             <MudSwitch @bind-Checked="@Protocol.Indications.AllowHemocorrection" Color="Color.Primary"  
                 Label="проведения экстракорпоральной гемокоррекции"></MudSwitch>
         </MudItem>

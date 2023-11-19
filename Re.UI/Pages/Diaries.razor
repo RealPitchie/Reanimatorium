@@ -1,8 +1,9 @@
 ﻿@page "/diaries"
+@using Re.UI.Pages.Components.Diary
+@using Re.Core.Models
+ 
 
-@using Re.UI.Pages.Components
-
-<MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary">
+<MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary" PanelClass="pa-6">
     <MudTabPanel Text="Стандартный дневник">
         <Diary_Standart />
     </MudTabPanel>

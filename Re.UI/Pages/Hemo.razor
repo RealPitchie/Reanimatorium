@@ -1,10 +1,11 @@
 @page "/hemo"
 
-@using Re.UI.Pages.Components
+@using Re.UI.Pages.Components.Hemo
+@using Re.Core.Models
 
 <MudTabs  Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary" PanelClass="pa-6">
     <MudTabPanel Text="Эпикриз на гемотрансфузию">
-        <Hemo_Epicrisis />
+        <Hemo_Epicrisis/>
     </MudTabPanel>
     <MudTabPanel Text="Протокол гемотрансфузии">
         <Hemo_Protocol />

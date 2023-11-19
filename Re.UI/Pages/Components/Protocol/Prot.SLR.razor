@@ -1,7 +1,144 @@
-<div>
-    СЛР
-</div>
+@using Core.Models
+@using Data
+
+<MudGrid Justify="Justify.FlexStart">
+    <MudItem>
+        <MudDatePicker style="width: 150px;" Label="Дата" DateChanged="@((e) => DateChanged(e))"/>
+    </MudItem>
+    <MudItem>
+        <MudTimePicker style="width: 150px;" Label="Время" TimeChanged="@((e) => TimeChanged(e))" />
+    </MudItem> 
+</MudGrid>
+
+<MudPaper Style="padding: 20px; margin: 15px 0; max-width: 75%;">
+    <MudText style="margin-top: 15px; font-weight: bolder;">
+        @date.ToDateOnly().ToString() &nbsp; &nbsp;&nbsp;&nbsp; @string.Format("{0}:{1}", time.Value.Hours.ToString("D2"),time.Value.Minutes.ToString("D2"))
+    </MudText>
+    <MudGrid>
+        <MudItem xs="6">
+            <MudSelect Value="slrProtocol.CallTo" Dense="true" T="string" Label="Вызов в">
+                @foreach(var call in calls)
+                {
+                    <MudSelectItem Value="@call" />
+                }
+            </MudSelect>
+        </MudItem>
+    </MudGrid>
+    <MudGrid>
+        <MudItem xs="10">
+            <MudTextField @bind-Value="slrProtocol.PatientName" Label="Ф.И.О. больного"></MudTextField>
+        </MudItem>
+        <MudItem xs="2">
+            <MudNumericField T="int" @bind-Value="slrProtocol.PatientAge" Label="возраст" Min="0"></MudNumericField>
+        </MudItem>
+    </MudGrid>
+    <MudText Style="margin-top: 10px" Typo="Typo.body2">
+        Клиническая картина: сознание отсутствует, пульсация на магистральных артериях не определяется.
+    </MudText>
+    
+    <MudGrid>
+        <MudItem xs="6">
+            <MudSelect Value="slrProtocol.SpontaneousBreathing" Dense="true" T="string" Label="Спонтанное дыхание">
+                @foreach(var breath in breaths)
+                {
+                    <MudSelectItem Value="@breath" />
+                }
+            </MudSelect>
+        </MudItem>
+    </MudGrid>
+    <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+     
+        <MudItem>
+            <MudSelect Value="slrProtocol.PupilType" Dense="true" T="string" Label="зрачки">
+                @foreach(var type in pupilTypes)
+                {
+                    <MudSelectItem Value="@type" />
+                }
+            </MudSelect>
+        </MudItem>
+        <MudItem>
+            <MudSelect Value="slrProtocol.CallTo" Dense="true" T="string" Label="зрачки">
+                @foreach(var condition in pupilConditions)
+                {
+                    <MudSelectItem Value="@condition" />
+                }
+            </MudSelect>
+        </MudItem>
+        <MudItem>
+            <MudText>
+                фотореакция отсутствует.
+            </MudText>
+        </MudItem> 
+    </MudGrid>
+    <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+     
+        <MudItem xs="6">
+            <MudSelect Value="slrProtocol.EKGMonitor" Dense="true" T="string" Label="По ЭКГ монитору">
+                @foreach(var monitor in monitors)
+                {
+                    <MudSelectItem Value="@monitor" />
+                }
+            </MudSelect>
+        </MudItem> 
+        <MudItem>
+            <MudText>
+                констатирована клиническая смерть.
+            </MudText>
+        </MudItem> 
+    </MudGrid>
+    
+    <MudGrid Justify="Justify.FlexStart" Style="align-items: center;">
+        <MudItem>
+            <MudSwitch @bind-Checked="@slrProtocol.WasBaseSLRCarriedOut" Color="Color.Primary" Label="Проводилась базовая СЛР"/>
+        </MudItem>
+        <MudItem>
+            <MudText Typo="Typo.body2">
+                Реанимационные мероприятия продолжены в полном объеме.
+            </MudText>            
+        </MudItem>
+    </MudGrid>
+    <MudGrid>
+        <MudItem xs="6">
+            <MudSelect Value="slrProtocol.Doctor" Dense="true" T="Doctor" ToStringFunc="@converter" Label="Врач">
+                @foreach(var doc in Doctors)
+                {
+                    <MudSelectItem Value="@doc" />
+                }
+            </MudSelect>
+        </MudItem>
+    </MudGrid>
+</MudPaper>
+
 
 @code{
-    
+    List<Doctor> Doctors = new();
+    DateTime? date = DateTime.Now;
+    TimeSpan? time = DateTime.Now.TimeOfDay;
+    SLRProtocol slrProtocol = new();
+
+
+    Func<Doctor,string> converter = d => d?.Name;
+ 
+    protected override void OnInitialized()
+    {
+        date = DateTime.Now;
+        time = DateTime.Now.TimeOfDay;
+        StateHasChanged();
+        Doctors.Add(new Doctor { Name = "Test Doctor", Id = Guid.NewGuid().ToString(), Position = "Test position" });
+    }
+    void DateChanged(DateTime? value)
+    {
+        date = value;
+        StateHasChanged();
+    }
+    void TimeChanged(TimeSpan? value)
+    {
+        time = value;
+        StateHasChanged();
+    }
+    string[] calls = new string[] {};
+    string[] breaths = new string[] {};
+    string[] pupilTypes = new string[] {};
+    string[] pupilConditions = new string[] {};
+    string[] monitors = new string[] {};
 }

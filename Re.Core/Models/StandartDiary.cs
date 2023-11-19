@@ -23,8 +23,18 @@ namespace Re.Core.Models
         public string[] skin { get; set; } //кожные покровы
         public string[] humidity { get; set; } //влажность кожных покровов
         public string[] colorskin { get; set; } //цвет кожных покровов
-
-
+        public string[] breathing { get; set; } //дыхание
+        public string[] extubation { get; set; } //экстубация
+        public string CDDField { get; set; } //ЧДД
+        public string[] inhalationO2 { get; set; } //ингаляция О2
+        public string SpeedFlow { get; set; } //скорость потока
+        public string[] auscultatory { get; set; } //аускультативно
+        public string[] ShortnessOfBreath { get; set; } //ослабление дыхания
+        public string[] ShortnessOfBreathParties { get; set; } //стороны ослабления дыхания
+        public string shortnessBreaths { get; set; } //ослабление дыхания поле ввода
+        public string[] Wheezes { get; set; } //хрипы
+        public string[] WheezesParties { get; set; } //стороны хрипов
+        public string[] WheezesDescription { get; set; } //описание хрипов
         public StandartDiary()
         {
 
@@ -104,8 +114,72 @@ namespace Re.Core.Models
                 "бледно-розовые."
            };
 
+            breathing = new string[]
+            {
+                "естественные дыхательные пути.",
+                "эндотрахеальную трубку.",
+                "ларингеальную маску.",
+                "трахеостомическую канюлю.",
+                "воздуховод."
+            };
+            extubation = new string[]
+            {
+                ",",
+                "а,"
+            };
+
+            inhalationO2 = new string[]
+            {
+                "носовые канюли.",
+                "HFOT аппаратом. Airvo 2",
+                "лицевую маску.",
+                "CPAP - клапан.",
+                "'искусственнный нос'",
+            };
+
+            auscultatory = new string[]
+            {
+                "дыхание жесткое.",
+                "дыхание везикулярное.",
+                "дыхание пуэрильное."
+            };
+
+            ShortnessOfBreath= new string[]
+           {
+                "есть,",
+                "нет."
+           };
+
+            ShortnessOfBreathParties = new string[]
+          {
+                "с двух сторон.",
+                "справа.",
+                "слева"
+          }; 
+            
+            Wheezes = new string[]
+          {
+                "есть,",
+                "нет."
+          };
+
+            WheezesParties = new string[]
+          {
+                "с двух сторон.",
+                "справа.",
+                "слева"
+          };
+            WheezesDescription = new string[]
+          {
+                "нет.",
+                "сухие",
+                "влажные",
+                "крепитирующие",
+                "проводные"
+          };
+
         }
+
     }
 
 }
-

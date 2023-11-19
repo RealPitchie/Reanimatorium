@@ -1,16 +1,14 @@
 @using Re.Core.Models
 @using Re.UI.Data
 
-<MudGrid Spacing="10" Justify="Justify.FlexStart">
+<MudGrid Justify="Justify.FlexStart">
     <MudItem>
-        <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date"/>
+        <MudDatePicker style="width: 150px;" Label="Дата" DateChanged="@((e) => DateChanged(e))"/>
     </MudItem>
     <MudItem>
         <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
     </MudItem> 
 </MudGrid>
-
-
 
 <MudGrid>
     <MudItem xs="8">
@@ -41,7 +39,7 @@
                 <span>Протокол катетеризации центральной вены</span>
             </MudItem>
         </MudGrid> 
-        <MudGrid Style="position: sticky; top: 150px; right: 50px">
+        <MudGrid Style="position: sticky; top: 175px; right: 50px">
             <MudItem xs="2">
                 <MudToggleIconButton Icon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="@Color.Error" ToggledChanged="ArteriaToggled" Title="Выкл"
                     ToggledIcon="@Icons.Material.Filled.CheckBox" ToggledColor="@Color.Success" ToggledTitle="Вкл"/>
@@ -50,7 +48,7 @@
                 <span>Протокол катетеризации артерии</span>
             </MudItem>
         </MudGrid >
-        <MudGrid Style="position: sticky; top: 200px; right: 50px">
+        <MudGrid Style="position: sticky; top: 250px; right: 50px">
             <MudItem xs="2">
                 <MudToggleIconButton Icon="@Icons.Material.Filled.CheckBoxOutlineBlank" Color="@Color.Error" ToggledChanged="EpiduralToggled" Title="Выкл"
                     ToggledIcon="@Icons.Material.Filled.CheckBox" ToggledColor="@Color.Success" ToggledTitle="Вкл"/>
@@ -71,8 +69,8 @@
 @code{
  
     List<Doctor> Doctors = new();
-    DateTime? date = DateTime.Now;
-    TimeSpan? time = DateTime.Now.TimeOfDay;
+    DateTime? date;
+    TimeSpan? time;
     CentralVeinProtocol? cvProtocol;
     ArteriaProtocol? arProtocol;
     EpiduralSpaceProtocol? esProtocol;
@@ -84,6 +82,8 @@
 
     protected override async Task OnInitializedAsync()
     {
+        time = DateTime.Now.TimeOfDay;
+        date = DateTime.Now;
         Doctors.Add(new Doctor { Name = "Test Doctor", Id = Guid.NewGuid().ToString(), Position = "Test position" });
     } 
     void CentralToggled(bool value)
@@ -119,5 +119,9 @@
         }
         isEpidural = value;
     }
-    
+    void DateChanged(DateTime? value)
+    {
+        date = value;
+        StateHasChanged();
+    }
 }
