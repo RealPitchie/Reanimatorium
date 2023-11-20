@@ -30,6 +30,28 @@
 
         </MudGrid>
 
+        <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+            <MudItem>
+                <MudText Typo="Typo.subtitle1"> Отмечается выраженный болевой синдром,  </MudText>
+            </MudItem>
+            <MudItem xs="2">
+                <MudSelect T="string" Label="ВАШ - " AnchorOrigin="Origin.BottomCenter">
+                    <MudSelectItem Value="@("1 б.")" />
+                    <MudSelectItem Value="@("2 б.")" />
+                    <MudSelectItem Value="@("3 б.")" />
+                    <MudSelectItem Value="@("4 б.")" />
+                    <MudSelectItem Value="@("5 б.")" />
+                    <MudSelectItem Value="@("6 б.")" />
+                    <MudSelectItem Value="@("7 б.")" />
+                </MudSelect>
+            </MudItem>
+
+            <MudItem xs="2">
+                <MudNumericField @bind-Value="@patient.ArtPres" Label="АД" HelperText="мм рт. ст." Variant="Variant.Outlined" />
+            </MudItem>
+
+        </MudGrid>
+
         <MudItem xs="6">
             
         </MudItem>
