@@ -1,4 +1,5 @@
-﻿@using Re.Core.Models
+﻿@using Newtonsoft.Json;
+@using Re.Core.Models
 @using Re.UI.Data
 
 <MudGrid>
@@ -17,9 +18,9 @@
         <MudPaper Style="padding: 10px; margin: 15px 0; width:150%">
 
             <MudSelect Style="width:50%" T="string" Label="Состояние" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var condit in standart.conditions)
+                @foreach (var item in standart.Сonditions)
                 {
-                    <MudSelectItem Value="@condit" />
+                    <MudSelectItem Value="@item" />
                 }
             </MudSelect>
 
@@ -31,16 +32,16 @@
                 <MudItem Style="width: 30%; padding: 11px 6px;">
 
                     <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var comp in standart.complaints)
+                        @foreach (var item in standart.Сomplaints)
                         {
-                            <MudSelectItem Value="@comp" />
+                            <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
 
                 </MudItem>
                 <MudItem Style="width: 40%; padding: 11px 6px;">
 
-                    <MudTextField T="string" Label="Жалобы на" Variant="Variant.Text" Text="@standart.complaintAbout" />
+                    <MudTextField T="string" Label="Жалобы на" Variant="Variant.Text" Text="@standart.ComplaintsAbout" />
 
                 </MudItem>
 
@@ -53,9 +54,9 @@
                 {
                     <MudItem Style="width: 6%; padding: 11px 6px;">
                         <MudSelect T="string">
-                            @foreach (var vashs in standart.VASH)
+                            @foreach (var item in standart.Vash)
                             {
-                                <MudSelectItem Style="margin-bottom: 15px;" Value="@vashs" />
+                                <MudSelectItem Style="margin-bottom: 15px;" Value="@item" />
                             }
                         </MudSelect>
                     </MudItem>
@@ -64,9 +65,9 @@
             </MudGrid>
 
             <MudSelect Style="width:50%" T="string" Label="Сознание" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var cons in standart.conscience)
+                @foreach (var item in standart.Conscience)
                 {
-                    <MudSelectItem Value="@cons" />
+                    <MudSelectItem Value="@item" />
                 }
             </MudSelect>
 
@@ -78,64 +79,64 @@
                 <MudItem Style="width: 25%; padding: 11px 6px;">
 
                     <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var rs in standart.RASS)
+                        @foreach (var item in standart.Rass)
                         {
-                            <MudSelectItem Value="@rs" />
+                            <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
 
                 </MudItem>
                 <MudItem Style="width: 65%; padding: 11px 6px;">
 
-                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@standart.RASSthis" />
+                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@standart.RassThis" />
 
                 </MudItem>
 
             </MudGrid>
 
             <MudSelect Style="width:50%" T="string" Label="Кожные покровы" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var sk in standart.skin)
+                @foreach (var item in standart.Skin[0])
                 {
-                    <MudSelectItem Value="@sk" />
+                    <MudSelectItem Value="@item" />
                 }
             </MudSelect>
 
 
             <MudSelect Style="width:50%" T="string" Label="Влажность" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var hm in standart.humidity)
+                @foreach (var item in standart.Skin[1])
                 {
-                    <MudSelectItem Value="@hm" />
+                    <MudSelectItem Value="@item" />
                 }
             </MudSelect>
             <MudSelect Style="width:50%" T="string" Label="Цвет" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var cl in standart.colorskin)
+                @foreach (var item in standart.Skin[2])
                 {
-                    <MudSelectItem Value="@cl" />
+                    <MudSelectItem Value="@item" />
                 }
             </MudSelect>
             <MudSelect Style="width:50%" T="string" Label="Дыхание через" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var Breathing in standart.breathing)
+                @foreach (var item in standart.Breathing)
                 {
-                    <MudSelectItem Value="@Breathing" />
+                    <MudSelectItem Value="@item" />
                 }
             </MudSelect>
              <MudGrid>
                 <MudItem Style="width: 10%;padding: 11px 25px;" Class="d-flex flex-column justify-end"><MudText>Экстубирован</MudText></MudItem>
                 <MudItem Style="padding: 11px 35px;">
                     <MudSelect Style="width:6%;" T="string" Label="" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var Extubation in standart.extubation)
+                        @foreach (var item in standart.Extubation)
                 {
-                    <MudSelectItem Value="@Extubation" />
+                            <MudSelectItem Value="@item" />
                 }
             </MudSelect>
                 </MudItem>
                 <MudItem Style="width: 30%;padding: 11px 5px;" Class="d-flex flex-column justify-end"><MudText>самостоятельное дыхание эффективно.</MudText></MudItem>
             </MudGrid>
             <MudGrid>
-                <MudItem Style="width: 8%;padding: 11px 25px;" Class="d-flex flex-column justify-end"><MudText>ЧДД - </MudText></MudItem>
+                <MudItem Style="width: 9%;padding: 11px 25px;" Class="d-flex flex-column justify-end"><MudText>ЧДД - </MudText></MudItem>
 
                 <MudItem Style="width: 8%; padding: 11px 1px;">
-                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@standart.CDDField" />
+                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@standart.CddField" />
                 </MudItem>
                 <MudItem Style="width: 30%;padding: 11px 15px;" Class="d-flex flex-column justify-end"><MudText>в 1 минуту.</MudText></MudItem>
             </MudGrid>
@@ -145,14 +146,14 @@
 
                 <MudItem Style="width: 25%; padding: 11px 1px;">
                     <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var Inhalation in standart.inhalationO2)
+                        @foreach (var item in standart.InhalationO2)
                         {
-                            <MudSelectItem Value="@Inhalation" />
+                            <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
 
-                <MudItem Style="width: 15%;padding: 11px 22px;" Class="d-flex flex-column justify-end"><MudText>Скорость потока - </MudText></MudItem>
+                <MudItem Style="width: 16%;padding: 11px 22px;" Class="d-flex flex-column justify-end"><MudText>Скорость потока - </MudText></MudItem>
 
                 <MudItem Style="width: 8%; padding: 11px 11px;">
                     <MudTextField T="string" Label="" Variant="Variant.Text" Text="@standart.SpeedFlow" />
@@ -161,65 +162,72 @@
             </MudGrid>
 
             <MudSelect Style="width:50%" T="string" Label="Аускультативно" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var Auscultatory in standart.auscultatory)
+                @foreach (var item in standart.Auscultatory)
                 {
-                    <MudSelectItem Value="@Auscultatory" />
+                    <MudSelectItem Value="@item" />
                 }
             </MudSelect>
 
              <MudGrid>
 
-                <MudItem Style="width: 30%; padding: 11px 6px;">
+                <MudItem Style="width: 30%; padding: 11px 11px;">
                     <MudSelect T="string" Label="Ослабление дыхания" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var shortness in standart.ShortnessOfBreath)
+                        @foreach (var item in standart.ShortnessOfBreath[0])
                         {
-                            <MudSelectItem Value="@shortness" />
+                            <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
            
                 <MudItem Style="width: 30%; padding: 11px 6px;">
                     <MudSelect T="string" Label="Стороны" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var shortness in standart.ShortnessOfBreathParties)
+                        @foreach (var item in standart.ShortnessOfBreath[1])
                         {
-                            <MudSelectItem Value="@shortness" />
+                            <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
                 <MudItem Style="width: 40%; padding: 11px 11px;">
-                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@standart.shortnessBreaths" />
+                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@standart.ShortnessOfBreathInput" />
                 </MudItem>
              </MudGrid>
 
             <MudGrid>
 
-                <MudItem Style="width: 30%; padding: 11px 6px;">
+                <MudItem Style="width: 30%; padding: 11px 11px;">
                     <MudSelect T="string" Label="Хрипы" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var wheezes in standart.Wheezes)
+                        @foreach (var item in standart.Wheezes[0])
                         {
-                            <MudSelectItem Value="@wheezes" />
+                            <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
 
                 <MudItem Style="width: 30%; padding: 11px 6px;">
                     <MudSelect T="string" Label="Стороны" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var wheezes in standart.WheezesParties)
+                        @foreach (var item in standart.Wheezes[1])
                         {
-                            <MudSelectItem Value="@wheezes" />
+                            <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
                 <MudItem Style="width: 40%; padding: 11px 11px;">
                     <MudSelect T="string" Label="Характер" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var wheezes in standart.WheezesDescription)
+                        @foreach (var item in standart.Wheezes[2])
                         {
-                            <MudSelectItem Value="@wheezes" />
+                            <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
             </MudGrid>
-
+            <MudItem Style="width: 100%; padding: 11px 0;">
+                <MudSelect T="string" Label="Респираторная поддержка" AnchorOrigin="Origin.BottomCenter">
+                    @foreach (var item in standart.RespiratorySupport)
+                    {
+                        <MudSelectItem Value="@item" />
+                    }
+                </MudSelect>
+            </MudItem>
         </MudPaper>
         
     </MudItem>
@@ -232,11 +240,19 @@
 
 
 @code {
-    StandartDiary standart = new StandartDiary();
+    StandartDiary? standart;
 
-    DateTime? date = DateTime.Now; //Дата
-    TimeSpan? time = DateTime.Now.TimeOfDay; //Время
+    DateTime? date; //дата
+    TimeSpan? time; //время
+    public bool vash { get; set; } 
 
-    public bool vash { get; set; } = false;
+    protected override void OnInitialized()
+    {
+        standart = JsonConvert.DeserializeObject<StandartDiary>(File.ReadAllText
+        ("./wwwroot/json/diary.standart.json"));
 
+        date = DateTime.Now; //Дата
+        time = DateTime.Now.TimeOfDay; //Время
+        vash = false;
+    }
 }
