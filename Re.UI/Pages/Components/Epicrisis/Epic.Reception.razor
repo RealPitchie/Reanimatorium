@@ -233,16 +233,24 @@
 </MudGrid>
 
 @code {
-    // Относительный путь
-    ReceptionEpicrisis re = 
-    JsonConvert.DeserializeObject<ReceptionEpicrisis>(File.ReadAllText
-        ("./wwwroot/json/epic.reception.json"));
-    DateTime? date = DateTime.Now;
-    TimeSpan? time = DateTime.Now.TimeOfDay;
+    ReceptionEpicrisis? re; 
+    DateTime? date;
+    TimeSpan? time;
+    public string? robodoc;
+    public bool IsVashOn { get; set; }
+    public bool IsIVL { get; set; }
 
-    public bool IsVashOn { get; set; } = false;
-    public bool IsIVL { get; set; } = false;
-    public string robodoc = "\t ROBODOC \t";
+    protected override void OnInitialized()
+    {
+        re = JsonConvert.DeserializeObject<ReceptionEpicrisis>(File.ReadAllText
+        ("./wwwroot/json/epic.reception.json"));
+        date = DateTime.Now;
+        time = DateTime.Now.TimeOfDay;
+
+        robodoc = "\t ROBODOC \t";
+        IsVashOn = false;
+        IsIVL = false;
+    }
 
     void HandleWithIVL() => IsIVL = true;
     void HandleWithoutIVL() => IsIVL = false;
