@@ -1,17 +1,18 @@
 ﻿@using Re.Core.Models
 @using Re.UI.Data
 
-<MudGrid Justify="Justify.FlexStart">
+<MudGrid Justify="Justify.FlexStart" style="margin-top: 15px;">
     <MudItem>
         <MudDatePicker style="width: 150px;" Label="Дата"  @bind-Date="date"/>
+    </MudItem>
+    <MudItem>
         <MudTimePicker style="width: 150px;" Label="Время"  @bind-Time="time"/>
-    </MudItem>    
-    <MudItem xs="6">
-        <MudCheckBox style="width: 150px;" @bind-Checked="@Basic_CheckBox1" Color="Color.Primary"><span>Пациент</span></MudCheckBox>
-        <MudCheckBox style="width: 150px;" @bind-Checked="@Basic_CheckBox2" Color="Color.Primary"><span>Синдром</span></MudCheckBox>
     </MudItem>
 </MudGrid>
-    <MudItem>
+
+<MudGrid>
+
+    <MudItem xs="8">
     
         @* Опциональная вкладка "Пациент доставлен в ...." *@
         @if(Basic_CheckBox1 == true)
@@ -26,6 +27,25 @@
         }
         
     </MudItem>
+
+    <MudItem xs="4">
+
+        <MudGrid Style="position: sticky; top: 100px; right: 50px">
+            <MudItem xs="2">
+                <MudCheckBox style="width: 150px;" @bind-Checked="@Basic_CheckBox1" Color="Color.Primary"><span>Пациент</span></MudCheckBox>
+            </MudItem>
+        </MudGrid>
+
+        <MudGrid Style="position: sticky; top: 100px; right: 50px">
+            <MudItem xs="2">
+                <MudCheckBox style="width: 150px;" @bind-Checked="@Basic_CheckBox2" Color="Color.Primary"><span>Синдром</span></MudCheckBox>
+            </MudItem>
+        </MudGrid>
+
+    </MudItem>
+</MudGrid>
+
+    
 
 
 @code{

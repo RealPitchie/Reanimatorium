@@ -3,6 +3,40 @@
 
 <MudPaper Style="padding: 20px; margin: 15px 0">
     <MudText style="margin-top: 15px; font-weight: bolder;">
-Пациент:
+        <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+        
+            <MudItem xs="6">
+                <MudTextField  T="string" Label="Пациент:" Variant="Variant.Text" Text="@patient.FIO"></MudTextField>
+            </MudItem>
+
+            <MudItem xs="2">
+                <MudText Typo="Typo.subtitle1"> доставлен в ОАР </MudText>
+            </MudItem>
+        </MudGrid>
+
+        <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+
+            <MudItem xs="0">
+                <MudText Typo="Typo.subtitle1"> из </MudText>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudTextField  T="string" Label="Адрес:" Variant="Variant.Text" Text="@patient.Adress"></MudTextField>
+            </MudItem>
+
+            <MudItem xs="0">
+                <MudText Typo="Typo.subtitle1"> С данными анмнеза и/б ознакомлен. </MudText>
+            </MudItem>
+
+        </MudGrid>
+
+        <MudItem xs="6">
+            
+        </MudItem>
     </MudText>
 </MudPaper>
+
+@code{
+    Patient patient = new Patient();
+
+}
