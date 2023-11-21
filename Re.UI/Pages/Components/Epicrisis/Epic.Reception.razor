@@ -2,6 +2,7 @@
 @using Re.Core.Models
 @using Re.UI.Data
 @using CColor = System.Drawing.Color
+@using System.Diagnostics;
 
 <MudGrid>
     <MudItem xs="8">
@@ -15,28 +16,28 @@
             </MudItem>
         </MudGrid>
         <MudPaper Style="padding: 10px; margin: 15px 0">
-            <MudText Align="Align.Center" Typo="Typo.h5">@re.Name</MudText>
-            <MudSelect T="string" Label="Пациент доставлен в реанимационное отделение из" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in re.DeliveredFrom)
+            <MudText Align="Align.Center" Typo="Typo.h5">@select.Name</MudText>
+            <MudSelect @bind-Value="re.DeliveredFrom" T="string" Label="Пациент доставлен в реанимационное отделение из" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var item in select.DeliveredFrom)
                 {
                     <MudSelectItem Value="@item" />
                 }
             </MudSelect>
-            <MudSelect T="string" Label="ИВЛ при транспортировке" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in re.AVLDueTransportation)
+            <MudSelect @bind-Value="re.AVLDueTransportation" T="string" Label="ИВЛ при транспортировке" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var item in select.AVLDueTransportation)
                 {
                     <MudSelectItem Value="@item" />
                 }
             </MudSelect>
-            <MudSelect T="string" Label="Жалобы:" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in re.Complaints)
+            <MudSelect @bind-Value="re.Complaints" T="string" Label="Жалобы:" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var item in select.Complaints)
                 {
                     <MudSelectItem Value="@item" />
                 }
             </MudSelect>
             <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
                 <MudItem xs="7">
-                    <MudTextField T="string" Label="Жалобы на" Variant="Variant.Text" Text="@re.Features" />
+                    <MudTextField T="string" Label="Жалобы на" Variant="Variant.Text" Text="@re.Complaint" />
                 </MudItem>
                 <MudItem Style="padding: 12px 0;" xs="2">
                     <MudSwitch Class="d-flex justify-end" @bind-Checked="@IsVashOn" Color="Color.Primary"
@@ -45,8 +46,8 @@
                 @if (IsVashOn)
                 {
                     <MudItem xs="3">
-                        <MudSelect T="string">
-                            @foreach (var item in re.Vash)
+                        <MudSelect @bind-Value="re.Vash" T="string">
+                            @foreach (var item in select.Vash)
                             {
                                 <MudSelectItem Style="margin-bottom: 15px;" Value="@item" />
                             }
@@ -55,32 +56,32 @@
                 }
             </MudGrid>
             <MudText Style="font-weight: bold; padding-top: 10px;">Объективно</MudText>
-            <MudSelect T="string" Label="Состояние" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in re.Condition)
+            <MudSelect @bind-Value="re.Condition" T="string" Label="Состояние" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var item in select.Condition)
                 {
                     <MudSelectItem Value="@item" />
                 }
             </MudSelect>
             <MudGrid>
                 <MudItem xs="6">
-                    <MudSelect T="string" Label="Сознание:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.Conscience)
+                    <MudSelect @bind-Value="re.Conscience" T="string" Label="Сознание:" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in select.Conscience)
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
                 <MudItem xs="6">
-                    <MudSelect T="string" Label="Ramsey:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.Ramsey)
+                    <MudSelect @bind-Value="re.Ramsey" T="string" Label="Ramsey:" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in select.Ramsey)
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
             </MudGrid>
-            <MudSelect T="string" Label="Мышечный тонус" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in re.MuscleTone)
+            <MudSelect @bind-Value="re.MuscleTone" T="string" Label="Мышечный тонус" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var item in select.MuscleTone)
                 {
                     <MudSelectItem Value="@item" />
                 }
@@ -88,24 +89,24 @@
             <MudGrid>
                 <MudItem Style="width: 20%; padding-right: 6px;" Class="d-flex flex-column justify-end"><MudText>Кожные покровы</MudText></MudItem>
                 <MudItem Style="width: 33%; padding: 12px 6px;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.SkinCovers[0])
+                    <MudSelect @bind-Value="re.SkinCovers[0]" T="string" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in select.SkinCovers[0])
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
                 <MudItem Style="width: 16%; padding: 12px 6px;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.SkinCovers[1])
+                    <MudSelect @bind-Value="re.SkinCovers[1]" T="string" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in select.SkinCovers[1])
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
                 <MudItem Style="width: 31%;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.SkinCovers[2])
+                    <MudSelect @bind-Value="re.SkinCovers[2]" T="string" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in select.SkinCovers[2])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -115,24 +116,24 @@
 
             <MudGrid>
                 <MudItem Style="padding-top: 0;" xs="6">
-                    <MudSelect T="string" Label="Цианоз:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.Cyanosis)
+                    <MudSelect @bind-Value="re.Cyanosis" T="string" Label="Цианоз:" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in select.Cyanosis)
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
                 <MudItem Style="padding-top: 0;" xs="6">
-                    <MudSelect T="string" Label="Мраморность:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.Marbling)
+                    <MudSelect @bind-Value="re.Marbling" T="string" Label="Мраморность:" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in select.Marbling)
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
             </MudGrid>
-            <MudSelect T="string" Label="Периферические отеки:" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in re.PeripheralEdema)
+            <MudSelect @bind-Value="re.PeripheralEdema" T="string" Label="Периферические отеки:" AnchorOrigin="Origin.BottomCenter">
+                @foreach (var item in select.PeripheralEdema)
                 {
                     <MudSelectItem Value="@item" />
                 }
@@ -140,16 +141,16 @@
             <MudGrid>
                 <MudItem xs="2" Class="d-flex flex-column justify-end"><MudText>В/в катетер -</MudText></MudItem>
                 <MudItem xs="5">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.VeinsToBeCatheterized[0])
+                    <MudSelect @bind-Value="re.VeinsToBeCatheterized[0]" T="string" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in select.VeinsToBeCatheterized[0])
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
                 <MudItem xs="5">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.VeinsToBeCatheterized[1])
+                    <MudSelect @bind-Value="re.VeinsToBeCatheterized[1]" T="string" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in select.VeinsToBeCatheterized[1])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -158,53 +159,128 @@
             </MudGrid>
             <MudGrid>
                 <MudItem Style="padding-top: 0;" xs="7">
-                    <MudSelect T="string" Label="Признаки воспаления в области катетера:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.InflammationInCatheter)
+                    <MudSelect @bind-Value="re.InflammationInCatheter" T="string" Label="Признаки воспаления в области катетера:" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in select.InflammationInCatheter)
+                        {
+                            <MudSelectItem Value="@item">@item</MudSelectItem>
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem Style="padding-top: 0;" xs="5">
+                    <MudSelect @bind-Value="re.SpontaneousBreathing" T="string" Label="Спонтанное дыхание:" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in select.SpontaneousBreathing)
+                        {
+                            <MudSelectItem Value="@item"/>
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="padding-top: 0;" xs="6">
+                    <MudSelect @bind-Value="re.BreathingThrough" T="string" Label="Дыхание через:" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in select.BreathingThrough)
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="padding-top: 0;" xs="5">
-                    <MudSelect T="string" Label="Спонтанное дыхание:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.SpontaneousBreathing)
+                <MudItem Style="padding-top: 0;" xs="6">
+                    <MudSelect @bind-Value="re.BreathingDisorder" T="string" Label="Нарушение дыхания:" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in select.BreathingDisorder)
                         {
                             <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem Style="padding-top: 0;" xs="12">
+                    <MudSelect @bind-Value="re.Auscultatory" T="string" Label="Аускультативно">
+                        @foreach(var item in select.Auscultatory)
+                        {
+                            <MudSelectItem Value="@item"/>
                         }
                     </MudSelect>
                 </MudItem>
                 
             </MudGrid>
             <MudGrid>
-                <MudItem Style="padding-top: 0;" xs="6">
-                    <MudSelect T="string" Label="Дыхание через:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.BreathingThrough)
+                <MudItem Style="padding-top: 0" xs="3" Class="d-flex flex-column justify-end">
+                    <MudText>Ослабление дыхания</MudText>
+                </MudItem>
+                <MudItem Style="padding-top: 0" xs="2">
+                    <MudSelect @bind-Value="re.ShortnessOfBreath[0]" T="string">
+                        @foreach (var item in select.ShortnessOfBreath[0])
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="padding-top: 0;" xs="6">
-                    <MudSelect T="string" Label="Нарушение дыхания:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in re.BreathingDisorder)
+                <MudItem Style="padding-top: 0" xs="7">
+                    <MudSelect @bind-Value="re.ShortnessOfBreath[1]" T="string">
+                        @foreach (var item in select.ShortnessOfBreath[1])
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
-                @if (!IsIVL)
-                {
-                    <MudItem Class="d-flex flex-column justify-center" xs="1">
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="padding-top: 0" xs="2" Class="d-flex flex-column justify-end">
+                    <MudText>Хрипы</MudText>
+                </MudItem>
+                <MudItem Style="padding-top: 0" xs="2">
+                    <MudSelect @bind-Value="re.Wheezes[0]" T="string">
+                        @foreach (var item in select.Wheezes[0])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem Style="padding-top: 0" xs="4">
+                    <MudSelect @bind-Value="re.Wheezes[1]" T="string">
+                        @foreach (var item in select.Wheezes[1])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem Style="padding-top: 0" xs="4">
+                    <MudSelect @bind-Value="re.Wheezes[2]" T="string">
+                        @foreach (var item in select.Wheezes[2])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+            @if (!IsIVL)
+            {
+                <MudGrid>
+                    <MudItem Class="d-flex flex-column justify-end" xs="1">
                         <MudText>ЧДД</MudText>
                     </MudItem>
-                    <MudItem Style="padding-top: 0;" xs="2">
+                    <MudItem xs="2">
                         <MudNumericField Style="margin-top: 0" HideSpinButtons="true" @bind-Value="re.RespiratoryRate" Variant="Variant.Text" Min="0"></MudNumericField>
                     </MudItem>
-                    <MudItem Class="d-flex flex-column justify-center" xs="3">
+                    <MudItem Class="d-flex flex-column justify-end" xs="4">
                         <MudText>в 1 минуту</MudText>
                     </MudItem>
-                }
-            </MudGrid>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem Style="padding-top: 0" xs="7">
+                        <MudSelect @bind-Value="re.OxygenInsufflation" T="string" Label="Инсуфляция кислорода через">
+                            @foreach (var item in select.OxygenInsufflation)
+                            {
+                                <MudSelectItem Value="@item" />
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem Style="padding-top: 0" Class="d-flex flex-column justify-end" xs="1"><MudText>V = </MudText></MudItem>
+                    <MudItem Class="d-flex flex-column justify-end" xs="2">
+                        <MudNumericField Class="d-flex flex-column justify-end" Style="margin-top: 0; padding-top: 0" HideSpinButtons="true" @bind-Value="re.Volume" Variant="Variant.Text" Min="0"></MudNumericField>
+                    </MudItem>
+                    <MudItem Style="padding-top: 0" Class="d-flex flex-column justify-end" xs="2"><MudText>л/мин</MudText></MudItem>
+                </MudGrid>
+            }
         </MudPaper>
     </MudItem>
     <MudItem xs="4">
@@ -233,7 +309,39 @@
 </MudGrid>
 
 @code {
-    ReceptionEpicrisis? re; 
+    // Этот класс должен быть здесь?
+    public class FrontSelectData
+    {
+        public string Name { get; set; }
+        public string[] DeliveredFrom { get; set; }
+        public string[] AVLDueTransportation { get; set; }
+        public string[] Complaints { get; set; }
+        public string[] Vash { get; set; }
+        public string[] Condition { get; set; }
+        public string[] Conscience { get; set; }
+        public string[] Ramsey { get; set; }
+        public string[] MuscleTone { get; set; }
+        public List<string[]> SkinCovers { get; set; }
+
+        public string[] Cyanosis { get; set; }
+        public string[] Marbling { get; set; }
+        public string[] PeripheralEdema { get; set; }
+
+        public List<string[]> VeinsToBeCatheterized { get; set; }
+
+        public string[] InflammationInCatheter { get; set; }
+        public string[] SpontaneousBreathing { get; set; }
+        public string[] BreathingThrough { get; set; }
+        public string[] BreathingDisorder { get; set; }
+        public string[] Auscultatory { get; set; }
+        public List<string[]> ShortnessOfBreath { get; set; }
+        public List<string[]> Wheezes { get; set; }
+        public string[] RespiratorySupport { get; set; }
+        public string[] OxygenInsufflation { get; set; }
+    }
+
+    ReceptionEpicrisis? re = new();
+    FrontSelectData? select = new();
     DateTime? date;
     TimeSpan? time;
     public string? robodoc;
@@ -242,7 +350,7 @@
 
     protected override void OnInitialized()
     {
-        re = JsonConvert.DeserializeObject<ReceptionEpicrisis>(File.ReadAllText
+        select = JsonConvert.DeserializeObject<FrontSelectData>(File.ReadAllText
         ("./wwwroot/json/epic.reception.json"));
         date = DateTime.Now;
         time = DateTime.Now.TimeOfDay;
@@ -252,6 +360,6 @@
         IsIVL = false;
     }
 
-    void HandleWithIVL() => IsIVL = true;
+    void HandleWithIVL() { IsIVL = true;}
     void HandleWithoutIVL() => IsIVL = false;
 }
