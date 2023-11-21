@@ -46,8 +46,24 @@
                 </MudSelect>
             </MudItem>
 
-            <MudItem xs="2">
-                <MudNumericField @bind-Value="@patient.ArtPres" Label="АД" HelperText="мм рт. ст." Variant="Variant.Outlined" />
+             <MudItem>
+                <MudText Typo="Typo.subtitle1"> АД </MudText>
+            </MudItem>
+            
+            <MudItem >
+                <MudNumericField Style="text-align: center; width: 75px"  Label="мм рт. ст." HideSpinButtons="true" @bind-Value="patient.ArtPresUp" Variant="Variant.Text" Min="0" />
+            </MudItem>
+            <MudItem>
+                <MudText Typo="Typo.subtitle1">/</MudText>
+            </MudItem>
+            <MudItem>
+                <MudNumericField Style="text-align: center; width: 75px" Label="мм рт. ст." HideSpinButtons="true" @bind-Value="patient.ArtPresDown" Variant="Variant.Text" Min="0" />
+            </MudItem>
+             <MudItem >
+                <MudText Typo="Typo.subtitle1">Пульс - </MudText>
+            </MudItem>
+            <MudItem>
+                <MudNumericField Style="text-align: center; width: 75px" Label="уд./мин." HideSpinButtons="true" @bind-Value="patient.ArtPresDown" Variant="Variant.Text" Min="0" />
             </MudItem>
 
         </MudGrid>

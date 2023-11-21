@@ -5,5 +5,8 @@ public class Patient{
 
      public string Adress { get; set; }
 
-     public int ArtPres { get; set; }
+     public int ArtPresUp { get; set; }
+    public int ArtPresDown { get; set; }
+
+    public int Pulse { get; set; }
 }
