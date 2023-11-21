@@ -36,6 +36,12 @@ namespace Re.Core.Models
         public string RespiratorySupport { get; set; }
         public string OxygenInsufflation {  get; set; }
         public int Volume { get; set; }
-
+        public string Device { get; set; }
+        public string Mode { get; set; }
+        public int Till {  get; set; }
+        public string Inotropes { get; set; }
+        public int InotropesValue { get; set; }
+        public string InotropesUnits { get; set; }
+        public string? InotropesDescription { get; set; }
     }
 }

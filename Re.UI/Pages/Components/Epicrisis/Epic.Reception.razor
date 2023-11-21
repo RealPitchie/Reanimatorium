@@ -5,7 +5,7 @@
 @using System.Diagnostics;
 
 <MudGrid>
-    <MudItem xs="8">
+    <MudItem xs="9">
         <MudText Align="Align.Center">Отделение анестезиологии-реанимации</MudText>
         <MudGrid Justify="Justify.Center">
             <MudItem>
@@ -16,21 +16,21 @@
             </MudItem>
         </MudGrid>
         <MudPaper Style="padding: 10px; margin: 15px 0">
-            <MudText Align="Align.Center" Typo="Typo.h5">@select.Name</MudText>
+            <MudText Align="Align.Center" Typo="Typo.h5">@Name</MudText>
             <MudSelect @bind-Value="re.DeliveredFrom" T="string" Label="Пациент доставлен в реанимационное отделение из" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in select.DeliveredFrom)
+                @foreach (var item in DeliveredFrom)
                 {
                     <MudSelectItem Value="@item" />
                 }
             </MudSelect>
             <MudSelect @bind-Value="re.AVLDueTransportation" T="string" Label="ИВЛ при транспортировке" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in select.AVLDueTransportation)
+                @foreach (var item in AVLDueTransportation)
                 {
                     <MudSelectItem Value="@item" />
                 }
             </MudSelect>
             <MudSelect @bind-Value="re.Complaints" T="string" Label="Жалобы:" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in select.Complaints)
+                @foreach (var item in Complaints)
                 {
                     <MudSelectItem Value="@item" />
                 }
@@ -47,7 +47,7 @@
                 {
                     <MudItem xs="3">
                         <MudSelect @bind-Value="re.Vash" T="string">
-                            @foreach (var item in select.Vash)
+                            @foreach (var item in Vash)
                             {
                                 <MudSelectItem Style="margin-bottom: 15px;" Value="@item" />
                             }
@@ -57,7 +57,7 @@
             </MudGrid>
             <MudText Style="font-weight: bold; padding-top: 10px;">Объективно</MudText>
             <MudSelect @bind-Value="re.Condition" T="string" Label="Состояние" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in select.Condition)
+                @foreach (var item in Condition)
                 {
                     <MudSelectItem Value="@item" />
                 }
@@ -65,7 +65,7 @@
             <MudGrid>
                 <MudItem xs="6">
                     <MudSelect @bind-Value="re.Conscience" T="string" Label="Сознание:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in select.Conscience)
+                        @foreach (var item in Conscience)
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -73,7 +73,7 @@
                 </MudItem>
                 <MudItem xs="6">
                     <MudSelect @bind-Value="re.Ramsey" T="string" Label="Ramsey:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in select.Ramsey)
+                        @foreach (var item in Ramsey)
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -81,7 +81,7 @@
                 </MudItem>
             </MudGrid>
             <MudSelect @bind-Value="re.MuscleTone" T="string" Label="Мышечный тонус" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in select.MuscleTone)
+                @foreach (var item in MuscleTone)
                 {
                     <MudSelectItem Value="@item" />
                 }
@@ -90,7 +90,7 @@
                 <MudItem Style="width: 20%; padding-right: 6px;" Class="d-flex flex-column justify-end"><MudText>Кожные покровы</MudText></MudItem>
                 <MudItem Style="width: 33%; padding: 12px 6px;">
                     <MudSelect @bind-Value="re.SkinCovers[0]" T="string" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in select.SkinCovers[0])
+                        @foreach (var item in SkinCovers[0])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -98,7 +98,7 @@
                 </MudItem>
                 <MudItem Style="width: 16%; padding: 12px 6px;">
                     <MudSelect @bind-Value="re.SkinCovers[1]" T="string" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in select.SkinCovers[1])
+                        @foreach (var item in SkinCovers[1])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -106,7 +106,7 @@
                 </MudItem>
                 <MudItem Style="width: 31%;">
                     <MudSelect @bind-Value="re.SkinCovers[2]" T="string" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in select.SkinCovers[2])
+                        @foreach (var item in SkinCovers[2])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -117,7 +117,7 @@
             <MudGrid>
                 <MudItem Style="padding-top: 0;" xs="6">
                     <MudSelect @bind-Value="re.Cyanosis" T="string" Label="Цианоз:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in select.Cyanosis)
+                        @foreach (var item in Cyanosis)
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -125,7 +125,7 @@
                 </MudItem>
                 <MudItem Style="padding-top: 0;" xs="6">
                     <MudSelect @bind-Value="re.Marbling" T="string" Label="Мраморность:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in select.Marbling)
+                        @foreach (var item in Marbling)
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -133,7 +133,7 @@
                 </MudItem>
             </MudGrid>
             <MudSelect @bind-Value="re.PeripheralEdema" T="string" Label="Периферические отеки:" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in select.PeripheralEdema)
+                @foreach (var item in PeripheralEdema)
                 {
                     <MudSelectItem Value="@item" />
                 }
@@ -142,7 +142,7 @@
                 <MudItem xs="2" Class="d-flex flex-column justify-end"><MudText>В/в катетер -</MudText></MudItem>
                 <MudItem xs="5">
                     <MudSelect @bind-Value="re.VeinsToBeCatheterized[0]" T="string" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in select.VeinsToBeCatheterized[0])
+                        @foreach (var item in VeinsToBeCatheterized[0])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -150,7 +150,7 @@
                 </MudItem>
                 <MudItem xs="5">
                     <MudSelect @bind-Value="re.VeinsToBeCatheterized[1]" T="string" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in select.VeinsToBeCatheterized[1])
+                        @foreach (var item in VeinsToBeCatheterized[1])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -160,7 +160,7 @@
             <MudGrid>
                 <MudItem Style="padding-top: 0;" xs="7">
                     <MudSelect @bind-Value="re.InflammationInCatheter" T="string" Label="Признаки воспаления в области катетера:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in select.InflammationInCatheter)
+                        @foreach (var item in InflammationInCatheter)
                         {
                             <MudSelectItem Value="@item">@item</MudSelectItem>
                         }
@@ -168,7 +168,7 @@
                 </MudItem>
                 <MudItem Style="padding-top: 0;" xs="5">
                     <MudSelect @bind-Value="re.SpontaneousBreathing" T="string" Label="Спонтанное дыхание:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in select.SpontaneousBreathing)
+                        @foreach (var item in SpontaneousBreathing)
                         {
                             <MudSelectItem Value="@item"/>
                         }
@@ -178,7 +178,7 @@
             <MudGrid>
                 <MudItem Style="padding-top: 0;" xs="6">
                     <MudSelect @bind-Value="re.BreathingThrough" T="string" Label="Дыхание через:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in select.BreathingThrough)
+                        @foreach (var item in BreathingThrough)
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -186,7 +186,7 @@
                 </MudItem>
                 <MudItem Style="padding-top: 0;" xs="6">
                     <MudSelect @bind-Value="re.BreathingDisorder" T="string" Label="Нарушение дыхания:" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in select.BreathingDisorder)
+                        @foreach (var item in BreathingDisorder)
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -194,7 +194,7 @@
                 </MudItem>
                 <MudItem Style="padding-top: 0;" xs="12">
                     <MudSelect @bind-Value="re.Auscultatory" T="string" Label="Аускультативно">
-                        @foreach(var item in select.Auscultatory)
+                        @foreach(var item in Auscultatory)
                         {
                             <MudSelectItem Value="@item"/>
                         }
@@ -208,7 +208,7 @@
                 </MudItem>
                 <MudItem Style="padding-top: 0" xs="2">
                     <MudSelect @bind-Value="re.ShortnessOfBreath[0]" T="string">
-                        @foreach (var item in select.ShortnessOfBreath[0])
+                        @foreach (var item in ShortnessOfBreath[0])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -216,7 +216,7 @@
                 </MudItem>
                 <MudItem Style="padding-top: 0" xs="7">
                     <MudSelect @bind-Value="re.ShortnessOfBreath[1]" T="string">
-                        @foreach (var item in select.ShortnessOfBreath[1])
+                        @foreach (var item in ShortnessOfBreath[1])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -229,7 +229,7 @@
                 </MudItem>
                 <MudItem Style="padding-top: 0" xs="2">
                     <MudSelect @bind-Value="re.Wheezes[0]" T="string">
-                        @foreach (var item in select.Wheezes[0])
+                        @foreach (var item in Wheezes[0])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -237,7 +237,7 @@
                 </MudItem>
                 <MudItem Style="padding-top: 0" xs="4">
                     <MudSelect @bind-Value="re.Wheezes[1]" T="string">
-                        @foreach (var item in select.Wheezes[1])
+                        @foreach (var item in Wheezes[1])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -245,7 +245,7 @@
                 </MudItem>
                 <MudItem Style="padding-top: 0" xs="4">
                     <MudSelect @bind-Value="re.Wheezes[2]" T="string">
-                        @foreach (var item in select.Wheezes[2])
+                        @foreach (var item in Wheezes[2])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -268,7 +268,7 @@
                 <MudGrid>
                     <MudItem Style="padding-top: 0" xs="7">
                         <MudSelect @bind-Value="re.OxygenInsufflation" T="string" Label="Инсуфляция кислорода через">
-                            @foreach (var item in select.OxygenInsufflation)
+                            @foreach (var item in OxygenInsufflation)
                             {
                                 <MudSelectItem Value="@item" />
                             }
@@ -281,9 +281,65 @@
                     <MudItem Style="padding-top: 0" Class="d-flex flex-column justify-end" xs="2"><MudText>л/мин</MudText></MudItem>
                 </MudGrid>
             }
+            @if (IsIVL)
+            {
+                <MudSelect @bind-Value="re.RespiratorySupport" T="string" Label="Респираторная поддержка">
+                    @foreach (var item in RespiratorySupport)
+                    {
+                        <MudSelectItem Value="@item" />
+                    }
+                </MudSelect>
+                <MudGrid>
+                    <MudItem xs="4">
+                        <MudSelect @bind-Value="re.Device" T="string" Label="Аппаратом">
+                            @foreach (var item in Device)
+                            {
+                                <MudSelectItem Value="@item" />
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem xs="3">
+                        <MudSelect @bind-Value="re.Mode" T="string" Label="Режим">
+                            @foreach (var item in Mode)
+                            {
+                                <MudSelectItem Value="@item" />
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem Class="d-flex flex-column justify-end" xs="1"><MudText>ДО - </MudText></MudItem>
+                    <MudItem Class="d-flex flex-column justify-end" xs="2">
+                        <MudNumericField Class="d-flex flex-column justify-end" Style="margin-top: 0; padding-top: 0" HideSpinButtons="true" @bind-Value="re.Till" Variant="Variant.Text" Min="0"></MudNumericField>
+                    </MudItem>
+                    <MudItem Class="d-flex flex-column justify-end" xs="2"><MudText>мл.</MudText></MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="6">
+                        <MudSelect @bind-Value="re.Inotropes" T="string" Label="Инотропы/вазопрессоры">
+                            @foreach (var item in Inotropes)
+                            {
+                                <MudSelectItem Value="@item" />
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem Class="d-flex flex-column justify-end" xs="2">
+                        <MudNumericField Class="d-flex flex-column justify-end" Style="margin-top: 0; padding-top: 0" HideSpinButtons="true" @bind-Value="re.InotropesValue" Variant="Variant.Text" Min="0"/>
+                    </MudItem>
+                    <MudItem Class="d-flex flex-column justify-end" xs="4">
+                        <MudSelect @bind-Value="re.InotropesUnits" T="string">
+                            @foreach (var item in InotropesUnits)
+                            {
+                                <MudSelectItem Value="@item" />
+                            }
+                        </MudSelect>
+                    </MudItem>
+                    <MudItem Style="padding-top: 0" xs="12">
+                        <MudTextField @bind-Value="re.InotropesDescription" Label="Инотропы/вазопрессоры(описание)"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+            }
         </MudPaper>
     </MudItem>
-    <MudItem xs="4">
+    <MudItem xs="3">
         <MudGrid>
             <MudItem>
                 <MudBadge Color="Color.Error" Origin="Origin.TopCenter" Overlap="true" Content="@robodoc">
@@ -309,49 +365,127 @@
 </MudGrid>
 
 @code {
-    // Этот класс должен быть здесь?
-    public class FrontSelectData
+    string Name = "Приемный статус";
+    string[] DeliveredFrom = new string[]
     {
-        public string Name { get; set; }
-        public string[] DeliveredFrom { get; set; }
-        public string[] AVLDueTransportation { get; set; }
-        public string[] Complaints { get; set; }
-        public string[] Vash { get; set; }
-        public string[] Condition { get; set; }
-        public string[] Conscience { get; set; }
-        public string[] Ramsey { get; set; }
-        public string[] MuscleTone { get; set; }
-        public List<string[]> SkinCovers { get; set; }
+        "операционной.", "премного отделения.", "поликлиники.",
+        "1 отделения.", "2 отделения.", "3 отделения.",
+        "4 отделения.", "5 отделения.", "6 отделения.",
+        "7 отделения.", "8 отделения.", "9 отделения.",
+        "10 отделения.", "11 отделения.", "12 отделения.",
+        "13 отделения.", "14 отделения.", "15 отделения.",
+        "16 отделения.", "17 отделения.", "18 отделения.",
+        "19 отделения.", "20 отделения.", "бригадой СМП.",    
+    };
+    string[] AVLDueTransportation = new string[]
+    { "нет.", "мешком AMBU.", "Dräger Oxylog.", "транспортным аппаратом ИВЛ." };
+    string[] Complaints = new string[]
+    {
+        "Жалоб нет.", "Жалобы не предъявляет из-за тяжести состояния.",
+        "Не предъявляет жалоб из-за седации.", "Жалобы прежние.",
+        "Предъявляет жалобы на", "Жалобы на боли в области операции."
+    };
+    string[] Vash = new string[]
+    {
+        "1 б.", "2 б.", "3 б.", "4 б.", "5 б.",
+        "6 б.", "7 б.", "8 б.", "9 б.", "10 б.",
+    };
+    string[] Condition = new string[]
+    {
+        "удовлетворительное.", "средней тяжести.",
+        "тяжелое.", "крайне тяжелое.",
+        "терминальное.", "клинической смерти."
+    };
+    string[] Conscience = new string[]
+    {
+        "ясное.", "оглушение.","глубокое оглушение.", "сопор.",
+        "кома 1.", "кома 2.", "кома 3.","медикаментозная седация."
+    };
+    string[] Ramsey = new string[]
+    {
+        "-5 баллов по шкале RASS.", "-4 балла по шкале RASS.",
+        "-3 балла по шкале RASS.", "-2 балла по шкале RASS.",
+        "-1 балл по шкале RASS.", "0 баллов по шкале RASS.",
+        "1 балл по шкале RASS.", "2 балла по шкале RASS.",
+        "3 балла по шкале RASS.", "4 балла по шкале RASS.",
+        "5 баллов по шкале RASS."
+    };
+    string[] MuscleTone = new string[]
+    { "не нарушен.", "снижен.", "медикаментозно угнетен."};
+    List<string[]> SkinCovers = new List<string[]>()
+    {
+        new string[] {"сухие,", "влажные,", "естественной влажности,"},
+        new string[] {"теплые,", "холодные,"},
+        new string[] {"естественной окраски.", "бледные.", "бледно-розовые."},
+    };
 
-        public string[] Cyanosis { get; set; }
-        public string[] Marbling { get; set; }
-        public string[] PeripheralEdema { get; set; }
+    string[] Cyanosis = new string[]
+    {
+        "нет.", "губ.", "лица.", "шеи.",
+        "верхней половины грудной клетки.", "конечностей.", "диффузный."
+    };
+    string[] Marbling = new string[]
+    { "нет.", "конечностей.", "грудной клетки.","живота." };
+    string[] PeripheralEdema = new string[]
+    {
+        "нет.", "нижних конечностей.", "лица.",
+        "боковых поверхностей туловища.", "анасакра."
+    };
 
-        public List<string[]> VeinsToBeCatheterized { get; set; }
+    List<string[]> VeinsToBeCatheterized = new List<string[]>()
+    {
+        new string[] { "периферическая вена.", "центральная вена.",
+                "центральный венозный порт."},
+        new string[] {
+            "v.subclavia dext.","v.subclavia sin.","v.jugularis int. dext.",
+            "v.jugularis in. sin.","v.femoralis dext.","v.femoralis sin."},
+    };
 
-        public string[] InflammationInCatheter { get; set; }
-        public string[] SpontaneousBreathing { get; set; }
-        public string[] BreathingThrough { get; set; }
-        public string[] BreathingDisorder { get; set; }
-        public string[] Auscultatory { get; set; }
-        public List<string[]> ShortnessOfBreath { get; set; }
-        public List<string[]> Wheezes { get; set; }
-        public string[] RespiratorySupport { get; set; }
-        public string[] OxygenInsufflation { get; set; }
-    }
+    string[] InflammationInCatheter = new string[] { "есть.", "нет." };
+    string[] SpontaneousBreathing = new string[] { "эффективно.", "неэффективно." };
+    string[] BreathingThrough = new string[]
+    {
+        "естественные пути.", "эндотрахеальную трубку.",
+        "ларингеальную маску.", "трахеостомическую канюлю.", "воздуховод.",
+    };
+    string[] BreathingDisorder = new string[]
+    { "нет.", "апноэ.", "трахипноэ.", "брадипноэ.", "периодизация." };
+    string[] Auscultatory = new string[] 
+    { "дыхание жесткое.","дыхание везикулярное.", "дыхание пуэрильное." };
+    List<string[]> ShortnessOfBreath = new List<string[]>()
+    {
+        new string[] { "есть,", "нет."},
+        new string[] {"с двух сторон.", "справа.", "слева"},
+    };
+    List<string[]> Wheezes = new List<string[]>()
+    {
+        new string[] { "есть,", "нет."},
+        new string[] {"с двух сторон.", "справа.", "слева"},
+        new string[] {"нет.", "сухие", "влажные", "крепитирующие", "проводные"},
+    };
+    string[] RespiratorySupport = new string[]{"не проводится.","начата","продолжена"};
+    string[] OxygenInsufflation = new string[] 
+    { 
+        "носовые канюли.",
+        "HFOT аппаратом Airvo 2",
+        "лицевую маску",
+        "CPAP-клапан",
+        "искусственный но" 
+    };
+    string[] Device = new string[] { "NPB 740,", "NPB 760,", "NPB 840,", "Servo-S", "PO-6", "мешком AMBU," };
+    string[] Mode = new string[] { "SPONT:","CPAP:","VCV:","PCV:","SIMV-VC:","SIMV-PC:","BiLevel:","A/C:","ASV:" };
+    string[] Inotropes = new string[] { "адреналин -", "норадреналин -", "добутамин -", "дофамин -", "мезатон -" };
+    string[] InotropesUnits = new string[] { "мкг/кг/мин", "мг/мин", "мл/час", "кап/мин" };
 
     ReceptionEpicrisis? re = new();
-    FrontSelectData? select = new();
     DateTime? date;
     TimeSpan? time;
-    public string? robodoc;
-    public bool IsVashOn { get; set; }
-    public bool IsIVL { get; set; }
+    string? robodoc;
+    bool IsVashOn;
+    bool IsIVL ;
 
     protected override void OnInitialized()
     {
-        select = JsonConvert.DeserializeObject<FrontSelectData>(File.ReadAllText
-        ("./wwwroot/json/epic.reception.json"));
         date = DateTime.Now;
         time = DateTime.Now.TimeOfDay;
 
