@@ -1,0 +1,68 @@
+﻿@using Re.Core.Models
+@using Re.UI.Data
+
+<MudGrid xs Justify="Justify.FlexStart" style="margin-top: 15px;">
+
+    <MudItem>
+        <MudDatePicker style="width: 150px;" Label="Дата"  @bind-Date="date"/>
+    </MudItem>
+
+    <MudItem>
+        <MudTimePicker style="width: 150px;" Label="Время"  @bind-Time="time"/>
+    </MudItem>
+
+</MudGrid>
+
+<MudGrid Justify="Justify.Center">
+   
+    <MudItem xs="8">
+    
+        @* Опциональная вкладка "Пациент доставлен в ...." *@
+        @if(Basic_CheckBox1 == true)
+        {
+            <Re.UI.Pages.Components.Drugs.Puspose.Drugs_Purpose_Patient />
+
+        }
+
+        <Re.UI.Pages.Components.Drugs.Puspose.Drugs_Purpose_Мedication />
+
+        @* Опциональная вкладка "Синдро ВАШ..." *@
+        @if(Basic_CheckBox2 == true)
+        {
+            <Re.UI.Pages.Components.Drugs.Puspose.Drugs_Purpose_Syndrom />
+        }
+    </MudItem>
+    
+
+    <MudItem >
+
+        <MudItem Style=" position: sticky; top: 100px; right: 10px">
+
+            <MudItem>
+                <MudCheckBox  @bind-Checked="@Basic_CheckBox1" Color="Color.Primary"><span>Пациент</span></MudCheckBox>
+            </MudItem>
+
+            <MudItem>
+                <MudCheckBox  @bind-Checked="@Basic_CheckBox2" Color="Color.Primary"><span>Синдром</span></MudCheckBox>
+            </MudItem>
+
+        </MudItem>
+
+    </MudItem>
+</MudGrid>
+
+    
+
+
+@code{
+
+    Syndrom? syndrom;
+    Patient? patient;
+    DateTime? date = DateTime.Now;
+    TimeSpan? time = DateTime.Now.TimeOfDay;
+
+
+     public bool Basic_CheckBox1 { get; set; } = false;
+    public bool Basic_CheckBox2 { get; set; } = false;
+
+}

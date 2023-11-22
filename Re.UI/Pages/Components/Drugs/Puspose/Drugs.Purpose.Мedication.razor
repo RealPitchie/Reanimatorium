@@ -1,0 +1,142 @@
+﻿@using Re.Core.Models
+@using Re.UI.Data
+
+<MudPaper Style="padding: 20px; margin: 15px 0">
+    <MudText style="margin-top: 15px; font-weight: bolder;">
+        <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+
+            <MudItem xs="2">
+                <MudText style="margin-top: 15px; font-weight: bolder;">  @date.ToDateOnly().ToString() </MudText>
+            </MudItem>
+
+            <MudItem xs="2">
+                <MudText style="margin-top: 15px; font-weight: bolder;"> @string.Format("{0}:{1}", time.Value.Hours.ToString("D2"),time.Value.Minutes.ToString("D2")) </MudText>
+            </MudItem>
+
+        </MudGrid>
+
+        <MudGrid Justify="Justify.Center" Style="align-items: center;">
+
+            <MudItem xs="10">
+                <MudSelect T="string" Label="Показание:" AnchorOrigin="Origin.BottomCenter" @bind-Value="medication.Purpose">
+                    @foreach (var item in Purpose)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                </MudSelect>
+            </MudItem>
+
+             <MudItem xs="10">
+                <MudSelect T="string" Label="Препарат:" AnchorOrigin="Origin.BottomCenter" @bind-Value="medication.Medication">
+                   @foreach (var item in Medication)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                </MudSelect>
+            </MudItem>
+
+             <MudItem xs="10">
+                <MudSelect T="string" Label="Путь введения:" AnchorOrigin="Origin.BottomCenter" @bind-Value="medication.Injection">
+                   @foreach (var item in Injection)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                </MudSelect>
+            </MudItem>
+
+        </MudGrid>
+
+        <MudGrid Justify="Justify.Center" Style="align-items: flex-end;">
+
+            <MudItem xs="2">
+                <MudNumericField Style="text-align: center; width: 75px" HideSpinButtons="true" @bind-Value="medication.Volume" Variant="Variant.Text" Min="0" />
+            </MudItem>
+
+            <MudItem xs="2">
+                <MudText Typo="Typo.subtitle1">мл</MudText>
+            </MudItem>
+
+            <MudItem xs="2">
+                <MudNumericField Style="text-align: center; width: 75px" HideSpinButtons="true" @bind-Value="medication.Аmpoule" Variant="Variant.Text" Min="0" />
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Typo="Typo.subtitle1">Количество ампул</MudText>
+            </MudItem>
+
+            <MudItem xs="10">
+                <MudSelect T="string" Label="Врач:" AnchorOrigin="Origin.BottomCenter" @bind-Value="medication.Injection">
+                   @foreach (var item in Doctor)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                </MudSelect>
+            </MudItem>
+
+        </MudGrid>
+
+    </MudText>
+</MudPaper>
+
+
+@code {
+    DateTime? date = DateTime.Now;
+    TimeSpan? time = DateTime.Now.TimeOfDay;
+
+    PrescribedMedications medication = new PrescribedMedications();
+
+    string[] Purpose = new string[]
+        {   "купирование болевого синдрома",
+            "купирование отека легких",
+            "медикаментозной седации",
+            "cинхронизации с аппаратом ИВЛ",};
+
+    string[] Medication = new string[]
+        {   "Sol. Phentanyli 50 mcg/ml",
+            "Tab. Targin 2.5 mg + 5 mg",
+            "Tab. Targin 5 mg + 10 mg",
+            "Tab. Targin 10 mg + 20 mg",
+            "Tab. Targin 20 mg + 40 mg",
+            "TTC Фендивия Fentanyl 12,5 mcg/hour",
+            "ТTC Фендивия Fentanyl 25 mcg/hour",
+            "TTC Фендивия Fentanyl 50 mcg/hour",
+            "Sol. Promedoli 20 mg/ml",
+            "Sol. Morphini 10 mg/ml",
+            "Sol. Sibazoni 5 mg/ml}",
+            "Sol. Ketamini 5%",
+            "Sol. Natrii Oxybati 20%" };
+
+    string[] Injection = new string[]
+        {   "per os",
+            "трансдермально",
+            "в/м",
+            "в/в",
+            "в/в, м/стр",
+            "в/в капельно в течении 24 часов" };
+
+         string[] Doctor = new string[]
+        {   "Розенгард С.А.",
+            "Глущенко В.А.",
+            "Алиева А.Э.",
+            "Борзых И.С.",
+            "Веденин Я.О.",
+            "Горохов Л.В.",
+            "Груздов М. С.",
+            "Гурин М.Н.",
+            "Зубайдов М.М.",
+            "Ишкараев В.Э.",
+            "Караваев А.В.",
+            "Кононец Ф.А.",
+            "Кремзель Е.Г.",
+            "Митрохина М.В.",
+            "Нюхлов Е.С.",
+            "Пазюк К.И.",
+            "Пастухова А.А.",
+            "Попель И.В.",
+            "Раевская О. А.",
+            "Сапронова Т.Н.",
+            "Семенов А.Н.",
+            "Склярова В.О.",
+            "Хестанова Н.З.",
+            "Шабут А.М."};
+}

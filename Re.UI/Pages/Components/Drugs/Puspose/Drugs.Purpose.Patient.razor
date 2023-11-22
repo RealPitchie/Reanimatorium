@@ -1,0 +1,125 @@
+@using Re.Core.Models
+@using Re.UI.Data
+
+<MudPaper Style="padding: 20px; margin: 15px 0">
+    <MudText style="margin-top: 15px; font-weight: bolder;">
+        <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+        
+            <MudItem xs="6">
+                <MudTextField  T="string" Label="Пациент:" Variant="Variant.Text" @bind-Value="@patient.FIO"></MudTextField>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Typo="Typo.subtitle1"> доставлен в ОАР </MudText>
+            </MudItem>
+
+        </MudGrid>
+
+        <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+
+            <MudItem xs="0">
+                <MudText Typo="Typo.subtitle1"> из </MudText>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudTextField  T="string" Label="Адрес:" Variant="Variant.Text" @bind-Value="@patient.Adress"></MudTextField>
+            </MudItem>
+
+            <MudItem xs="0">
+                <MudText Typo="Typo.subtitle1"> С данными анмнеза и/б ознакомлен. </MudText>
+            </MudItem>
+
+        </MudGrid>
+
+        <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+
+            <MudItem>
+                <MudText Typo="Typo.subtitle1"> Отмечается выраженный болевой синдром,  </MudText>
+            </MudItem>
+
+            <MudItem xs="2">
+                <MudSelect T="string" Label="ВАШ - " AnchorOrigin="Origin.BottomCenter" @bind-Value="patient.VAS">
+                    @foreach (var item in VAS)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                </MudSelect>
+            </MudItem>
+
+            <MudItem>
+                <MudText Typo="Typo.subtitle1"> АД </MudText>
+            </MudItem>
+            
+            <MudItem >
+                <MudNumericField Style="text-align: center; width: 75px"  Label="мм рт. ст." HideSpinButtons="true" @bind-Value="patient.ArtPresUp" Variant="Variant.Text" Min="0" />
+            </MudItem>
+
+            <MudItem>
+                <MudText Typo="Typo.subtitle1">/</MudText>
+            </MudItem>
+
+            <MudItem>
+                <MudNumericField Style="text-align: center; width: 75px" Label="мм рт. ст." HideSpinButtons="true" @bind-Value="patient.ArtPresDown" Variant="Variant.Text" Min="0" />
+            </MudItem>
+
+             <MudItem>
+                <MudText Typo="Typo.subtitle1">Пульс - </MudText>
+            </MudItem>
+
+            <MudItem>
+                <MudNumericField Style="text-align: center; width: 75px" Label="уд./мин." HideSpinButtons="true" @bind-Value="patient.Pulse" Variant="Variant.Text" Min="0" />
+            </MudItem>
+
+            <MudItem xs="5">
+                <MudSelect T="string" Label="Особенности:" AnchorOrigin="Origin.BottomCenter" @bind-Value="patient.Peculiarity">
+                   @foreach (var item in Peculiarity)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                </MudSelect>
+            </MudItem>
+
+            <MudItem xs="1">
+                <MudNumericField Style="text-align: center; width: 75px" Label="SpO₂" HideSpinButtons="true" @bind-Value="patient.SpO2" Variant="Variant.Text" Min="0" Max="100" />
+            </MudItem>
+
+            <MudItem>
+                <MudText Typo="Typo.subtitle1">%</MudText>
+            </MudItem>
+
+            <MudItem xs="4">
+                <MudText Typo="Typo.subtitle1">Терапия НПВС неэффективна.</MudText>
+            </MudItem>
+
+            <MudItem xs="8">
+                <MudText Typo="Typo.subtitle1">Показано введение наркотических анальгетиков.</MudText>
+            </MudItem>
+
+           <MudItem xs="12">
+                <MudTextField Style="height: 70px;" T="string" Label="Примечание:" Variant="Variant.Text" @bind-Value="@patient.Notes" Lines="3"/>
+            </MudItem>
+
+        </MudGrid>
+    </MudText>
+</MudPaper>
+
+@code{
+    Patient patient = new Patient();
+
+    string[] VAS = new string[]
+        {   "1 б.",
+            "2 б.",
+            "3 б.",
+            "4 б.",
+            "5 б.",
+            "6 б.",
+            "7 б."};
+
+    string[] Peculiarity = new string[]
+        {  "ритмичный.",
+           "аритмичный",
+           "ФП.",
+           "желудочковые экстрасистолы.",
+           "предсердные экстрасистолы."};
+
+}
