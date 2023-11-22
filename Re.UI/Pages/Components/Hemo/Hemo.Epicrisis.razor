@@ -1,4 +1,5 @@
-﻿@using Re.Core.Models
+﻿@using Newtonsoft.Json;
+@using Re.Core.Models
 @using Re.UI.Data
 
 <MudGrid>
@@ -27,7 +28,7 @@
                 <MudItem Style="margin-top:5px;"><MudText>Группа крови и Rh-принадлежность:</MudText></MudItem>
                 <MudItem Style="margin-top:-20px;">
                     <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="width:573px;">
-                        @foreach (var item in ep.GroupRh)
+                        @foreach (var item in GroupRh)
                     {
                         <MudSelectItem Value="@item" />
                     }
@@ -42,7 +43,7 @@
             <MudItem Style="margin-top:5px;"><MudText>Показания к переливанию компонентов крови:</MudText></MudItem>
             <MudItem Style="margin-top:-20px;">
                 <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="width:485px;">
-                    @foreach (var item in ep.Indications)
+                    @foreach (var item in Indications)
                     {
                         <MudSelectItem Value="@item" />
                     }
@@ -60,23 +61,23 @@
         <MudItem><MudText>эритроцитарной взвеси</MudText></MudItem>
         <MudItem>
             <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="margin-top:-21px; width:460px;">
-                @foreach (var item in ep.GroupRh)
+                @foreach (var item in GroupRh)
                 {
                     <MudSelectItem Value="@item" />
                 }
             </MudSelect>
         </MudItem>
     </MudGrid>
-    <MudGrid Style="margin-top:1px; margin-left:135px;">
+    <MudGrid Style="margin-top:1px; margin-left:120px;">
         <MudItem>
-            <MudCheckBox @bind-Checked="CheckboxChecked" />
+            <MudSwitch @bind-Checked="SwitchChecked" />
         </MudItem>
         <MudItem Style="margin-top:10px"><MudText>и</MudText></MudItem>
-        <MudItem><MudInput T="string" Style="margin-top:-10px; width:80px;" Disabled="@CheckboxChecked" /></MudItem>
+        <MudItem><MudInput T="string" Style="margin-top:-10px; width:80px;" Disabled="@SwitchChecked" /></MudItem>
         <MudItem><MudText>свежезамороженной плазмы</MudText></MudItem>
         <MudItem>
-            <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="margin-top:-21px; width:420px;" Disabled="@CheckboxChecked">
-                @foreach (var item in ep.GroupRh)
+            <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="margin-top:-21px; width:415px;" Disabled="@SwitchChecked">
+                @foreach (var item in GroupRh)
                 {
                     <MudSelectItem Value="@item" />
                 }
@@ -84,11 +85,11 @@
         </MudItem>
     </MudGrid>
     <MudGrid Style="margin-top:-20px; margin-left:237px;">
-        <MudItem><MudInput T="string" Style="margin-top:-10px; width:80px;" Disabled="@(!CheckboxChecked)" /></MudItem>
+        <MudItem><MudInput T="string" Style="margin-top:-10px; width:80px;" Disabled="@(!SwitchChecked)" /></MudItem>
         <MudItem><MudText>тромбоцитарного концентрата</MudText></MudItem>
         <MudItem>
-            <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="margin-top:-21px; width:410px;" Disabled="@(!CheckboxChecked)">
-                @foreach (var item in ep.GroupRh)
+            <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="margin-top:-21px; width:410px;" Disabled="@(!SwitchChecked)">
+                @foreach (var item in GroupRh)
                 {
                     <MudSelectItem Value="@item" />
                 }
@@ -108,7 +109,7 @@
         <MudItem Class="d-flex flex-column justify-end"><MudText>Лечащий врач</MudText></MudItem>
         <MudItem>
             <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in ep.Doctor.OrderBy(x => x))
+                @foreach (var item in Doctor.OrderBy(x => x))
                 {
                     <MudSelectItem Value="@item" />
                 }
@@ -118,11 +119,97 @@
     <MudText Style="margin-left:670px;">
         Глав. отделением <span style="text-decoration: underline;">Розенгард С.А.</span>,
     </MudText>
+    <MudGrid Style="width:925px; height:90px; background: #ffff99; display: flex; align-items: center; padding:0 20px; margin-top:50px; margin-left:100px; border:1px solid #c00000;">
+        <MudImage Width="50" Src="../img/links.jpg" Style="margin-right:50px; margin-left:20px; border:1px solid #c00000;" />
+        <MudLink Href="https://donor38.ru/wp-content/uploads/2020/07/prikaz-minzdrava-rf-ot-25-noyabrya-2002-g-n-363-ob-utverzhdenii-instrukczii-po-prime.pdf" Target="_blank">
+            <div>Приказ Минздрава РФ от 25 ноября 2002 г. N 363</div>
+            <div>Об утверждении Инструкции по применению компонентов крови</div>
+        </MudLink>
+    </MudGrid>
+    <MudGrid Style="width:925px; height:90px; background: #ffff99; display: flex; align-items: center; padding:0 20px; margin-top:30px; margin-left:100px; border:1px solid #c00000;">
+        <MudImage Width="50" Src="../img/links.jpg" Style="margin-right:50px; margin-left:20px; border:1px solid #c00000;" />
+        <MudLink Href="https://www.rg.ru/documents/2013/08/28/donory-dok.html" Target="_blank">
+            <div>Приказ Министерства здравоохранения Российской Федерации (Минздрава России) от 2 апреля</div>
+            <div>2013 г. N 183н г.Москва "Об утверждении правил клинического использования донорской крови и</div>
+            <div>(или) ее компонентов"</div>
+        </MudLink>
+    </MudGrid>
+    <MudGrid Style="width:925px; height:90px; background: #ffff99; display: flex; align-items: center; padding:0 20px; margin-top:30px; margin-left:100px; border:1px solid #c00000;">
+        <MudImage Width="50" Src="../img/links.jpg" Style="margin-right:50px; margin-left:20px; border:1px solid #c00000;" />
+        <MudLink Href="https://www.rg.ru/documents/2012/07/23/donorstvo-dok.html" Target="_blank">
+            <div>Федеральный закон Российской Федерации от 20 июля 2012 г. N 125-ФЗ</div>
+            <div>"О донорстве крови и ее компонентов"</div>
+        </MudLink>
+    </MudGrid>
+    <MudGrid Style="width:925px; height:90px; background: #ffff99; display: flex; align-items: center; padding:0 20px; margin-top:30px; margin-left:100px; border:1px solid #c00000;">
+        <MudImage Width="50" Src="../img/links.jpg" Style="margin-right:50px; margin-left:20px; border:1px solid #c00000;" />
+        <MudLink Href="http://vsegost.com/Catalog/49/49916.shtml" Target="_blank">
+            <div>ГОСТ Р 53470-2009</div>
+            <div>Кровь донорская и ее компоенты. Руководство по применению компонентов донорской крови</div>
+        </MudLink>
+    </MudGrid>
 </MudGrid>
 
-@code{
-    Hemo ep = new Hemo();
-    DateTime? date = DateTime.Now; 
-    TimeSpan? time = DateTime.Now.TimeOfDay;
-    private bool CheckboxChecked = false;
+@code {
+    string[] Name = new string[]
+    {
+        "ЭПИКРИЗ НА ПЕРЕЛИВАНИЕ КОМПОНЕНТОВ КРОВИ"
+    };
+    string[] GroupRh = new string[]
+    {
+        "0(I) Rh- (отрицательный)",
+        "A(II) Rh- (отрицательный)",
+        "A₂(II) Rh- (отрицательный)",
+        "B(III) Rh- (отрицательный)",
+        "AB(IV) Rh- (отрицательный)",
+        "0(I) Rh+ (положительный)",
+        "A(II) Rh+ (положительный)",
+        "A₂(II) Rh+ (положительный)",
+        "B(III) Rh+ (положительный)",
+        "AB(IV) Rh+ (положительный)"
+    };
+    string[] Indications = new string[]
+    {
+         "анемия тяжелой степени",
+        "дефицит факторов свертывания",
+        "анемия тяжелой степени и деф. факторов свертывания",
+        "тромбоцитопения"
+    };
+    string[] Doctor = new string[]
+    {
+        "Розенгард С.А.",
+        "Глущенко В.А.",
+        "Алиева А.Э.",
+        "Борзых И.С.",
+        "Веденин Я.О.",
+        "Горохов Л.В.",
+        "Груздов М.С.",
+        "Гурин М.Н.",
+        "Зубайдов М.М.",
+        "Ишкараев В.Э.",
+        "Караваев А.В.",
+        "Кононец Ф.А.",
+        "Кремзель Е.Г,",
+        "Митрохина М.В.",
+        "Нюхлов Е.С.",
+        "Пазюк К.И.",
+        "Пастухова А.А.",
+        "Попель И.В.",
+        "Раевская О.А.",
+        "Сапронова Т.Н.",
+        "Семенов А.Н.",
+        "Склярова В.О.",
+        "Хестанова Н.З.",
+        "Шабут А.М."
+    };
+    Hemo? ep = new();
+    DateTime? date; //дата
+    TimeSpan? time; //время
+    private bool SwitchChecked = false;
+    protected override void OnInitialized()
+    {
+
+        date = DateTime.Now; //Дата
+        time = DateTime.Now.TimeOfDay; //Время
+    }
 }
