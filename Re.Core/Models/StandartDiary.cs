@@ -31,7 +31,10 @@ namespace Re.Core.Models
         public string ShortnessOfBreathInput { get; set; } //ослабление дыхания поле ввода
         public List<string[]> Wheezes { get; set; } //хрипы
         public string[] RespiratorySupport { get; set; } //респираторная поддержка
-
+        public List<string[]> InotropicSupportOne { get; set; } //инотропная поддержка 1
+        public string InotropicSupportOneInput { get; set; } //инотропная поддержка 1 поле
+        public List<string[]> InotropicSupportTwo { get; set; } //инотропная поддержка 2
+        public string InotropicSupportTwoInput { get; set; } //инотропная поддержка 2 поле
     }
 
 }

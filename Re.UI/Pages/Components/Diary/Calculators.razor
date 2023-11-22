@@ -1,0 +1,12 @@
+﻿<MudDialog>
+    <DialogContent>
+        Здесь будут калькуляторы
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="Exit">Exit</MudButton>
+    </DialogActions>
+</MudDialog>
+@code {
+    [CascadingParameter] MudDialogInstance MudDialog { get; set; }
+    void Exit() => MudDialog.Cancel();
+}
