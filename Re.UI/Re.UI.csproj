@@ -7,6 +7,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="wwwroot\json\**" />
+    <Content Remove="wwwroot\json\**" />
+    <EmbeddedResource Remove="wwwroot\json\**" />
+    <None Remove="wwwroot\json\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Remove="Pages\Components\Diary\Diary.razor" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="MudBlazor" Version="6.0.13" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
   </ItemGroup>

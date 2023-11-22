@@ -1,7 +1,7 @@
-﻿@using Newtonsoft.Json;
-@using Re.Core.Models
+﻿@using Re.Core.Models
 @using Re.UI.Data
-
+@using System.Diagnostics;
+@inject IDialogService DialogService
 <MudGrid>
     <MudItem>
         <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
@@ -18,7 +18,7 @@
         <MudPaper Style="padding: 10px; margin: 15px 0; width:150%">
 
             <MudSelect Style="width:50%" T="string" Label="Состояние" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in standart.Сonditions)
+                @foreach (var item in Сonditions)
                 {
                     <MudSelectItem Value="@item" />
                 }
@@ -32,7 +32,7 @@
                 <MudItem Style="width: 30%; padding: 11px 6px;">
 
                     <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in standart.Сomplaints)
+                        @foreach (var item in Сomplaints)
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -54,7 +54,7 @@
                 {
                     <MudItem Style="width: 6%; padding: 11px 6px;">
                         <MudSelect T="string">
-                            @foreach (var item in standart.Vash)
+                            @foreach (var item in Vash)
                             {
                                 <MudSelectItem Style="margin-bottom: 15px;" Value="@item" />
                             }
@@ -65,7 +65,7 @@
             </MudGrid>
 
             <MudSelect Style="width:50%" T="string" Label="Сознание" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in standart.Conscience)
+                @foreach (var item in Conscience)
                 {
                     <MudSelectItem Value="@item" />
                 }
@@ -79,7 +79,7 @@
                 <MudItem Style="width: 25%; padding: 11px 6px;">
 
                     <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in standart.Rass)
+                        @foreach (var item in Rass)
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -88,14 +88,14 @@
                 </MudItem>
                 <MudItem Style="width: 65%; padding: 11px 6px;">
 
-                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@standart.RassThis" />
+                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@RassThis" />
 
                 </MudItem>
 
             </MudGrid>
 
             <MudSelect Style="width:50%" T="string" Label="Кожные покровы" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in standart.Skin[0])
+                @foreach (var item in Skin[0])
                 {
                     <MudSelectItem Value="@item" />
                 }
@@ -103,19 +103,19 @@
 
 
             <MudSelect Style="width:50%" T="string" Label="Влажность" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in standart.Skin[1])
+                @foreach (var item in Skin[1])
                 {
                     <MudSelectItem Value="@item" />
                 }
             </MudSelect>
             <MudSelect Style="width:50%" T="string" Label="Цвет" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in standart.Skin[2])
+                @foreach (var item in Skin[2])
                 {
                     <MudSelectItem Value="@item" />
                 }
             </MudSelect>
             <MudSelect Style="width:50%" T="string" Label="Дыхание через" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in standart.Breathing)
+                @foreach (var item in Breathing)
                 {
                     <MudSelectItem Value="@item" />
                 }
@@ -124,7 +124,7 @@
                 <MudItem Style="width: 10%;padding: 11px 25px;" Class="d-flex flex-column justify-end"><MudText>Экстубирован</MudText></MudItem>
                 <MudItem Style="padding: 11px 35px;">
                     <MudSelect Style="width:6%;" T="string" Label="" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in standart.Extubation)
+                        @foreach (var item in Extubation)
                 {
                             <MudSelectItem Value="@item" />
                 }
@@ -146,7 +146,7 @@
 
                 <MudItem Style="width: 25%; padding: 11px 1px;">
                     <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in standart.InhalationO2)
+                        @foreach (var item in InhalationO2)
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -162,7 +162,7 @@
             </MudGrid>
 
             <MudSelect Style="width:50%" T="string" Label="Аускультативно" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in standart.Auscultatory)
+                @foreach (var item in Auscultatory)
                 {
                     <MudSelectItem Value="@item" />
                 }
@@ -172,7 +172,7 @@
 
                 <MudItem Style="width: 30%; padding: 11px 11px;">
                     <MudSelect T="string" Label="Ослабление дыхания" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in standart.ShortnessOfBreath[0])
+                        @foreach (var item in ShortnessOfBreath[0])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -181,7 +181,7 @@
            
                 <MudItem Style="width: 30%; padding: 11px 6px;">
                     <MudSelect T="string" Label="Стороны" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in standart.ShortnessOfBreath[1])
+                        @foreach (var item in ShortnessOfBreath[1])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -196,7 +196,7 @@
 
                 <MudItem Style="width: 30%; padding: 11px 11px;">
                     <MudSelect T="string" Label="Хрипы" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in standart.Wheezes[0])
+                        @foreach (var item in Wheezes[0])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -205,7 +205,7 @@
 
                 <MudItem Style="width: 30%; padding: 11px 6px;">
                     <MudSelect T="string" Label="Стороны" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in standart.Wheezes[1])
+                        @foreach (var item in Wheezes[1])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -213,7 +213,7 @@
                 </MudItem>
                 <MudItem Style="width: 40%; padding: 11px 11px;">
                     <MudSelect T="string" Label="Характер" AnchorOrigin="Origin.BottomCenter">
-                        @foreach (var item in standart.Wheezes[2])
+                        @foreach (var item in Wheezes[2])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -222,14 +222,82 @@
             </MudGrid>
             <MudItem Style="width: 100%; padding: 11px 0;">
                 <MudSelect T="string" Label="Респираторная поддержка" AnchorOrigin="Origin.BottomCenter">
-                    @foreach (var item in standart.RespiratorySupport)
+                    @foreach (var item in RespiratorySupport)
                     {
                         <MudSelectItem Value="@item" />
                     }
                 </MudSelect>
             </MudItem>
+
+            <MudGrid>
+                <MudItem Style="width: 20%; padding-right: 6px;" Class="d-flex flex-column justify-end"><MudText>Инотропная поддержка:</MudText></MudItem>
+
+                <MudItem Style="width: 25%; padding: 11px 1px;">
+                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in InotropicSupportOne[0])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+
+                <MudItem Style="width: 10%; padding: 11px 6px;">
+
+                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@standart.InotropicSupportOneInput" />
+                </MudItem>
+
+                <MudItem Style="width: 10%; padding: 11px 1px;">
+                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in InotropicSupportOne[1])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+
+            <MudGrid>
+
+                <MudItem Style="width: 20%;padding:20px 6px 10px 60px; ">
+
+                        <MudPaper Class="d-flex flex-column justify-center" Style="background-color: #D9D9D9; border: 1px solid #111111;"
+                                  Height="40px" Width="70px">
+                            <MudButtonGroup Style="" Variant="Variant.Filled" Size="Size.Small" VerticalAlign="true">
+                                <MudButton Style="justify-content: center;" OnClick="Calculator">
+                                    <MudImage Width="20" Height="30" Src="../img/calc.png" />
+
+                                </MudButton>
+                            </MudButtonGroup>
+                        </MudPaper>
+                </MudItem>
+           
+
+                <MudItem Style="width: 25%; padding: 11px 1px;">
+                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in InotropicSupportTwo[0])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+
+                <MudItem Style="width: 10%; padding: 11px 6px;">
+
+                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@standart.InotropicSupportTwoInput" />
+                </MudItem>
+
+                <MudItem Style="width: 10%; padding: 11px 1px;">
+                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in InotropicSupportTwo[1])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+     
         </MudPaper>
-        
+
     </MudItem>
 
 </MudGrid>
@@ -240,19 +308,159 @@
 
 
 @code {
-    StandartDiary? standart;
+    string[] Сonditions = new string[]
+       {
+       "удовлетворительное.",
+       "средней тяжести.",
+       "тяжелое.",
+       "крайне тяжелое.",
+       "терминальное.",
+       "клинической смерти."
+       };
+
+    string[] Сomplaints = new string[]
+    {
+    "Жалоб нет.",
+    "Жалобы не предъявляет из - за тяжести состояния.",
+    "Не предъявляет жалоб из - за седации.",
+    "Жалобы прежние.",
+    "Предъявляет жалобы на",
+    "Жалобы на боли в области операции."
+    };
+
+    string[] Vash = new string[]
+    {
+    "1 б.",
+    "2 б.",
+    "3 б.",
+    "4 б.",
+    "5 б.",
+    "6 б.",
+    "7 б.",
+    "8 б.",
+    "9 б.",
+    "10 б."
+    };
+
+    string[] Conscience = new string[]
+    {
+    "ясное.",
+    "оглушение.",
+    "глубокое оглушение.",
+    "сопор.",
+    "кома I.",
+    "кома II.",
+    "кома III.",
+    "медикаментозная седация."
+    };
+
+    string[] Rass = new string[]
+    {
+    "- 5 баллов по шкале RASS.",
+    "- 4 балла по шкале RASS.",
+    "- 3 балла по шкале RASS.",
+    "- 2 балла по шкале RASS.",
+    "- 1 балл по шкале RASS.",
+    "0 баллов по шкале RASS.",
+    "+ 1 балл по шкале RASS.",
+    "+ 2 балла по шкале RASS.",
+    "+ 3 балла по шкале RASS.",
+    "+ 4 балла по шкале RASS."
+    };
+
+    string RassThis = "С целью потенцирования эффекта анальгетической терапии вводится в/в микроструйно Дексмедетомидин в дозировке 0.7 мкг/кг/час.";
+
+    List<string[]> Skin = new List<string[]>()
+    {
+        new string[] {"теплые,", "холодные,"},
+        new string[] {"сухие,", "влажные,", "естественной влажности,"},
+        new string[] {"естественной окраски.", "бледные.", "бледно-розовые."}
+    };
+
+    string[] Breathing = new string[]
+    {
+    "естественные дыхательные пути.",
+    "эндотрахеальную трубку.",
+    "ларингеальную маску.",
+    "трахеостомическую канюлю.",
+    "воздуховод."
+    };
+
+    string[] Extubation = new string[]
+    {
+    ",",
+    "а,"
+    };
+
+    string[] InhalationO2 = new string[]
+    {
+    "носовые канюли.",
+    "HFOT аппаратом. Airvo 2",
+    "лицевую маску.",
+    "CPAP - клапан.",
+    "'искусственнный нос'"
+    };
+
+    string[] Auscultatory = new string[]
+    {
+    "дыхание жесткое.",
+    "дыхание везикулярное.",
+    "дыхание пуэрильное."
+    };
+
+    List<string[]> ShortnessOfBreath = new List<string[]>()
+    {
+        new string[] {"есть,", "нет."},
+        new string[] {"с двух сторон.", "справа.", "слева"}
+    };
+
+    List<string[]> Wheezes = new List<string[]>()
+    {
+        new string[] {"есть,", "нет."},
+        new string[] {"с двух сторон.", "справа.", "слева"},
+        new string[] { "нет.", "сухие", "влажные", "крепитирующие", "проводные"}
+    };
+
+    string[] RespiratorySupport = new string[]
+    {
+    "не проводится.",
+    "начата",
+    "продолжена"
+    };
+
+    List<string[]> InotropicSupportOne = new List<string[]>()
+    {
+        new string[] {"адреналин - ", "норадреналин - ","добутамин - ", "дофамин - ", "мезатон - "},
+        new string[] {"мкг/кг/мин", "мг/мин","мл/час", "кап/мин"},
+    };
+
+    List<string[]> InotropicSupportTwo = new List<string[]>()
+    {
+        new string[] {"адреналин - ", "норадреналин - ","добутамин - ", "дофамин - ", "мезатон - "},
+        new string[] {"мкг/кг/мин", "мг/мин","мл/час", "кап/мин"},
+    };
+
+    StandartDiary? standart = new();
 
     DateTime? date; //дата
     TimeSpan? time; //время
-    public bool vash { get; set; } 
+    public bool vash { get; set; }
+    bool IsCalculator;
+    
 
     protected override void OnInitialized()
     {
-        standart = JsonConvert.DeserializeObject<StandartDiary>(File.ReadAllText
-        ("./wwwroot/json/diary.standart.json"));
 
         date = DateTime.Now; //Дата
         time = DateTime.Now.TimeOfDay; //Время
         vash = false;
+        IsCalculator = false;
     }
+  //  void Calculator() { IsCalculator = true; }
+    private void Calculator()
+    {
+        var options = new DialogOptions { CloseOnEscapeKey = true };
+        DialogService.Show<Calculators>("Калькуляторы", options);
+    }
+
 }
