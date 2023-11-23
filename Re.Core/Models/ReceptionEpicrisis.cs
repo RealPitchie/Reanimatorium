@@ -12,7 +12,7 @@ namespace Re.Core.Models
         public string DeliveredFrom { get; set; }
         public string AVLDueTransportation { get; set; }
         public string Complaints { get; set; }
-        public string Vash { get; set; }
+        public string VAS { get; set; }
         public string Condition { get; set; }
         public string Conscience { get; set; }
         public string Ramsey { get; set; }
@@ -31,7 +31,7 @@ namespace Re.Core.Models
         public int RespiratoryRate { get; set; }
         public string? Complaint { get; set; }
         public string Auscultatory { get; set; }
-        public string[] ShortnessOfBreath { get; set; } = new string[2];
+        public string[] BreathingRate { get; set; } = new string[2];
         public string[] Wheezes { get; set; } = new string[3];
         public string RespiratorySupport { get; set; }
         public string OxygenInsufflation {  get; set; }
@@ -43,5 +43,12 @@ namespace Re.Core.Models
         public int InotropesValue { get; set; }
         public string InotropesUnits { get; set; }
         public string? InotropesDescription { get; set; }
+        public int BR { get; set; }
+        public int Pinsp { get; set; }
+        public int Psupp { get; set; }
+        public int PEEP { get; set; }
+        public int FiO2 { get;set; }
+        public string Hemodynamics { get; set; }
+        public string ArtherialPressure { get; set; }
     }
 }

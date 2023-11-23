@@ -46,10 +46,10 @@
                 @if (IsVashOn)
                 {
                     <MudItem xs="3">
-                        <MudSelect @bind-Value="re.Vash" T="string">
-                            @foreach (var item in Vash)
+                        <MudSelect @bind-Value="re.VAS" T="string">
+                            @foreach (var item in VAS)
                             {
-                                <MudSelectItem Style="margin-bottom: 15px;" Value="@item" />
+                                <MudSelectItem Value="@item" />
                             }
                         </MudSelect>
                     </MudItem>
@@ -87,8 +87,8 @@
                 }
             </MudSelect>
             <MudGrid>
-                <MudItem Style="width: 20%; padding-right: 6px;" Class="d-flex flex-column justify-end"><MudText>Кожные покровы</MudText></MudItem>
-                <MudItem Style="width: 33%; padding: 12px 6px;">
+                <MudItem xs="2" Class="d-flex flex-column justify-end"><MudText>Кожные покровы</MudText></MudItem>
+                <MudItem xs="4">
                     <MudSelect @bind-Value="re.SkinCovers[0]" T="string" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in SkinCovers[0])
                         {
@@ -96,7 +96,7 @@
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 16%; padding: 12px 6px;">
+                <MudItem xs="2">
                     <MudSelect @bind-Value="re.SkinCovers[1]" T="string" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in SkinCovers[1])
                         {
@@ -104,7 +104,7 @@
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 31%;">
+                <MudItem xs="4">
                     <MudSelect @bind-Value="re.SkinCovers[2]" T="string" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in SkinCovers[2])
                         {
@@ -207,16 +207,16 @@
                     <MudText>Ослабление дыхания</MudText>
                 </MudItem>
                 <MudItem Style="padding-top: 0" xs="2">
-                    <MudSelect @bind-Value="re.ShortnessOfBreath[0]" T="string">
-                        @foreach (var item in ShortnessOfBreath[0])
+                    <MudSelect @bind-Value="re.BreathingRate[0]" T="string">
+                        @foreach (var item in BreathingRate[0])
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
                 <MudItem Style="padding-top: 0" xs="7">
-                    <MudSelect @bind-Value="re.ShortnessOfBreath[1]" T="string">
-                        @foreach (var item in ShortnessOfBreath[1])
+                    <MudSelect @bind-Value="re.BreathingRate[1]" T="string">
+                        @foreach (var item in BreathingRate[1])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -286,7 +286,7 @@
                 <MudSelect @bind-Value="re.RespiratorySupport" T="string" Label="Респираторная поддержка">
                     @foreach (var item in RespiratorySupport)
                     {
-                        <MudSelectItem Value="@item" />
+                        <MudSelectItem Value="@item"/>
                     }
                 </MudSelect>
                 <MudGrid>
@@ -306,11 +306,57 @@
                             }
                         </MudSelect>
                     </MudItem>
-                    <MudItem Class="d-flex flex-column justify-end" xs="1"><MudText>ДО - </MudText></MudItem>
-                    <MudItem Class="d-flex flex-column justify-end" xs="2">
+                    <MudItem Class="d-flex flex-column justify-end" xs="1">
+                        <MudText>ДО - </MudText>
+                    </MudItem>
+                    <MudItem Class="d-flex flex-column justify-end" xs="1">
                         <MudNumericField Class="d-flex flex-column justify-end" Style="margin-top: 0; padding-top: 0" HideSpinButtons="true" @bind-Value="re.Till" Variant="Variant.Text" Min="0"></MudNumericField>
                     </MudItem>
-                    <MudItem Class="d-flex flex-column justify-end" xs="2"><MudText>мл.</MudText></MudItem>
+                    <MudItem Class="d-flex flex-column justify-end" xs="3">
+                        <MudText>мл.</MudText>
+                    </MudItem>
+                    <MudItem xs="2">
+                        <MudNumericField Class="d-flex flex-column justify-end" 
+                        Style="padding-top: 0" HideSpinButtons="true" Label="ЧД апп." 
+                        @bind-Value="re.BR" Variant="Variant.Text" Min="0"/>
+                    </MudItem>
+                    <MudItem Class="d-flex flex-column justify-end" xs="2">
+                        <MudText>в 1 мин.</MudText>
+                    </MudItem>
+                    <MudItem xs="2">
+                        <MudNumericField Class="d-flex flex-column justify-end" Disabled="true"
+                                         Style="padding-top: 0" HideSpinButtons="true"
+                                         Label="MOB" Variant="Variant.Text" Value="6" />
+                    </MudItem>
+                    <MudItem xs="2">
+                        <MudNumericField Class="d-flex flex-column justify-end"
+                                         Style="padding-top: 0" HideSpinButtons="true" Label="Pinsp" 
+                                          @bind-Value="re.Pinsp" Variant="Variant.Text" Min="0"/>
+                    </MudItem>
+                    <MudItem Class="d-flex flex-column justify-end" xs="3">
+                        <MudText>см. водн. ст.</MudText>
+                    </MudItem>
+                    <MudItem xs="2">
+                        <MudNumericField Class="d-flex flex-column justify-end"
+                                         Style="padding-top: 0" HideSpinButtons="true" Label="Psupp"
+                        @bind-Value="re.Psupp" Variant="Variant.Text" Min="0" />
+                    </MudItem>
+                    <MudItem Class="d-flex flex-column justify-end" xs="2">
+                        <MudText>см. водн. ст.</MudText>
+                    </MudItem>
+                    <MudItem xs="2">
+                        <MudNumericField Class="d-flex flex-column justify-end"
+                                         Style="padding-top: 0" HideSpinButtons="true" Label="PEEP"
+                        @bind-Value="re.PEEP" Variant="Variant.Text" Min="0"/>
+                    </MudItem>
+                    <MudItem xs="1">
+                        <MudNumericField Class="d-flex flex-column justify-end"
+                                         Style="padding-top: 0" HideSpinButtons="true" Label="FiO2"
+                        @bind-Value="re.FiO2" Variant="Variant.Text" Min="0"/>
+                    </MudItem>
+                    <MudItem Class="d-flex flex-column justify-end" xs="1">
+                        <MudText>%</MudText>
+                    </MudItem>
                 </MudGrid>
                 <MudGrid>
                     <MudItem xs="6">
@@ -337,6 +383,12 @@
                     </MudItem>
                 </MudGrid>
             }
+            <MudSelect Label="Гемодинамика" @bind-Value="re.Hemodynamics" T="string">
+                @foreach (var item in Hemodynamics)
+                {
+                    <MudSelectItem Value="@item" />
+                }
+            </MudSelect>
         </MudPaper>
     </MudItem>
     <MudItem xs="3">
@@ -385,7 +437,7 @@
         "Не предъявляет жалоб из-за седации.", "Жалобы прежние.",
         "Предъявляет жалобы на", "Жалобы на боли в области операции."
     };
-    string[] Vash = new string[]
+    string[] VAS = new string[]
     {
         "1 б.", "2 б.", "3 б.", "4 б.", "5 б.",
         "6 б.", "7 б.", "8 б.", "9 б.", "10 б.",
@@ -452,7 +504,7 @@
     { "нет.", "апноэ.", "трахипноэ.", "брадипноэ.", "периодизация." };
     string[] Auscultatory = new string[] 
     { "дыхание жесткое.","дыхание везикулярное.", "дыхание пуэрильное." };
-    List<string[]> ShortnessOfBreath = new List<string[]>()
+    List<string[]> BreathingRate = new List<string[]>()
     {
         new string[] { "есть,", "нет."},
         new string[] {"с двух сторон.", "справа.", "слева"},
@@ -476,24 +528,55 @@
     string[] Mode = new string[] { "SPONT:","CPAP:","VCV:","PCV:","SIMV-VC:","SIMV-PC:","BiLevel:","A/C:","ASV:" };
     string[] Inotropes = new string[] { "адреналин -", "норадреналин -", "добутамин -", "дофамин -", "мезатон -" };
     string[] InotropesUnits = new string[] { "мкг/кг/мин", "мг/мин", "мл/час", "кап/мин" };
+    string[] Hemodynamics = new string[] { "устойчивая", "неустойчивая" };
 
-    ReceptionEpicrisis? re = new();
+    public ReceptionEpicrisis? re = new();
     DateTime? date;
     TimeSpan? time;
     string? robodoc;
     bool IsVashOn;
-    bool IsIVL ;
+    bool IsIVL;
 
     protected override void OnInitialized()
     {
         date = DateTime.Now;
         time = DateTime.Now.TimeOfDay;
 
-        robodoc = "\t ROBODOC \t";
+        robodoc = "ROBODOC";
         IsVashOn = false;
         IsIVL = false;
     }
 
-    void HandleWithIVL() { IsIVL = true;}
+    void HandleWithIVL() 
+    {
+        @if(re.RespiratorySupport == null)
+            re.RespiratorySupport = RespiratorySupport[1];
+
+        @if(re.Device == null)
+            re.Device = Device[1];
+
+        @if(re.Mode == null)
+            re.Mode = Mode[4];
+
+        @if (re.Till == 0)
+            re.Till = 500;
+
+        @if (re.BR == 0)
+            re.BR = 12;
+
+        @if (re.Pinsp == 0)
+            re.Pinsp = 16;
+
+        @if (re.Psupp == 0)
+            re.Psupp = 12;
+
+        @if (re.PEEP == 0)
+            re.PEEP = 5;
+
+        @if (re.FiO2 == 0)
+            re.FiO2 = 40;
+
+        IsIVL = true;
+    }
     void HandleWithoutIVL() => IsIVL = false;
 }
