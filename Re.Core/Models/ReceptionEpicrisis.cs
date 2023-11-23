@@ -49,6 +49,29 @@ namespace Re.Core.Models
         public int PEEP { get; set; }
         public int FiO2 { get;set; }
         public string Hemodynamics { get; set; }
-        public string ArtherialPressure { get; set; }
+        public int[] ArtherialPressure { get; set; } = new int[2];
+        public int Pulse { get; set; }
+        public string PulseRhythm { get; set; }
+        public int HeartRate { get; set; }
+        public int SpO2 { get; set; }
+        public string Abdomen { get; set; } // живот
+        public string AbdomenText { get; set; }
+
+        public string Pain { get; set; }
+        public string PainText { get; set; }
+
+        public string Distension { get; set; }
+        public string DistensionText { get; set; }
+
+        public string Peristalsis { get; set; }
+
+        public string[] Tongue { get; set; } = new string[2];
+
+        public int Diuresis { get; set; }
+        public string Urine { get; set; }
+        public string Drainage { get; set; }
+        public string LaboratoryData { get; set; }
+        public string Addition { get; set; }
+        public string SeverityOfCondition { get; set; }
     }
 }
