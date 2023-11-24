@@ -16,9 +16,19 @@
              
         <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
             
-            <MudItem xs="12">
-                <MudTextField Text="Болевой синдром купирован. Сознание ясное, контактен, адекватен." T="string" Label="Описание:" Variant="Variant.Text" @bind-Value="@syndrom.Description"/>
+            <MudItem xs="7">
+                <MudTextField Text="Болевой синдром купирован." T="string" Label="Описание:" Variant="Variant.Text" @bind-Value="@syndrom.Description"/>
             </MudItem>
+            
+            <MudItem xs="5">
+                <MudSelect T="string" Label="Состояние: " AnchorOrigin="Origin.BottomCenter" @bind-Value="syndrom.Status">
+                    @foreach (var item in Status)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                </MudSelect>
+            </MudItem>
+
             <MudItem xs="2">
                 <MudSelect T="string" Label="ВАШ - " AnchorOrigin="Origin.BottomCenter" @bind-Value="syndrom.VAS">
                     @foreach (var item in VAS)
@@ -77,21 +87,9 @@
                 <MudText Typo="Typo.subtitle1">Дыхание не нарушено, эффективное.</MudText>
             </MudItem>
 
-            <MudItem xs="12">
-                <MudText Typo="Typo.subtitle1">Пациент переводится в профильное отделение под наблюдение дежурного персонала.</MudText>
-            </MudItem>
 
             <MudItem xs="12">
                 <MudTextField Style="height: 70px;" T="string" Label="Примечание:" Variant="Variant.Text" @bind-Value="@syndrom.Notes" Lines="3"/>
-            </MudItem>
-
-             <MudItem xs="10">
-                <MudSelect T="string" Label="Дежурный реаниматолог:" AnchorOrigin="Origin.BottomCenter" @bind-Value="syndrom.Resuscitator">
-                   @foreach (var item in Resuscitator)
-                        {
-                            <MudSelectItem Value="@item" />
-                        }
-                </MudSelect>
             </MudItem>
 
         </MudGrid>
@@ -104,7 +102,9 @@
 
     Syndrom syndrom = new Syndrom();
 
-    string Status = "Сознание ясное, контактен, адекватен.";
+    string[] Status = new string[]
+        {   "Сознание ясное, контактен, адекватен.",
+            "Пациент спит."};
 
     string[] VAS = new string[]
         {   "1 б.",
@@ -125,29 +125,5 @@
            "желудочковые экстрасистолы.",
            "предсердные экстрасистолы."};
 
-     string[] Resuscitator = new string[]
-        {   "Розенгард С.А.",
-            "Глущенко В.А.",
-            "Алиева А.Э.",
-            "Борзых И.С.",
-            "Веденин Я.О.",
-            "Горохов Л.В.",
-            "Груздов М. С.",
-            "Гурин М.Н.",
-            "Зубайдов М.М.",
-            "Ишкараев В.Э.",
-            "Караваев А.В.",
-            "Кононец Ф.А.",
-            "Кремзель Е.Г.",
-            "Митрохина М.В.",
-            "Нюхлов Е.С.",
-            "Пазюк К.И.",
-            "Пастухова А.А.",
-            "Попель И.В.",
-            "Раевская О. А.",
-            "Сапронова Т.Н.",
-            "Семенов А.Н.",
-            "Склярова В.О.",
-            "Хестанова Н.З.",
-            "Шабут А.М."};
+     
 }

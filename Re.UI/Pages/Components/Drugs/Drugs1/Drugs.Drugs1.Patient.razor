@@ -3,41 +3,20 @@
 
 <MudPaper Style="padding: 20px; margin: 15px 0">
     <MudText style="margin-top: 15px; font-weight: bolder;">
+
         <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+
+            <MudItem xs="8">
+                <MudText Typo="Typo.subtitle1"> У пациента отмечается вырженный болевой синдром,  </MudText>
+            </MudItem>
         
-            <MudItem xs="6">
-                <MudTextField  T="string" Label="Пациент:" Variant="Variant.Text" @bind-Value="@patient.FIO"></MudTextField>
-            </MudItem>
+            
+       
+         </MudGrid>
 
-            <MudItem xs="4">
-                <MudText Typo="Typo.subtitle1"> доставлен в ОАР </MudText>
-            </MudItem>
-
-        </MudGrid>
-
-        <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
-
-            <MudItem xs="0">
-                <MudText Typo="Typo.subtitle1"> из </MudText>
-            </MudItem>
-
-            <MudItem xs="4">
-                <MudTextField  T="string" Label="Адрес:" Variant="Variant.Text" @bind-Value="@patient.Adress"></MudTextField>
-            </MudItem>
-
-            <MudItem xs="0">
-                <MudText Typo="Typo.subtitle1"> С данными анмнеза и/б ознакомлен. </MudText>
-            </MudItem>
-
-        </MudGrid>
-
-        <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
-
-            <MudItem>
-                <MudText Typo="Typo.subtitle1"> Отмечается выраженный болевой синдром,  </MudText>
-            </MudItem>
-
-            <MudItem xs="2">
+         <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
+       
+             <MudItem xs="2">
                 <MudSelect T="string" Label="ВАШ - " AnchorOrigin="Origin.BottomCenter" @bind-Value="patient.VAS">
                     @foreach (var item in VAS)
                         {
@@ -46,7 +25,7 @@
                 </MudSelect>
             </MudItem>
 
-            <MudItem>
+            <MudItem xs="1">
                 <MudText Typo="Typo.subtitle1"> АД </MudText>
             </MudItem>
             
@@ -62,13 +41,17 @@
                 <MudNumericField Style="text-align: center; width: 75px" Label="мм рт. ст." HideSpinButtons="true" @bind-Value="patient.ArtPresDown" Variant="Variant.Text" Min="0" />
             </MudItem>
 
-             <MudItem>
+             <MudItem xs="2">
                 <MudText Typo="Typo.subtitle1">Пульс - </MudText>
             </MudItem>
 
             <MudItem>
                 <MudNumericField Style="text-align: center; width: 75px" Label="уд./мин." HideSpinButtons="true" @bind-Value="patient.Pulse" Variant="Variant.Text" Min="0" />
             </MudItem>
+
+        </MudGrid>
+
+        <MudGrid Justify="Justify.FlexStart" Style="align-items: flex-end;">
 
             <MudItem xs="5">
                 <MudSelect T="string" Label="Особенности:" AnchorOrigin="Origin.BottomCenter" @bind-Value="patient.Peculiarity">
@@ -85,10 +68,6 @@
 
             <MudItem>
                 <MudText Typo="Typo.subtitle1">%</MudText>
-            </MudItem>
-
-            <MudItem xs="4">
-                <MudText Typo="Typo.subtitle1">Терапия НПВС неэффективна.</MudText>
             </MudItem>
 
             <MudItem xs="8">
