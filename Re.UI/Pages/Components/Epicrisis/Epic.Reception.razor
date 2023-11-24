@@ -538,12 +538,35 @@
             </MudGrid>
             <MudStack Row="true">
                 <MudText Class="d-flex flex-column justify-center" Style="width: 20%">Тяжесть состояния обусловлена: </MudText>
-                <MudInput Style="width: 80%; margin-right: 30px;" @bind-Value="re.SeverityOfCondition" Lines="3"/>
-                <MudButton Style="margin-right: -250px;" StartIcon="@Icons.Material.Filled.FormatListNumbered" 
-                    Color="Color.Primary" Variant="Variant.Outlined" OnClick="HandleCondition">
+                <MudInput Style="width: 80%; margin-right: 30px;" @bind-Value="re.SeverityOfCondition" Lines="3">@string.Join(',', re.SeverityOfCondition)</MudInput>
+                <MudButton Style="margin-right: -250px; width: 25%; padding: 0; height: 4rem;" StartIcon="@Icons.Material.Filled.FormatListNumbered"
+                           OnClick="OpenConditionDialog" Color="Color.Primary" Variant="Variant.Outlined">
                     Тяжесть состояния
                 </MudButton>
             </MudStack>
+            <MudStack Row="true">
+                <MudText Class="d-flex flex-column justify-center" Style="width: 20%">Планируется: </MudText>
+                <MudInput Style="width: 80%; margin-right: 30px;" @bind-Value="re.TreatmentPlan" Lines="3">@string.Join(',', re.TreatmentPlan)</MudInput>
+                <MudButton Style="margin-right: -250px; width: 25%; padding: 0; height: 4rem;" StartIcon="@Icons.Material.Filled.FormatListNumbered"
+                           OnClick="OpenPlanDialog" Color="Color.Primary" Variant="Variant.Outlined">
+                    План лечения
+                </MudButton>
+            </MudStack>
+            <MudStack Row="true">
+                <MudItem xs="2"></MudItem>
+            <MudItem xs="6">
+                <MudSelect Label="Врач:" T="string" @bind-Value="re.Doctor">
+                    @foreach (var item in Doctor)
+                    {
+                        <MudSelectItem Value="@item" />
+                    }
+                </MudSelect>
+            </MudItem>
+            <MudItem xs="3">
+                <MudField Disabled="true" HelperText="Подпись"></MudField>
+            </MudItem>
+            </MudStack>
+            
         </MudPaper>
     </MudItem>
     <MudItem xs="3">
@@ -571,7 +594,126 @@
     </MudItem>
 </MudGrid>
 
+<MudDialog @bind-IsVisible="visibleCondition" Options="dialogOptionsCondition">
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Class="mr-3" /> Тяжесть состояния обусловлена:
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudContainer Style="width: 500px; max-height: 500px; overflow-y: scroll">
+            <MudSelect AdornmentColor="Color.Success" FullWidth="true" MultiSelection="true" @bind-Value="re.SeverityOfCondition" @bind-SelectedValues="listCondition">
+                @foreach (var item in conditionList)
+                {
+                    <MudSelectItem Value="@item"></MudSelectItem>
+                }
+            </MudSelect>
+        </MudContainer>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="ConditionOk">ОК</MudButton>
+        <MudButton OnClick="ClearConditionList">Очистить список</MudButton>
+    </DialogActions>
+</MudDialog>
+
+<MudDialog @bind-IsVisible="visiblePlan" Options="dialogOptionsPlan">
+    <TitleContent>
+        <MudText Typo="Typo.h6">
+            <MudIcon Class="mr-3" /> Планируется:
+        </MudText>
+    </TitleContent>
+    <DialogContent>
+        <MudContainer Style="width: 500px; max-height: 500px; overflow-y: scroll">
+            <MudSelect AdornmentColor="Color.Success" FullWidth="true" MultiSelection="true" @bind-Value="re.TreatmentPlan" @bind-SelectedValues="listTreatmentPlan">
+                @foreach (var item in planList)
+                {
+                    <MudSelectItem Value="@item"></MudSelectItem>
+                }
+            </MudSelect>
+        </MudContainer>
+    </DialogContent>
+    <DialogActions>
+        <MudButton OnClick="PlanOk">ОК</MudButton>
+        <MudButton OnClick="ClearTreatmentPlan">Очистить</MudButton>
+    </DialogActions>
+</MudDialog>
+
 @code {
+    Func<Doctor,string> doctorConverter = d => d?.Name;
+    string[] conditionList = new string[]
+        {
+            "объемом оперативного вмешательства",
+            "течением основного заболевания",
+            "сопутствующей патологией",
+            "остаточной седацией",
+            "медикаментозной миоплегией",
+            "церебральной недостаточностью",
+            "сердечной недостаточностью",
+            "дыхательной недостаточностью",
+            "ХПН",
+            "ОПН",
+            "ОпечН",
+            "ХПечН",
+            "СПОН",
+            "ССВО",
+            "ДВС-синдромом",
+            "ОРДС",
+            "нарушением ВЭБ",
+            "нарушением КЩС",
+            "декомпенсацией ХСН",
+            "левожелудочковой недостаточностью",
+            "течением постреанимационной болезни",
+            "анемией тяжелой степени",
+            "анемией средней степени тяжести",
+            "алиментарной недостаточностью",
+            "синдромом эндогенной интоксикации"
+        };
+    string[] planList = {
+    "осуществление наблюдения за состоянием пациента после окончания анестезии до восстановления и стабилизации жизненно важных функций",
+    "динамическое наблюдение",
+    "контроль лабораторных показателей",
+    "антибактериальная терапия",
+    "инфузионная терапия",
+    "анальгезия",
+    "респираторная поддержка",
+    "профилактика ТЭЛА",
+    "коррекция ВЭБ и КОС",
+    "детоксикация",
+    "заместительная терапия",
+    "гемотрансфузия",
+    "парентеральное питание",
+    "энтеральное питание",
+    "нейровегетативная стабилизация",
+    "инотропная и вазопрессорная поддержка",
+    "вазоактивная терапия",
+    "кардиотропная терапия",
+    "гастропротекция"
+};
+    string[] Doctor = new string[]
+            {   "Розенгард С.А.",
+            "Глущенко В.А.",
+            "Алиева А.Э.",
+            "Борзых И.С.",
+            "Веденин Я.О.",
+            "Горохов Л.В.",
+            "Груздов М. С.",
+            "Гурин М.Н.",
+            "Зубайдов М.М.",
+            "Ишкараев В.Э.",
+            "Караваев А.В.",
+            "Кононец Ф.А.",
+            "Кремзель Е.Г.",
+            "Митрохина М.В.",
+            "Нюхлов Е.С.",
+            "Пазюк К.И.",
+            "Пастухова А.А.",
+            "Попель И.В.",
+            "Раевская О. А.",
+            "Сапронова Т.Н.",
+            "Семенов А.Н.",
+            "Склярова В.О.",
+            "Хестанова Н.З.",
+            "Шабут А.М."};
     string Name = "Приемный статус";
     string[] DeliveredFrom = new string[]
     {
@@ -750,9 +892,26 @@
         IsIVL = true;
     }
     void HandleWithoutIVL() => IsIVL = false;
-    void HandleCondition()
+    IEnumerable<string> listCondition;
+    IEnumerable<string> listTreatmentPlan;
+    private DialogOptions dialogOptionsCondition = new();
+    private DialogOptions dialogOptionsPlan = new();
+    private bool visibleCondition;
+    private bool visiblePlan;
+    private void OpenConditionDialog() => visibleCondition = true;
+    private void OpenPlanDialog() => visiblePlan = true;
+    void ConditionOk() => visibleCondition = false;
+    void PlanOk() => visiblePlan = false;
+    void ClearConditionList() 
     {
-        var options = new DialogOptions { CloseOnEscapeKey = true };
-        DialogService.Show<SeverityOfCondition>("Тяжесть состояния обусловлена:", options);
+        re.SeverityOfCondition = "";
+        listCondition = null;
+        StateHasChanged();
+    }
+    void ClearTreatmentPlan()
+    {
+        re.TreatmentPlan = "";
+        listTreatmentPlan = null;
+        StateHasChanged();
     }
 }

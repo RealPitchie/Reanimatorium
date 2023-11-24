@@ -73,5 +73,7 @@ namespace Re.Core.Models
         public string LaboratoryData { get; set; }
         public string Addition { get; set; }
         public string SeverityOfCondition { get; set; }
+        public string TreatmentPlan { get; set; }
+        public string Doctor { get; set; }
     }
 }
