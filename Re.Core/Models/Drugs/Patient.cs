@@ -12,6 +12,8 @@ public class Patient{
 
     public string VAS { get; set; }//ВАШ
 
+  
+
     public string Notes { get; set; }//Дополнительно
 
     public int ArtPresUp { get; set; }//Систолическое давление
