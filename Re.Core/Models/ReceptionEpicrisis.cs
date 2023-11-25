@@ -12,7 +12,8 @@ namespace Re.Core.Models
         public string DeliveredFrom { get; set; }
         public string AVLDueTransportation { get; set; }
         public string Complaints { get; set; }
-        public string Vash { get; set; }
+        public string? ComplaintText { get; set; }
+        public string VAS { get; set; }
         public string Condition { get; set; }
         public string Conscience { get; set; }
         public string Ramsey { get; set; }
@@ -29,9 +30,8 @@ namespace Re.Core.Models
         public string BreathingThrough { get; set; }
         public string BreathingDisorder { get; set; }
         public int RespiratoryRate { get; set; }
-        public string? Complaint { get; set; }
         public string Auscultatory { get; set; }
-        public string[] ShortnessOfBreath { get; set; } = new string[2];
+        public string[] BreathingRate { get; set; } = new string[2];
         public string[] Wheezes { get; set; } = new string[3];
         public string RespiratorySupport { get; set; }
         public string OxygenInsufflation {  get; set; }
@@ -43,5 +43,37 @@ namespace Re.Core.Models
         public int InotropesValue { get; set; }
         public string InotropesUnits { get; set; }
         public string? InotropesDescription { get; set; }
+        public int BR { get; set; } // Breathing rate (ЧД апп.)
+        public int Pinsp { get; set; }
+        public int Psupp { get; set; }
+        public int PEEP { get; set; }
+        public int FiO2 { get;set; }
+        public string Hemodynamics { get; set; }
+        public int[] ArtherialPressure { get; set; } = new int[2];
+        public int Pulse { get; set; }
+        public string PulseRhythm { get; set; }
+        public int HeartRate { get; set; }
+        public int SpO2 { get; set; }
+        public string Abdomen { get; set; } // живот
+        public string AbdomenText { get; set; }
+
+        public string Pain { get; set; }
+        public string PainText { get; set; }
+
+        public string Distension { get; set; }
+        public string DistensionText { get; set; }
+
+        public string Peristalsis { get; set; }
+
+        public string[] Tongue { get; set; } = new string[2];
+
+        public int Diuresis { get; set; }
+        public string Urine { get; set; }
+        public string Drainage { get; set; }
+        public string LaboratoryData { get; set; }
+        public string Addition { get; set; }
+        public string SeverityOfCondition { get; set; }
+        public string TreatmentPlan { get; set; }
+        public string Doctor { get; set; }
     }
 }
