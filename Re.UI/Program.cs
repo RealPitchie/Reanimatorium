@@ -2,6 +2,8 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets; 
 using MudBlazor.Services;
+using Re.Services.Servises;
+using Re.Services.Servises.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,8 @@ StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configurat
 builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor(); 
 builder.Services.AddMudServices();
+
+builder.Services.AddSingleton<IDatabaseService, Service>();
 
 var app = builder.Build();
 
