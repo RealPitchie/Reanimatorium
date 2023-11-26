@@ -31,10 +31,41 @@ namespace Re.Core.Models
         public string ShortnessOfBreathInput { get; set; } //ослабление дыхания поле ввода
         public List<string[]> Wheezes { get; set; } //хрипы
         public string[] RespiratorySupport { get; set; } //респираторная поддержка
+        public List<string[]> RespiratorySupportMachine { get; set; } //респираторная поддержка аппарат
         public List<string[]> InotropicSupportOne { get; set; } //инотропная поддержка 1
         public string InotropicSupportOneInput { get; set; } //инотропная поддержка 1 поле
         public List<string[]> InotropicSupportTwo { get; set; } //инотропная поддержка 2
+        public string[] Hemodynamics { get; set; } //Гемодинамика
         public string InotropicSupportTwoInput { get; set; } //инотропная поддержка 2 поле
+        public string Do { get; set; } //ДО
+        public string Cd { get; set; } //ЧД
+        public string Pdkv { get; set; } //ПДКВ
+        public string Fio2 { get; set; } //FiO2
+        public string Dvdox { get; set; } //Двдох
+        public string Dpod { get; set; } //Дпод
+        public string Ad { get; set; } //АД
+        public string Сhss { get; set; } //ЧСС
+        public string Spo2 { get; set; } //ЧСС
+        public string[] Stomach { get; set; } //Живот
+        public string[] Pain { get; set; } //Болезненность
+        public string PainAbout { get; set; } //ЧСС
+        public List<string[]> AbdominalBloating { get; set; } //Вздутие живота
+        public string[] Peristalsis { get; set; } //Перистальтика
+        public List<string[]> Tongue { get; set; } //Язык
+        public string Diuresis { get; set; } //диурез
+        public string Intravenously { get; set; } //внутривенно
+        public string[] Urine { get; set; } //Моча
+        public string BodyTemperature { get; set; } //температура тела
+        public List<string[]> Drainage { get; set; } //дренаж
+        public string DrinageAbout { get; set; }
+        public string Additionally { get; set; } //дополнительно
+        public string Laboratory1 { get; set; }
+        public string Laboratory2 { get; set; }
+        public string Laboratory3 { get; set; }
+        public string Laboratory4 { get; set; }
+        public string Laboratory5 { get; set; }
+        public string Laboratory6 { get; set; }
+        public Doctor Doctor { get; set; }
     }
 
 }

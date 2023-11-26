@@ -12,6 +12,7 @@ namespace Re.Core.Models
         public string DeliveredFrom { get; set; }
         public string AVLDueTransportation { get; set; }
         public string Complaints { get; set; }
+        public string? ComplaintText { get; set; }
         public string VAS { get; set; }
         public string Condition { get; set; }
         public string Conscience { get; set; }
@@ -29,7 +30,6 @@ namespace Re.Core.Models
         public string BreathingThrough { get; set; }
         public string BreathingDisorder { get; set; }
         public int RespiratoryRate { get; set; }
-        public string? Complaint { get; set; }
         public string Auscultatory { get; set; }
         public string[] BreathingRate { get; set; } = new string[2];
         public string[] Wheezes { get; set; } = new string[3];
@@ -43,7 +43,7 @@ namespace Re.Core.Models
         public int InotropesValue { get; set; }
         public string InotropesUnits { get; set; }
         public string? InotropesDescription { get; set; }
-        public int BR { get; set; }
+        public int BR { get; set; } // Breathing rate (ЧД апп.)
         public int Pinsp { get; set; }
         public int Psupp { get; set; }
         public int PEEP { get; set; }
@@ -73,5 +73,7 @@ namespace Re.Core.Models
         public string LaboratoryData { get; set; }
         public string Addition { get; set; }
         public string SeverityOfCondition { get; set; }
+        public string TreatmentPlan { get; set; }
+        public string Doctor { get; set; }
     }
 }
