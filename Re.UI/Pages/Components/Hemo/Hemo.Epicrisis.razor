@@ -1,5 +1,4 @@
-﻿@using Newtonsoft.Json;
-@using Re.Core.Models
+﻿@using Re.Core.Models
 @using Re.UI.Data
 
 <MudGrid>
@@ -10,115 +9,118 @@
         </MudGrid>
     </MudItem>
     <MudDivider Style="margin:35px 0;"></MudDivider>
-    <MudText Align="Align.Center" Typo="Typo.h6" Style="margin: auto;">@ep.Name</MudText>
-        <MudGrid Style="margin-top:10px; margin-left:150px;">
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Больной(-ая)</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@ep.FIO" Style="width:750px;"></MudInput></MudItem>
+    <MudPaper Style="margin: 15px 0;" Height="705px">
+        <MudText Style="margin-top:10px" Align="Align.Center" Typo="Typo.h6">@Name</MudText>
+
+            <MudGrid Style="margin-top:10px; margin-left:150px;">
+                <MudGrid>
+                    <MudItem Style="margin-top:5px;"><MudText>Больной(-ая)</MudText></MudItem>
+                    <MudItem><MudInput T="string" Variant="Variant.Text" Text="@ep.FIO" Style="width:750px;"></MudInput></MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem Style="margin-top:5px;"><MudText>Возраст</MudText></MudItem>
+                    <MudItem><MudInput T="string" Variant="Variant.Text" Text="@ep.Age" Style="width:100px;"></MudInput></MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem Style="margin-top:5px;"><MudText>История болезни №</MudText></MudItem>
+                    <MudItem><MudInput T="string" Variant="Variant.Text" Text="@ep.Number" Style="width:100px;"></MudInput></MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem Style="margin-top:5px;"><MudText>Группа крови и Rh-принадлежность:</MudText></MudItem>
+                    <MudItem Style="margin-top:-20px;">
+                        <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="width:573px;">
+                            @foreach (var item in GroupRh)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
             </MudGrid>
             <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Возраст</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@ep.Age" Style="width:100px;"></MudInput></MudItem>
+                <MudItem Style="margin-top:5px;"><MudText>Диагноз:</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@ep.Diagnosis" Style="width:783px;" Lines="3"></MudInput></MudItem>
             </MudGrid>
             <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>История болезни №</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@ep.Number" Style="width:100px;"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Группа крови и Rh-принадлежность:</MudText></MudItem>
+                <MudItem Style="margin-top:5px;"><MudText>Показания к переливанию компонентов крови:</MudText></MudItem>
                 <MudItem Style="margin-top:-20px;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="width:573px;">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="width:485px;">
+                        @foreach (var item in Indications)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Ранее гемотрансфузии:</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@ep.Hemotransfusion" Style="width:670px" Lines="3"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid Style="margin-top:0px">
+                <MudItem><MudText>Заявка на</MudText></MudItem>
+                <MudItem><MudInput T="string" Style="margin-top:-10px; width:80px;" /></MudItem>
+                <MudItem><MudText>эритроцитарной взвеси</MudText></MudItem>
+                <MudItem>
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="margin-top:-21px; width:460px;">
                         @foreach (var item in GroupRh)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+            <MudGrid Style="margin-top:1px;">
+                <MudItem>
+                    <MudSwitch @bind-Checked="SwitchChecked" />
+                </MudItem>
+                <MudItem Style="margin-top:10px; margin-left:-20px;"><MudText>и</MudText></MudItem>
+                <MudItem><MudInput T="string" Style="margin-top:-10px; width:80px;" Disabled="@SwitchChecked" /></MudItem>
+                <MudItem><MudText>свежезамороженной плазмы</MudText></MudItem>
+                <MudItem>
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="margin-top:-21px; width:418px;" Disabled="@SwitchChecked">
+                        @foreach (var item in GroupRh)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+            <MudGrid Style="margin-left:90px;">
+                <MudItem><MudInput T="string" Style="margin-top:-10px; width:80px;" Disabled="@(!SwitchChecked)" /></MudItem>
+                <MudItem><MudText>тромбоцитарного концентрата</MudText></MudItem>
+                <MudItem>
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="margin-top:-21px; width:405px;" Disabled="@(!SwitchChecked)">
+                        @foreach (var item in GroupRh)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+            <MudGrid Style="margin-top:15px;">
+                <MudText>Согласие больного(ой) на гемотрансфузию получено.</MudText>
+            </MudGrid>
+            <MudGrid Style="margin-top:15px;">
+                <MudText>Противопоказаний к переливанию компонентов крови нет.</MudText>
+            </MudGrid>
+            <MudGrid>
+                <MudItem><MudDatePicker Style="margin-top:50px; margin-left:-25px; width: 150px;" @bind-Date="date" /></MudItem>
+            </MudGrid>
+        </MudGrid>
+        <MudGrid Style="margin-left:660px;">
+            <MudItem Class="d-flex flex-column justify-end"><MudText>Лечащий врач</MudText></MudItem>
+            <MudItem>
+                <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
+                    @foreach (var item in Doctor.OrderBy(x => x))
                     {
                         <MudSelectItem Value="@item" />
                     }
                 </MudSelect>
             </MudItem>
         </MudGrid>
-        <MudGrid>
-            <MudItem Style="margin-top:5px;"><MudText>Диагноз:</MudText></MudItem>
-            <MudItem><MudInput T="string" Variant="Variant.Text" Text="@ep.Diagnosis" Style="width:783px;" Lines="3"></MudInput></MudItem>
-        </MudGrid>
-        <MudGrid>
-            <MudItem Style="margin-top:5px;"><MudText>Показания к переливанию компонентов крови:</MudText></MudItem>
-            <MudItem Style="margin-top:-20px;">
-                <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="width:485px;">
-                    @foreach (var item in Indications)
-                    {
-                        <MudSelectItem Value="@item" />
-                    }
-                </MudSelect>
-            </MudItem>
-        </MudGrid>
-        <MudGrid>
-            <MudItem Style="margin-top:5px;"><MudText>Ранее гемотрансфузии:</MudText></MudItem>
-            <MudItem><MudInput T="string" Variant="Variant.Text" Text="@ep.Hemotransfusion" Style="width:670px" Lines="3"></MudInput></MudItem>
-        </MudGrid>
-    </MudGrid>
-    <MudGrid Style="margin-top:10px; margin-left:140px;">
-        <MudItem><MudText>Заявка на</MudText></MudItem>
-        <MudItem><MudInput T="string" Style="margin-top:-10px; width:80px;" /></MudItem>
-        <MudItem><MudText>эритроцитарной взвеси</MudText></MudItem>
-        <MudItem>
-            <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="margin-top:-21px; width:460px;">
-                @foreach (var item in GroupRh)
-                {
-                    <MudSelectItem Value="@item" />
-                }
-            </MudSelect>
-        </MudItem>
-    </MudGrid>
-    <MudGrid Style="margin-top:1px; margin-left:120px;">
-        <MudItem>
-            <MudSwitch @bind-Checked="SwitchChecked" />
-        </MudItem>
-        <MudItem Style="margin-top:10px"><MudText>и</MudText></MudItem>
-        <MudItem><MudInput T="string" Style="margin-top:-10px; width:80px;" Disabled="@SwitchChecked" /></MudItem>
-        <MudItem><MudText>свежезамороженной плазмы</MudText></MudItem>
-        <MudItem>
-            <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="margin-top:-21px; width:415px;" Disabled="@SwitchChecked">
-                @foreach (var item in GroupRh)
-                {
-                    <MudSelectItem Value="@item" />
-                }
-            </MudSelect>
-        </MudItem>
-    </MudGrid>
-    <MudGrid Style="margin-top:-20px; margin-left:237px;">
-        <MudItem><MudInput T="string" Style="margin-top:-10px; width:80px;" Disabled="@(!SwitchChecked)" /></MudItem>
-        <MudItem><MudText>тромбоцитарного концентрата</MudText></MudItem>
-        <MudItem>
-            <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="margin-top:-21px; width:410px;" Disabled="@(!SwitchChecked)">
-                @foreach (var item in GroupRh)
-                {
-                    <MudSelectItem Value="@item" />
-                }
-            </MudSelect>
-        </MudItem>
-    </MudGrid>
-    <MudGrid Style="margin-left:150px; margin-top:15px;">
-        <MudText>Согласие больного(ой) на гемотрансфузию получено.</MudText>
-    </MudGrid>
-    <MudGrid Style="margin-left:150px; margin-top:15px;">
-        <MudText>Противопоказаний к переливанию компонентов крови нет.</MudText>
-    </MudGrid>
-    <MudGrid>
-        <MudItem><MudDatePicker Style="margin-left:150px; margin-top:50px; width: 150px;" @bind-Date="date" /></MudItem>
-    </MudGrid>
-    <MudGrid Style="margin-left:660px;">
-        <MudItem Class="d-flex flex-column justify-end"><MudText>Лечащий врач</MudText></MudItem>
-        <MudItem>
-            <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
-                @foreach (var item in Doctor.OrderBy(x => x))
-                {
-                    <MudSelectItem Value="@item" />
-                }
-            </MudSelect>
-        </MudItem>
-    </MudGrid>
-    <MudText Style="margin-left:670px;">
-        Глав. отделением <span style="text-decoration: underline;">Розенгард С.А.</span>,
-    </MudText>
+        <MudText Style="margin-left:670px;">
+            Глав. отделением <span style="text-decoration: underline;">Розенгард С.А.</span>,
+        </MudText>
+    </MudPaper>
     <MudGrid Style="width:925px; height:90px; background: #ffff99; display: flex; align-items: center; padding:0 20px; margin-top:50px; margin-left:100px; border:1px solid #c00000;">
         <MudImage Width="50" Src="../img/links.jpg" Style="margin-right:50px; margin-left:20px; border:1px solid #c00000;" />
         <MudLink Href="https://donor38.ru/wp-content/uploads/2020/07/prikaz-minzdrava-rf-ot-25-noyabrya-2002-g-n-363-ob-utverzhdenii-instrukczii-po-prime.pdf" Target="_blank">
@@ -151,10 +153,7 @@
 </MudGrid>
 
 @code {
-    string[] Name = new string[]
-    {
-        "ЭПИКРИЗ НА ПЕРЕЛИВАНИЕ КОМПОНЕНТОВ КРОВИ"
-    };
+    string Name = "ЭПИКРИЗ НА ПЕРЕЛИВАНИЕ КОМПОНЕНТОВ КРОВИ";
     string[] GroupRh = new string[]
     {
         "0(I) Rh- (отрицательный)",
@@ -202,13 +201,12 @@
         "Хестанова Н.З.",
         "Шабут А.М."
     };
-    Hemo? ep = new();
+    HemoEpicrisis? ep = new();
     DateTime? date; //дата
     TimeSpan? time; //время
     private bool SwitchChecked = false;
     protected override void OnInitialized()
     {
-
         date = DateTime.Now; //Дата
         time = DateTime.Now.TimeOfDay; //Время
     }
