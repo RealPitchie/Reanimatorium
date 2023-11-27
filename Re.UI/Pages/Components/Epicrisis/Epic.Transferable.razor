@@ -1,5 +1,44 @@
-﻿<h3>Epic.Transferable</h3>
+﻿@using Re.Core.Models.Epicrisis;
+<MudGrid>
+    <MudItem xs="9">
+        <MudGrid Justify="Justify.Center">
+            <MudItem>
+                <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
+            </MudItem>
+            <MudItem>
+                <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
+            </MudItem>
+        </MudGrid>
+        <MudPaper Style="padding: 10px; margin: 15px 0">
+            <MudText Align="Align.Center" Typo="Typo.h5">Переводной эпикриз</MudText>
+            <MudStack Row="true">
+                <MudText Class="d-flex flex-column justify-end">Пациент находился в ОАР с </MudText>
+                <MudDatePicker @bind-Date="date" />
+                <MudText Class="d-flex flex-column justify-end">по</MudText>
+                <MudDatePicker @bind-Time="date" />
+            </MudStack>
+            <MudItem xs="12">
+                <MudTextField Label="Диагноз:" @bind-Value="tr.Diagnosis" Lines="3"></MudTextField>
+            </MudItem>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="3">
+
+    </MudItem>
+</MudGrid>
 
 @code {
+    DateTime? date;
+    TimeSpan? time;
+    DateTime? dateFrom;
+    DateTime? dateTo;
+    Transferable? tr = new();
 
+    protected override void OnInitialized()
+    {
+        date = DateTime.Now;
+        time = DateTime.Now.TimeOfDay;
+        dateFrom = DateTime.Now;
+        dateTo = DateTime.Now;
+    }
 }

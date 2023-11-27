@@ -8,7 +8,6 @@ namespace Re.Core.Models
         public string Id { get; set; }
         public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }
-        public string Name { get; set; }
         public string DeliveredFrom { get; set; }
         public string AVLDueTransportation { get; set; }
         public string Complaints { get; set; }
@@ -67,7 +66,7 @@ namespace Re.Core.Models
 
         public string[] Tongue { get; set; } = new string[2];
 
-        public int Diuresis { get; set; }
+        public double Diuresis { get; set; }
         public string Urine { get; set; }
         public string Drainage { get; set; }
         public string LaboratoryData { get; set; }
