@@ -15,7 +15,7 @@
                 <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
             </MudItem>
         </MudGrid>
-        <MudPaper Style="padding: 10px; margin: 15px 0">
+        <MudPaper Style="padding: 20px; margin: 15px 0">
             <MudText Align="Align.Center" Typo="Typo.h5">@Name</MudText>
             <MudSelect @bind-Value="re.DeliveredFrom" T="string" Label="Пациент доставлен в реанимационное отделение из" AnchorOrigin="Origin.BottomCenter">
                 @foreach (var item in DeliveredFrom)
@@ -515,7 +515,7 @@
             </MudGrid>
             <MudGrid>
                 <MudItem Class="d-flex flex-column justify-end" Style="padding: 12px;" xs="3">
-                    <MudSwitch @bind-Checked="IsDrainage" Label="По дренажам" Color="Color.Tertiary" />
+                    <MudSwitch @bind-Checked="IsDrainage" Label="По дренажам" Color="Color.Primary" />
                 </MudItem>
                 @if (IsDrainage)
                 {
@@ -527,7 +527,7 @@
             <MudTextField @bind-Value="re.LaboratoryData" Label="Лабораторные данные"/>
             <MudGrid>
                 <MudItem Class="d-flex flex-column justify-end" Style="padding: 12px;" xs="3">
-                    <MudSwitch @bind-Checked="IsAddition" Label="Дополнительно" Color="Color.Tertiary" />
+                    <MudSwitch @bind-Checked="IsAddition" Label="Дополнительно" Color="Color.Primary" />
                 </MudItem>
                 @if (IsAddition)
                 {

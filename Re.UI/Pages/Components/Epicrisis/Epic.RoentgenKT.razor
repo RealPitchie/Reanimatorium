@@ -1,15 +1,16 @@
 ﻿@using Re.Core.Models.Epicrisis
 
 <MudGrid>
+    <MudItem>
+        <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
+    </MudItem>
+    <MudItem>
+        <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
+    </MudItem>
+</MudGrid>
+
+<MudGrid>
     <MudItem xs="8">
-        <MudGrid Justify="Justify.Center">
-            <MudItem>
-                <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
-            </MudItem>
-            <MudItem>
-                <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
-            </MudItem>
-        </MudGrid>
         @if (isChestCavity)
         {
             <Re.UI.Pages.Components.Epicrisis.RoentgenKT.Epic_RoentgenKT_ChestCavity />
@@ -47,7 +48,7 @@
 </MudGrid>
 
 @code {
-    СhestСavityRoentgen ccRoentgen;
+    
     AbdominalCavityRoentgen acRoentgen;
     TomographicExploration tmgExploration;
     DateTime? date = DateTime.Now;
