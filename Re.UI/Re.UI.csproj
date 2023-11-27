@@ -15,6 +15,7 @@
 
   <ItemGroup>
     <Content Remove="Pages\Components\Diary\Diary.razor" />
+    <Content Remove="Pages\Components\Hemo\HemoProtocol.razor" />
   </ItemGroup>
 
   <ItemGroup>
