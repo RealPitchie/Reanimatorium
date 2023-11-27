@@ -1,5 +1,321 @@
-﻿<h3>Epic.Transferable</h3>
+﻿@using Re.Core.Models.Epicrisis;
+@using Re.Core.Models;
+<MudGrid>
+    <MudItem xs="9">
+        <MudGrid Justify="Justify.Center">
+            <MudItem>
+                <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
+            </MudItem>
+            <MudItem>
+                <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
+            </MudItem>
+        </MudGrid>
+        <MudPaper Style="padding: 10px; margin: 15px 0">
+            <MudText Align="Align.Center" Typo="Typo.h5">Переводной эпикриз</MudText>
+            <MudStack Row="true">
+                <MudText Class="d-flex flex-column justify-end">Пациент находился в ОАР с </MudText>
+                <MudDatePicker @bind-Date="tr.DateFrom" />
+                <MudText Class="d-flex flex-column justify-end">по</MudText>
+                <MudDatePicker @bind-Date="tr.DateTo" />
+            </MudStack>
+            <MudItem xs="12">
+                <MudTextField Label="Диагноз:" @bind-Value="tr.Diagnosis" Lines="3"></MudTextField>
+            </MudItem>
+            <MudItem xs="12">
+                <MudTextField Label="Причины пребывания в отделении реанимации:" @bind-Value="tr.ReasonsHere" Lines="3"></MudTextField>
+            </MudItem>
+            <MudItem xs="12">
+                <MudTextField Label="Проводимая терапия:" @bind-Value="tr.OngoingTherapy" Lines="3"></MudTextField>
+            </MudItem>
+            <MudItem xs="12">
+                <MudTextField Label="Динамика состояния:" @bind-Value="tr.DynamicsState" Lines="3"></MudTextField>
+            </MudItem>
+            <MudText>В связи со стабилизацией витальных функций, 
+                отсутствием угрожающих нарушений ВЭО и метаболических расстройств, 
+                переводится в профильное</MudText>
+            <MudStack Row="true">
+                <MudItem xs="6">
+                    <MudSelect @bind-Value="tr.Department">
+                        @foreach (var item in department)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem Class="d-flex flex-column justify-end" xs="6">
+                    <MudText>
+                        для дальнейшего лечения и наблюдения.
+                    </MudText>
+                </MudItem>
+            </MudStack>
+            <MudTextField Label="Перевод согласован:" @bind-Value="tr.AgreedWith"></MudTextField>
+            <MudStack Row="true">
+                <MudItem xs="8">
+                    <MudSelect Label="На момент перевода состояние" @bind-Value="tr.Condition">
+                        @foreach (var item in condition)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="4">
+                    <MudNumericField HideSpinButtons="true" Label="t" @bind-Value="tr.Temperature"></MudNumericField>
+                </MudItem>
+            </MudStack>
+            <MudSelect Label="Сознание" @bind-Value="tr.Conscience">
+                 @foreach (var item in conscience)
+                    {
+                        <MudSelectItem Value="@item" />
+                    }
+            </MudSelect>
+            <MudStack Row="true">
+                <MudItem xs="2" Class="d-flex flex-column justify-end"><MudText>Кожные покровы</MudText></MudItem>
+                <MudItem xs="4">
+                    <MudSelect @bind-Value="tr.SkinCovers[0]">
+                        @foreach (var item in skinCovers[0])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="2">
+                    <MudSelect @bind-Value="tr.SkinCovers[1]">
+                        @foreach (var item in skinCovers[1])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="4">
+                    <MudSelect @bind-Value="tr.SkinCovers[2]">
+                        @foreach (var item in skinCovers[2])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudStack>
+            <MudStack Row="true">
+                <MudItem Style="padding-top: 0;" xs="5">
+                    <MudSelect @bind-Value="tr.Breathing" Label="Дыхание:" >
+                        @foreach (var item in breathing)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="2">
+                    <MudNumericField Label="ЧДД" HideSpinButtons="true" @bind-Value="tr.RespiratoryRate" Variant="Variant.Text" Min="0"></MudNumericField>
+                </MudItem>
+                <MudItem Class="d-flex flex-column justify-end" xs="4">
+                    <MudText>в мин.</MudText>
+                </MudItem>
+            </MudStack>
+            <MudSelect Label="Гемодинамика" @bind-Value="tr.Hemodynamics" T="string">
+                @foreach (var item in hemodynamics)
+                {
+                    <MudSelectItem Value="@item" />
+                }
+            </MudSelect>
+            <MudStack Row="true" Justify="Justify.SpaceBetween">
+                <MudStack Row="true" >
+                    <MudText Class="d-flex flex-column justify-end">АД</MudText>
+                    <MudItem xs="2">
+                        <MudNumericField HideSpinButtons="true" @bind-Value="tr.ArtherialPressure[0]" Variant="Variant.Text" Min="0" />
+                    </MudItem>
+                    <MudItem Class="d-flex flex-column justify-end">
+                        <MudText>/</MudText>
+                    </MudItem>
+                    <MudItem xs="2">
+                        <MudNumericField HideSpinButtons="true" @bind-Value="tr.ArtherialPressure[1]" Variant="Variant.Text" Min="0" />
+                    </MudItem>
+                    <MudText Class="d-flex flex-column justify-end">мм рт. ст.</MudText>
+                </MudStack>
+                <MudStack Row="true">
+                    <MudItem xs="2">
+                        <MudNumericField Label="Ps" @bind-Value="tr.Ps" HideSpinButtons="true"></MudNumericField>
+                    </MudItem>
+                    <MudText Class="d-flex flex-column justify-end">в 1 мин.</MudText>
+                </MudStack>
+                <MudStack Row="true">
+                    <MudItem xs="2">
+                        <MudNumericField Label="ЧЖС" @bind-Value="tr.VentricularReduce" HideSpinButtons="true"></MudNumericField>
+                    </MudItem>
+                    <MudText Class="d-flex flex-column justify-end">в 1 мин.</MudText>
+                </MudStack>
+            </MudStack>
+            <MudSelect @bind-Value="tr.Auscultatory" Label="Аускультативно">
+                @foreach (var item in auscultatory)
+                {
+                    <MudSelectItem Value="@item" />
+                }
+            </MudSelect>
+            <MudStack Row="true">
+                <MudText Class="d-flex flex-column justify-end">Хрипы</MudText>
+                <MudSelect @bind-Value="tr.Wheezes[0]">
+                    @foreach (var item in wheezes[0])
+                    {
+                        <MudSelectItem Value="@item" />
+                    }
+                </MudSelect>
+                <MudSelect @bind-Value="tr.Wheezes[1]">
+                    @foreach (var item in wheezes[1])
+                    {
+                        <MudSelectItem Value="@item" />
+                    }
+                </MudSelect>
+                <MudSelect @bind-Value="tr.Wheezes[2]" >
+                    @foreach (var item in wheezes[2])
+                    {
+                        <MudSelectItem Value="@item" />
+                    }
+                </MudSelect>
+            </MudStack>
+            <MudTextField Label="Живот" Lines="2" @bind-Value="tr.Abdomen"/>
+            <MudTextField Label="Диурез" @bind-Value="tr.Diuresis"/>
+            <MudTextField Label="Дренажи" @bind-Value="tr.Drainage" Lines="2" />
+            <MudStack Row="true">
+                <MudItem xs="6">
+                    <MudSelect Label="Переводится с кавакатетером" @bind-Value="tr.TransferCavacatheter">
+                        @foreach (var item in transferCavacatheter)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="6">
+                    <MudSelect Label="Признаки воспаления" @bind-Value="tr.InflammationSigns">
+                        @foreach (var item in inflammationSigns)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudStack>
+            <MudSelect Label="Переводится с эпидуриальным кавакатетером" @bind-Value="tr.TransferEpidurialCavacatheter">
+                @foreach (var item in transferEpidurialCavacatheter)
+                {
+                    <MudSelectItem Value="@item" />
+                }
+            </MudSelect>
+            <MudStack Row="true" Spacing="10">
+                <MudTextField @bind-Value="tr.Recomended" Label="Рекомендовано" Lines="3">
+                </MudTextField>
+                <MudBadge Style="margin-right: -300px;" Color="Color.Error" Origin="Origin.TopCenter" Overlap="true" Content="@robodoc">
+                    <MudPaper Class="d-flex flex-column justify-center" Style="background-color: #D9D9D9; border: 1px solid #C00000;"
+                              Height="100px" Width="250px">
+                        <MudButtonGroup Style="margin: 1rem;" Variant="Variant.Outlined" Size="Size.Large" VerticalAlign="true">
+                            <MudButton Style="justify-content: space-between" OnClick="HandleEpidurial">
+                                <MudImage Width="20" Src="../img/robot.png" />
+                                Эпидуриальный
+                            </MudButton>
+                        </MudButtonGroup>
+                    </MudPaper>
+                </MudBadge>
+            </MudStack>
+            <MudStack Row="true">
+                <MudItem xs="7">
+                    <MudSelect Label="Врач:" @bind-Value="tr.Doctor" ToStringFunc="@converter">
+                        @foreach (var item in doctors)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="5">
+                    <MudField Disabled="true" HelperText="Подпись"></MudField>
+                </MudItem>
+            </MudStack>
+            <MudStack Row="true">
+                <MudItem xs="7">
+                    <MudSelect Label="Зав. ОАР" @bind-Value="tr.Chief" ToStringFunc="@converter">
+                        @foreach (var item in doctors)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="5">
+                    <MudField Disabled="true" HelperText="Подпись"></MudField>
+                </MudItem>
+            </MudStack>
+        </MudPaper>
+    </MudItem>
+    <MudItem xs="3"></MudItem>
+</MudGrid>
 
 @code {
+    public string SelectedOption { get; set; }
+    DateTime? date;
+    TimeSpan? time;
+    Transferable? tr = new();
+    string robodoc = "ROBODOC";
+    string[] department = new string[]
+    {
+        "1 отделения.", "2 отделения.", "3 отделения.",
+        "4 отделения.", "5 отделения.", "6 отделения.",
+        "7 отделения.", "8 отделения.", "9 отделения.",
+        "10 отделения.", "11 отделения.", "12 отделения.",
+        "13 отделения.", "14 отделения.", "15 отделения.",
+        "16 отделения.", "17 отделения.", "18 отделения.",
+        "19 отделения.", "20 отделения."
+    };
+    string[] condition = new string[]
+    {
+        "удовлетворительное.", "средней тяжести.",
+        "тяжелое.", "крайне тяжелое.",
+        "терминальное.", "клинической смерти."
+    };
+    string[] conscience = new string[]
+    {
+        "ясное.","оглушение.","глубокое оглушение.","сопор.",
+        "кома I.","кома II.","кома III.","медикаментозная седация."
+    };
+    List<string[]> skinCovers = new List<string[]>()
+    {
+        new string[] {"сухие,", "влажные,", "естественной влажности,"},
+        new string[] {"теплые,", "холодные,"},
+        new string[] {"естественной окраски.", "бледные.", "бледно-розовые."},
+    };
+    string[] breathing = new string[] { "неэффективно.", "эффективно." };
+    string[] hemodynamics = new string[] { "устойчивая", "неустойчивая" };
+    string[] auscultatory = new string[]
+    { "дыхание жесткое.","дыхание везикулярное.", "дыхание пуэрильное." };
+    List<string[]> wheezes = new List<string[]>()
+    {
+        new string[] { "нет.", "есть,"},
+        new string[] {"с двух сторон.", "справа.", "слева"},
+        new string[] {"нет.", "сухие", "влажные", "крепитирующие", "проводные"},
+    };
+    string[] transferCavacatheter = new string[] { "да", "нет" };
+    string[] inflammationSigns = new string[] { "есть", "нет" };
+    string[] transferEpidurialCavacatheter = new string[] { "да", "нет" };
+    string recomended = "Введение наропина 0.2% эпидурально со скоростью 4-6 мл/ч под контролем АД и ЧСС.";
+    public List<Doctor> doctors = new();
+    Func<Doctor, string> converter = d => d?.Name;
 
+    protected override void OnInitialized()
+    {
+        date = DateTime.Now;
+        time = DateTime.Now.TimeOfDay;
+        tr.DateFrom = null;
+        tr.DateTo = null;
+        tr.ReasonsHere = "необходимость динамического наблюдения и лабораторного мониторинга, проведения интенсивной терапии.";
+        tr.OngoingTherapy = "инфузионная, анальгезия, оксигенотерапия, гастропротекция, профилактикаТЭЛА, мероприятия по уходу. ";
+        tr.DynamicsState = "положительная, компенсация по витальным функциям.";
+        tr.AgreedWith = "с заведующим отделения.";
+        doctors.Add(new Doctor { Name = "Розенгард С.А.", Id = Guid.NewGuid().ToString(), Position = "1" });
+        doctors.Add(new Doctor { Name = "Глущенко В.А.", Id = Guid.NewGuid().ToString(), Position = "2" });
+        doctors.Add(new Doctor { Name = "Алиева  А.Э.", Id = Guid.NewGuid().ToString(), Position = "3" });
+        doctors.Add(new Doctor { Name = "Борзых И.С.", Id = Guid.NewGuid().ToString(), Position = "4" });
+        doctors.Add(new Doctor { Name = "Веденин Я.О.", Id = Guid.NewGuid().ToString(), Position = "5" });
+        doctors.Add(new Doctor { Name = "Горохов Л.В.", Id = Guid.NewGuid().ToString(), Position = "6" });
+        doctors.Add(new Doctor { Name = "Груздов М.С.", Id = Guid.NewGuid().ToString(), Position = "7" });
+        tr.Chief = doctors[0];
+    }
+
+    void HandleEpidurial()
+    {
+        tr.Recomended = recomended;
+    }
 }
