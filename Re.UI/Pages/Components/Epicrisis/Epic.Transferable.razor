@@ -192,7 +192,7 @@
                     </MudSelect>
                 </MudItem>
             </MudStack>
-            <MudSelect Label="Переводится с эпидуриальным кавакатетером" @bind-Value="tr.TransferEpidurialCavacatheter">
+            <MudSelect Label="Переводится с эпидуральным кавакатетером" @bind-Value="tr.TransferEpiduralCavacatheter">
                 @foreach (var item in transferEpidurialCavacatheter)
                 {
                     <MudSelectItem Value="@item" />
@@ -291,8 +291,40 @@
     string[] inflammationSigns = new string[] { "есть", "нет" };
     string[] transferEpidurialCavacatheter = new string[] { "да", "нет" };
     string recomended = "Введение наропина 0.2% эпидурально со скоростью 4-6 мл/ч под контролем АД и ЧСС.";
+    string[] doctorNames = new string[]
+            {   "Розенгард С.А.",
+            "Глущенко В.А.",
+            "Алиева А.Э.",
+            "Борзых И.С.",
+            "Веденин Я.О.",
+            "Горохов Л.В.",
+            "Груздов М. С.",
+            "Гурин М.Н.",
+            "Зубайдов М.М.",
+            "Ишкараев В.Э.",
+            "Караваев А.В.",
+            "Кононец Ф.А.",
+            "Кремзель Е.Г.",
+            "Митрохина М.В.",
+            "Нюхлов Е.С.",
+            "Пазюк К.И.",
+            "Пастухова А.А.",
+            "Попель И.В.",
+            "Раевская О. А.",
+            "Сапронова Т.Н.",
+            "Семенов А.Н.",
+            "Склярова В.О.",
+            "Хестанова Н.З.",
+            "Шабут А.М."};
     public List<Doctor> doctors = new();
     Func<Doctor, string> converter = d => d?.Name;
+    void DoctorAdd()
+    {
+        @for(int i = 0; i < doctorNames.Length; i++)
+        {
+            doctors.Add(new Doctor { Name = doctorNames[i], Id = Guid.NewGuid().ToString(), Position = i.ToString() });
+        }
+    }
 
     protected override void OnInitialized()
     {
@@ -304,13 +336,7 @@
         tr.OngoingTherapy = "инфузионная, анальгезия, оксигенотерапия, гастропротекция, профилактикаТЭЛА, мероприятия по уходу. ";
         tr.DynamicsState = "положительная, компенсация по витальным функциям.";
         tr.AgreedWith = "с заведующим отделения.";
-        doctors.Add(new Doctor { Name = "Розенгард С.А.", Id = Guid.NewGuid().ToString(), Position = "1" });
-        doctors.Add(new Doctor { Name = "Глущенко В.А.", Id = Guid.NewGuid().ToString(), Position = "2" });
-        doctors.Add(new Doctor { Name = "Алиева  А.Э.", Id = Guid.NewGuid().ToString(), Position = "3" });
-        doctors.Add(new Doctor { Name = "Борзых И.С.", Id = Guid.NewGuid().ToString(), Position = "4" });
-        doctors.Add(new Doctor { Name = "Веденин Я.О.", Id = Guid.NewGuid().ToString(), Position = "5" });
-        doctors.Add(new Doctor { Name = "Горохов Л.В.", Id = Guid.NewGuid().ToString(), Position = "6" });
-        doctors.Add(new Doctor { Name = "Груздов М.С.", Id = Guid.NewGuid().ToString(), Position = "7" });
+        DoctorAdd();
         tr.Chief = doctors[0];
     }
 

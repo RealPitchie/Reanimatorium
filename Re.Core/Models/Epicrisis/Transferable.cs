@@ -34,7 +34,7 @@ namespace Re.Core.Models.Epicrisis
         public string Drainage { get; set; }
         public string TransferCavacatheter {  get; set; }
         public string InflammationSigns { get; set; }
-        public string TransferEpidurialCavacatheter { get; set; }
+        public string TransferEpiduralCavacatheter { get; set; }
         public string Recomended { get; set; }
         public Doctor Doctor { get; set; }
         public Doctor Chief {  get; set; }

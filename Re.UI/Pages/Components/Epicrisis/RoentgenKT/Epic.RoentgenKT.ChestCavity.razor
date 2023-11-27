@@ -1,0 +1,8 @@
+﻿<MudText style="margin-top: 15px; font-weight: bolder;">
+    @date.Value.Date.ToString("dd.MM.yyyy") &nbsp; &nbsp;&nbsp;&nbsp; @string.Format("{0}:{1}", time.Value.Hours.ToString("D2"),time.Value.Minutes.ToString("D2"))
+</MudText>
+
+@code {
+    DateTime? date = DateTime.Now;
+    TimeSpan? time = DateTime.Now.TimeOfDay;
+}

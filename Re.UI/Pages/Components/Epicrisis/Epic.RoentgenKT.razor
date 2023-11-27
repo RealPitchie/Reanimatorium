@@ -1,5 +1,59 @@
-﻿<h3>Epic.RoentgenKT</h3>
+﻿@using Re.Core.Models.Epicrisis
+
+<MudGrid>
+    <MudItem xs="8">
+        <MudGrid Justify="Justify.Center">
+            <MudItem>
+                <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
+            </MudItem>
+            <MudItem>
+                <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
+            </MudItem>
+        </MudGrid>
+        @if (isChestCavity)
+        {
+            <Re.UI.Pages.Components.Epicrisis.RoentgenKT.Epic_RoentgenKT_ChestCavity />
+        }
+
+        @if (isAbdominalCavity)
+        {
+           <Re.UI.Pages.Components.Epicrisis.RoentgenKT.Epic_RoentgenKT_AbdominalCavity/>
+        }
+
+        @if (isTomographic)
+        {
+             <Re.UI.Pages.Components.Epicrisis.RoentgenKT.Epic_RoentgenKT_Tomographic/>
+        }
+    </MudItem> 
+    <MudItem xs="4">
+        <MudStack>
+            <MudItem>
+                <MudCheckBox @bind-Checked="@isChestCavity" UnCheckedColor="Color.Error" Color="Color.Success">
+                    <span>Эпикриз на рентгенологическое исследование грудной полости</span>
+                </MudCheckBox>
+            </MudItem>
+            <MudItem>
+                <MudCheckBox @bind-Checked="@isAbdominalCavity" UnCheckedColor="Color.Error" Color="Color.Success">
+                    <span>Эпикриз на рентгенологическое исследование брюшной полости</span>
+                </MudCheckBox>
+            </MudItem>
+            <MudItem>
+                <MudCheckBox @bind-Checked="@isTomographic" UnCheckedColor="Color.Error" Color="Color.Success">
+                    <span>Эпикриз на проведение томографического исследования</span>
+                </MudCheckBox>
+            </MudItem>
+        </MudStack>
+    </MudItem>
+</MudGrid>
 
 @code {
+    СhestСavityRoentgen ccRoentgen;
+    AbdominalCavityRoentgen acRoentgen;
+    TomographicExploration tmgExploration;
+    DateTime? date = DateTime.Now;
+    TimeSpan? time = DateTime.Now.TimeOfDay;
+    bool isChestCavity = false;
+    bool isAbdominalCavity = false;
+    bool isTomographic = false;
 
 }
