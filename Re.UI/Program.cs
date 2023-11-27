@@ -14,7 +14,7 @@ builder.Services.AddRazorPages();
 builder.Services.AddServerSideBlazor(); 
 builder.Services.AddMudServices();
 
-builder.Services.AddSingleton<IDatabaseService, Service>();
+builder.Services.AddScoped<IDatabaseService, Service>();
 
 var app = builder.Build();
 
