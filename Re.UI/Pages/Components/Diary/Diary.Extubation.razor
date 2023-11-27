@@ -1,5 +1,130 @@
-﻿<h3>Экстубация</h3>
+﻿@using Newtonsoft.Json;
+@using Re.Core.Models
+@using Re.UI.Data
+@using System.Diagnostics;
+
+
+<MudGrid>
+    <MudItem>
+        <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
+    </MudItem>
+    <MudItem>
+        <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
+    </MudItem>
+</MudGrid>
+
+<MudGrid>
+    <MudItem xs="8">
+        <MudPaper Style="padding: 10px; margin: 15px 0 0 0; width:150%">
+            <MudGrid>
+                <MudItem Style="width: 22%;" Class="d-flex flex-column justify-end"><MudText>Мед. седация прекращена в </MudText></MudItem>
+                <MudItem Style="width: 76%;">
+                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@ex.MedSedation" />
+                </MudItem>
+            </MudGrid>
+
+
+            <MudGrid>
+                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Мышечный тонус </MudText></MudItem>
+                <MudItem Style="width: 83%;">
+                    <MudTextField T="string" Variant="Variant.Text" Text="@MuscleTone" />
+                </MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="width: 80%;" Class="d-flex flex-column justify-end"><MudText>Удовлетворительная вентеляция в режиме SPONT </MudText></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="width: 80%;" Class="d-flex flex-column justify-end"><MudText>Выполнена экстубация трахеи. Пациент дышит самостоятельно </MudText></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="width: 30%;" Class="d-flex flex-column justify-end"><MudText>Инсуфляция O2 через носовые канюли -  </MudText></MudItem>
+                <MudItem Style="width: 10%;">
+                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@ex.Insuflation" />
+                </MudItem>
+                <MudItem Style="width: 10%;" Class="d-flex flex-column justify-end"><MudText>л/мин. </MudText></MudItem>
+            </MudGrid>
+
+            <MudGrid>
+                <MudItem Style="width: 8%;" Class="d-flex flex-column justify-end">
+                    <MudText>Sat% - </MudText>
+                </MudItem>
+
+                <MudItem Style="width: 10%;">
+                    <MudTextField T="string" Variant="Variant.Text" Text="@ex.Sat" />
+                </MudItem>
+
+                <MudItem Style="width: 10%;padding-left:70px;" Class="d-flex flex-column justify-end"><MudText>АД - </MudText></MudItem>
+
+                <MudItem Style="width: 12%;">
+                    <MudTextField T="string" Variant="Variant.Text" Text="@ex.Ad" />
+                </MudItem>
+                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>мм рт.ст.</MudText></MudItem>
+                <MudItem Style="width: 6%;" Class="d-flex flex-column justify-end"><MudText>ЧСС - </MudText></MudItem>
+
+                <MudItem Style="width: 12%;">
+                    <MudTextField T="string" Variant="Variant.Text" Text="@ex.Chss" />
+                </MudItem>
+                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>в 1 минуту.</MudText></MudItem>
+            </MudGrid>
+
+            <MudGrid>
+                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Врач АиР: </MudText></MudItem>
+                <MudItem Style="width: 83%;">
+                    <MudSelect Value="ex.Doctor" Dense="true" T="Doctor" ToStringFunc="@converterTwo">
+                        @foreach (var doc in DoctorsTwo)
+                        {
+                            <MudSelectItem Value="@doc" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+
 
 @code {
+    string MuscleTone = "удовлетворительный";
+    protected override void OnInitialized()
+    {
+
+        date = DateTime.Now; //Дата
+        time = DateTime.Now.TimeOfDay; //Время
+
+        DoctorsTwo.Add(new Doctor { Name = "Розенгард С.А.", Id = Guid.NewGuid().ToString(), Position = "1" });
+        DoctorsTwo.Add(new Doctor { Name = "Глущенко В.А.", Id = Guid.NewGuid().ToString(), Position = "2" });
+        DoctorsTwo.Add(new Doctor { Name = "Алиева  А.Э.", Id = Guid.NewGuid().ToString(), Position = "3" });
+        DoctorsTwo.Add(new Doctor { Name = "Борзых И.С.", Id = Guid.NewGuid().ToString(), Position = "4" });
+        DoctorsTwo.Add(new Doctor { Name = "Веденин Я.О.", Id = Guid.NewGuid().ToString(), Position = "5" });
+        DoctorsTwo.Add(new Doctor { Name = "Горохов Л.В.", Id = Guid.NewGuid().ToString(), Position = "6" });
+        DoctorsTwo.Add(new Doctor { Name = "Груздов М.С.", Id = Guid.NewGuid().ToString(), Position = "7" });
+        DoctorsTwo.Add(new Doctor { Name = "Гурин М.Н.", Id = Guid.NewGuid().ToString(), Position = "8" });
+        DoctorsTwo.Add(new Doctor { Name = "Зубайдов М.М.", Id = Guid.NewGuid().ToString(), Position = "9" });
+        DoctorsTwo.Add(new Doctor { Name = "Ишкараев В.Э.", Id = Guid.NewGuid().ToString(), Position = "10" });
+        DoctorsTwo.Add(new Doctor { Name = "Караваев А.В.", Id = Guid.NewGuid().ToString(), Position = "11" });
+        DoctorsTwo.Add(new Doctor { Name = "Кононец Ф.А.", Id = Guid.NewGuid().ToString(), Position = "12" });
+        DoctorsTwo.Add(new Doctor { Name = "Кремзель Е.Г.", Id = Guid.NewGuid().ToString(), Position = "13" });
+        DoctorsTwo.Add(new Doctor { Name = "Митрохина М.В.", Id = Guid.NewGuid().ToString(), Position = "14" });
+        DoctorsTwo.Add(new Doctor { Name = "Нюхлов Е.С.", Id = Guid.NewGuid().ToString(), Position = "15" });
+        DoctorsTwo.Add(new Doctor { Name = "Пазюк К.И.", Id = Guid.NewGuid().ToString(), Position = "16" });
+        DoctorsTwo.Add(new Doctor { Name = "Пастухова А.А.", Id = Guid.NewGuid().ToString(), Position = "17" });
+        DoctorsTwo.Add(new Doctor { Name = "Попель И.В.", Id = Guid.NewGuid().ToString(), Position = "18" });
+        DoctorsTwo.Add(new Doctor { Name = "Раевская О. А.", Id = Guid.NewGuid().ToString(), Position = "19" });
+        DoctorsTwo.Add(new Doctor { Name = "Сапронова Т.Н.", Id = Guid.NewGuid().ToString(), Position = "20" });
+        DoctorsTwo.Add(new Doctor { Name = "Семенов А.Н.", Id = Guid.NewGuid().ToString(), Position = "21" });
+        DoctorsTwo.Add(new Doctor { Name = "Склярова В.О.", Id = Guid.NewGuid().ToString(), Position = "22" });
+        DoctorsTwo.Add(new Doctor { Name = "Хестанова Н.З.", Id = Guid.NewGuid().ToString(), Position = "23" });
+        DoctorsTwo.Add(new Doctor { Name = "Шабут А.М.", Id = Guid.NewGuid().ToString(), Position = "24" });
+    }
+
+    Extubation? ex = new();
+
+    DateTime? date; //дата
+    TimeSpan? time; //время
+
+    public List<Doctor> DoctorsTwo = new();
+    Func<Doctor, string> converterTwo = d => d?.Name;
 
 }

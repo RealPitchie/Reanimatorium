@@ -54,7 +54,7 @@
                 </MudItem>
 
                 <MudItem Style="width: 10%; padding:  11px 0 0 0">
-                    <MudSelect T="string" Disabled="@SwitchChecked">
+                    <MudSelect T="string" Disabled="!SwitchChecked">
                         @foreach (var item in Vash)
                         {
                             <MudSelectItem Value="@item" />
@@ -92,7 +92,7 @@
                 </MudItem>
                 <MudItem Style="width: 65%; padding: 11px 0 0 6px;">
 
-                    <MudTextField T="string" Variant="Variant.Text" Text="@RassThis" Disabled="@SwitchChecked2" />
+                    <MudTextField T="string" Variant="Variant.Text" Text="@RassThis" Disabled="!SwitchChecked2" />
 
                 </MudItem>
                 <MudItem Style=" padding: 38px 0 0 15px;">
@@ -149,7 +149,7 @@
             <MudGrid>
                 <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Экстубирован</MudText></MudItem>
                 <MudItem Style="width: 40%;">
-                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="SwitchChecked3">
+                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked3">
                         @foreach (var item in Extubation)
                         {
                             <MudSelectItem Value="@item" />
@@ -295,7 +295,7 @@
             <MudGrid Style="padding-left:300px;">
                 <MudItem Style="width: 7%;" Class="d-flex flex-column justify-end"><MudText>ДО - </MudText></MudItem>
                 <MudItem Style="width: 7%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Do" Disabled="!SwitchChecked4" />
+                    <MudTextField @bind-Value="@Num1" T="int" Variant="Variant.Text" Text="@standart.Do" Disabled="!SwitchChecked4" />
                 </MudItem>
                 <MudItem Style="width: 10%;" Class="d-flex flex-column justify-end"><MudText>мл;</MudText></MudItem>
 
@@ -304,12 +304,22 @@
                     <MudTextField T="string" Variant="Variant.Text" Text="@standart.Fio2" Disabled="!SwitchChecked4" />
                 </MudItem>
                 <MudItem Style="width: 5%;" Class="d-flex flex-column justify-end"><MudText>%;</MudText></MudItem>
+
+                <MudItem Style="width: 15%; padding-left:90px; padding-top:40px;">
+                    <MudButton OnClick="CalculateProduct">МОД</MudButton>
+                </MudItem>
+                <MudItem Style="width: 20%;padding-top:45px;">
+                    @if (Result != null)
+                    {
+                        <p> - @Result мл/мин;</p>
+                    }
+                </MudItem>
             </MudGrid>
 
             <MudGrid Style="padding-left:300px;">
                 <MudItem Style="width: 7%;" Class="d-flex flex-column justify-end"><MudText>ЧД - </MudText></MudItem>
                 <MudItem Style="width: 7%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Cd" Disabled="!SwitchChecked4" />
+                    <MudTextField @bind-Value="@Num2" T="int" Variant="Variant.Text" Text="@standart.Cd" Disabled="!SwitchChecked4" />
                 </MudItem>
                 <MudItem Style="width: 10%;" Class="d-flex flex-column justify-end"><MudText>в мин;</MudText></MudItem>
 
@@ -357,7 +367,7 @@
                 <MudItem Style="width: 20%; padding-right: 6px;" Class="d-flex flex-column justify-end"><MudText>Инотропная поддержка:</MudText></MudItem>
 
                 <MudItem Style="width: 25%; padding: 11px 1px;">
-                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="SwitchChecked5">
+                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked5">
                         @foreach (var item in InotropicSupportOne[0])
                         {
                             <MudSelectItem Value="@item" />
@@ -367,11 +377,11 @@
 
                 <MudItem Style="width: 10%; padding: 11px 6px;">
 
-                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@standart.InotropicSupportOneInput" Disabled="SwitchChecked5" />
+                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@standart.InotropicSupportOneInput" Disabled="!SwitchChecked5" />
                 </MudItem>
 
                 <MudItem Style="width: 10%; padding: 11px 1px;">
-                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="SwitchChecked5">
+                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked5">
                         @foreach (var item in InotropicSupportOne[1])
                         {
                             <MudSelectItem Value="@item" />
@@ -385,7 +395,7 @@
 
             <MudGrid Style="padding-left:230px;">
                 <MudItem Style="width: 32%; padding: 11px 1px;">
-                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="SwitchChecked5">
+                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked5">
                         @foreach (var item in InotropicSupportOne[0])
                         {
                             <MudSelectItem Value="@item" />
@@ -395,11 +405,11 @@
 
                 <MudItem Style="width: 13%; padding: 11px 6px;">
 
-                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@standart.InotropicSupportOneInput" Disabled="SwitchChecked5" />
+                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@standart.InotropicSupportOneInput" Disabled="!SwitchChecked5" />
                 </MudItem>
 
                 <MudItem Style="width: 12%; padding: 11px 1px;">
-                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="SwitchChecked5">
+                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked5">
                         @foreach (var item in InotropicSupportOne[1])
                         {
                             <MudSelectItem Value="@item" />
@@ -460,7 +470,7 @@
                     </MudSelect>
 
                 </MudItem>
-                <MudItem Style="width: 35%; padding: 11px 0 0 6px;">
+                <MudItem Style="width: 73%; padding: 11px 0 0 6px;">
 
                     <MudTextField T="string" Variant="Variant.Text" Text="@standart.PainAbout" />
 
@@ -530,7 +540,7 @@
                 <MudItem Style="width: 12%;" Class="d-flex flex-column justify-end"><MudText>Перелито в/в - </MudText></MudItem>
 
                 <MudItem Style="width: 12%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Intravenously" Disabled="SwitchChecked6" />
+                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Intravenously" Disabled="!SwitchChecked6" />
                 </MudItem>
                 <MudItem Style="width: 5%;" Class="d-flex flex-column justify-end"><MudText>мл.</MudText></MudItem>
                 <MudItem Style=" padding: 35px 0 0 50px;">
@@ -561,7 +571,7 @@
             <MudGrid>
                 <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Дренаж: </MudText></MudItem>
                 <MudItem Style="width: 15%;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Disabled="SwitchChecked7">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
                         @foreach (var item in Drainage[0])
                         {
                             <MudSelectItem Value="@item" />
@@ -570,15 +580,23 @@
                 </MudItem>
 
                 <MudItem Style="width: 20%; padding: 11px 6px;">
-                    <MudSelect T="string" Label="Стороны" AnchorOrigin="Origin.BottomCenter" Disabled="SwitchChecked7">
+                    <MudSelect T="string" Label="Стороны" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
                         @foreach (var item in Drainage[1])
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 34%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.DrinageAbout" Disabled="SwitchChecked7" />
+                <MudItem Style="width: 20%;">
+                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.DrinageAbout" Disabled="!SwitchChecked7" />
+                </MudItem>
+                <MudItem Style="width: 20%; padding: 11px 6px;">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
+                        @foreach (var item in Drainage[2])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
                 </MudItem>
                 <MudItem Style=" padding: 35px 0 0 50px;">
                     <MudSwitch @bind-Checked="SwitchChecked7" />
@@ -587,7 +605,7 @@
 
             <MudGrid>
                 <MudItem Style="width: 30%;padding-left:190px;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Disabled="SwitchChecked7">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
                         @foreach (var item in Drainage[0])
                         {
                             <MudSelectItem Value="@item" />
@@ -596,26 +614,33 @@
                 </MudItem>
 
                 <MudItem Style="width: 20%; padding: 11px 6px;">
-                    <MudSelect T="string" Label="Стороны" AnchorOrigin="Origin.BottomCenter" Disabled="SwitchChecked7">
+                    <MudSelect T="string" Label="Стороны" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
                         @foreach (var item in Drainage[1])
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 34%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.DrinageAbout" Disabled="SwitchChecked7" />
+                <MudItem Style="width: 20%;">
+                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.DrinageAbout" Disabled="!SwitchChecked7" />
                 </MudItem>
-
+                <MudItem Style="width: 20%; padding: 11px 6px;">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
+                        @foreach (var item in Drainage[2])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
             </MudGrid>
 
 
             <MudGrid>
                 <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Дополнительно: </MudText></MudItem>
-                <MudItem Style="width: 70%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Additionally" Disabled="SwitchChecked8" />
+                <MudItem Style="width: 75%;">
+                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Additionally" Disabled="!SwitchChecked8" />
                 </MudItem>
-                <MudItem Style=" padding: 35px 0 0 40px;">
+                <MudItem Style=" padding: 35px 0 0 45px;">
                     <MudSwitch @bind-Checked="SwitchChecked8" />
                 </MudItem>
             </MudGrid>
@@ -625,24 +650,24 @@
                 <MudItem Style="width: 6%;" Class="d-flex flex-column justify-end"><MudText>WBC - </MudText></MudItem>
 
                 <MudItem Style="width: 8%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Laboratory1" Disabled="SwitchChecked9" />
+                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Laboratory1" Disabled="!SwitchChecked9" />
                 </MudItem>
                 <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>x10⁹/л.</MudText></MudItem>
 
                 <MudItem Style="width: 6%;" Class="d-flex flex-column justify-end"><MudText>HGB - </MudText></MudItem>
 
                 <MudItem Style="width: 8%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Laboratory2" Disabled="SwitchChecked9" />
+                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Laboratory2" Disabled="!SwitchChecked9" />
                 </MudItem>
                 <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>г/л.</MudText></MudItem>
 
                 <MudItem Style="width: 6%;" Class="d-flex flex-column justify-end"><MudText>RBC - </MudText></MudItem>
 
                 <MudItem Style="width: 8%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Laboratory3" Disabled="SwitchChecked9" />
+                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Laboratory3" Disabled="!SwitchChecked9" />
                 </MudItem>
                 <MudItem Style="width: 10%;" Class="d-flex flex-column justify-end"><MudText>x10¹²/л.</MudText></MudItem>
-                <MudItem Style=" padding: 35px 0 0 0;">
+                <MudItem Style=" padding: 35px 0 0 25px;">
                     <MudSwitch @bind-Checked="SwitchChecked9" />
                 </MudItem>
             </MudGrid>
@@ -651,21 +676,21 @@
                 <MudItem Style="width: 8%;padding-left:25px;" Class="d-flex flex-column justify-end"><MudText>HCT - </MudText></MudItem>
 
                 <MudItem Style="width: 10%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Laboratory4" Disabled="SwitchChecked9" />
+                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Laboratory4" Disabled="!SwitchChecked9" />
                 </MudItem>
                 <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>%.</MudText></MudItem>
 
                 <MudItem Style="width: 7%;padding-left:25px;" Class="d-flex flex-column justify-end"><MudText>PLT - </MudText></MudItem>
 
                 <MudItem Style="width: 10%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Laboratory5" Disabled="SwitchChecked9" />
+                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Laboratory5" Disabled="!SwitchChecked9" />
                 </MudItem>
                 <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>x10⁹/л.</MudText></MudItem>
 
                 <MudItem Style="width: 6%; " Class="d-flex flex-column justify-end"><MudText>Glu - </MudText></MudItem>
 
                 <MudItem Style="width: 10%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Laboratory6" Disabled="SwitchChecked9" />
+                    <MudTextField T="string" Variant="Variant.Text" Text="@standart.Laboratory6" Disabled="!SwitchChecked9" />
                 </MudItem>
                 <MudItem Style="width: 10%;" Class="d-flex flex-column justify-end"><MudText>ммоль/л.</MudText></MudItem>
             </MudGrid>
@@ -694,8 +719,6 @@
 
 
 @code {
-
-
     string[] Сonditions = new string[]
        {
        "удовлетворительное.",
@@ -877,6 +900,7 @@
     {
         new string[] {"плевральный", "брюшная полость", "груша", "вакуум", "нефростом", "пиелостома", "холецистостома", "колостома", "энтеростома", "зонд назогастральный", "зонд назоинтестинальный"},
         new string[] {"с двух сторон", "справа", "слева", "спрва снизу", "слева сверху", "слева снизу", "по центру"},
+        new string[] {"следы", "серозного отделяемого", "серозно-геморрагического отделяемого", "сукровичного отделяемого", "геморрагического отделяемого", "гнойного отделяемого", "желчного отделяемого","кишечного отделяемого"}
     };
 
     StandartDiary? standart = new();
@@ -898,6 +922,7 @@
         Doctors.Add(new Doctor { Name = "Веденин Я.О.", Id = Guid.NewGuid().ToString(), Position = "5" });
         Doctors.Add(new Doctor { Name = "Горохов Л.В.", Id = Guid.NewGuid().ToString(), Position = "6" });
         Doctors.Add(new Doctor { Name = "Груздов М.С.", Id = Guid.NewGuid().ToString(), Position = "7" });
+
     }
 
     public List<Doctor> Doctors = new();
@@ -912,4 +937,16 @@
     private bool SwitchChecked7 = false;
     private bool SwitchChecked8 = false;
     private bool SwitchChecked9 = false;
+
+    private int Num1;
+    private int Num2;
+    private string Result;
+
+    private void CalculateProduct()
+    {
+        int Product = Num1 * Num2;
+        Result = Product.ToString();
+    }
+
 }
+
