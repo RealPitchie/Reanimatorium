@@ -4,20 +4,20 @@
 <MudGrid>
     <MudPaper Style="margin: 15px 0; margin-top:30px; height: 900px;" Width="1190px">
         <MudText Style="margin-top:10px; margin-left:20px;" Typo="Typo.h6">@Name</MudText>
-        <MudGrid Style="margin-top:10px; margin-left:20px;">
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Ф.И.О. реципиента</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.FIO" Style="width:980px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>№ карты:</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Number" Style="width:1050px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Группа крови репициента</MudText></MudItem>
-                <MudItem Style="margin-top:-20px;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="width:925px">
-                        @foreach (var item in Group)
+            <MudGrid Style="margin-top:10px; margin-left:20px;">
+                <MudGrid>
+                    <MudItem Style="margin-top:5px;"><MudText>Ф.И.О. реципиента</MudText></MudItem>
+                    <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.FIO" Style="width:980px"></MudInput></MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem Style="margin-top:5px;"><MudText>№ карты:</MudText></MudItem>
+                    <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Number" Style="width:1050px"></MudInput></MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem Style="margin-top:5px;"><MudText>Группа крови репициента</MudText></MudItem>
+                    <MudItem Style="margin-top:-20px;">
+                        <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="width:925px">
+                            @foreach (var item in Group)
                         {
                             <MudSelectItem Value="@item" />
                         }
