@@ -698,10 +698,10 @@
             <MudGrid>
                 <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Врач: </MudText></MudItem>
                 <MudItem Style="width: 84%;">
-                    <MudSelect Value="standart.Doctor" Dense="true" T="Doctor" ToStringFunc="@converter">
-                        @foreach (var doc in Doctors)
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in Doctor.OrderBy(x => x))
                         {
-                            <MudSelectItem Value="@doc" />
+                            <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
@@ -902,6 +902,16 @@
         new string[] {"с двух сторон", "справа", "слева", "спрва снизу", "слева сверху", "слева снизу", "по центру"},
         new string[] {"следы", "серозного отделяемого", "серозно-геморрагического отделяемого", "сукровичного отделяемого", "геморрагического отделяемого", "гнойного отделяемого", "желчного отделяемого","кишечного отделяемого"}
     };
+    string[] Doctor = new string[]
+    {
+"Розенгард С.А.",
+"Глущенко В.А.",
+"Алиева  А.Э.",
+"Борзых И.С.",
+"Веденин Я.О.",
+"Горохов Л.В.",
+"Груздов М.С."
+    };
 
     StandartDiary? standart = new();
 
@@ -915,18 +925,8 @@
         date = DateTime.Now; //Дата
         time = DateTime.Now.TimeOfDay; //Время
         vash = false;
-        Doctors.Add(new Doctor { Name = "Розенгард С.А.", Id = Guid.NewGuid().ToString(), Position = "1" });
-        Doctors.Add(new Doctor { Name = "Глущенко В.А.", Id = Guid.NewGuid().ToString(), Position = "2" });
-        Doctors.Add(new Doctor { Name = "Алиева  А.Э.", Id = Guid.NewGuid().ToString(), Position = "3" });
-        Doctors.Add(new Doctor { Name = "Борзых И.С.", Id = Guid.NewGuid().ToString(), Position = "4" });
-        Doctors.Add(new Doctor { Name = "Веденин Я.О.", Id = Guid.NewGuid().ToString(), Position = "5" });
-        Doctors.Add(new Doctor { Name = "Горохов Л.В.", Id = Guid.NewGuid().ToString(), Position = "6" });
-        Doctors.Add(new Doctor { Name = "Груздов М.С.", Id = Guid.NewGuid().ToString(), Position = "7" });
 
     }
-
-    public List<Doctor> Doctors = new();
-    Func<Doctor, string> converter = d => d?.Name;
 
     private bool SwitchChecked = false;
     private bool SwitchChecked2 = false;

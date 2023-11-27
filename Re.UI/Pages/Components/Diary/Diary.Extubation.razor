@@ -70,10 +70,10 @@
             <MudGrid>
                 <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Врач АиР: </MudText></MudItem>
                 <MudItem Style="width: 83%;">
-                    <MudSelect Value="ex.Doctor" Dense="true" T="Doctor" ToStringFunc="@converterTwo">
-                        @foreach (var doc in DoctorsTwo)
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in Doctor.OrderBy(x => x))
                         {
-                            <MudSelectItem Value="@doc" />
+                            <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
@@ -87,44 +87,43 @@
 
 @code {
     string MuscleTone = "удовлетворительный";
+    string[] Doctor = new string[]
+    {
+"Розенгард С.А.",
+"Глущенко В.А.",
+"Алиева  А.Э.",
+"Борзых И.С.",
+"Веденин Я.О.",
+"Горохов Л.В.",
+"Груздов М.С.",
+"Гурин М.Н.",
+"Зубайдов М.М.",
+"Ишкараев В.Э.",
+"Караваев А.В.",
+"Кононец Ф.А.",
+"Кремзель Е.Г.",
+"Митрохина М.В.",
+"Нюхлов Е.С.",
+"Пазюк К.И.",
+"Пастухова А.А.",
+"Попель И.В.",
+"Раевская О. А.",
+"Сапронова Т.Н.",
+"Склярова В.О.",
+"Хестанова Н.З.",
+"Шабут А.М."
+    };
     protected override void OnInitialized()
     {
 
         date = DateTime.Now; //Дата
         time = DateTime.Now.TimeOfDay; //Время
 
-        DoctorsTwo.Add(new Doctor { Name = "Розенгард С.А.", Id = Guid.NewGuid().ToString(), Position = "1" });
-        DoctorsTwo.Add(new Doctor { Name = "Глущенко В.А.", Id = Guid.NewGuid().ToString(), Position = "2" });
-        DoctorsTwo.Add(new Doctor { Name = "Алиева  А.Э.", Id = Guid.NewGuid().ToString(), Position = "3" });
-        DoctorsTwo.Add(new Doctor { Name = "Борзых И.С.", Id = Guid.NewGuid().ToString(), Position = "4" });
-        DoctorsTwo.Add(new Doctor { Name = "Веденин Я.О.", Id = Guid.NewGuid().ToString(), Position = "5" });
-        DoctorsTwo.Add(new Doctor { Name = "Горохов Л.В.", Id = Guid.NewGuid().ToString(), Position = "6" });
-        DoctorsTwo.Add(new Doctor { Name = "Груздов М.С.", Id = Guid.NewGuid().ToString(), Position = "7" });
-        DoctorsTwo.Add(new Doctor { Name = "Гурин М.Н.", Id = Guid.NewGuid().ToString(), Position = "8" });
-        DoctorsTwo.Add(new Doctor { Name = "Зубайдов М.М.", Id = Guid.NewGuid().ToString(), Position = "9" });
-        DoctorsTwo.Add(new Doctor { Name = "Ишкараев В.Э.", Id = Guid.NewGuid().ToString(), Position = "10" });
-        DoctorsTwo.Add(new Doctor { Name = "Караваев А.В.", Id = Guid.NewGuid().ToString(), Position = "11" });
-        DoctorsTwo.Add(new Doctor { Name = "Кононец Ф.А.", Id = Guid.NewGuid().ToString(), Position = "12" });
-        DoctorsTwo.Add(new Doctor { Name = "Кремзель Е.Г.", Id = Guid.NewGuid().ToString(), Position = "13" });
-        DoctorsTwo.Add(new Doctor { Name = "Митрохина М.В.", Id = Guid.NewGuid().ToString(), Position = "14" });
-        DoctorsTwo.Add(new Doctor { Name = "Нюхлов Е.С.", Id = Guid.NewGuid().ToString(), Position = "15" });
-        DoctorsTwo.Add(new Doctor { Name = "Пазюк К.И.", Id = Guid.NewGuid().ToString(), Position = "16" });
-        DoctorsTwo.Add(new Doctor { Name = "Пастухова А.А.", Id = Guid.NewGuid().ToString(), Position = "17" });
-        DoctorsTwo.Add(new Doctor { Name = "Попель И.В.", Id = Guid.NewGuid().ToString(), Position = "18" });
-        DoctorsTwo.Add(new Doctor { Name = "Раевская О. А.", Id = Guid.NewGuid().ToString(), Position = "19" });
-        DoctorsTwo.Add(new Doctor { Name = "Сапронова Т.Н.", Id = Guid.NewGuid().ToString(), Position = "20" });
-        DoctorsTwo.Add(new Doctor { Name = "Семенов А.Н.", Id = Guid.NewGuid().ToString(), Position = "21" });
-        DoctorsTwo.Add(new Doctor { Name = "Склярова В.О.", Id = Guid.NewGuid().ToString(), Position = "22" });
-        DoctorsTwo.Add(new Doctor { Name = "Хестанова Н.З.", Id = Guid.NewGuid().ToString(), Position = "23" });
-        DoctorsTwo.Add(new Doctor { Name = "Шабут А.М.", Id = Guid.NewGuid().ToString(), Position = "24" });
     }
 
     Extubation? ex = new();
 
     DateTime? date; //дата
     TimeSpan? time; //время
-
-    public List<Doctor> DoctorsTwo = new();
-    Func<Doctor, string> converterTwo = d => d?.Name;
 
 }

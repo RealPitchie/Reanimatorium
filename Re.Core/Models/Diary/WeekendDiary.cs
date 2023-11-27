@@ -10,7 +10,8 @@ namespace Re.Core.Models
 {
     public class WeekendDiary
     {
-        public Doctor Doctor { get; set; }
+        public string[] Doctor { get; set; } //доктор
+        public string[] DoctorTwo { get; set; } //доктор 2
         public string Patient { get; set; } //пациент
         public string Age { get; set; } //возраст
         public string Day { get; set; } //сутки

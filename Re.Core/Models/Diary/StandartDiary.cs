@@ -65,7 +65,7 @@ namespace Re.Core.Models
         public string Laboratory4 { get; set; }
         public string Laboratory5 { get; set; }
         public string Laboratory6 { get; set; }
-        public Doctor Doctor { get; set; }
+        public string[] Doctor { get; set; } //доктор
     }
 
 }

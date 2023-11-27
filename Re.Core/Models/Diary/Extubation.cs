@@ -16,6 +16,6 @@ namespace Re.Core.Models
         public string Sat { get; set; } //Sat
         public string Ad { get; set; } //АД
         public string Chss { get; set; } //ЧСС
-        public Doctor Doctor { get; set; }
+        public string[] Doctor { get; set; } //доктор
     }
 }

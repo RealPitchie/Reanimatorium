@@ -27,18 +27,18 @@
             <MudGrid>
                 <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>ОБХОД В СОСТАВЕ: </MudText></MudItem>
                 <MudItem Style="width: 34%;">
-                    <MudSelect Value="weekend.Doctor" Dense="true" T="Doctor" ToStringFunc="@converter" Disabled="!Dense_Radio">
-                        @foreach (var doc in Doctors)
+                    <MudSelect T="string" Dense="true" AnchorOrigin="Origin.BottomCenter" Disabled="!Dense_Radio">
+                        @foreach (var item in Doctor.OrderBy(x => x))
                         {
-                            <MudSelectItem Value="@doc" />
+                            <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
                 <MudItem Style="width: 34%;">
-                    <MudSelect Value="weekend.Doctor" Dense="true" T="Doctor" ToStringFunc="@converter" Disabled="!Dense_Radio">
-                        @foreach (var doc in Doctors)
+                    <MudSelect T="string" Dense="true" AnchorOrigin="Origin.BottomCenter" Disabled="!Dense_Radio">
+                        @foreach (var item in Doctor.OrderBy(x => x))
                         {
-                            <MudSelectItem Value="@doc" />
+                            <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
@@ -824,10 +824,10 @@
             <MudGrid>
                 <MudItem Style="width: 25%;" Class="d-flex flex-column justify-end"><MudText>Зам.глав.врача по АиР: </MudText></MudItem>
                 <MudItem Style="width: 74%;">
-                    <MudSelect Value="weekend.Doctor" Dense="true" T="Doctor" ToStringFunc="@converterTwo" Disabled="!Dense_Radio">
-                        @foreach (var doc in DoctorsTwo)
+                    <MudSelect T="string" Dense="true" AnchorOrigin="Origin.BottomCenter" Disabled="!Dense_Radio">
+                        @foreach (var item in DoctorTwo.OrderBy(x => x))
                         {
-                            <MudSelectItem Value="@doc" />
+                            <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
@@ -835,10 +835,10 @@
             <MudGrid>
                 <MudItem Style="width: 25%;" Class="d-flex flex-column justify-end"><MudText>Заведующий отделением: </MudText></MudItem>
                 <MudItem Style="width: 74%;">
-                    <MudSelect Value="weekend.Doctor" Dense="true" T="Doctor" ToStringFunc="@converterTwo" Disabled="!Dense_Radio">
-                        @foreach (var doc in DoctorsTwo)
+                    <MudSelect T="string" Dense="true" AnchorOrigin="Origin.BottomCenter" Disabled="!Dense_Radio">
+                        @foreach (var item in DoctorTwo.OrderBy(x => x))
                         {
-                            <MudSelectItem Value="@doc" />
+                            <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
@@ -846,10 +846,10 @@
             <MudGrid>
                 <MudItem Style="width: 25%;" Class="d-flex flex-column justify-end"><MudText>Врач анестезиолог-реаниматолог: </MudText></MudItem>
                 <MudItem Style="width: 74%;">
-                    <MudSelect Value="weekend.Doctor" Dense="true" T="Doctor" ToStringFunc="@converterTwo">
-                        @foreach (var doc in DoctorsTwo)
+                    <MudSelect T="string" Dense="true" AnchorOrigin="Origin.BottomCenter" Disabled="!Dense_Radio">
+                        @foreach (var item in DoctorTwo.OrderBy(x => x))
                         {
-                            <MudSelectItem Value="@doc" />
+                            <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
@@ -1099,6 +1099,62 @@
             "алиментарной недостаточностью",
             "синдромом эндогенной интоксикации"
        };
+
+    string[] Doctor = new string[]
+        {
+"зав.отд. Розенгарда С.А.",
+"зам. главного врача по анестезиологии-реанимации Глущенко В.А.",
+"Алиевой  А.Э.",
+"Борзых И.С.",
+"Веденина Я.О.",
+"Горохова Л.В.",
+"Груздова М.С.",
+"Гурина М.Н.",
+"Зубайдова М.М.",
+"Ишкараева В.Э.",
+"Караваева А.В.",
+"Кононец Ф.А.",
+"Кремзель Е.Г.",
+"Митрохиной М.В.",
+"Нюхлова Е.С.",
+"Пазюк К.И.",
+"Пастуховой А.А.",
+"Попель И.В.",
+"Раевской О. А.",
+"Сапроновой Т.Н.",
+"Семенова А.Н.",
+"Скляровой В.О.",
+"Хестановой Н.З.",
+"Шабута А.М.",
+"Шкуратова Р.В."
+        };
+    string[] DoctorTwo = new string[]
+    {
+"Розенгард С.А.",
+"Глущенко В.А.",
+"Алиева  А.Э.",
+"Борзых И.С.",
+"Веденин Я.О.",
+"Горохов Л.В.",
+"Груздов М.С.",
+"Гурин М.Н.",
+"Зубайдов М.М.",
+"Ишкараев В.Э.",
+"Караваев А.В.",
+"Кононец Ф.А.",
+"Кремзель Е.Г.",
+"Митрохина М.В.",
+"Нюхлов Е.С.",
+"Пазюк К.И.",
+"Пастухова А.А.",
+"Попель И.В.",
+"Раевская О. А.",
+"Сапронова Т.Н.",
+"Склярова В.О.",
+"Хестанова Н.З.",
+"Шабут А.М."
+    };
+
     string Recommended = "продолжить терапию в условиях ОАРИТ.";
     protected override void OnInitialized()
     {
@@ -1106,57 +1162,6 @@
         date = DateTime.Now; //Дата
         time = DateTime.Now.TimeOfDay; //Время
 
-        /*Список 1*/
-        Doctors.Add(new Doctor { Name = "зав.отд. Розенгарда С.А.", Id = Guid.NewGuid().ToString(), Position = "1" });
-        Doctors.Add(new Doctor { Name = "зам. главного врача по анестезиологии-реанимации Глущенко В.А.", Id = Guid.NewGuid().ToString(), Position = "2" });
-        Doctors.Add(new Doctor { Name = "Алиевой  А.Э.", Id = Guid.NewGuid().ToString(), Position = "3" });
-        Doctors.Add(new Doctor { Name = "Борзых И.С.", Id = Guid.NewGuid().ToString(), Position = "4" });
-        Doctors.Add(new Doctor { Name = "Веденина Я.О.", Id = Guid.NewGuid().ToString(), Position = "5" });
-        Doctors.Add(new Doctor { Name = "Горохова Л.В.", Id = Guid.NewGuid().ToString(), Position = "6" });
-        Doctors.Add(new Doctor { Name = "Груздова М.С.", Id = Guid.NewGuid().ToString(), Position = "7" });
-        Doctors.Add(new Doctor { Name = "Гурина М.Н.", Id = Guid.NewGuid().ToString(), Position = "8" });
-        Doctors.Add(new Doctor { Name = "Зубайдова М.М.", Id = Guid.NewGuid().ToString(), Position = "9" });
-        Doctors.Add(new Doctor { Name = "Ишкараева В.Э.", Id = Guid.NewGuid().ToString(), Position = "10" });
-        Doctors.Add(new Doctor { Name = "Караваева А.В.", Id = Guid.NewGuid().ToString(), Position = "11" });
-        Doctors.Add(new Doctor { Name = "Кононец Ф.А.", Id = Guid.NewGuid().ToString(), Position = "12" });
-        Doctors.Add(new Doctor { Name = "Кремзель Е.Г.", Id = Guid.NewGuid().ToString(), Position = "13" });
-        Doctors.Add(new Doctor { Name = "Митрохиной М.В.", Id = Guid.NewGuid().ToString(), Position = "14" });
-        Doctors.Add(new Doctor { Name = "Нюхлова Е.С.", Id = Guid.NewGuid().ToString(), Position = "15" });
-        Doctors.Add(new Doctor { Name = "Пазюк К.И.", Id = Guid.NewGuid().ToString(), Position = "16" });
-        Doctors.Add(new Doctor { Name = "Пастуховой А.А.", Id = Guid.NewGuid().ToString(), Position = "17" });
-        Doctors.Add(new Doctor { Name = "Попель И.В.", Id = Guid.NewGuid().ToString(), Position = "18" });
-        Doctors.Add(new Doctor { Name = "Раевской О. А.", Id = Guid.NewGuid().ToString(), Position = "19" });
-        Doctors.Add(new Doctor { Name = "Сапроновой Т.Н.", Id = Guid.NewGuid().ToString(), Position = "20" });
-        Doctors.Add(new Doctor { Name = "Семенова А.Н.", Id = Guid.NewGuid().ToString(), Position = "21" });
-        Doctors.Add(new Doctor { Name = "Скляровой В.О.", Id = Guid.NewGuid().ToString(), Position = "22" });
-        Doctors.Add(new Doctor { Name = "Хестановой Н.З.", Id = Guid.NewGuid().ToString(), Position = "23" });
-        Doctors.Add(new Doctor { Name = "Шабута А.М.", Id = Guid.NewGuid().ToString(), Position = "24" });
-        Doctors.Add(new Doctor { Name = "Шкуратова Р.В.", Id = Guid.NewGuid().ToString(), Position = "25" });
-        /*Список 2*/
-        DoctorsTwo.Add(new Doctor { Name = "Розенгард С.А.", Id = Guid.NewGuid().ToString(), Position = "1" });
-        DoctorsTwo.Add(new Doctor { Name = "Глущенко В.А.", Id = Guid.NewGuid().ToString(), Position = "2" });
-        DoctorsTwo.Add(new Doctor { Name = "Алиева  А.Э.", Id = Guid.NewGuid().ToString(), Position = "3" });
-        DoctorsTwo.Add(new Doctor { Name = "Борзых И.С.", Id = Guid.NewGuid().ToString(), Position = "4" });
-        DoctorsTwo.Add(new Doctor { Name = "Веденин Я.О.", Id = Guid.NewGuid().ToString(), Position = "5" });
-        DoctorsTwo.Add(new Doctor { Name = "Горохов Л.В.", Id = Guid.NewGuid().ToString(), Position = "6" });
-        DoctorsTwo.Add(new Doctor { Name = "Груздов М.С.", Id = Guid.NewGuid().ToString(), Position = "7" });
-        DoctorsTwo.Add(new Doctor { Name = "Гурин М.Н.", Id = Guid.NewGuid().ToString(), Position = "8" });
-        DoctorsTwo.Add(new Doctor { Name = "Зубайдов М.М.", Id = Guid.NewGuid().ToString(), Position = "9" });
-        DoctorsTwo.Add(new Doctor { Name = "Ишкараев В.Э.", Id = Guid.NewGuid().ToString(), Position = "10" });
-        DoctorsTwo.Add(new Doctor { Name = "Караваев А.В.", Id = Guid.NewGuid().ToString(), Position = "11" });
-        DoctorsTwo.Add(new Doctor { Name = "Кононец Ф.А.", Id = Guid.NewGuid().ToString(), Position = "12" });
-        DoctorsTwo.Add(new Doctor { Name = "Кремзель Е.Г.", Id = Guid.NewGuid().ToString(), Position = "13" });
-        DoctorsTwo.Add(new Doctor { Name = "Митрохина М.В.", Id = Guid.NewGuid().ToString(), Position = "14" });
-        DoctorsTwo.Add(new Doctor { Name = "Нюхлов Е.С.", Id = Guid.NewGuid().ToString(), Position = "15" });
-        DoctorsTwo.Add(new Doctor { Name = "Пазюк К.И.", Id = Guid.NewGuid().ToString(), Position = "16" });
-        DoctorsTwo.Add(new Doctor { Name = "Пастухова А.А.", Id = Guid.NewGuid().ToString(), Position = "17" });
-        DoctorsTwo.Add(new Doctor { Name = "Попель И.В.", Id = Guid.NewGuid().ToString(), Position = "18" });
-        DoctorsTwo.Add(new Doctor { Name = "Раевская О. А.", Id = Guid.NewGuid().ToString(), Position = "19" });
-        DoctorsTwo.Add(new Doctor { Name = "Сапронова Т.Н.", Id = Guid.NewGuid().ToString(), Position = "20" });
-        DoctorsTwo.Add(new Doctor { Name = "Семенов А.Н.", Id = Guid.NewGuid().ToString(), Position = "21" });
-        DoctorsTwo.Add(new Doctor { Name = "Склярова В.О.", Id = Guid.NewGuid().ToString(), Position = "22" });
-        DoctorsTwo.Add(new Doctor { Name = "Хестанова Н.З.", Id = Guid.NewGuid().ToString(), Position = "23" });
-        DoctorsTwo.Add(new Doctor { Name = "Шабут А.М.", Id = Guid.NewGuid().ToString(), Position = "24" });
     }
     void HandleWithoutNeurologist()
     {
@@ -1169,11 +1174,6 @@
 
     DateTime? date; //дата
     TimeSpan? time; //время
-    public List<Doctor> Doctors = new();
-    Func<Doctor, string> converter = d => d?.Name;
-
-    public List<Doctor> DoctorsTwo = new();
-    Func<Doctor, string> converterTwo = d => d?.Name;
 
     string? robodoc = "ROBODOC";
     private bool SwitchChecked = false;
