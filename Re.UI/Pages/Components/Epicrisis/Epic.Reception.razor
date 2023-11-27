@@ -563,8 +563,8 @@
             <MudStack Row="true">
                 <MudItem xs="3"></MudItem>
             <MudItem xs="6">
-                <MudSelect Label="Врач:" T="string" @bind-Value="re.Doctor">
-                    @foreach (var item in Doctor)
+                    <MudSelect Label="Врач:" @bind-Value="re.Doctor" ToStringFunc="@converter">
+                        @foreach (var item in doctors)
                     {
                         <MudSelectItem Value="@item" />
                     }
@@ -698,31 +698,6 @@
     "кардиотропная терапия",
     "гастропротекция"
 };
-    string[] Doctor = new string[]
-            {   "Розенгард С.А.",
-            "Глущенко В.А.",
-            "Алиева А.Э.",
-            "Борзых И.С.",
-            "Веденин Я.О.",
-            "Горохов Л.В.",
-            "Груздов М. С.",
-            "Гурин М.Н.",
-            "Зубайдов М.М.",
-            "Ишкараев В.Э.",
-            "Караваев А.В.",
-            "Кононец Ф.А.",
-            "Кремзель Е.Г.",
-            "Митрохина М.В.",
-            "Нюхлов Е.С.",
-            "Пазюк К.И.",
-            "Пастухова А.А.",
-            "Попель И.В.",
-            "Раевская О. А.",
-            "Сапронова Т.Н.",
-            "Семенов А.Н.",
-            "Склярова В.О.",
-            "Хестанова Н.З.",
-            "Шабут А.М."};
     string Name = "Приемный статус";
     string[] DeliveredFrom = new string[]
     {
@@ -756,8 +731,8 @@
     };
     string[] Conscience = new string[]
     {
-        "ясное.", "оглушение.","глубокое оглушение.", "сопор.",
-        "кома 1.", "кома 2.", "кома 3.", "остаточные явления седации.","медикаментозная седация."
+        "ясное.","оглушение.","глубокое оглушение.","сопор.",
+        "кома I.","кома II.","кома III.","медикаментозная седация."
     };
     string[] Ramsey = new string[]
     {
@@ -857,16 +832,26 @@
     public ReceptionEpicrisis? re = new();
     DateTime? date;
     TimeSpan? time;
-    string? robodoc = "ROBODOC";
+    string robodoc = "ROBODOC";
     bool IsVashOn = false;
     bool IsIVL = false;
     bool IsDrainage = false;
     bool IsAddition = false;
+    List<Doctor> doctors = new();
+    Func<Doctor, string> converter = d => d?.Name;
 
     protected override void OnInitialized()
     {
         date = DateTime.Now;
         time = DateTime.Now.TimeOfDay;
+        doctors.Add(new Doctor { Name = "Розенгард С.А.", Id = Guid.NewGuid().ToString(), Position = "1" });
+        doctors.Add(new Doctor { Name = "Глущенко В.А.", Id = Guid.NewGuid().ToString(), Position = "2" });
+        doctors.Add(new Doctor { Name = "Алиева  А.Э.", Id = Guid.NewGuid().ToString(), Position = "3" });
+        doctors.Add(new Doctor { Name = "Борзых И.С.", Id = Guid.NewGuid().ToString(), Position = "4" });
+        doctors.Add(new Doctor { Name = "Веденин Я.О.", Id = Guid.NewGuid().ToString(), Position = "5" });
+        doctors.Add(new Doctor { Name = "Горохов Л.В.", Id = Guid.NewGuid().ToString(), Position = "6" });
+        doctors.Add(new Doctor { Name = "Груздов М.С.", Id = Guid.NewGuid().ToString(), Position = "7" });
+
     }
 
     void HandleWithoutIVL()
