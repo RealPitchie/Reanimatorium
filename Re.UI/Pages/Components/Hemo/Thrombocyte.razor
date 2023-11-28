@@ -1,0 +1,205 @@
+﻿@using Re.Core.Models
+@using Re.Core.Models.Hemo;
+@using Re.UI.Data
+
+<MudGrid>
+    <MudPaper Style="margin: 15px 0; margin-top:30px; height: 900px;" Width="1190px">
+        <MudText Style="margin-top:10px; margin-left:20px;" Typo="Typo.h6">@Name</MudText>
+        <MudGrid Style="margin-top:10px; margin-left:20px;">
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Ф.И.О. реципиента</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.FIO" Style="width:980px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>№ карты:</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.Number" Style="width:1050px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Группа крови репициента</MudText></MudItem>
+                <MudItem Style="margin-top:-20px;">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="width:925px">
+                        @foreach (var item in Group)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Фенотип</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.Phenotype" Style="width:1055px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Где определяли резус:</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.Place" Style="width:950px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Показания к гемотрансфузии:</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.Indication" Style="width:890px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Трансфузионный анамнез:</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.Anamnesis" Style="width:915px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Наименование компонента:</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.Component" Style="width:905px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Изготовитель:</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.Mfr" Style="width:1010px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Дата заготовки:</MudText></MudItem>
+                <MudItem><MudDatePicker Style="width:150px; margin-top:-5px;" @bind-Date="zagdate" /></MudItem>
+                <MudItem Style="margin-top:5px;"><MudText>Годна до:</MudText></MudItem>
+                <MudItem> <MudDatePicker Style="width:150px; margin-top:-5px;" @bind-Date="enddate" /></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>N контейнера:</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.NumberCont" Style="width:1010px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Объем:</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.Volume" Style="width:1060px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Код донора:</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.Code" Style="width:1020px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Группа крови донора:</MudText></MudItem>
+                <MudItem Style="margin-top:-20px;">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="width:945px">
+                        @foreach (var item in GroupDonor)
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Реактивы:</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.Reagents" Style="width:1030px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Пробы на совместимость:</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.Compatibility" Lines="2" Style="width:905px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Биологическая проба:</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.BiologicalSample" Style="width:937px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Способ трансфузии:</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.Transfusion" Style="width:953px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Осложнения:</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.Complications" Style="width:1005px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Пробы на совместимость:</MudText></MudItem>
+                <MudGrid Style="margin-top:-20px; margin-left:530px;">
+                    <MudText>АД</MudText>
+                    <MudText Style="margin-left:145px;">ЧСС</MudText>
+                    <MudText Style="margin-left:150px;">Т</MudText>
+                    <MudText Style="margin-left:100px;">Диурез, цвет мочи</MudText>
+                </MudGrid>
+            </MudGrid>
+            <MudGrid Style="margin-left:255px; margin-top:5px;">
+                <MudItem Style="margin-top:5px;"><MudText>перед переливанием</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.AD" Style="width:150px"></MudInput></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.HR" Style="width:150px"></MudInput></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.T" Style="width:150px"></MudInput></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.Diuresis" Style="width:150px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid Style="margin-left:283px;">
+                <MudItem Style="margin-top:5px;"><MudText>через 1 час после</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.ADhafter" Style="width:150px"></MudInput></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.HRhafter" Style="width:150px"></MudInput></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.Thafter" Style="width:150px"></MudInput></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.Diuresishafter" Style="width:150px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid Style="margin-left:275px;">
+                <MudItem Style="margin-top:5px;"><MudText>через 2 часа после</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.AD2hafter" Style="width:150px"></MudInput></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.HR2hafter" Style="width:150px"></MudInput></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.T2hafter" Style="width:150px"></MudInput></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@thr.Diuresis2hafter" Style="width:150px"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem><MudText>Врач</MudText></MudItem>
+                <MudItem>
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="margin-top:-8px; width:1070px;">
+                        @foreach (var item in Doctor.OrderBy(x => x))
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+        </MudGrid>
+    </MudPaper>
+</MudGrid>
+
+@code {
+    string Name = "Трансфузия тромбоцитарного концентрата";
+    string[] Group = new string[]
+    {
+        "0(I) Rh- (отрицательный)",
+        "A(II) Rh- (отрицательный)",
+        "A₂(II) Rh- (отрицательный)",
+        "B(III) Rh- (отрицательный)",
+        "AB(IV) Rh- (отрицательный)",
+        "0(I) Rh+ (положительный)",
+        "A(II) Rh+ (положительный)",
+        "A₂(II) Rh+ (положительный)",
+        "B(III) Rh+ (положительный)",
+        "AB(IV) Rh+ (положительный)"
+    };
+    string[] GroupDonor = new string[]
+    {
+        "0(I) Rh- (отрицательный)",
+        "A(II) Rh- (отрицательный)",
+        "A₂(II) Rh- (отрицательный)",
+        "B(III) Rh- (отрицательный)",
+        "AB(IV) Rh- (отрицательный)",
+        "0(I) Rh+ (положительный)",
+        "A(II) Rh+ (положительный)",
+        "A₂(II) Rh+ (положительный)",
+        "B(III) Rh+ (положительный)",
+        "AB(IV) Rh+ (положительный)"
+    };
+    string[] Doctor = new string[]
+    {
+        "Розенгард С.А.",
+        "Глущенко В.А.",
+        "Алиева А.Э.",
+        "Борзых И.С.",
+        "Веденин Я.О.",
+        "Горохов Л.В.",
+        "Груздов М.С.",
+        "Гурин М.Н.",
+        "Зубайдов М.М.",
+        "Ишкараев В.Э.",
+        "Караваев А.В.",
+        "Кононец Ф.А.",
+        "Кремзель Е.Г,",
+        "Митрохина М.В.",
+        "Нюхлов Е.С.",
+        "Пазюк К.И.",
+        "Пастухова А.А.",
+        "Попель И.В.",
+        "Раевская О.А.",
+        "Сапронова Т.Н.",
+        "Семенов А.Н.",
+        "Склярова В.О.",
+        "Хестанова Н.З.",
+        "Шабут А.М."
+    };
+    //[Parameter]
+    public ThrombocyteProtocol thr = new();
+    DateTime? zagdate; //дата
+    DateTime? enddate;
+}

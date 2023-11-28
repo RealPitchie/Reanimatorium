@@ -1,5 +1,53 @@
-﻿<h3>Hemo.Protocol</h3>
+﻿@using Re.Core.Models
+@using Re.Core.Models.Hemo;
+@using Re.UI.Data
+
+<MudGrid>
+    <MudGrid Style="margin-top:20px; margin-left:20px">
+        <MudRadioGroup @bind-SelectedOption="@SelectedOption" Disabled="Disabled">
+            <MudGrid>
+                <MudRadio Option="@("Erythrocyte")">Эритроциты</MudRadio>
+            </MudGrid>
+            <MudGrid>
+                <MudRadio Option="@("SZP")">СЗП</MudRadio>
+            </MudGrid>
+            <MudGrid>
+                <MudRadio Option="@("Trombocyte")">Тромбоциты</MudRadio>
+            </MudGrid>
+        </MudRadioGroup>
+        <MudGrid Style="margin-top:-80px; margin-left:200px;">
+            <MudItem Style="margin-top:5px;"><MudText>Дата:</MudText></MudItem>
+            <MudItem><MudDatePicker Style="width:150px; margin-top:-5px;" @bind-Date="date" /></MudItem>
+        </MudGrid>
+        <MudGrid Style="margin-left:200px; margin-top:-50px;">
+            <MudItem Style="margin-top:5px;"><MudText>начало:</MudText></MudItem>
+            <MudItem><MudTimePicker Style="width:150px; margin-top:-5px;" @bind-Time="StartTime" /></MudItem>
+            <MudItem Style="margin-top:5px;"><MudText>конец:</MudText></MudItem>
+            <MudItem><MudTimePicker Style="width:150px; margin-top:-5px;" @bind-Time="EndTime" /></MudItem>
+        </MudGrid>
+        @if (SelectedOption == "Erythrocyte")
+        {
+            <Erythrocyte />
+        }
+        else if (SelectedOption == "SZP")
+        {
+            <SZP />
+        }
+        else if (SelectedOption == "Trombocyte")
+        {
+            <Thrombocyte />
+        }
+    </MudGrid>
+</MudGrid>
 
 @code {
-
+    HemoProtocol? hp = new();
+    DateTime? date; //дата
+    TimeSpan? StartTime;
+    TimeSpan? EndTime;
+    protected override void OnInitialized()
+    {
+        date = DateTime.Now; //Дата
+    }
+    string SelectedOption = "Erythrocyte";
 }
