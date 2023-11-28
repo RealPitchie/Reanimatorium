@@ -65,7 +65,72 @@ namespace Re.Core.Models
         public string Laboratory4 { get; set; }
         public string Laboratory5 { get; set; }
         public string Laboratory6 { get; set; }
+        public PiCCO? Picco { get; set; }
+        public PiCCO2? Picco2 { get; set; }
+        public FioTrac? FioTrac { get; set; }
+        public EsCCO? EsCCO { get; set; }
+        public VoLEF? VoLEF { get; set; }
         public string[] Doctor { get; set; } //доктор
     }
-
+    public class PiCCO
+    {
+        public int? CI { get; set; }
+        public int? ITBI { get; set; }
+        public int? CFI { get; set; }
+        public int? SVV { get; set; }
+        public int? SVI { get; set; }
+        public int? ELWI { get; set; }
+        public int? MAP { get; set; }
+        public int? GEDI { get; set; }
+        public int? CVP { get; set; }
+        public int? SVRI { get; set; }
+        public string? Description { get; set; }
+    }
+    public class PiCCO2
+    {
+        public int CI { get; set; }
+        public int PVPI { get; set; }
+        public int CFI { get; set; }
+        public int SVV { get; set; }
+        public int SVI { get; set; }
+        public int ELWI { get; set; }
+        public int MAP { get; set; }
+        public int ScvO2 { get; set; }
+        public int GEDI { get; set; }
+        public int CVP { get; set; }
+        public int SVRI { get; set; }
+        public string Description { get; set; }
+    }
+    public class FioTrac
+    {
+        public int CCO { get; set; }
+        public int SVR { get; set; }
+        public int SVV { get; set; }
+        public int SV { get; set; }
+        public int CVP { get; set; }
+        public string Description { get; set; }
+    }
+    public class EsCCO
+    {
+        public int EsHCB { get; set; }
+        public int EsYO { get; set; }
+        public int EsHCI { get; set; }
+        public int EsIYO { get; set; }
+        public int EsCCC { get; set; }
+        public int EsICCC { get; set; }
+        public string Description { get; set; }
+    }
+    public class VoLEF
+    {
+        public int RHEDV { get; set; }
+        public int PCWP { get; set; }
+        public int RL { get; set; }
+        public int RVEDV { get; set; }
+        public int LHEDV { get; set; }
+        public int PVR { get; set; }
+        public int PAP { get; set; }
+        public int CVP { get; set; }
+        public int RVEF { get; set; }
+        public string Description { get; set; }
+    }
 }
