@@ -1,4 +1,5 @@
-﻿@using Re.Core.Models
+﻿@using Re.Core.Models.Hemo;
+@using Re.Core.Models
 @using Re.UI.Data
 
 <MudGrid>
@@ -11,25 +12,24 @@
     <MudDivider Style="margin:35px 0;"></MudDivider>
     <MudPaper Style="margin: 15px 0;" Height="705px">
         <MudText Style="margin-top:10px" Align="Align.Center" Typo="Typo.h6">@Name</MudText>
-
-            <MudGrid Style="margin-top:10px; margin-left:150px;">
-                <MudGrid>
-                    <MudItem Style="margin-top:5px;"><MudText>Больной(-ая)</MudText></MudItem>
-                    <MudItem><MudInput T="string" Variant="Variant.Text" Text="@ep.FIO" Style="width:750px;"></MudInput></MudItem>
-                </MudGrid>
-                <MudGrid>
-                    <MudItem Style="margin-top:5px;"><MudText>Возраст</MudText></MudItem>
-                    <MudItem><MudInput T="string" Variant="Variant.Text" Text="@ep.Age" Style="width:100px;"></MudInput></MudItem>
-                </MudGrid>
-                <MudGrid>
-                    <MudItem Style="margin-top:5px;"><MudText>История болезни №</MudText></MudItem>
-                    <MudItem><MudInput T="string" Variant="Variant.Text" Text="@ep.Number" Style="width:100px;"></MudInput></MudItem>
-                </MudGrid>
-                <MudGrid>
-                    <MudItem Style="margin-top:5px;"><MudText>Группа крови и Rh-принадлежность:</MudText></MudItem>
-                    <MudItem Style="margin-top:-20px;">
-                        <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="width:573px;">
-                            @foreach (var item in GroupRh)
+        <MudGrid Style="margin-top:10px; margin-left:150px;">
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Больной(-ая)</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@ep.FIO" Style="width:750px;"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Возраст</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@ep.Age" Style="width:100px;"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>История болезни №</MudText></MudItem>
+                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@ep.Number" Style="width:100px;"></MudInput></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="margin-top:5px;"><MudText>Группа крови и Rh-принадлежность:</MudText></MudItem>
+                <MudItem Style="margin-top:-20px;">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="width:573px;">
+                        @foreach (var item in GroupRh)
                         {
                             <MudSelectItem Value="@item" />
                         }
