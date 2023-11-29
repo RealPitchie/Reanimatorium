@@ -1,5 +1,85 @@
-﻿<h3>Epic.RoentgenKT.AbdominalCavity</h3>
+﻿@using Re.Core.Models.Epicrisis;
+@using Re.Core.Models;
+<MudText style="margin-top: 15px; font-weight: bolder;">
+    @date.Value.Date.ToString("dd.MM.yyyy") &nbsp; &nbsp;&nbsp;&nbsp; @string.Format("{0}:{1}", time.Value.Hours.ToString("D2"),time.Value.Minutes.ToString("D2"))
+</MudText>
+<MudPaper Style="padding: 20px; margin: 15px 0">
+    <MudText Align="Align.Center" Typo="Typo.h6">Эпикриз на рентгенологическое исследование брюшной полости</MudText>
+    <MudText Typo="Typo.body1" Style="margin-top: 1rem">С целью: </MudText>
+    <MudStack Spacing="1">
+        <MudSwitch @bind-Checked="@acRoentgen.AllowPostoperativeAnalysis" Color="Color.Primary"
+                   Label="планового послеоперационного исследования" />
+        <MudSwitch @bind-Checked="@acRoentgen.AllowGasAvailable" Color="Color.Primary"
+                   Label="диагностики наличия свободнго газа" />
+        <MudSwitch @bind-Checked="@acRoentgen.AllowPassageRating" Color="Color.Primary"
+                   Label="оценки пассажа рентгенконтрастного вещества по ЖКТ" />
+        <MudSwitch @bind-Checked="@acRoentgen.AllowPositionControl" Color="Color.Primary"
+                   Label="контроля положения рентгенконтрастных элементов" />
+        </MudStack>
+    <MudTextField @bind-Value="acRoentgen.Other" Label="Другое" Lines="4" />
+    <MudStack Row="true">
+        <MudText Class="d-flex flex-column justify-center">Место проведения: </MudText>
+        <MudRadioGroup @bind-SelectedOption="acRoentgen.Location">
+            <MudRadio Option="@("в палате ОАР")" Dense="false" Color="Color.Primary">в палате ОАР</MudRadio>
+            <MudRadio Option="@("в отделении ЛД")" Dense="false" Color="Color.Primary">в отделении ЛД</MudRadio>
+        </MudRadioGroup>
+    </MudStack>
+    <MudStack Row="true">
+        <MudText Class="d-flex flex-column justify-center">В положении: </MudText>
+        <MudRadioGroup @bind-SelectedOption="acRoentgen.LocationPosition">
+            <MudRadio Option="@("сидя")" Dense="false" Color="Color.Primary">сидя</MudRadio>
+            <MudRadio Option="@("лежа")" Dense="false" Color="Color.Primary">лежа</MudRadio>
+            <MudRadio Option="@("латеропозиции")" Dense="false" Color="Color.Primary">латеропозиции</MudRadio>
+        </MudRadioGroup>
+    </MudStack>
+    <MudSelect Label="Врач:" @bind-Value="acRoentgen.Doctor" ToStringFunc="@converter">
+        @foreach (var item in doctors)
+        {
+            <MudSelectItem Value="@item" />
+        }
+    </MudSelect>
+</MudPaper>
 
 @code {
-
+    DateTime? date = DateTime.Now;
+    TimeSpan? time = DateTime.Now.TimeOfDay;
+    AbdominalCavityRoentgen acRoentgen = new();
+    string[] doctorNames = new string[]
+            {   "Розенгард С.А.",
+            "Глущенко В.А.",
+            "Алиева А.Э.",
+            "Борзых И.С.",
+            "Веденин Я.О.",
+            "Горохов Л.В.",
+            "Груздов М. С.",
+            "Гурин М.Н.",
+            "Зубайдов М.М.",
+            "Ишкараев В.Э.",
+            "Караваев А.В.",
+            "Кононец Ф.А.",
+            "Кремзель Е.Г.",
+            "Митрохина М.В.",
+            "Нюхлов Е.С.",
+            "Пазюк К.И.",
+            "Пастухова А.А.",
+            "Попель И.В.",
+            "Раевская О. А.",
+            "Сапронова Т.Н.",
+            "Семенов А.Н.",
+            "Склярова В.О.",
+            "Хестанова Н.З.",
+            "Шабут А.М."};
+    Func<Doctor, string> converter = d => d?.Name;
+    public List<Doctor> doctors = new();
+    void DoctorAdd()
+    {
+        @for (int i = 0; i < doctorNames.Length; i++)
+        {
+            doctors.Add(new Doctor { Name = doctorNames[i], Id = Guid.NewGuid().ToString(), Position = i.ToString() });
+        }
+    }
+    protected override void OnInitialized()
+    {
+        DoctorAdd();
+    }
 }

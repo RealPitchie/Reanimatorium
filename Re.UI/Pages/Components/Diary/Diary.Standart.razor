@@ -1,4 +1,4 @@
-﻿@using Re.Core.Models
+﻿﻿@using Re.Core.Models
 @using Re.UI.Data
 @using System.Diagnostics;
 
@@ -695,7 +695,7 @@
                 <MudItem Style="width: 10%;" Class="d-flex flex-column justify-end"><MudText>ммоль/л.</MudText></MudItem>
             </MudGrid>
 
-             <MudStack Row="true" Style="margin-top: 10px;">
+            <MudStack Row="true" Style="margin-top: 10px;">
                 <MudItem xs="3">
                     <MudText Align="Align.Center">Показатели гемодинамики</MudText>
                     <MudRadioGroup @bind-SelectedOption="Hemodynamic">
@@ -706,10 +706,10 @@
                         <MudRadio Option="@("VoLEF")" Dense="false" Color="Color.Primary">VoLEF</MudRadio>
                     </MudRadioGroup>
                     <MudCheckBox @bind-Checked="@isWatered" UnCheckedColor="Color.Error" Color="Color.Success">
-                    <span>см. водн. ст.</span>
+                        <span>см. водн. ст.</span>
                     </MudCheckBox>
                 </MudItem>
-                @if(Hemodynamic == "PiCCO+")
+                @if (Hemodynamic == "PiCCO+")
                 {
                     <MudItem xs="3">
                         <MudStack Row="true">
@@ -751,13 +751,15 @@
                         <MudStack Row="true">
                             <MudNumericField Label="CVP" HideSpinButtons="true" @bind-Value="standart.Picco.CVP" Min="0" />
                             <MudText Class="d-flex flex-column justify-end">
-                                @if(isWatered){
+                                @if (isWatered)
+                                {
                                     @water
                                 }
-                                @if(!isWatered){
+                                @if (!isWatered)
+                                {
                                     @noWater
                                 }
-                                </MudText>
+                            </MudText>
                         </MudStack>
                         <MudStack Row="true">
                             <MudNumericField Label="SVRI" HideSpinButtons="true" @bind-Value="standart.Picco.SVRI" Min="0" />
@@ -792,12 +794,15 @@
                         <MudStack Row="true">
                             <MudNumericField Label="CVP" HideSpinButtons="true" @bind-Value="standart.FioTrac.CVP" Min="0" />
                             <MudText Class="d-flex flex-column justify-end">
-                                @if(isWatered){
+                                @if (isWatered)
+                                {
                                     @water
                                 }
-                                @if(!isWatered){
+                                @if (!isWatered)
+                                {
                                     @noWater
-                                }</MudText>
+                                }
+                            </MudText>
                         </MudStack>
                         <MudInput Style="width: 100%; padding-top: 10px" @bind-Value="standart.FioTrac.Description"></MudInput>
                     </MudItem>
@@ -848,12 +853,15 @@
                         <MudStack Row="true">
                             <MudNumericField Label="CVP" HideSpinButtons="true" @bind-Value="standart.Picco2.CVP" Min="0" />
                             <MudText Class="d-flex flex-column justify-end">
-                                @if(isWatered){
+                                @if (isWatered)
+                                {
                                     @water
                                 }
-                                @if(!isWatered){
+                                @if (!isWatered)
+                                {
                                     @noWater
-                                }</MudText>
+                                }
+                            </MudText>
                         </MudStack>
                         <MudStack Row="true">
                             <MudNumericField Label="SVRI" HideSpinButtons="true" @bind-Value="standart.Picco2.SVRI" Min="0" />
@@ -911,7 +919,7 @@
                             <MudNumericField Label="R/L" HideSpinButtons="true" @bind-Value="standart.VoLEF.RL" Min="0" />
                             <MudText Class="d-flex flex-column justify-end"></MudText>
                         </MudStack>
-                        
+
                     </MudItem>
                     <MudItem xs="3">
                         <MudStack Row="true">
@@ -935,12 +943,15 @@
                         <MudStack Row="true">
                             <MudNumericField Label="CVP" HideSpinButtons="true" @bind-Value="standart.VoLEF.CVP" Min="0" />
                             <MudText Class="d-flex flex-column justify-end">
-                                @if(isWatered){
+                                @if (isWatered)
+                                {
                                     @water
                                 }
-                                @if(!isWatered){
+                                @if (!isWatered)
+                                {
                                     @noWater
-                                }</MudText>
+                                }
+                            </MudText>
                         </MudStack>
                         <MudStack Row="true">
                             <MudNumericField Label="RVEF" HideSpinButtons="true" @bind-Value="standart.VoLEF.RVEF" Min="0" />
@@ -1208,4 +1219,3 @@
     }
 
 }
-
