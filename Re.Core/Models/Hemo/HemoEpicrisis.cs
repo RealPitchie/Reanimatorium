@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Re.Core.Models
+namespace Re.Core.Models.Hemo
 {
-    public class Hemo
+    public class HemoEpicrisis
     {
         public DateOnly Date { get; set; }
         public TimeOnly Time { get; set; }

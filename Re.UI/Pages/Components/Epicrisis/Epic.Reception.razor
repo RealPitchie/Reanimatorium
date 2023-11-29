@@ -1,5 +1,5 @@
 ﻿@using Newtonsoft.Json;
-@using Re.Core.Models
+@using Re.Core.Models;
 @using Re.UI.Data
 @using System.Diagnostics;
 @inject IDialogService DialogService
@@ -15,7 +15,7 @@
                 <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
             </MudItem>
         </MudGrid>
-        <MudPaper Style="padding: 10px; margin: 15px 0">
+        <MudPaper Style="padding: 20px; margin: 15px 0">
             <MudText Align="Align.Center" Typo="Typo.h5">@Name</MudText>
             <MudSelect @bind-Value="re.DeliveredFrom" T="string" Label="Пациент доставлен в реанимационное отделение из" AnchorOrigin="Origin.BottomCenter">
                 @foreach (var item in DeliveredFrom)
@@ -415,7 +415,7 @@
                     <MudText Typo="Typo.subtitle1">уд./мин.</MudText>
                 </MudItem>
 
-                <MudItem xs="5">
+                <MudItem>
                     <MudSelect T="string" Label="Ритмичность:" AnchorOrigin="Origin.BottomCenter" @bind-Value="re.PulseRhythm">
                         @foreach (var item in PulseRhythm)
                         {
@@ -515,7 +515,7 @@
             </MudGrid>
             <MudGrid>
                 <MudItem Class="d-flex flex-column justify-end" Style="padding: 12px;" xs="3">
-                    <MudSwitch @bind-Checked="IsDrainage" Label="По дренажам" Color="Color.Tertiary" />
+                    <MudSwitch @bind-Checked="IsDrainage" Label="По дренажам" Color="Color.Primary" />
                 </MudItem>
                 @if (IsDrainage)
                 {
@@ -527,7 +527,7 @@
             <MudTextField @bind-Value="re.LaboratoryData" Label="Лабораторные данные"/>
             <MudGrid>
                 <MudItem Class="d-flex flex-column justify-end" Style="padding: 12px;" xs="3">
-                    <MudSwitch @bind-Checked="IsAddition" Label="Дополнительно" Color="Color.Tertiary" />
+                    <MudSwitch @bind-Checked="IsAddition" Label="Дополнительно" Color="Color.Primary" />
                 </MudItem>
                 @if (IsAddition)
                 {
@@ -563,8 +563,8 @@
             <MudStack Row="true">
                 <MudItem xs="3"></MudItem>
             <MudItem xs="6">
-                <MudSelect Label="Врач:" T="string" @bind-Value="re.Doctor">
-                    @foreach (var item in Doctor)
+                    <MudSelect Label="Врач:" @bind-Value="re.Doctor" ToStringFunc="@converter">
+                        @foreach (var item in doctors)
                     {
                         <MudSelectItem Value="@item" />
                     }
@@ -698,31 +698,6 @@
     "кардиотропная терапия",
     "гастропротекция"
 };
-    string[] Doctor = new string[]
-            {   "Розенгард С.А.",
-            "Глущенко В.А.",
-            "Алиева А.Э.",
-            "Борзых И.С.",
-            "Веденин Я.О.",
-            "Горохов Л.В.",
-            "Груздов М. С.",
-            "Гурин М.Н.",
-            "Зубайдов М.М.",
-            "Ишкараев В.Э.",
-            "Караваев А.В.",
-            "Кононец Ф.А.",
-            "Кремзель Е.Г.",
-            "Митрохина М.В.",
-            "Нюхлов Е.С.",
-            "Пазюк К.И.",
-            "Пастухова А.А.",
-            "Попель И.В.",
-            "Раевская О. А.",
-            "Сапронова Т.Н.",
-            "Семенов А.Н.",
-            "Склярова В.О.",
-            "Хестанова Н.З.",
-            "Шабут А.М."};
     string Name = "Приемный статус";
     string[] DeliveredFrom = new string[]
     {
@@ -756,8 +731,8 @@
     };
     string[] Conscience = new string[]
     {
-        "ясное.", "оглушение.","глубокое оглушение.", "сопор.",
-        "кома 1.", "кома 2.", "кома 3.","медикаментозная седация."
+        "ясное.","оглушение.","глубокое оглушение.","сопор.",
+        "кома I.","кома II.","кома III.","медикаментозная седация."
     };
     string[] Ramsey = new string[]
     {
@@ -799,8 +774,8 @@
             "v.jugularis in. sin.","v.femoralis dext.","v.femoralis sin."},
     };
 
-    string[] InflammationInCatheter = new string[] { "есть.", "нет." };
-    string[] SpontaneousBreathing = new string[] { "эффективно.", "неэффективно." };
+    string[] InflammationInCatheter = new string[] { "нет.", "есть." };
+    string[] SpontaneousBreathing = new string[] { "неэффективно.","эффективно." };
     string[] BreathingThrough = new string[]
     {
         "естественные пути.", "эндотрахеальную трубку.",
@@ -812,12 +787,12 @@
     { "дыхание жесткое.","дыхание везикулярное.", "дыхание пуэрильное." };
     List<string[]> BreathingRate = new List<string[]>()
     {
-        new string[] { "есть,", "нет."},
+        new string[] { "нет.", "есть,"},
         new string[] {"с двух сторон.", "справа.", "слева"},
     };
     List<string[]> Wheezes = new List<string[]>()
     {
-        new string[] { "есть,", "нет."},
+        new string[] { "нет.", "есть,"},
         new string[] {"с двух сторон.", "справа.", "слева"},
         new string[] {"нет.", "сухие", "влажные", "крепитирующие", "проводные"},
     };
@@ -842,7 +817,7 @@
            "желудочковые экстрасистолы.",
            "предсердные экстрасистолы."};
     string[] Abdomen = new string[] { "мягкий", "напряженный" };
-    string[] Pain = new string[] { "есть", "нет" };
+    string[] Pain = new string[] { "нет", "есть" };
     string[] Distension = new string[] { "резко", "умеренно", "незначительно" };
     string[] Peristalsis = new string[] 
     { 
@@ -852,57 +827,187 @@
         new string[] { "влажный,", "сухой,"},
         new string[] {"чистый.", "обложен налетом."},
     };
-    string[] Urine = new string[] { "устойчивая", "неустойчивая" };
+    string[] Urine = new string[] { "светлая.", "темная.", "мутная.", "с примесью крови." };
+    string[] doctorNames = new string[]
+            {   "Розенгард С.А.",
+            "Глущенко В.А.",
+            "Алиева А.Э.",
+            "Борзых И.С.",
+            "Веденин Я.О.",
+            "Горохов Л.В.",
+            "Груздов М. С.",
+            "Гурин М.Н.",
+            "Зубайдов М.М.",
+            "Ишкараев В.Э.",
+            "Караваев А.В.",
+            "Кононец Ф.А.",
+            "Кремзель Е.Г.",
+            "Митрохина М.В.",
+            "Нюхлов Е.С.",
+            "Пазюк К.И.",
+            "Пастухова А.А.",
+            "Попель И.В.",
+            "Раевская О. А.",
+            "Сапронова Т.Н.",
+            "Семенов А.Н.",
+            "Склярова В.О.",
+            "Хестанова Н.З.",
+            "Шабут А.М."};
 
     public ReceptionEpicrisis? re = new();
     DateTime? date;
     TimeSpan? time;
-    string? robodoc = "ROBODOC";
+    string robodoc = "ROBODOC";
     bool IsVashOn = false;
     bool IsIVL = false;
     bool IsDrainage = false;
     bool IsAddition = false;
+    List<Doctor> doctors = new();
+    Func<Doctor, string> converter = d => d?.Name;
+    void DoctorAdd()
+    {
+        @for (int i = 0; i < doctorNames.Length; i++)
+        {
+            doctors.Add(new Doctor { Name = doctorNames[i], Id = Guid.NewGuid().ToString(), Position = i.ToString() });
+        }
+    }
 
     protected override void OnInitialized()
     {
         date = DateTime.Now;
         time = DateTime.Now.TimeOfDay;
+        doctors.Add(new Doctor { Name = "Розенгард С.А.", Id = Guid.NewGuid().ToString(), Position = "1" });
+        doctors.Add(new Doctor { Name = "Глущенко В.А.", Id = Guid.NewGuid().ToString(), Position = "2" });
+        doctors.Add(new Doctor { Name = "Алиева  А.Э.", Id = Guid.NewGuid().ToString(), Position = "3" });
+        doctors.Add(new Doctor { Name = "Борзых И.С.", Id = Guid.NewGuid().ToString(), Position = "4" });
+        doctors.Add(new Doctor { Name = "Веденин Я.О.", Id = Guid.NewGuid().ToString(), Position = "5" });
+        doctors.Add(new Doctor { Name = "Горохов Л.В.", Id = Guid.NewGuid().ToString(), Position = "6" });
+        doctors.Add(new Doctor { Name = "Груздов М.С.", Id = Guid.NewGuid().ToString(), Position = "7" });
+
     }
 
     void HandleWithoutIVL()
     {
+        re.DeliveredFrom = DeliveredFrom[0];
+        re.AVLDueTransportation = AVLDueTransportation[0];
+        re.Complaints = Complaints[0];
+        re.ComplaintText = "SOFA-0.";
+        re.Condition = Condition[2];
+        re.Conscience = Conscience[7];
+        re.Ramsey = Ramsey[7];
+        re.MuscleTone = MuscleTone[0];
+        re.SkinCovers[0] = SkinCovers[0].GetValue(0).ToString();
+        re.SkinCovers[1] = SkinCovers[1].GetValue(0).ToString();
+        re.SkinCovers[2] = SkinCovers[2].GetValue(0).ToString();
+        re.Cyanosis = Cyanosis[0];
+        re.Marbling = Marbling[0];
+        re.PeripheralEdema = PeripheralEdema[0];
+        re.SkinCovers[0] = SkinCovers[0].GetValue(0).ToString();
+        re.VeinsToBeCatheterized[0] = VeinsToBeCatheterized[0].GetValue(0).ToString();
+        re.InflammationInCatheter = InflammationInCatheter[0];
+        re.SpontaneousBreathing = SpontaneousBreathing[1];
+        re.BreathingThrough = BreathingThrough[0];
+        re.BreathingDisorder = BreathingDisorder[0];
+        re.Auscultatory = Auscultatory[0];
+        re.BreathingRate[0] = BreathingRate[0].GetValue(0).ToString();
+        re.Wheezes[0] = Wheezes[0].GetValue(0).ToString();
+        #region WithouAvl Block
+        if(re.RespiratoryRate == 0) re.RespiratoryRate = 16;
+        if (re.OxygenInsufflation == null) re.OxygenInsufflation = OxygenInsufflation[0];
+        if (re.Volume == 0) re.Volume = 5;
+        #endregion
+        re.Hemodynamics = Hemodynamics[0];
+        re.ArtherialPressure[0] = 120;
+        re.ArtherialPressure[1] = 80;
+        re.Pulse = 75;
+        re.PulseRhythm = PulseRhythm[0];
+        re.HeartRate = 75;
+        re.SpO2 = 97;
+        re.Abdomen = Abdomen[0];
+        re.Pain = Pain[0];
+        re.Distension = Distension[1];
+        re.Peristalsis = Peristalsis[2];
+        re.Tongue[0] = Tongue[0].GetValue(0).ToString();
+        re.Tongue[1] = Tongue[1].GetValue(0).ToString();
+        re.Diuresis = 200.0;
+        re.Urine = Urine[0];
+        re.LaboratoryData = "в работе.";
+        re.SeverityOfCondition = $"{conditionList[0]}, {conditionList[1]}, {conditionList[3]}";
+        re.TreatmentPlan = $"{planList[1]}, {planList[2]}, {planList[4]}, {planList[5]}, {planList[7]}, {planList[11]}";
         IsIVL = false;
     }
 
     void HandleWithIVL() 
     {
-        @if(re.RespiratorySupport == null)
+        re.DeliveredFrom = DeliveredFrom[0];
+        re.AVLDueTransportation = AVLDueTransportation[1];
+        re.Complaints = Complaints[2];
+        re.ComplaintText = "SOFA-0.";
+        re.Condition = Condition[2];
+        re.Conscience = Conscience[8];
+        re.Ramsey = Ramsey[5];
+        re.MuscleTone = MuscleTone[0];
+        re.SkinCovers[0] = SkinCovers[0].GetValue(0).ToString();
+        re.SkinCovers[1] = SkinCovers[1].GetValue(0).ToString();
+        re.SkinCovers[2] = SkinCovers[2].GetValue(0).ToString();
+        re.Cyanosis = Cyanosis[0];
+        re.Marbling = Marbling[0];
+        re.PeripheralEdema = PeripheralEdema[0];
+        re.SkinCovers[0] = SkinCovers[0].GetValue(0).ToString();
+        re.VeinsToBeCatheterized[0] = VeinsToBeCatheterized[0].GetValue(0).ToString();
+        re.InflammationInCatheter = InflammationInCatheter[0];
+        re.SpontaneousBreathing = SpontaneousBreathing[1];
+        re.BreathingThrough = BreathingThrough[1];
+        re.BreathingDisorder = BreathingDisorder[1];
+        re.Auscultatory = Auscultatory[0];
+        re.BreathingRate[0] = BreathingRate[0].GetValue(0).ToString();
+        re.Wheezes[0] = Wheezes[0].GetValue(0).ToString();
+        #region AVL Block
+        if (re.RespiratorySupport == null)
             re.RespiratorySupport = RespiratorySupport[1];
 
-        @if(re.Device == null)
+        if (re.Device == null)
             re.Device = Device[1];
 
-        @if(re.Mode == null)
+        if (re.Mode == null)
             re.Mode = Mode[4];
 
-        @if (re.Till == 0)
+        if (re.Till == 0)
             re.Till = 500;
 
-        @if (re.BR == 0)
+        if (re.BR == 0)
             re.BR = 12;
 
-        @if (re.Pinsp == 0)
+        if (re.Pinsp == 0)
             re.Pinsp = 16;
 
-        @if (re.Psupp == 0)
+        if (re.Psupp == 0)
             re.Psupp = 12;
 
-        @if (re.PEEP == 0)
+        if (re.PEEP == 0)
             re.PEEP = 5;
 
-        @if (re.FiO2 == 0)
+        if (re.FiO2 == 0)
             re.FiO2 = 40;
-
+        #endregion
+        re.Hemodynamics = Hemodynamics[0];
+        re.ArtherialPressure[0] = 120;
+        re.ArtherialPressure[1] = 80;
+        re.Pulse = 75;
+        re.PulseRhythm = PulseRhythm[0];
+        re.HeartRate = 75;
+        re.SpO2 = 97;
+        re.Abdomen = Abdomen[0];
+        re.Pain = Pain[0];
+        re.Distension = Distension[1];
+        re.Peristalsis = Peristalsis[2];
+        re.Tongue[0] = Tongue[0].GetValue(0).ToString();
+        re.Tongue[1] = Tongue[1].GetValue(0).ToString();
+        re.Diuresis = 200.0;
+        re.Urine = Urine[0];
+        re.LaboratoryData = "в работе.";
+        re.SeverityOfCondition = $"{conditionList[0]}, {conditionList[1]}, {conditionList[3]}";
+        re.TreatmentPlan = $"{planList[1]}, {planList[2]}, {planList[4]}, {planList[5]}, {planList[6]}, {planList[11]}";
         IsIVL = true;
     }
     

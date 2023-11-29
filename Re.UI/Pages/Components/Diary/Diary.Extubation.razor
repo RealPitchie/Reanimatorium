@@ -1,5 +1,129 @@
-﻿<h3>Экстубация</h3>
+﻿@using Newtonsoft.Json;
+@using Re.Core.Models
+@using Re.UI.Data
+@using System.Diagnostics;
+
+
+<MudGrid>
+    <MudItem>
+        <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
+    </MudItem>
+    <MudItem>
+        <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
+    </MudItem>
+</MudGrid>
+
+<MudGrid>
+    <MudItem xs="8">
+        <MudPaper Style="padding: 10px; margin: 15px 0 0 0; width:150%">
+            <MudGrid>
+                <MudItem Style="width: 22%;" Class="d-flex flex-column justify-end"><MudText>Мед. седация прекращена в </MudText></MudItem>
+                <MudItem Style="width: 76%;">
+                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@ex.MedSedation" />
+                </MudItem>
+            </MudGrid>
+
+
+            <MudGrid>
+                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Мышечный тонус </MudText></MudItem>
+                <MudItem Style="width: 83%;">
+                    <MudTextField T="string" Variant="Variant.Text" Text="@MuscleTone" />
+                </MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="width: 80%;" Class="d-flex flex-column justify-end"><MudText>Удовлетворительная вентеляция в режиме SPONT </MudText></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="width: 80%;" Class="d-flex flex-column justify-end"><MudText>Выполнена экстубация трахеи. Пациент дышит самостоятельно </MudText></MudItem>
+            </MudGrid>
+            <MudGrid>
+                <MudItem Style="width: 30%;" Class="d-flex flex-column justify-end"><MudText>Инсуфляция O2 через носовые канюли -  </MudText></MudItem>
+                <MudItem Style="width: 10%;">
+                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@ex.Insuflation" />
+                </MudItem>
+                <MudItem Style="width: 10%;" Class="d-flex flex-column justify-end"><MudText>л/мин. </MudText></MudItem>
+            </MudGrid>
+
+            <MudGrid>
+                <MudItem Style="width: 8%;" Class="d-flex flex-column justify-end">
+                    <MudText>Sat% - </MudText>
+                </MudItem>
+
+                <MudItem Style="width: 10%;">
+                    <MudTextField T="string" Variant="Variant.Text" Text="@ex.Sat" />
+                </MudItem>
+
+                <MudItem Style="width: 10%;padding-left:70px;" Class="d-flex flex-column justify-end"><MudText>АД - </MudText></MudItem>
+
+                <MudItem Style="width: 12%;">
+                    <MudTextField T="string" Variant="Variant.Text" Text="@ex.Ad" />
+                </MudItem>
+                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>мм рт.ст.</MudText></MudItem>
+                <MudItem Style="width: 6%;" Class="d-flex flex-column justify-end"><MudText>ЧСС - </MudText></MudItem>
+
+                <MudItem Style="width: 12%;">
+                    <MudTextField T="string" Variant="Variant.Text" Text="@ex.Chss" />
+                </MudItem>
+                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>в 1 минуту.</MudText></MudItem>
+            </MudGrid>
+
+            <MudGrid>
+                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Врач АиР: </MudText></MudItem>
+                <MudItem Style="width: 83%;">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
+                        @foreach (var item in Doctor.OrderBy(x => x))
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+
+        </MudPaper>
+    </MudItem>
+</MudGrid>
+
+
 
 @code {
+    string MuscleTone = "удовлетворительный";
+    string[] Doctor = new string[]
+    {
+"Розенгард С.А.",
+"Глущенко В.А.",
+"Алиева  А.Э.",
+"Борзых И.С.",
+"Веденин Я.О.",
+"Горохов Л.В.",
+"Груздов М.С.",
+"Гурин М.Н.",
+"Зубайдов М.М.",
+"Ишкараев В.Э.",
+"Караваев А.В.",
+"Кононец Ф.А.",
+"Кремзель Е.Г.",
+"Митрохина М.В.",
+"Нюхлов Е.С.",
+"Пазюк К.И.",
+"Пастухова А.А.",
+"Попель И.В.",
+"Раевская О. А.",
+"Сапронова Т.Н.",
+"Склярова В.О.",
+"Хестанова Н.З.",
+"Шабут А.М."
+    };
+    protected override void OnInitialized()
+    {
+
+        date = DateTime.Now; //Дата
+        time = DateTime.Now.TimeOfDay; //Время
+
+    }
+
+    Extubation? ex = new();
+
+    DateTime? date; //дата
+    TimeSpan? time; //время
 
 }
