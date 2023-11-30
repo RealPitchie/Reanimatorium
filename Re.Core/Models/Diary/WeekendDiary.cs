@@ -74,5 +74,11 @@ namespace Re.Core.Models
         public string Laboratory5 { get; set; }
         public string Laboratory6 { get; set; }
         public string Recommended { get; set; } //рекомендовано
+        public int Analyses { get; set; } //Анализы
+        public int AnalysesTwo { get; set; } //Анализы
+        public int AnalysesThree { get; set; } //Анализы
+        public int AnalysesFour { get; set; } //Анализы
+        public int AnalysesFive { get; set; } //Анализы
+        public int AnalysesSix { get; set; } //Анализы
     }
 }

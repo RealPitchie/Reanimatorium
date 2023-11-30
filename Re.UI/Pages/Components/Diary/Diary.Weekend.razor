@@ -442,10 +442,7 @@
                 <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>см водн.ст.;</MudText></MudItem>
 
                 <MudItem Style=" padding: 35px 0 0 150px;">
-
                     <MudSwitch @bind-Checked="SwitchChecked6" />
-
-
                 </MudItem>
             </MudGrid>
 
@@ -810,6 +807,116 @@
                 </MudItem>
                 <MudItem Style="width: 10%;" Class="d-flex flex-column justify-end"><MudText>ммоль/л.</MudText></MudItem>
             </MudGrid>
+
+            <MudGrid>
+                <MudItem xs="3">
+                    <MudStack Row="true">
+                        <MudIconButton Variant="Variant.Filled" Icon="@Icons.Material.Filled.Delete"
+                                       OnClick="Delete" Disabled="!SwitchChecked10" />
+                        <MudButton Variant="Variant.Filled" OnClick="Khs" Disabled="!SwitchChecked10">
+                            <MudText Typo="Typo.subtitle1">КЩС >></MudText>
+                        </MudButton>
+                        <MudButton Variant="Variant.Filled" OnClick="Electrolytes" Disabled="!SwitchChecked10">
+                            Электролиты >>
+                        </MudButton>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="3">
+                    <MudStack>
+                        <MudStack Row="true">
+                            <MudSelect @ref="select1" T="string" ValueChanged="() => HandleChange(select1.Text, select1)" Disabled="!SwitchChecked10">
+                                @foreach (var item in selectValues.Keys)
+                                {
+                                    <MudSelectItem Value="@item" />
+                                }
+                            </MudSelect>
+                            <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.Analyses" Disabled="!SwitchChecked10" />
+                            <MudText Class="d-flex flex-column justify-end">
+                                @(select1.Text != null ?
+                                    selectValues[select1.Text] : "")
+                            </MudText>
+                        </MudStack>
+                        <MudStack Row="true">
+                            <MudSelect @ref="select2" T="string" ValueChanged="() => HandleChange(select2.Text, select2)" Disabled="!SwitchChecked10">
+                                @foreach (var item in selectValues.Keys)
+                                {
+                                    <MudSelectItem Value="@item" />
+                                }
+                            </MudSelect>
+                            <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.AnalysesTwo" Disabled="!SwitchChecked10" />
+
+                            <MudText Class="d-flex flex-column justify-end">
+                                @(select2.Text != null ?
+                                    selectValues[select2.Text] : "")
+                            </MudText>
+                        </MudStack>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="3">
+                    <MudStack>
+                        <MudStack Row="true">
+                            <MudSelect @ref="select3" T="string" ValueChanged="() => HandleChange(select3.Text, select3)" Disabled="!SwitchChecked10">
+                                @foreach (var item in selectValues.Keys)
+                                {
+                                    <MudSelectItem Value="@item" />
+                                }
+                            </MudSelect>
+                            <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.AnalysesThree" Disabled="!SwitchChecked10" />
+
+                            <MudText Class="d-flex flex-column justify-end">
+                                @(select3.Text != null ?
+                                    selectValues[select3.Text] : "")
+                            </MudText>
+                        </MudStack>
+                        <MudStack Row="true">
+                            <MudSelect @ref="select4" T="string" ValueChanged="() => HandleChange(select4.Text, select4)" Disabled="!SwitchChecked10">
+                                @foreach (var item in selectValues.Keys)
+                                {
+                                    <MudSelectItem Value="@item" />
+                                }
+                            </MudSelect>
+                            <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.AnalysesFour" Disabled="!SwitchChecked10" />
+
+                            <MudText Class="d-flex flex-column justify-end">
+                                @(select4.Text != null ?
+                                    selectValues[select4.Text] : "")
+                            </MudText>
+                        </MudStack>
+                    </MudStack>
+                </MudItem>
+                <MudItem xs="3">
+                    <MudStack>
+                        <MudStack Row="true">
+                            <MudSelect @ref="select5" T="string" ValueChanged="() => HandleChange(select5.Text, select5)" Disabled="!SwitchChecked10">
+                                @foreach (var item in selectValues.Keys)
+                                {
+                                    <MudSelectItem Value="@item" />
+                                }
+                            </MudSelect>
+                            <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.AnalysesFive" Disabled="!SwitchChecked10" />
+
+                            <MudText Class="d-flex flex-column justify-end">
+                                @(select5.Text != null ?
+                                    selectValues[select5.Text] : "")
+                            </MudText>
+                        </MudStack>
+                        <MudStack Row="true">
+                            <MudSelect Disabled="isDisabled || !SwitchChecked10" @ref="select6" T="string" ValueChanged="() => HandleChange(select6.Text, select6)">
+                                @foreach (var item in selectValues.Keys)
+                                {
+                                    <MudSelectItem Value="@item" />
+                                }
+                            </MudSelect>
+                            <MudNumericField Disabled="isDisabled || !SwitchChecked10" HideSpinButtons="true" Min="0" @bind-Value="@weekend.AnalysesSix" />
+                            <MudText Class="d-flex flex-column justify-end">
+                                @(select6.Text != null ?
+                                    selectValues[select6.Text] : "")
+                            </MudText>
+                        </MudStack>
+                    </MudStack>
+                </MudItem>
+            </MudGrid>
+
 
             <MudGrid>
                 <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Рекомендовано: </MudText></MudItem>
@@ -1239,5 +1346,92 @@
 
     private bool Checkbox = false;
     public bool Dense_Radio { get; set; } = true;
+    Dictionary<string, string> selectValues = new Dictionary<string, string>()
+    {
+        {"pH –", " ; "},
+        {"Glu –", "ммоль/л"},
+        {"pCO₂ – ", "мм.рт.ст."},
+        {"pO₂ –", "мм.рт.ст."},
+        {"ABE –", "ммоль/л"},
+        {"SBE –", "ммоль/л"},
+        {"HCO₃̄ – ", "ммоль/л"},
+        {"K⁺ –", "ммоль/л"},
+        {"Na⁺–", "ммоль/л"},
+        {"Ca²⁺ –", "ммоль/л"},
+        {"Cl⁻–", "ммоль/л"},
+        {"Mg²⁺ –", "ммоль/л"},
+        {"mOsm –", "ммоль/кг"},
+        {"МНО –", ";"},
+        {"ПТИ –", ";"},
+        {"АЧТВ –", "сек.;"},
+        {"иАЧТВ –", ";"},
+        {"ПТ –", "%;"},
+        {"ТВ -", "сек.;"},
+        {"Д-димер –", "нг/мл;"},
+        {"п/я -", "%;"},
+        {"с/я -", "%;"},
+        {"PCT –", "нг/мл"},
+        {"СРБ -", "мг/л"},
+        {"Lac -", "ммоль/л."},
+        {"ЛДГ -", "Ед/л;"},
+        {"Troponin-T –", "нг/мл;"},
+        {"Troponin-I –", "нг/мл;"},
+        {"КФК-МB –", "нг/мл;"}
+    };
+    bool isDisabled = false;
+    MudSelect<string> select1 = new();
+    MudSelect<string> select2 = new();
+    MudSelect<string> select3 = new();
+    MudSelect<string> select4 = new();
+    MudSelect<string> select5 = new();
+    MudSelect<string> select6 = new();
+
+    void Khs() //КЩС
+    {
+        string key1 = selectValues.FirstOrDefault(x => x.Key == "pO₂ –").Key;
+        select1.SelectedValues = new List<string>() { key1 };
+        string key2 = selectValues.FirstOrDefault(x => x.Key == "ABE –").Key;
+        select2.SelectedValues = new List<string>() { key2 };
+        string key3 = selectValues.FirstOrDefault(x => x.Key == "pO₂ –").Key;
+        select3.SelectedValues = new List<string>() { key3 };
+        string key4 = selectValues.FirstOrDefault(x => x.Key == "HCO₃̄ – ").Key;
+        select4.SelectedValues = new List<string>() { key4 };
+        string key5 = selectValues.FirstOrDefault(x => x.Key == "pH –").Key;
+        select5.SelectedValues = new List<string>() { key5 };
+        var key6 = selectValues.FirstOrDefault(x => x.Key == "Lac -").Key;
+        select6.SelectedValues = new List<string>() { key6 };
+        isDisabled = false;
+    }
+    void Electrolytes() //Электролиты
+    {
+        string key1 = selectValues.FirstOrDefault(x => x.Key == "K⁺ –").Key;
+        select1.SelectedValues = new List<string>() { key1 };
+        string key2 = selectValues.FirstOrDefault(x => x.Key == "Cl⁻–").Key;
+        select2.SelectedValues = new List<string>() { key2 };
+        string key3 = selectValues.FirstOrDefault(x => x.Key == "Na⁺–").Key;
+        select3.SelectedValues = new List<string>() { key3 };
+        string key4 = selectValues.FirstOrDefault(x => x.Key == "Lac -").Key;
+        select4.SelectedValues = new List<string>() { key4 };
+        string key5 = selectValues.FirstOrDefault(x => x.Key == "Ca²⁺ –").Key;
+        select5.SelectedValues = new List<string>() { key5 };
+        select6.SelectedValues = Enumerable.Empty<string>();
+        isDisabled = true;
+    }
+    void Delete() //Очищение
+    {
+        select1.SelectedValues = Enumerable.Empty<string>();
+        select2.SelectedValues = Enumerable.Empty<string>();
+        select3.SelectedValues = Enumerable.Empty<string>();
+        select4.SelectedValues = Enumerable.Empty<string>();
+        select5.SelectedValues = Enumerable.Empty<string>();
+        select6.SelectedValues = Enumerable.Empty<string>();
+    }
+
+    void HandleChange(string changedSelect, MudSelect<string> select)
+    {
+        var change = selectValues.FirstOrDefault(x => x.Key == changedSelect).Key;
+        select.SelectedValues = new List<string>() { change };
+    }
 }
+
 
