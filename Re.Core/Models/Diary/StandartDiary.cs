@@ -71,6 +71,12 @@ namespace Re.Core.Models
         public FioTrac? FioTrac { get; set; }
         public EsCCO? EsCCO { get; set; }
         public VoLEF? VoLEF { get; set; }
+        public int Analyses { get; set; } //Анализы
+        public int AnalysesTwo { get; set; } //Анализы
+        public int AnalysesThree { get; set; } //Анализы
+        public int AnalysesFour { get; set; } //Анализы
+        public int AnalysesFive { get; set; } //Анализы
+        public int AnalysesSix { get; set; } //Анализы
     }
     public class PiCCO
     {
