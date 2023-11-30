@@ -917,6 +917,274 @@
                 </MudItem>
             </MudGrid>
 
+            <MudGrid>
+                <MudItem Style="padding-top:40px;">
+                    <MudStack Row="true">
+                        <MudText>Биохимия: </MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem Style="width:30%;">
+                    <MudStack Row="true">
+                        <MudNumericField Label="АЛТ -" HideSpinButtons="true" @bind-Value="weekend.BioChemistry" Disabled="!SwitchChecked12" />
+                        <MudText Class="d-flex flex-column justify-end">Ед/л;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="АСТ -" HideSpinButtons="true" @bind-Value="weekend.BioChemistry2" Disabled="!SwitchChecked12" />
+                        <MudText Class="d-flex flex-column justify-end">Ед/л;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="Креатинин -" HideSpinButtons="true" @bind-Value="weekend.BioChemistry3" Disabled="!SwitchChecked12" />
+                        <MudText Class="d-flex flex-column justify-end">мкмоль/л;</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem>
+                    <MudStack Row="true">
+                        <MudNumericField Label="Мочевина -" HideSpinButtons="true" @bind-Value="weekend.BioChemistry4" Disabled="!SwitchChecked12" />
+                        <MudText Class="d-flex flex-column justify-end">ммоль/л;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="О.бил.н. -" HideSpinButtons="true" @bind-Value="weekend.BioChemistry5" Disabled="!SwitchChecked12" />
+                        <MudText Class=" d-flex flex-column justify-end">мкмоль/л;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="О.белок. -" HideSpinButtons="true" @bind-Value="weekend.BioChemistry6" Disabled="!SwitchChecked12" />
+                        <MudText Class="d-flex flex-column justify-end">г/л;</MudText>
+                    </MudStack>
+                </MudItem>
+
+                <MudItem>
+                    <MudStack Row="true">
+                        <MudNumericField Label="Альбумин -" HideSpinButtons="true" @bind-Value="weekend.BioChemistry7" Disabled="!SwitchChecked12" />
+                        <MudText Class="d-flex flex-column justify-end">г/л;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="Амилаза -" HideSpinButtons="true" @bind-Value="weekend.BioChemistry8" Disabled="!SwitchChecked12" />
+                        <MudText Class=" d-flex flex-column justify-end">Ед/л;</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem Style=" padding: 35px 0 0 47px;">
+                    <MudSwitch @bind-Checked="SwitchChecked12" />
+                </MudItem>
+            </MudGrid>
+
+            <MudGrid>
+                <MudItem Style="padding-top:40px;">
+                    <MudStack Row="true">
+                        <MudText>Гемостаз: </MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem Style="width:25%;">
+                    <MudStack Row="true">
+                        <MudNumericField Label="ПВ -" HideSpinButtons="true" @bind-Value="weekend.Hemostasis" Disabled="!SwitchChecked14" />
+                        <MudText Class="d-flex flex-column justify-end">сек.;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                            <MudSelect @ref="select7" T="string" ValueChanged="() => HandleChange(select7.Text, select7)" Disabled="!SwitchChecked14">
+                                @foreach (var item in selectValues.Keys)
+                                {
+                                    <MudSelectItem Value="@item" />
+                                }
+                            </MudSelect>
+                            <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.Analyses1" Disabled="!SwitchChecked14" />
+                            <MudText Class="d-flex flex-column justify-end">
+                                @(select7.Text != null ?
+                                    selectValues[select7.Text] : "")
+                            </MudText>
+                        </MudStack>
+                </MudItem>
+                <MudItem Style="width:25%;">
+                    <MudStack Row="true">
+                        <MudNumericField Label="АПТВ -" HideSpinButtons="true" @bind-Value="weekend.Hemostasis2" Disabled="!SwitchChecked14" />
+                        <MudText Class="d-flex flex-column justify-end">сек.;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudSelect @ref="select8" T="string" ValueChanged="() => HandleChange(select8.Text, select8)" Disabled="!SwitchChecked14">
+                            @foreach (var item in selectValues.Keys)
+                            {
+                                <MudSelectItem Value="@item" />
+                            }
+                        </MudSelect>
+                        <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.Analyses2" Disabled="!SwitchChecked14" />
+                        <MudText Class="d-flex flex-column justify-end">
+                            @(select8.Text != null ?
+                                selectValues[select8.Text] : "")
+                        </MudText>
+                    </MudStack>
+                </MudItem>
+
+                <MudItem Style="width:25%;">
+                    <MudStack Row="true">
+                        <MudNumericField HideSpinButtons="true" @bind-Value="weekend.Hemostasis3" Disabled="!SwitchChecked14" />
+                        <MudText Class="d-flex flex-column justify-end">;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudSelect @ref="select9" T="string" ValueChanged="() => HandleChange(select9.Text, select9)" Disabled="!SwitchChecked14">
+                            @foreach (var item in selectValues.Keys)
+                            {
+                                <MudSelectItem Value="@item" />
+                            }
+                        </MudSelect>
+                        <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.Analyses3" Disabled="!SwitchChecked14" />
+                        <MudText Class="d-flex flex-column justify-end">
+                            @(select9.Text != null ?
+                                selectValues[select9.Text] : "")
+                        </MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem Style=" padding: 35px 0 0 110px;">
+                    <MudSwitch @bind-Checked="SwitchChecked14" />
+                </MudItem>
+            </MudGrid>
+
+            <MudGrid>
+                <MudItem Style="padding-top:40px; padding-left:50px;">
+                    <MudStack Row="true">
+                        <MudText>КЩС: </MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem Style="width:30%;">
+                    <MudStack Row="true">
+                        <MudNumericField Label="pH -" HideSpinButtons="true" @bind-Value="weekend.Kshs" Disabled="!SwitchChecked13" />
+                        <MudText Class="d-flex flex-column justify-end">;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="HCO₃̄ –" HideSpinButtons="true" @bind-Value="weekend.Kshs2" Disabled="!SwitchChecked13" />
+                        <MudText Class="d-flex flex-column justify-end">;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="K⁺ –" HideSpinButtons="true" @bind-Value="weekend.Kshs3" Disabled="!SwitchChecked13" />
+                        <MudText Class="d-flex flex-column justify-end">ммоль/л;</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem>
+                    <MudStack Row="true">
+                        <MudNumericField Label="PaO₂ –" HideSpinButtons="true" @bind-Value="weekend.Kshs4" Disabled="!SwitchChecked13" />
+                        <MudText Class="d-flex flex-column justify-end">мм рт.ст;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="ABE -" HideSpinButtons="true" @bind-Value="weekend.Kshs5" Disabled="!SwitchChecked13" />
+                        <MudText Class=" d-flex flex-column justify-end">ммоль/л;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="Na⁺–" HideSpinButtons="true" @bind-Value="weekend.Kshs6" Disabled="!SwitchChecked13" />
+                        <MudText Class="d-flex flex-column justify-end">ммоль/л;</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem>
+                    <MudStack Row="true">
+                        <MudNumericField Label="PaСO₂ –" HideSpinButtons="true" @bind-Value="weekend.Kshs7" Disabled="!SwitchChecked13" />
+                        <MudText Class="d-flex flex-column justify-end">мм рт.ст;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="Cl⁻–" HideSpinButtons="true" @bind-Value="weekend.Kshs8" Disabled="!SwitchChecked13" />
+                        <MudText Class=" d-flex flex-column justify-end">ммоль/л;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="Ca²⁺ –" HideSpinButtons="true" @bind-Value="weekend.Kshs9" Disabled="!SwitchChecked13" />
+                        <MudText Class=" d-flex flex-column justify-end">ммоль/л;</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem Style=" padding: 35px 0 0 30px;">
+                    <MudSwitch @bind-Checked="SwitchChecked13" />
+                </MudItem>
+            </MudGrid>
+
+            <MudGrid>
+                <MudItem Style="padding-top:40px;">
+                    <MudStack Row="true">
+                        <MudText>PICCO-тест: </MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem Style="width:30%;">
+                    <MudStack Row="true">
+                        <MudNumericField Label="Cl -" HideSpinButtons="true" @bind-Value="weekend.Picco" Disabled="!SwitchChecked15" />
+                        <MudText Class="d-flex flex-column justify-end">л/мин/м²;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="SVI –" HideSpinButtons="true" @bind-Value="weekend.Picco2" Disabled="!SwitchChecked15" />
+                        <MudText Class="d-flex flex-column justify-end">мл/м²;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="GEDI –" HideSpinButtons="true" @bind-Value="weekend.Picco3" Disabled="!SwitchChecked15" />
+                        <MudText Class="d-flex flex-column justify-end">мл/м²;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="GEDIs –" HideSpinButtons="true" @bind-Value="weekend.Picco3" Disabled="!SwitchChecked15" />
+                        <MudText Class="d-flex flex-column justify-end">мл/м;</MudText>
+                    </MudStack>
+                    @if (!isPicco)
+                    {
+                        <MudStack Row="true">
+                            <MudNumericField Label="ITBI –" HideSpinButtons="true" @bind-Value="weekend.Picco4" Disabled="!SwitchChecked15" />
+                            <MudText Class="d-flex flex-column justify-end">мл/м²;</MudText>
+                        </MudStack>
+                    }
+                    @if (isPicco)
+                    {
+                        <MudStack Row="true">
+                            <MudNumericField Label="PVPI –" HideSpinButtons="true" @bind-Value="weekend.Picco4" Disabled="!SwitchChecked15" />
+                            <MudText Class="d-flex flex-column justify-end">;</MudText>
+                        </MudStack>
+                    }
+                </MudItem>
+                <MudItem>
+                    <MudStack Row="true">
+                        <MudNumericField Label="ELWI –" HideSpinButtons="true" @bind-Value="weekend.Picco5" Disabled="!SwitchChecked15" />
+                        <MudText Class="d-flex flex-column justify-end">мл/кг;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="SVV -" HideSpinButtons="true" @bind-Value="weekend.Picco6" Disabled="!SwitchChecked15" />
+                        <MudText Class=" d-flex flex-column justify-end">%;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="CFI –" HideSpinButtons="true" @bind-Value="weekend.Picco7" Disabled="!SwitchChecked15" />
+                        <MudText Class="d-flex flex-column justify-end">1/мин;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="MAP –" HideSpinButtons="true" @bind-Value="weekend.Picco8" Disabled="!SwitchChecked15" />
+                        <MudText Class="d-flex flex-column justify-end">мм рт.ст;</MudText>
+                    </MudStack>
+                </MudItem>
+                <MudItem>
+                    <MudStack Row="true">
+                        <MudNumericField Label="SVRI –" HideSpinButtons="true" @bind-Value="weekend.Picco9" Disabled="!SwitchChecked15" />
+                        <MudText Class="d-flex flex-column justify-end">дин*с*см⁻⁵ ;</MudText>
+                    </MudStack>
+                    <MudStack Row="true">
+                        <MudNumericField Label="CVP –" HideSpinButtons="true" @bind-Value="weekend.Picco10" Disabled="!SwitchChecked15" />
+                        <MudText Class="d-flex flex-column justify-end">
+                            @if (isWatered)
+                            {
+                                @water
+                            }
+                            @if (!isWatered)
+                            {
+                                @noWater
+                            }
+                        </MudText>
+                    </MudStack>
+                    @if (isPicco)
+                    {
+                        <MudStack Row="true">
+                            <MudNumericField Label="SvO₂ –" HideSpinButtons="true" @bind-Value="weekend.Picco11" Disabled="!SwitchChecked15" />
+                            <MudText Class=" d-flex flex-column justify-end">%;</MudText>
+                        </MudStack>
+                    }
+                </MudItem>
+                <MudItem Style=" padding: 35px 0 0 10px;">
+                    <MudSwitch @bind-Checked="SwitchChecked15" />
+                </MudItem>
+            </MudGrid>
+
+            <MudItem xs="3">
+                <MudCheckBox @bind-Checked="@isWatered" UnCheckedColor="Color.Error" Color="Color.Success">
+                    <span>см. водн. ст.</span>
+                </MudCheckBox>
+
+                <MudCheckBox @bind-Checked="@isPicco" UnCheckedColor="Color.Error" Color="Color.Success">
+                    <span>PICCO2</span>
+                </MudCheckBox>
+            </MudItem>
 
             <MudGrid>
                 <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Рекомендовано: </MudText></MudItem>
@@ -1285,7 +1553,8 @@
     string? robodoc = "ROBODOC";
     bool SwitchChecked, SwitchChecked2, SwitchChecked3, SwitchChecked4,
        SwitchChecked5, SwitchChecked6, SwitchChecked7, SwitchChecked8,
-       SwitchChecked9, SwitchChecked10, SwitchChecked11, SwitchCheckedGCS;
+       SwitchChecked9, SwitchChecked10, SwitchChecked11, SwitchCheckedGCS,
+        SwitchChecked12, SwitchChecked13, SwitchChecked14, SwitchChecked15;
 
     private int selectedValue;
     private int selectedValueTwo;
@@ -1346,6 +1615,15 @@
 
     private bool Checkbox = false;
     public bool Dense_Radio { get; set; } = true;
+
+    bool isWatered;
+    string water = "см.водн.ст";
+    string noWater = "мм.рт.ст.";
+
+    bool isPicco;
+    string picco = "PVPI";
+    string noPicco = "ITBI";
+
     Dictionary<string, string> selectValues = new Dictionary<string, string>()
     {
         {"pH –", " ; "},
@@ -1385,6 +1663,9 @@
     MudSelect<string> select4 = new();
     MudSelect<string> select5 = new();
     MudSelect<string> select6 = new();
+    MudSelect<string> select7 = new();
+    MudSelect<string> select8 = new();
+    MudSelect<string> select9 = new();
 
     void Khs() //КЩС
     {
@@ -1425,6 +1706,9 @@
         select4.SelectedValues = Enumerable.Empty<string>();
         select5.SelectedValues = Enumerable.Empty<string>();
         select6.SelectedValues = Enumerable.Empty<string>();
+        select7.SelectedValues = Enumerable.Empty<string>();
+        select8.SelectedValues = Enumerable.Empty<string>();
+        select9.SelectedValues = Enumerable.Empty<string>();
     }
 
     void HandleChange(string changedSelect, MudSelect<string> select)

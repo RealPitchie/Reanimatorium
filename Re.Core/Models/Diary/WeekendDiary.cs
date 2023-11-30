@@ -80,5 +80,39 @@ namespace Re.Core.Models
         public int AnalysesFour { get; set; } //Анализы
         public int AnalysesFive { get; set; } //Анализы
         public int AnalysesSix { get; set; } //Анализы
+        public string BioChemistry { get; set; } //Биохимия
+        public string BioChemistry2 { get; set; } //Биохимия
+        public string BioChemistry3 { get; set; } //Биохимия
+        public string BioChemistry4 { get; set; } //Биохимия
+        public string BioChemistry5 { get; set; } //Биохимия
+        public string BioChemistry6 { get; set; } //Биохимия
+        public string BioChemistry7 { get; set; } //Биохимия
+        public string BioChemistry8 { get; set; } //Биохимия
+        public string Hemostasis { get; set; } //гемостаз
+        public string Hemostasis2 { get; set; } //гемостаз
+        public string Hemostasis3 { get; set; } //гемостаз
+        public string Kshs { get; set; } //КЩС
+        public string Kshs2 { get; set; } //КЩС
+        public string Kshs3 { get; set; } //КЩС
+        public string Kshs4 { get; set; } //КЩС
+        public string Kshs5 { get; set; } //КЩС
+        public string Kshs6 { get; set; } //КЩС
+        public string Kshs7 { get; set; } //КЩС
+        public string Kshs8 { get; set; } //КЩС
+        public string Kshs9 { get; set; } //КЩС
+        public string Picco { get; set; } //PICCO-тест
+        public string Picco2 { get; set; } //PICCO-тест
+        public string Picco3 { get; set; } //PICCO-тест
+        public string Picco4 { get; set; } //PICCO-тест
+        public string Picco5 { get; set; } //PICCO-тест
+        public string Picco6 { get; set; } //PICCO-тест
+        public string Picco7 { get; set; } //PICCO-тест
+        public string Picco8 { get; set; } //PICCO-тест
+        public string Picco9 { get; set; } //PICCO-тест
+        public string Picco10 { get; set; } //PICCO-тест
+        public string Picco11 { get; set; } //PICCO-тест
+        public int Analyses1 { get; set; } //Анализы
+        public int Analyses2 { get; set; } //Анализы
+        public int Analyses3 { get; set; } //Анализы
     }
 }
