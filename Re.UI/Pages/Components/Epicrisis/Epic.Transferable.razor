@@ -239,6 +239,8 @@
                     <MudField Disabled="true" HelperText="Подпись"></MudField>
                 </MudItem>
             </MudStack>
+            <MudButton OnClick="Submit" FullWidth="true" Variant="Variant.Filled" Color="Color.Primary">Сохранить</MudButton>
+
         </MudPaper>
     </MudItem>
     <MudItem xs="3"></MudItem>
@@ -346,5 +348,9 @@
     void HandleEpidurial()
     {
         tr.Recomended = recomended;
+    }
+    async Task Submit()
+    {
+        var temp = tr;
     }
 }

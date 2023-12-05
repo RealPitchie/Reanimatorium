@@ -10,14 +10,14 @@ namespace Re.Services.Services
 {
     public class ProtocolService : IProtocols
     {
-        Repo _repo;
-        public ProtocolService(Repo repo)
+        private readonly IRepo<StandardProtocol> _repo;
+        public ProtocolService(IRepo<StandardProtocol> repo)
         {
             _repo = repo;
         }
         public async Task<StandardProtocol> SaveProtocolAsync(StandardProtocol protocol)
         {
-            return await _repo.SaveProtocolAsync(protocol);
+            return await _repo.SaveAsync(protocol);
         }
     }
 }

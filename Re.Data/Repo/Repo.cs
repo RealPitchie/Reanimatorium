@@ -6,14 +6,14 @@ using Re.Core.Models;
 
 namespace Re.Data.Repo
 {
-    public class Repo : IRepo
+    public class Repo : IRepo<StandardProtocol>
     {
         DataContext _context;
         public Repo(DataContext context)
         {
             _context = context;
         }
-        public async Task<StandardProtocol> SaveProtocolAsync(StandardProtocol protocol)
+        public async Task<StandardProtocol> SaveAsync(StandardProtocol protocol)
         {
             await _context.Protocols.AddAsync(protocol);
             await _context.SaveChangesAsync();
