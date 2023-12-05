@@ -97,6 +97,113 @@
             </MudText>            
         </MudItem>
     </MudGrid>
+
+    <MudGrid>
+        <MudItem xs="10">
+            @* A-section *@
+            
+            <MudGrid  Justify="Justify.FlexStart" Style="align-items: baseline;">
+                <MudItem >
+                    <MudText  Typo="Typo.h3" Style="@($"color:{Colors.BlueGrey.Lighten3};")" > 
+                        A   
+                    </MudText>
+                </MudItem>
+                <MudItem>
+                    <MudText Typo="Typo.body2">
+                        Интубация трахеи ЭТТ № 
+                    </MudText>
+                </MudItem>
+                <MudItem xs="2">
+                    <MudNumericField HideSpinButtons="true" T="int" @bind-Value="slrProtocol.TrachealIntubationNo"  Min="0"></MudNumericField>
+                </MudItem>
+                <MudItem>
+                    <MudText Typo="Typo.body2">
+                        c
+                    </MudText>
+                </MudItem>
+                <MudItem xs="2">
+                    <MudNumericField HideSpinButtons="true" T="int" @bind-Value="slrProtocol.TrachealIntubationTry" Min="0"></MudNumericField>
+                </MudItem>
+                <MudItem>
+                    <MudText Typo="Typo.body2">
+                        попытки
+                    </MudText>
+                </MudItem>
+            </MudGrid>
+            @* A-section end *@
+            <MudDivider style="margin-top: 20px;"></MudDivider>
+            @* B-section *@
+            
+            <MudGrid Justify="Justify.FlexStart" Style="align-items: baseline;">
+                <MudItem >
+                    <MudText Typo="Typo.h3" Style="@($"color:{Colors.BlueGrey.Lighten3};")" > 
+                        B  
+                    </MudText>
+                </MudItem>  
+                <MudItem xs="10" Style="margin: 0">
+                    <MudGrid Justify="Justify.Center" Style="align-items: baseline;">
+                        <MudItem Style="margin: 0">
+                            <MudText>Мешком AMBU</MudText>
+                        </MudItem>
+                        <MudItem Style="margin: 0">
+                            <MudSwitch @bind-Checked="isVentSelected"></MudSwitch>
+                        </MudItem>
+                        <MudItem Style="margin: 0">
+                            <MudText>Аппаратом ИВЛ</MudText>
+                        </MudItem>
+                    </MudGrid> 
+                </MudItem>
+                @if(isVentSelected)
+                {
+                    <MudItem xs="3" Style="padding-top: 0;">
+                        <MudTextField ReadOnly="true" Style="padding-top: 0;" T="string" @bind-Value="ventString"  Typo="Typo.body2">
+                            
+                        </MudTextField>
+                    </MudItem>
+                    <MudItem xs="7" Style="padding-top: 0;">
+                        <MudSelect @bind-Value="slrProtocol.VentilationThrough">
+                            @foreach(var ventThru in ventilations)
+                            {
+                                <MudSelectItem Value="ventThru" />
+                            }
+                        </MudSelect>
+                    </MudItem>
+                }else{
+                    <MudItem>
+                        <MudText Typo="Typo.body2">
+                            Режим VCV, ДО 450 мл; ЧД 10/мин; FiO<sub>2</sub> 100%; ПДКВ см.водн.ст 
+                        </MudText>
+                    </MudItem>
+                }
+                
+                <MudItem xs="1">
+
+                </MudItem>
+                
+
+            </MudGrid>
+            @* B-section end *@
+            <MudDivider style="margin-top: 20px;"></MudDivider>
+            @* C-section *@
+            <MudGrid Justify="Justify.FlexStart" Style="align-items: baseline;">
+                <MudItem >
+                    <MudText Typo="Typo.h3" Style="@($"color:{Colors.BlueGrey.Lighten3};")" > 
+                        C  
+                    </MudText>
+                </MudItem>
+                <MudText Typo="Typo.body2">
+                    Закрытый массаж сердца с частотой 100 компрессий в минуту
+                </MudText>
+            </MudGrid>
+            @* C-section end *@
+        </MudItem>
+        <MudItem xs="2" Style="position: sticky; top: 100px; right: 50px">
+            <MudSwitch Checked="aSectionEnabled" Label="A"></MudSwitch>
+            <MudSwitch Checked="dSectionEnabled" Label="D"></MudSwitch>
+        </MudItem>
+    </MudGrid>
+    
+
     <MudGrid>
         <MudItem xs="6">
             <MudSelect Value="slrProtocol.Doctor" Dense="true" T="Doctor" ToStringFunc="@converter" Label="Врач">
@@ -115,10 +222,11 @@
     DateTime? date = DateTime.Now;
     TimeSpan? time = DateTime.Now.TimeOfDay;
     SLRProtocol slrProtocol = new();
-
+    bool aSectionEnabled, dSectionEnabled, isVentSelected;
+    string ventString = "ИВЛ через";
 
     Func<Doctor,string> converter = d => d?.Name;
- 
+    string SelectedOption = string.Empty;
     protected override void OnInitialized()
     {
         date = DateTime.Now;
@@ -141,4 +249,12 @@
     string[] pupilTypes = new string[] {};
     string[] pupilConditions = new string[] {};
     string[] monitors = new string[] {};
+    string[] ventilations = new string[]
+    {
+        "естественные дыхательные пути",
+        "эндотрахеальную трубку",
+        "ларингеальную маску",
+        "трахеостомическую канюлю",
+        "воздуховод"
+    };
 }

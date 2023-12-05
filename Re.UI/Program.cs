@@ -2,19 +2,22 @@ using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.AspNetCore.Hosting.StaticWebAssets; 
 using MudBlazor.Services;
-using Re.Services.Servises;
-using Re.Services.Servises.Interfaces;
+using Microsoft.EntityFrameworkCore;
+using Re.Data;
 
 var builder = WebApplication.CreateBuilder(args);
-
+var services = builder.Services;
 StaticWebAssetsLoader.UseStaticWebAssets(builder.Environment, builder.Configuration);
 
 // Add services to the container.
-builder.Services.AddRazorPages();
-builder.Services.AddServerSideBlazor(); 
-builder.Services.AddMudServices();
+services.AddRazorPages();
+services.AddServerSideBlazor(); 
+services.AddMudServices();
 
-builder.Services.AddScoped<IDatabaseService, Service>();
+services.AddDbContext<DataContext>(options =>
+    options.UseNpgsql("UserID=postgres;Password=passmein123;Server=localhost;Port=5432;Database=reanim;"), 
+    ServiceLifetime.Transient
+);
 
 var app = builder.Build();
 

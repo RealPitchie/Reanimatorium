@@ -100,6 +100,7 @@ public class EpiduralSpaceProtocol : StandardProtocol
 
 public class CentralVeinIndications
 {
+    public string Id { get; set; }
     public bool AllowVenoseAccess { get; set; }
     public bool AllowInfusionTherapy { get; set; }
     public bool AllowParenteralNutrition { get; set; }
@@ -107,12 +108,14 @@ public class CentralVeinIndications
 }
 public class ArteriaIndications
 {
+    public string Id { get; set; }
     public bool AllowControl { get; set; } //КЩС, что бы это ни было
     public bool AllowPressureMonitoring { get; set; }
     public bool AllowPiccoMonitoring { get; set; }
 }
 public class EpiduralSpaceIndications
 {
+    public string Id { get; set; }
     public bool AllowPostoperativeAnesthesia { get; set; }
     public bool AllowPainSyndromeTreatment { get; set; }
     public bool AllowAcutePancreatitisTreatment { get; set; }
