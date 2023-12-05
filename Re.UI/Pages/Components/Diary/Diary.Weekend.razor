@@ -1228,6 +1228,11 @@
                         }
                     </MudSelect>
                 </MudItem>
+                <MudItem Style="width: 10%;padding-top:20px;">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit">
+                        Отправить
+                    </MudButton>
+                </MudItem>
             </MudGrid>
         </MudPaper>
     </MudItem>
@@ -1537,7 +1542,7 @@
         date = DateTime.Now; //Дата
         time = DateTime.Now.TimeOfDay; //Время
 #pragma warning disable BL0005
-#pragma warning disable CS8604
+
     }
     void HandleWithoutNeurologist()
     {
@@ -1562,6 +1567,7 @@
     private int selectedValueThree;
     private int totalSum = 0;
 
+#nullable disable
     private void HandleSelectionChange(ChangeEventArgs e)
     {
         var newValue = int.Parse(e.Value?.ToString());
@@ -1587,7 +1593,7 @@
 
     private int Num1;
     private int Num2;
-    private string? Result;
+    private string Result;
 
     private void CalculateProduct()
     {
@@ -1596,8 +1602,8 @@
     }
 
     #region Dialog functionality
-    IEnumerable<string>? listCondition;
-    IEnumerable<string>? listTreatmentPlan;
+    IEnumerable<string> listCondition;
+    IEnumerable<string> listTreatmentPlan;
     private DialogOptions dialogOptionsCondition = new();
     private DialogOptions dialogOptionsPlan = new();
     private bool visibleCondition;
@@ -1716,6 +1722,10 @@
     {
         var change = selectValues.FirstOrDefault(x => x.Key == changedSelect).Key;
         select.SelectedValues = new List<string>() { change };
+    }
+    void Submit()
+    {
+        var temp = weekend;
     }
 }
 

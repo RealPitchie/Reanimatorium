@@ -1087,11 +1087,13 @@
                     </MudSelect>
                 </MudItem>
             </MudGrid>
-
+            <MudItem Style="width: 10%;padding-top:20px;">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit">
+                    Отправить
+                </MudButton>
+            </MudItem>
         </MudPaper>
-
     </MudItem>
-
 </MudGrid>
 
 
@@ -1416,5 +1418,9 @@
     {
         var change = selectValues.FirstOrDefault(x => x.Key == changedSelect).Key;
         select.SelectedValues = new List<string>() { change };
+    }
+    void Submit()
+    {
+        var temp = standart;
     }
 }

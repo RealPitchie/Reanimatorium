@@ -106,7 +106,7 @@ namespace Re.Core.Models
         public int GEDI { get; set; }
         public int CVP { get; set; }
         public int SVRI { get; set; }
-#nullable disable
+        #nullable disable
         public string Description { get; set; }
     }
     public class FioTrac
