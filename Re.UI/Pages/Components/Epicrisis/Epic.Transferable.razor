@@ -245,10 +245,9 @@
 </MudGrid>
 
 @code {
-    public string SelectedOption { get; set; }
     DateTime? date;
     TimeSpan? time;
-    Transferable? tr = new();
+    Transferable tr = new();
     string robodoc = "ROBODOC";
     string[] department = new string[]
     {
@@ -317,7 +316,11 @@
             "Хестанова Н.З.",
             "Шабут А.М."};
     public List<Doctor> doctors = new();
-    Func<Doctor, string> converter = d => d?.Name;
+    Func<Doctor, string> converter = d =>
+    {
+        if (d != null) return d.Name;
+        else return " ";
+    };
     void DoctorAdd()
     {
         @for(int i = 0; i < doctorNames.Length; i++)

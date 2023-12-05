@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#nullable disable
 namespace Re.Core.Models.Epicrisis
 {
     public class Roentgen
