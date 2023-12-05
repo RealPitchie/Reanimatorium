@@ -6,6 +6,7 @@ using System.Text;
 using System.Threading.Tasks;
 
 #nullable disable
+
 namespace Re.Core.Models
 {
     public class StandartDiary
@@ -66,6 +67,7 @@ namespace Re.Core.Models
         public string Laboratory5 { get; set; }
         public string Laboratory6 { get; set; }
         public string[] Doctor { get; set; } //доктор
+        #nullable enable
         public PiCCO? Picco { get; set; }
         public PiCCO2? Picco2 { get; set; }
         public FioTrac? FioTrac { get; set; }
@@ -105,6 +107,7 @@ namespace Re.Core.Models
         public int GEDI { get; set; }
         public int CVP { get; set; }
         public int SVRI { get; set; }
+        #nullable disable
         public string Description { get; set; }
     }
     public class FioTrac
