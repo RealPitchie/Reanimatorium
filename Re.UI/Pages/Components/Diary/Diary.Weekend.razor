@@ -979,18 +979,18 @@
                         <MudText Class="d-flex flex-column justify-end">сек.;</MudText>
                     </MudStack>
                     <MudStack Row="true">
-                            <MudSelect @ref="select7" T="string" ValueChanged="() => HandleChange(select7.Text, select7)" Disabled="!SwitchChecked14">
-                                @foreach (var item in selectValues.Keys)
-                                {
-                                    <MudSelectItem Value="@item" />
-                                }
-                            </MudSelect>
-                            <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.Analyses1" Disabled="!SwitchChecked14" />
-                            <MudText Class="d-flex flex-column justify-end">
-                                @(select7.Text != null ?
-                                    selectValues[select7.Text] : "")
-                            </MudText>
-                        </MudStack>
+                        <MudSelect @ref="select7" T="string" ValueChanged="() => HandleChange(select7.Text, select7)" Disabled="!SwitchChecked14">
+                            @foreach (var item in selectValues.Keys)
+                            {
+                                <MudSelectItem Value="@item" />
+                            }
+                        </MudSelect>
+                        <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.Analyses1" Disabled="!SwitchChecked14" />
+                        <MudText Class="d-flex flex-column justify-end">
+                            @(select7.Text != null ?
+                                selectValues[select7.Text] : "")
+                        </MudText>
+                    </MudStack>
                 </MudItem>
                 <MudItem Style="width:25%;">
                     <MudStack Row="true">
@@ -1536,7 +1536,8 @@
 
         date = DateTime.Now; //Дата
         time = DateTime.Now.TimeOfDay; //Время
-
+#pragma warning disable BL0005
+#pragma warning disable CS8604
     }
     void HandleWithoutNeurologist()
     {
@@ -1545,7 +1546,7 @@
             weekend.Neurologist = Neurologist;
     }
 
-    WeekendDiary? weekend = new();
+    WeekendDiary weekend = new();
 
     DateTime? date; //дата
     TimeSpan? time; //время
@@ -1586,7 +1587,7 @@
 
     private int Num1;
     private int Num2;
-    private string Result;
+    private string? Result;
 
     private void CalculateProduct()
     {
@@ -1595,8 +1596,8 @@
     }
 
     #region Dialog functionality
-    IEnumerable<string> listCondition;
-    IEnumerable<string> listTreatmentPlan;
+    IEnumerable<string>? listCondition;
+    IEnumerable<string>? listTreatmentPlan;
     private DialogOptions dialogOptionsCondition = new();
     private DialogOptions dialogOptionsPlan = new();
     private bool visibleCondition;
@@ -1608,7 +1609,7 @@
     void ClearConditionList()
     {
         weekend.SeverityOfCondition = "";
-        listCondition = null;
+        listCondition = null!;
         StateHasChanged();
     }
     #endregion
