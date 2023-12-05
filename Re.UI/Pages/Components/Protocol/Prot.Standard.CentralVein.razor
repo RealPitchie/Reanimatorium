@@ -34,7 +34,7 @@
         @if(Protocol.IsLocalAnesthesyNeeded)
         {
             <MudItem xs="4">
-                <MudSelect Value="Protocol.LocalAnesthesyType" Dense="true" T="string" Label="Выберите препарат" AnchorOrigin="Origin.BottomCenter">
+                <MudSelect @bind-Value="Protocol.LocalAnesthesyType" Dense="true" T="string" Label="Выберите препарат" AnchorOrigin="Origin.BottomCenter">
                     @foreach(var item in Protocol.LocalAnesthesyTypes)
                     {
                         <MudSelectItem Value="@item"/>
@@ -52,7 +52,7 @@
     
     <MudGrid>
         <MudItem>
-            <MudSelect Value="Protocol.VeinToBeCatheterized" Dense="true" HelperText="методом Сельдингера" Style="max-width:250px" T="string" Label="Катетеризирована вена" AnchorOrigin="Origin.BottomCenter">
+            <MudSelect @bind-Value="Protocol.VeinToBeCatheterized" Dense="true" HelperText="методом Сельдингера" Style="max-width:250px" T="string" Label="Катетеризирована вена" AnchorOrigin="Origin.BottomCenter">
             @foreach(var vein in Protocol.VeinsToBeCatheterized)
             {
                 <MudSelectItem Value="@vein"/>
@@ -60,7 +60,7 @@
         </MudSelect>
         </MudItem>
         <MudItem>
-            <MudSelect Value="Protocol.CatheterUsed" Dense="true" Style="max-width:250px" T="string" Label="Катетером" AnchorOrigin="Origin.BottomCenter">
+            <MudSelect @bind-Value="Protocol.CatheterUsed" Dense="true" Style="max-width:250px" T="string" Label="Катетером" AnchorOrigin="Origin.BottomCenter">
                 @foreach(var catheter in Protocol.CathetersUsed)
                 {
                     <MudSelectItem Value="@catheter"/>
@@ -98,8 +98,8 @@
         </MudItem>
     </MudGrid>
     <MudDivider Style="margin: 15px 0"/>
-    <MudTextField T="string" Label="Особенности" Variant="Variant.Text" Text="@Protocol.Features" />
-    <MudTextField T="string" Label="Осложнения" Variant="Variant.Text" Text="@Protocol.Complications" Lines="3" />
+    <MudTextField T="string" Label="Особенности" Variant="Variant.Text" @bind-Value="@Protocol.Features" />
+    <MudTextField T="string" Label="Осложнения" Variant="Variant.Text" @bind-Value="@Protocol.Complications" Lines="3" />
     <MudGrid Justify="Justify.FlexStart" Style="align-items: center;">
         <MudItem>
             <MudSwitch @bind-Checked="@Protocol.IsRgControlNeeded" Color="Color.Primary" 
@@ -119,7 +119,7 @@
     <MudDivider Style="margin: 15px 0"/>
     <MudGrid>
         <MudItem xs="6">
-            <MudSelect Value="Protocol.Doctor" Dense="true" T="Doctor" ToStringFunc="@converter" Label="Врач">
+            <MudSelect @bind-Value="Protocol.Doctor" Dense="true" T="Doctor" ToStringFunc="@converter" Label="Врач">
                 @foreach(var doc in Doctors)
                 {
                     <MudSelectItem Value="@doc" />
@@ -129,8 +129,8 @@
     </MudGrid>
 </MudPaper>
 
-@code{
-    [Parameter]
+@code{ 
+    #nullable disable
     public CentralVeinProtocol Protocol { get; set; }
     public List<Doctor> Doctors = new();
     DateTime? date = DateTime.Now;
@@ -140,6 +140,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        Protocol = new();
         Doctors.Add(new Doctor { Name = "Test Doctor", Id = Guid.NewGuid().ToString(), Position = "Test position" });
     }
 }

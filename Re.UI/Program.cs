@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Hosting.StaticWebAssets;
 using MudBlazor.Services;
 using Microsoft.EntityFrameworkCore;
 using Re.Data;
+using Re.Data.Repo;
+using Re.Services.Services;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -18,6 +20,11 @@ services.AddDbContext<DataContext>(options =>
     options.UseNpgsql("UserID=postgres;Password=passmein123;Server=localhost;Port=5432;Database=reanim;"), 
     ServiceLifetime.Transient
 );
+
+
+services.AddTransient<Repo>();
+services.AddTransient<ProtocolService>();
+
 
 var app = builder.Build();
 

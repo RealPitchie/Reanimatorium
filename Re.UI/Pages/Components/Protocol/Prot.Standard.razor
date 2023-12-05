@@ -13,20 +13,20 @@
 <MudGrid>
     <MudItem xs="8">
         @* протокол центральной вены *@
-        @if(isCentralVein && cvProtocol != null)
+        @if(isCentralVein )
         {
-            <Prot_Standard_CentralVein Protocol="cvProtocol" />
+            <Prot_Standard_CentralVein />
 
         }
         @* протокол артерии *@
-        @if(isArteria && arProtocol != null)
+        @if(isArteria )
         {
-           <Prot_Standard_Arteria Protocol="arProtocol" />
+           <Prot_Standard_Arteria />
         }
         @* протокол эпидурального пространства *@
-        @if(isEpidural && esProtocol != null)
+        @if(isEpidural )
         {
-             <Prot_Standard_Epidural Protocol="esProtocol" />
+             <Prot_Standard_Epidural />
         }
     </MudItem> 
     <MudItem xs="4">
@@ -70,10 +70,7 @@
  
     List<Doctor> Doctors = new();
     DateTime? date;
-    TimeSpan? time;
-    CentralVeinProtocol? cvProtocol;
-    ArteriaProtocol? arProtocol;
-    EpiduralSpaceProtocol? esProtocol;
+    TimeSpan? time; 
 
 
     Func<Doctor,string> converter = d => d?.Name;
@@ -87,36 +84,15 @@
         Doctors.Add(new Doctor { Name = "Test Doctor", Id = Guid.NewGuid().ToString(), Position = "Test position" });
     } 
     void CentralToggled(bool value)
-    {
-       if(value)
-       {
-            if(cvProtocol == null)
-            {
-                cvProtocol = new CentralVeinProtocol();
-            }
-       }
+    { 
        isCentralVein = value;
     }
     void ArteriaToggled(bool value)
-    {
-        if(value)
-        {
-                if(arProtocol == null)
-                {
-                    arProtocol = new ArteriaProtocol();
-                }
-        }
+    { 
         isArteria = value;
     }
     void EpiduralToggled(bool value)
-    {
-        if(value)
-        {
-                if(esProtocol == null)
-                {
-                    esProtocol = new EpiduralSpaceProtocol();
-                }
-        }
+    { 
         isEpidural = value;
     }
     void DateChanged(DateTime? value)
@@ -124,4 +100,5 @@
         date = value;
         StateHasChanged();
     }
+    
 }
