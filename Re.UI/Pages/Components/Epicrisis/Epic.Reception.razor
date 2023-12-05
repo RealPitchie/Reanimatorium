@@ -1,4 +1,5 @@
 ﻿@using Re.Core.Models;
+@using Re.Services.Services;
 @using Re.UI.Data
 @using System.Diagnostics;
 @inject IDialogService DialogService
@@ -574,8 +575,9 @@
                 <MudField Disabled="true" HelperText="Подпись"></MudField>
             </MudItem>
             </MudStack>
-            
+            <MudButton OnClick="Submit" FullWidth="true" Variant="Variant.Filled" Color="Color.Primary">Сохранить</MudButton>
         </MudPaper>
+        
     </MudItem>
     <MudItem xs="3">
         <MudGrid>
@@ -1004,7 +1006,6 @@
         re.TreatmentPlan = $"{planList[1]}, {planList[2]}, {planList[4]}, {planList[5]}, {planList[6]}, {planList[11]}";
         IsIVL = true;
     }
-    
 
     #region Dialog functionality
     IEnumerable<string>? listCondition;
@@ -1030,4 +1031,9 @@
         StateHasChanged();
     }
     #endregion
+
+    // ReceptEpicrisisService reService;
+    async Task Submit(){
+        var temp = re;
+    }
 }

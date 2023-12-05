@@ -1,4 +1,5 @@
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Re.Core.Models;
 
 #nullable disable
@@ -17,8 +18,8 @@ public class DataContext : DbContext
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) 
     { 
         if (!optionsBuilder.IsConfigured) 
-        { 
-            optionsBuilder.UseNpgsql("UserID=postgres;Password=passmein123;Server=localhost;Port=5432;Database=reanim;"); 
+        {
+            optionsBuilder.UseNpgsql("UserID=postgres;Password=passmein123;Server=localhost;Port=5432;Database=reanim;");
         } 
     }
 
@@ -27,4 +28,7 @@ public class DataContext : DbContext
     public DbSet<SLRProtocol> SLRProtocols { get; set; }
     public DbSet<CentralVeinProtocol> CentralVeinProtocols { get; set; }
     public DbSet<ArteriaProtocol> ArteriaProtocols { get; set; }
+
+    //Эпикризы
+    public DbSet<ReceptionEpicrisis> ReceptionEpicrises { get; set; }
 }

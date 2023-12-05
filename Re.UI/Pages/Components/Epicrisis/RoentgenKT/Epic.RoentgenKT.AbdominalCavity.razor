@@ -38,6 +38,8 @@
             <MudSelectItem Value="@item" />
         }
     </MudSelect>
+    <MudButton OnClick="Submit" FullWidth="true" Variant="Variant.Filled" Color="Color.Primary">Сохранить</MudButton>
+
 </MudPaper>
 
 @code {
@@ -85,5 +87,9 @@
     protected override void OnInitialized()
     {
         DoctorAdd();
+    }
+    async Task Submit()
+    {
+        var temp = acRoentgen;
     }
 }

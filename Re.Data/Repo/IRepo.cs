@@ -6,8 +6,8 @@ using Re.Core.Models;
 
 namespace Re.Data.Repo
 {
-    public interface IRepo
+    public interface IRepo<T> where T : class
     {
-        Task<StandardProtocol> SaveProtocolAsync(StandardProtocol protocol);
+        Task<T> SaveAsync(T entity);
     }
 }

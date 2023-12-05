@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Re.Data;
 using Re.Data.Repo;
 using Re.Services.Services;
+using Re.Core.Models;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -22,9 +23,10 @@ services.AddDbContext<DataContext>(options =>
 );
 
 
-services.AddTransient<Repo>();
+services.AddScoped<IRepo<StandardProtocol>, Repo>();
+services.AddScoped<IRepo<ReceptionEpicrisis>, ReceptEpicrisisRepo>();
 services.AddTransient<ProtocolService>();
-
+services.AddTransient<ReceptEpicrisisService>();
 
 var app = builder.Build();
 
