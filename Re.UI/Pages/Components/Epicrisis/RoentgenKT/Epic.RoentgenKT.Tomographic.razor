@@ -1,5 +1,95 @@
-﻿<h3>Epic.RoentgenKT.Tomographic</h3>
+﻿@using Re.Core.Models.Epicrisis;
+@using Re.Core.Models;
+@using System.Diagnostics;
+<MudText style="margin-top: 15px; font-weight: bolder;">
+    @date.Date.ToString("dd.MM.yyyy") &nbsp; &nbsp;&nbsp;&nbsp; @string.Format("{0}:{1}", time.Hours.ToString("D2"),time.Minutes.ToString("D2"))
+</MudText>
+<MudPaper Style="padding: 20px; margin: 15px 0">
+    <MudText Align="Align.Center" Typo="Typo.h6">Эпикриз на рентгенологическое исследование брюшной полости</MudText>
+    <MudStack Spacing="1" Row="true" Style="margin: 5px 0">
+        <MudText Class="d-flex flex-column justify-center">Тип исследования:</MudText>
+        <MudRadioGroup @bind-SelectedOption="tmgExploration.ExplorationType">
+            <MudRadio Option="@("СКТ")" Dense="true" Color="Color.Primary">СКТ</MudRadio>
+            <MudRadio Option="@("МРТ")" Dense="true" Color="Color.Primary">МРТ</MudRadio>
+        </MudRadioGroup>
+        <MudCheckBox Dense="true" Label="c контрастированием" @bind-Checked="tmgExploration.IsContrasted" UnCheckedColor="Color.Error" Color="Color.Success" />
+    </MudStack>
+    <MudGrid >
+        <MudItem><MudText>Область сканирования:</MudText></MudItem>
+        <MudItem >
+            <MudStack Style="padding-top: 0" Row="true">
+                <MudCheckBox Dense="true" Label="Голова" @bind-Checked="tmgExploration.ScanArea.IsHead" UnCheckedColor="Color.Error" Color="Color.Success" />
+                <MudCheckBox Dense="true" Label="Грудная полость" @bind-Checked="tmgExploration.ScanArea.IsThoracicCavity" UnCheckedColor="Color.Error" Color="Color.Success" />
+                <MudCheckBox Dense="true" Label="Таз" @bind-Checked="tmgExploration.ScanArea.IsPelvicCavity" UnCheckedColor="Color.Error" Color="Color.Success" />
+            </MudStack>
+            <MudStack Row="true">
+                <MudCheckBox Dense="true" Label="ШОП" @bind-Checked="tmgExploration.ScanArea.IsCervicalSpine" UnCheckedColor="Color.Error" Color="Color.Success" />
+                <MudCheckBox Dense="true" Label="Брюшная полость" @bind-Checked="tmgExploration.ScanArea.IsAbdominalCavity" UnCheckedColor="Color.Error" Color="Color.Success" />
+            </MudStack>
+        </MudItem>
+    </MudGrid>
+    <MudTextField @bind-Value="tmgExploration.Other" Label="Прочее" Lines="1" />
+    <MudTextField @bind-Value="tmgExploration.Indication" Label="Показание" Lines="5" />
+    <MudSelect Label="Врач:" @bind-Value="tmgExploration.Doctor" ToStringFunc="@converter">
+        @foreach (var item in doctors)
+        {
+            <MudSelectItem Value="@item" />
+        }
+    </MudSelect>
+    <MudButton OnClick="Submit" FullWidth="true" Variant="Variant.Filled" Color="Color.Primary">Сохранить</MudButton>
+
+</MudPaper>
 
 @code {
+    DateTime date = DateTime.Now;
+    TimeSpan time = DateTime.Now.TimeOfDay;
+    TomographicExploration tmgExploration = new();
+    string[] doctorNames = new string[]
+            {   "Розенгард С.А.",
+            "Глущенко В.А.",
+            "Алиева А.Э.",
+            "Борзых И.С.",
+            "Веденин Я.О.",
+            "Горохов Л.В.",
+            "Груздов М. С.",
+            "Гурин М.Н.",
+            "Зубайдов М.М.",
+            "Ишкараев В.Э.",
+            "Караваев А.В.",
+            "Кононец Ф.А.",
+            "Кремзель Е.Г.",
+            "Митрохина М.В.",
+            "Нюхлов Е.С.",
+            "Пазюк К.И.",
+            "Пастухова А.А.",
+            "Попель И.В.",
+            "Раевская О. А.",
+            "Сапронова Т.Н.",
+            "Семенов А.Н.",
+            "Склярова В.О.",
+            "Хестанова Н.З.",
+            "Шабут А.М."};
+    public List<Doctor> doctors = new();
+    Func<Doctor, string> converter = d =>
+    {
+        if (d != null) return d.Name;
+        else return " ";
+    };
 
+    void DoctorAdd()
+    {
+        @for (int i = 0; i < doctorNames.Length; i++)
+        {
+            doctors.Add(new Doctor { Name = doctorNames[i], Id = Guid.NewGuid().ToString(), Position = i.ToString() });
+        }
+    }
+    protected override void OnInitialized()
+    {
+        DoctorAdd();
+        tmgExploration.ScanArea = new();
+    }
+    async Task Submit()
+    {
+        var temp = tmgExploration;
+    }
 }

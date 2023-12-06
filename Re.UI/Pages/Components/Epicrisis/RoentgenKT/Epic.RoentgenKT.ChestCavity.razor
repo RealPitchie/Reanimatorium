@@ -1,7 +1,7 @@
 ﻿@using Re.Core.Models.Epicrisis;
 @using Re.Core.Models;
 <MudText style="margin-top: 15px; font-weight: bolder;">
-    @date.Value.Date.ToString("dd.MM.yyyy") &nbsp; &nbsp;&nbsp;&nbsp; @string.Format("{0}:{1}", time.Value.Hours.ToString("D2"),time.Value.Minutes.ToString("D2"))
+    @date.Date.ToString("dd.MM.yyyy") &nbsp; &nbsp;&nbsp;&nbsp; @string.Format("{0}:{1}", time.Hours.ToString("D2"),time.Minutes.ToString("D2"))
 </MudText>
 <MudPaper Style="padding: 20px; margin: 15px 0">
     <MudText Align="Align.Center" Typo="Typo.h6">Эпикриз на рентгенологическое исследование грудной полости</MudText>
@@ -39,12 +39,14 @@
             <MudSelectItem Value="@item" />
         }
     </MudSelect>
+    <MudButton OnClick="Submit" FullWidth="true" Variant="Variant.Filled" Color="Color.Primary">Сохранить</MudButton>
+
 </MudPaper>
 
 @code {
     СhestСavityRoentgen ccRoentgen = new();
-    DateTime? date = DateTime.Now;
-    TimeSpan? time = DateTime.Now.TimeOfDay;
+    DateTime date = DateTime.Now;
+    TimeSpan time = DateTime.Now.TimeOfDay;
     string[] doctorNames = new string[]
             {   "Розенгард С.А.",
             "Глущенко В.А.",
@@ -71,7 +73,11 @@
             "Хестанова Н.З.",
             "Шабут А.М."};
     public List<Doctor> doctors = new();
-    Func<Doctor, string> converter = d => d?.Name;
+    Func<Doctor, string> converter = d =>
+    {
+        if (d != null) return d.Name;
+        else return " ";
+    };
     void DoctorAdd()
     {
         @for (int i = 0; i < doctorNames.Length; i++)
@@ -82,5 +88,9 @@
     protected override void OnInitialized()
     {
         DoctorAdd();
+    }
+    async Task Submit()
+    {
+        var temp = ccRoentgen;
     }
 }

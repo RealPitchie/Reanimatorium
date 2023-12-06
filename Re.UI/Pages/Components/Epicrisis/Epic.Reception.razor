@@ -1,5 +1,5 @@
-﻿@using Newtonsoft.Json;
-@using Re.Core.Models;
+﻿@using Re.Core.Models;
+@using Re.Services.Services;
 @using Re.UI.Data
 @using System.Diagnostics;
 @inject IDialogService DialogService
@@ -575,8 +575,9 @@
                 <MudField Disabled="true" HelperText="Подпись"></MudField>
             </MudItem>
             </MudStack>
-            
+            <MudButton OnClick="Submit" FullWidth="true" Variant="Variant.Filled" Color="Color.Primary">Сохранить</MudButton>
         </MudPaper>
+        
     </MudItem>
     <MudItem xs="3">
         <MudGrid>
@@ -648,7 +649,6 @@
 </MudDialog>
 
 @code {
-    Func<Doctor,string> doctorConverter = d => d?.Name;
     string[] conditionList = new string[]
         {
             "объемом оперативного вмешательства",
@@ -854,7 +854,7 @@
             "Хестанова Н.З.",
             "Шабут А.М."};
 
-    public ReceptionEpicrisis? re = new();
+    public ReceptionEpicrisis re = new();
     DateTime? date;
     TimeSpan? time;
     string robodoc = "ROBODOC";
@@ -863,7 +863,11 @@
     bool IsDrainage = false;
     bool IsAddition = false;
     List<Doctor> doctors = new();
-    Func<Doctor, string> converter = d => d?.Name;
+    Func<Doctor, string> converter = d =>
+    {
+        if (d != null) return d.Name;
+        else return " ";
+    };
     void DoctorAdd()
     {
         @for (int i = 0; i < doctorNames.Length; i++)
@@ -876,14 +880,7 @@
     {
         date = DateTime.Now;
         time = DateTime.Now.TimeOfDay;
-        doctors.Add(new Doctor { Name = "Розенгард С.А.", Id = Guid.NewGuid().ToString(), Position = "1" });
-        doctors.Add(new Doctor { Name = "Глущенко В.А.", Id = Guid.NewGuid().ToString(), Position = "2" });
-        doctors.Add(new Doctor { Name = "Алиева  А.Э.", Id = Guid.NewGuid().ToString(), Position = "3" });
-        doctors.Add(new Doctor { Name = "Борзых И.С.", Id = Guid.NewGuid().ToString(), Position = "4" });
-        doctors.Add(new Doctor { Name = "Веденин Я.О.", Id = Guid.NewGuid().ToString(), Position = "5" });
-        doctors.Add(new Doctor { Name = "Горохов Л.В.", Id = Guid.NewGuid().ToString(), Position = "6" });
-        doctors.Add(new Doctor { Name = "Груздов М.С.", Id = Guid.NewGuid().ToString(), Position = "7" });
-
+        DoctorAdd();
     }
 
     void HandleWithoutIVL()
@@ -896,21 +893,20 @@
         re.Conscience = Conscience[7];
         re.Ramsey = Ramsey[7];
         re.MuscleTone = MuscleTone[0];
-        re.SkinCovers[0] = SkinCovers[0].GetValue(0).ToString();
-        re.SkinCovers[1] = SkinCovers[1].GetValue(0).ToString();
-        re.SkinCovers[2] = SkinCovers[2].GetValue(0).ToString();
+        re.SkinCovers[0] = SkinCovers[0][0]?.ToString();
+        re.SkinCovers[1] = SkinCovers[1][0]?.ToString();
+        re.SkinCovers[2] = SkinCovers[2][0]?.ToString();
         re.Cyanosis = Cyanosis[0];
         re.Marbling = Marbling[0];
         re.PeripheralEdema = PeripheralEdema[0];
-        re.SkinCovers[0] = SkinCovers[0].GetValue(0).ToString();
-        re.VeinsToBeCatheterized[0] = VeinsToBeCatheterized[0].GetValue(0).ToString();
+        re.VeinsToBeCatheterized[0] = VeinsToBeCatheterized[0][0]?.ToString();
         re.InflammationInCatheter = InflammationInCatheter[0];
         re.SpontaneousBreathing = SpontaneousBreathing[1];
         re.BreathingThrough = BreathingThrough[0];
         re.BreathingDisorder = BreathingDisorder[0];
         re.Auscultatory = Auscultatory[0];
-        re.BreathingRate[0] = BreathingRate[0].GetValue(0).ToString();
-        re.Wheezes[0] = Wheezes[0].GetValue(0).ToString();
+        re.BreathingRate[0] = BreathingRate[0][0]?.ToString();
+        re.Wheezes[0] = Wheezes[0][0]?.ToString();
         #region WithouAvl Block
         if(re.RespiratoryRate == 0) re.RespiratoryRate = 16;
         if (re.OxygenInsufflation == null) re.OxygenInsufflation = OxygenInsufflation[0];
@@ -927,8 +923,8 @@
         re.Pain = Pain[0];
         re.Distension = Distension[1];
         re.Peristalsis = Peristalsis[2];
-        re.Tongue[0] = Tongue[0].GetValue(0).ToString();
-        re.Tongue[1] = Tongue[1].GetValue(0).ToString();
+        re.Tongue[0] = Tongue[0][0]?.ToString();
+        re.Tongue[1] = Tongue[1][0]?.ToString();
         re.Diuresis = 200.0;
         re.Urine = Urine[0];
         re.LaboratoryData = "в работе.";
@@ -944,24 +940,24 @@
         re.Complaints = Complaints[2];
         re.ComplaintText = "SOFA-0.";
         re.Condition = Condition[2];
-        re.Conscience = Conscience[8];
+        re.Conscience = Conscience[7];
         re.Ramsey = Ramsey[5];
         re.MuscleTone = MuscleTone[0];
-        re.SkinCovers[0] = SkinCovers[0].GetValue(0).ToString();
-        re.SkinCovers[1] = SkinCovers[1].GetValue(0).ToString();
-        re.SkinCovers[2] = SkinCovers[2].GetValue(0).ToString();
+        re.SkinCovers[0] = SkinCovers[0][0]?.ToString();
+        re.SkinCovers[1] = SkinCovers[1][0]?.ToString();
+        re.SkinCovers[2] = SkinCovers[2][0]?.ToString();
         re.Cyanosis = Cyanosis[0];
         re.Marbling = Marbling[0];
         re.PeripheralEdema = PeripheralEdema[0];
-        re.SkinCovers[0] = SkinCovers[0].GetValue(0).ToString();
-        re.VeinsToBeCatheterized[0] = VeinsToBeCatheterized[0].GetValue(0).ToString();
+        re.SkinCovers[0] = SkinCovers[0][0]?.ToString();
+        re.VeinsToBeCatheterized[0] = VeinsToBeCatheterized[0][0]?.ToString();
         re.InflammationInCatheter = InflammationInCatheter[0];
         re.SpontaneousBreathing = SpontaneousBreathing[1];
         re.BreathingThrough = BreathingThrough[1];
         re.BreathingDisorder = BreathingDisorder[1];
         re.Auscultatory = Auscultatory[0];
-        re.BreathingRate[0] = BreathingRate[0].GetValue(0).ToString();
-        re.Wheezes[0] = Wheezes[0].GetValue(0).ToString();
+        re.BreathingRate[0] = BreathingRate[0][0]?.ToString();
+        re.Wheezes[0] = Wheezes[0][0]?.ToString();
         #region AVL Block
         if (re.RespiratorySupport == null)
             re.RespiratorySupport = RespiratorySupport[1];
@@ -1001,8 +997,8 @@
         re.Pain = Pain[0];
         re.Distension = Distension[1];
         re.Peristalsis = Peristalsis[2];
-        re.Tongue[0] = Tongue[0].GetValue(0).ToString();
-        re.Tongue[1] = Tongue[1].GetValue(0).ToString();
+        re.Tongue[0] = Tongue[0][0]?.ToString();
+        re.Tongue[1] = Tongue[1][0]?.ToString();
         re.Diuresis = 200.0;
         re.Urine = Urine[0];
         re.LaboratoryData = "в работе.";
@@ -1010,11 +1006,10 @@
         re.TreatmentPlan = $"{planList[1]}, {planList[2]}, {planList[4]}, {planList[5]}, {planList[6]}, {planList[11]}";
         IsIVL = true;
     }
-    
 
     #region Dialog functionality
-    IEnumerable<string> listCondition;
-    IEnumerable<string> listTreatmentPlan;
+    IEnumerable<string>? listCondition;
+    IEnumerable<string>? listTreatmentPlan;
     private DialogOptions dialogOptionsCondition = new();
     private DialogOptions dialogOptionsPlan = new();
     private bool visibleCondition;
@@ -1036,4 +1031,9 @@
         StateHasChanged();
     }
     #endregion
+
+    // ReceptEpicrisisService reService;
+    async Task Submit(){
+        var temp = re;
+    }
 }

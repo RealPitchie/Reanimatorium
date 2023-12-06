@@ -1,31 +1,33 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.Web">
-
+<Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-	  <TargetFramework>net6.0</TargetFramework>
-	  <Nullable>enable</Nullable>
-	  <ImplicitUsings>enable</ImplicitUsings>
+    <TargetFramework>net6.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
-
   <ItemGroup>
     <Compile Remove="wwwroot\json\**" />
     <Content Remove="wwwroot\json\**" />
     <EmbeddedResource Remove="wwwroot\json\**" />
     <None Remove="wwwroot\json\**" />
   </ItemGroup>
-
   <ItemGroup>
     <Content Remove="Pages\Components\Diary\Diary.razor" />
     <Content Remove="Pages\Components\Hemo\HemoProtocol.razor" />
   </ItemGroup>
-
   <ItemGroup>
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="6.0.25">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
     <PackageReference Include="MudBlazor" Version="6.0.13" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.25" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.25" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.22" />
   </ItemGroup>
-
   <ItemGroup>
     <ProjectReference Include="..\Re.Core\Re.Core.csproj" />
+    <ProjectReference Include="..\Re.Data\Re.Data.csproj" />
     <ProjectReference Include="..\Re.Services\Re.Services.csproj" />
   </ItemGroup>
-
 </Project>

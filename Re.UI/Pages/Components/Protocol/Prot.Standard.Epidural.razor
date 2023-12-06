@@ -33,7 +33,7 @@
         @if(Protocol.IsLocalAnesthesyNeeded)
         {
             <MudItem xs="4">
-                <MudSelect Value="Protocol.LocalAnesthesyType" Dense="true" T="string" Label="Выберите препарат" AnchorOrigin="Origin.BottomCenter">
+                <MudSelect @bind-Value="Protocol.LocalAnesthesyType" Dense="true" T="string" Label="Выберите препарат" AnchorOrigin="Origin.BottomCenter">
                     @foreach(var item in Protocol.LocalAnesthesyTypes)
                     {
                         <MudSelectItem Value="@item"/>
@@ -51,7 +51,7 @@
     
     <MudGrid>
         <MudItem xs="6">
-            <MudSelect Value="Protocol.PunctionLevel" Dense="true" T="string" Label="Уровень пункции" AnchorOrigin="Origin.BottomCenter">
+            <MudSelect @bind-Value="Protocol.PunctionLevel" Dense="true" T="string" Label="Уровень пункции" AnchorOrigin="Origin.BottomCenter">
             @foreach(var level in Protocol.PunctionLevels)
             {
                 <MudSelectItem Value="@level"/>
@@ -59,7 +59,7 @@
         </MudSelect>
         </MudItem>
         <MudItem xs="6">
-            <MudSelect Value="Protocol.CatheterUsed" Dense="true" T="string" Label="Катетер" AnchorOrigin="Origin.BottomCenter">
+            <MudSelect @bind-Value="Protocol.CatheterUsed" Dense="true" T="string" Label="Катетер" AnchorOrigin="Origin.BottomCenter">
                 @foreach(var catheter in Protocol.CathetersUsed)
                 { 
                     <MudSelectItem Value="@catheter"/>
@@ -78,7 +78,7 @@
             <MudNumericField Style="text-align: right;" HideSpinButtons="true" @bind-Value="Protocol.TriesNo" Variant="Variant.Text" Min="0" />
         </MudItem> 
         <MudItem >
-             <MudSelect Value="Protocol.CatheterInserted" Dense="true" T="string" Label="Катетер заведен" AnchorOrigin="Origin.BottomCenter">
+             <MudSelect @bind-Value="Protocol.CatheterInserted" Dense="true" T="string" Label="Катетер заведен" AnchorOrigin="Origin.BottomCenter">
                 @foreach(var catheter in Protocol.CathetersInserted)
                 { 
                     <MudSelectItem Value="@catheter"/>
@@ -97,13 +97,13 @@
         
     </MudGrid>
     
-    <MudTextField T="string" Label="Особенности" Variant="Variant.Text" Text="@Protocol.Features" />
-    <MudTextField T="string" Label="Осложнения" Variant="Variant.Text" Text="@Protocol.Complications" Lines="3" />
-    <MudTextField T="string" Label="Примечание" Variant="Variant.Text" Text="@Protocol.Notes" /> 
+    <MudTextField T="string" Label="Особенности" Variant="Variant.Text" @bind-Value="@Protocol.Features" />
+    <MudTextField T="string" Label="Осложнения" Variant="Variant.Text" @bind-Value="@Protocol.Complications" Lines="3" />
+    <MudTextField T="string" Label="Примечание" Variant="Variant.Text" @bind-Value="@Protocol.Notes" /> 
     
     <MudGrid>
         <MudItem xs="6">
-            <MudSelect Value="Protocol.Doctor" Dense="true" T="Doctor" ToStringFunc="@converter" Label="Врач">
+            <MudSelect @bind-Value="Protocol.Doctor" Dense="true" T="Doctor" ToStringFunc="@converter" Label="Врач">
                 @foreach(var doc in Doctors)
                 {
                     <MudSelectItem Value="@doc" />
@@ -113,8 +113,8 @@
     </MudGrid>
 </MudPaper>
 
-@code{
-    [Parameter]
+@code{ 
+    #nullable disable
     public EpiduralSpaceProtocol Protocol { get; set; }
     public List<Doctor> Doctors = new();
     DateTime? date = DateTime.Now;
@@ -123,6 +123,7 @@
 
     protected override async Task OnInitializedAsync()
     {
+        Protocol = new();
         Doctors.Add(new Doctor { Name = "Test Doctor", Id = Guid.NewGuid().ToString(), Position = "Test position" });
     }
 }

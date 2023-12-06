@@ -29,28 +29,22 @@
     <MudItem xs="4">
         <MudStack>
             <MudItem>
-                <MudCheckBox @bind-Checked="@isChestCavity" UnCheckedColor="Color.Error" Color="Color.Success">
-                    <span>Эпикриз на рентгенологическое исследование грудной полости</span>
-                </MudCheckBox>
+                <MudCheckBox @bind-Checked="@isChestCavity" UnCheckedColor="Color.Error" Color="Color.Success"
+                     Label="Эпикриз на рентгенологическое исследование грудной полости"/>
             </MudItem>
             <MudItem>
-                <MudCheckBox @bind-Checked="@isAbdominalCavity" UnCheckedColor="Color.Error" Color="Color.Success">
-                    <span>Эпикриз на рентгенологическое исследование брюшной полости</span>
-                </MudCheckBox>
+                <MudCheckBox @bind-Checked="@isAbdominalCavity" UnCheckedColor="Color.Error" Color="Color.Success" 
+                Label="Эпикриз на рентгенологическое исследование грудной полости" />
             </MudItem>
             <MudItem>
-                <MudCheckBox @bind-Checked="@isTomographic" UnCheckedColor="Color.Error" Color="Color.Success">
-                    <span>Эпикриз на проведение томографического исследования</span>
-                </MudCheckBox>
+                <MudCheckBox @bind-Checked="@isTomographic" UnCheckedColor="Color.Error" Color="Color.Success"
+                             Label="Эпикриз на проведение томографического исследования" />
             </MudItem>
         </MudStack>
     </MudItem>
 </MudGrid>
 
 @code {
-    
-    AbdominalCavityRoentgen acRoentgen;
-    TomographicExploration tmgExploration;
     DateTime? date = DateTime.Now;
     TimeSpan? time = DateTime.Now.TimeOfDay;
     bool isChestCavity = false;

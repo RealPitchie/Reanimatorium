@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
+#nullable disable
 namespace Re.Core.Models.Epicrisis
 {
     public class Roentgen
@@ -26,8 +27,8 @@ namespace Re.Core.Models.Epicrisis
         public bool AllowDiagnosticsChanges { get; set; }
         public bool AllowIdentificationInjuries { get; set; }
     }
-    
-    public class AbdominalCavityRoentgen
+
+    public class AbdominalCavityRoentgen : Roentgen
     {
         public bool AllowPostoperativeAnalysis { get; set; }
         public bool AllowGasAvailable { get; set; }
@@ -37,7 +38,16 @@ namespace Re.Core.Models.Epicrisis
     public class TomographicExploration : Roentgen
     {
         public string ExplorationType { get; set; }
-        public string ScanArea { get; set; }
-        public string Indication {  get; set; }
+        public bool IsContrasted { get; set; }
+        public ScanArea ScanArea { get; set; }
+        public string Indication { get; set; }
+    }
+    public class ScanArea
+    {
+        public bool IsHead { get; set; }
+        public bool IsThoracicCavity { get; set; } 
+        public bool IsAbdominalCavity { get; set; } 
+        public bool IsCervicalSpine { get; set; } 
+        public bool IsPelvicCavity { get; set; } 
     }
 }

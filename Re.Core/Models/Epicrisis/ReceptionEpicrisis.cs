@@ -11,7 +11,7 @@ namespace Re.Core.Models
         public string DeliveredFrom { get; set; }
         public string AVLDueTransportation { get; set; }
         public string Complaints { get; set; }
-        public string? ComplaintText { get; set; }
+        public string ComplaintText { get; set; }
         public string VAS { get; set; }
         public string Condition { get; set; }
         public string Conscience { get; set; }
@@ -41,7 +41,7 @@ namespace Re.Core.Models
         public string Inotropes { get; set; }
         public int InotropesValue { get; set; }
         public string InotropesUnits { get; set; }
-        public string? InotropesDescription { get; set; }
+        public string InotropesDescription { get; set; }
         public int BR { get; set; } // Breathing rate (ЧД апп.)
         public int Pinsp { get; set; }
         public int Psupp { get; set; }
