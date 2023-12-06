@@ -31,4 +31,9 @@ public class DataContext : DbContext
 
     //Эпикризы
     public DbSet<ReceptionEpicrisis> ReceptionEpicrises { get; set; }
+
+    //Дневники
+    public DbSet<StandartDiary> StandartDiaries { get; set; }
+    public DbSet<WeekendDiary> WeekendDiaries { get; set; }
+    public DbSet<Extubation> ExtubationDiaries { get; set; }
 }

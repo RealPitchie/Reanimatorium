@@ -7,6 +7,7 @@ using Re.Data;
 using Re.Data.Repo;
 using Re.Services.Services;
 using Re.Core.Models;
+using Re.Data.Repo.Diary;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -27,6 +28,14 @@ services.AddScoped<IRepo<StandardProtocol>, Repo>();
 services.AddScoped<IRepo<ReceptionEpicrisis>, ReceptEpicrisisRepo>();
 services.AddTransient<ProtocolService>();
 services.AddTransient<ReceptEpicrisisService>();
+
+
+services.AddScoped<IRepo<StandartDiary>, DiaryStandartRepo>();
+services.AddScoped<IRepo<WeekendDiary>, DiaryWeekendRepo>();
+services.AddScoped<IRepo<Extubation>, DiaryExtubationRepo>();
+services.AddTransient<StandartDiaryService>();
+services.AddTransient<WeekendDiaryService>();
+services.AddTransient<ExtubationDiaryService>();
 
 var app = builder.Build();
 
