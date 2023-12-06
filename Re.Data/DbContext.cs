@@ -9,7 +9,7 @@ namespace Re.Data;
 
 public class DataContext : DbContext
 {
-    public DbSet<Patient> Patients { get; set; } 
+    
     
     public DataContext() {}
     public DataContext(DbContextOptions<DataContext> options)
@@ -22,6 +22,11 @@ public class DataContext : DbContext
             optionsBuilder.UseNpgsql("UserID=postgres;Password=passmein123;Server=localhost;Port=5432;Database=reanim;");
         } 
     }
+
+    //Наркотики
+    public DbSet<Patient> Patients { get; set; }
+    public DbSet<PrescribedMedication> Medications { get; set; }
+    public DbSet<Syndrom> Syndroms { get; set; }
 
     //Протоколы
     public DbSet<StandardProtocol> Protocols { get; set; }
