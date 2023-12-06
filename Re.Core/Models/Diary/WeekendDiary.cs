@@ -56,7 +56,7 @@ namespace Re.Core.Models
         public string Spo2 { get; set; } //ЧСС
         public string[] Stomach { get; set; } //Живот
         public string[] Pain { get; set; } //Болезненность
-        public string PainAbout { get; set; } 
+        public string PainAbout { get; set; }
         public List<string[]> AbdominalBloating { get; set; } //Вздутие живота
         public string[] Peristalsis { get; set; } //Перистальтика
         public List<string[]> Tongue { get; set; } //Язык

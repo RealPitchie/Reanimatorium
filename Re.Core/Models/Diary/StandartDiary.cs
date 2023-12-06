@@ -67,12 +67,11 @@ namespace Re.Core.Models
         public string Laboratory5 { get; set; }
         public string Laboratory6 { get; set; }
         public string[] Doctor { get; set; } //доктор
-        #nullable enable
-        public PiCCO? Picco { get; set; }
-        public PiCCO2? Picco2 { get; set; }
-        public FioTrac? FioTrac { get; set; }
-        public EsCCO? EsCCO { get; set; }
-        public VoLEF? VoLEF { get; set; }
+        public PiCCO Picco { get; set; }
+        public PiCCO2 Picco2 { get; set; }
+        public FioTrac FioTrac { get; set; }
+        public EsCCO EsCCO { get; set; }
+        public VoLEF VoLEF { get; set; }
         public int Analyses { get; set; } //Анализы
         public int AnalysesTwo { get; set; } //Анализы
         public int AnalysesThree { get; set; } //Анализы
@@ -92,7 +91,7 @@ namespace Re.Core.Models
         public int? GEDI { get; set; }
         public int? CVP { get; set; }
         public int? SVRI { get; set; }
-        public string? Description { get; set; }
+        public string Description { get; set; }
     }
     public class PiCCO2
     {

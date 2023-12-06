@@ -800,9 +800,9 @@
                     </MudStack>
                 </MudItem>
             </MudGrid>
-                <MudItem Style=" padding: 35px 0 0 1090px;">
-                    <MudSwitch @bind-Checked="SwitchChecked10" />
-                </MudItem>
+            <MudItem Style=" padding: 35px 0 0 1090px;">
+                <MudSwitch @bind-Checked="SwitchChecked10" />
+            </MudItem>
 
 
 
@@ -828,39 +828,39 @@
                             <MudText Class="d-flex flex-column justify-end">I/min/m²</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="ITBI" HideSpinButtons="true" @bind-Value="standart.Picco.ITBI" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="ITBI" HideSpinButtons="true" @bind-Value="standart.Picco.ITBI" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">ml/m²</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="CFI" HideSpinButtons="true" @bind-Value="standart.Picco.CFI" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="CFI" HideSpinButtons="true" @bind-Value="standart.Picco.CFI" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">I/min</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="SVV" HideSpinButtons="true" @bind-Value="standart.Picco.SVV" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="SVV" HideSpinButtons="true" @bind-Value="standart.Picco.SVV" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">%</MudText>
                         </MudStack>
                     </MudItem>
                     <MudItem xs="3">
                         <MudStack Row="true">
-                            <MudNumericField Label="SVI" HideSpinButtons="true" @bind-Value="standart.Picco.SVI" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="SVI" HideSpinButtons="true" @bind-Value="standart.Picco.SVI" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">ml/m²</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="ELWI" HideSpinButtons="true" @bind-Value="standart.Picco.ELWI" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="ELWI" HideSpinButtons="true" @bind-Value="standart.Picco.ELWI" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">ml/kg</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="MAP" HideSpinButtons="true" @bind-Value="standart.Picco.MAP" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="MAP" HideSpinButtons="true" @bind-Value="standart.Picco.MAP" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">mm Hg</MudText>
                         </MudStack>
                     </MudItem>
                     <MudItem xs="3">
                         <MudStack Row="true">
-                            <MudNumericField Label="GEDI" HideSpinButtons="true" @bind-Value="standart.Picco.GEDI" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="GEDI" HideSpinButtons="true" @bind-Value="standart.Picco.GEDI" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">ml/m²</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="CVP" HideSpinButtons="true" @bind-Value="standart.Picco.CVP" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="CVP" HideSpinButtons="true" @bind-Value="standart.Picco.CVP" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">
                                 @if (isWatered)
                                 {
@@ -873,7 +873,7 @@
                             </MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="SVRI" HideSpinButtons="true" @bind-Value="standart.Picco.SVRI" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="SVRI" HideSpinButtons="true" @bind-Value="standart.Picco.SVRI" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">dyn*s*m*/cm⁻⁵</MudText>
                         </MudStack>
                         <MudInput Style="width: 100%; padding-top: 10px" @bind-Value="standart.Picco.Description" Disabled="!SwitchChecked11"></MudInput>
@@ -883,17 +883,17 @@
                 {
                     <MudItem xs="3">
                         <MudStack Row="true">
-                            <MudNumericField Label="CCO" HideSpinButtons="true" @bind-Value="standart.FioTrac.CCO" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="CCO" HideSpinButtons="true" @bind-Value="standart.FioTrac.CCO" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">I/min</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="SVR" HideSpinButtons="true" @bind-Value="standart.FioTrac.SVR" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="SVR" HideSpinButtons="true" @bind-Value="standart.FioTrac.SVR" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">mm Hg</MudText>
                         </MudStack>
                     </MudItem>
                     <MudItem xs="3">
                         <MudStack Row="true">
-                            <MudNumericField Label="SVV" HideSpinButtons="true" @bind-Value="standart.FioTrac.SVV" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="SVV" HideSpinButtons="true" @bind-Value="standart.FioTrac.SVV" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">ml</MudText>
                         </MudStack>
                         <MudStack Row="true">
@@ -903,7 +903,7 @@
                     </MudItem>
                     <MudItem xs="3">
                         <MudStack Row="true">
-                            <MudNumericField Label="CVP" HideSpinButtons="true" @bind-Value="standart.FioTrac.CVP" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="CVP" HideSpinButtons="true" @bind-Value="standart.FioTrac.CVP" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">
                                 @if (isWatered)
                                 {
@@ -922,19 +922,19 @@
                 {
                     <MudItem xs="3">
                         <MudStack Row="true">
-                            <MudNumericField Label="CI" HideSpinButtons="true" @bind-Value="standart.Picco2.CI" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="CI" HideSpinButtons="true" @bind-Value="standart.Picco2.CI" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">I/min/m²</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="PVPI" HideSpinButtons="true" @bind-Value="standart.Picco2.PVPI" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="PVPI" HideSpinButtons="true" @bind-Value="standart.Picco2.PVPI" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end"></MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="CFI" HideSpinButtons="true" @bind-Value="standart.Picco2.CFI" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="CFI" HideSpinButtons="true" @bind-Value="standart.Picco2.CFI" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">I/min</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="SVV" HideSpinButtons="true" @bind-Value="standart.Picco2.SVV" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="SVV" HideSpinButtons="true" @bind-Value="standart.Picco2.SVV" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">%</MudText>
                         </MudStack>
                     </MudItem>
@@ -944,21 +944,21 @@
                             <MudText Class="d-flex flex-column justify-end">ml/m²</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="ELWI" HideSpinButtons="true" @bind-Value="standart.Picco2.ELWI" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="ELWI" HideSpinButtons="true" @bind-Value="standart.Picco2.ELWI" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">ml/kg</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="MAP" HideSpinButtons="true" @bind-Value="standart.Picco2.MAP" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="MAP" HideSpinButtons="true" @bind-Value="standart.Picco2.MAP" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">mm Hg</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="ScvO₂" HideSpinButtons="true" @bind-Value="standart.Picco2.ScvO2" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="ScvO₂" HideSpinButtons="true" @bind-Value="standart.Picco2.ScvO2" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">%</MudText>
                         </MudStack>
                     </MudItem>
                     <MudItem xs="3">
                         <MudStack Row="true">
-                            <MudNumericField Label="GEDI" HideSpinButtons="true" @bind-Value="standart.Picco2.GEDI" Min="0"  Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="GEDI" HideSpinButtons="true" @bind-Value="standart.Picco2.GEDI" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">ml/m²</MudText>
                         </MudStack>
                         <MudStack Row="true">
@@ -985,31 +985,31 @@
                 {
                     <MudItem xs="3">
                         <MudStack Row="true">
-                            <MudNumericField Label="esНСВ" HideSpinButtons="true" @bind-Value="standart.EsCCO.EsHCB" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="esНСВ" HideSpinButtons="true" @bind-Value="standart.EsCCO.EsHCB" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">I/min</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="esУО" HideSpinButtons="true" @bind-Value="standart.EsCCO.EsYO" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="esУО" HideSpinButtons="true" @bind-Value="standart.EsCCO.EsYO" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">ml</MudText>
                         </MudStack>
                     </MudItem>
                     <MudItem xs="3">
                         <MudStack Row="true">
-                            <MudNumericField Label="esНСИ" HideSpinButtons="true" @bind-Value="standart.EsCCO.EsHCI" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="esНСИ" HideSpinButtons="true" @bind-Value="standart.EsCCO.EsHCI" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">I/min/m²</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="esИУО" HideSpinButtons="true" @bind-Value="standart.EsCCO.EsIYO" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="esИУО" HideSpinButtons="true" @bind-Value="standart.EsCCO.EsIYO" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">ml/m²</MudText>
                         </MudStack>
                     </MudItem>
                     <MudItem xs="3">
                         <MudStack Row="true">
-                            <MudNumericField Label="esССС" HideSpinButtons="true" @bind-Value="standart.EsCCO.EsCCC" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="esССС" HideSpinButtons="true" @bind-Value="standart.EsCCO.EsCCC" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">dyn*s*/cm⁵</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="esИССС" HideSpinButtons="true" @bind-Value="standart.EsCCO.EsICCC" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="esИССС" HideSpinButtons="true" @bind-Value="standart.EsCCO.EsICCC" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">dyn*s*m*/cm⁻⁵</MudText>
                         </MudStack>
                         <MudInput Style="width: 100%; padding-top: 10px" @bind-Value="standart.EsCCO.Description" Disabled="!SwitchChecked11"></MudInput>
@@ -1019,7 +1019,7 @@
                 {
                     <MudItem xs="3">
                         <MudStack Row="true">
-                            <MudNumericField Label="RHEDV" HideSpinButtons="true" @bind-Value="standart.VoLEF.RHEDV" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="RHEDV" HideSpinButtons="true" @bind-Value="standart.VoLEF.RHEDV" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">ml</MudText>
                         </MudStack>
                         <MudStack Row="true">
@@ -1027,7 +1027,7 @@
                             <MudText Class="d-flex flex-column justify-end">mm Hg</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="R/L" HideSpinButtons="true" @bind-Value="standart.VoLEF.RL" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="R/L" HideSpinButtons="true" @bind-Value="standart.VoLEF.RL" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end"></MudText>
                         </MudStack>
 
@@ -1038,7 +1038,7 @@
                             <MudText Class="d-flex flex-column justify-end">ml</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="LHEDV" HideSpinButtons="true" @bind-Value="standart.VoLEF.LHEDV" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="LHEDV" HideSpinButtons="true" @bind-Value="standart.VoLEF.LHEDV" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">ml</MudText>
                         </MudStack>
                         <MudStack Row="true">
@@ -1048,11 +1048,11 @@
                     </MudItem>
                     <MudItem xs="3">
                         <MudStack Row="true">
-                            <MudNumericField Label="PAP" HideSpinButtons="true" @bind-Value="standart.VoLEF.PAP" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="PAP" HideSpinButtons="true" @bind-Value="standart.VoLEF.PAP" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">mm Hg</MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="CVP" HideSpinButtons="true" @bind-Value="standart.VoLEF.CVP" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="CVP" HideSpinButtons="true" @bind-Value="standart.VoLEF.CVP" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">
                                 @if (isWatered)
                                 {
@@ -1065,7 +1065,7 @@
                             </MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudNumericField Label="RVEF" HideSpinButtons="true" @bind-Value="standart.VoLEF.RVEF" Min="0" Disabled="!SwitchChecked11"/>
+                            <MudNumericField Label="RVEF" HideSpinButtons="true" @bind-Value="standart.VoLEF.RVEF" Min="0" Disabled="!SwitchChecked11" />
                             <MudText Class="d-flex flex-column justify-end">%</MudText>
                         </MudStack>
                         <MudInput Style="width: 100%; padding-top: 10px" @bind-Value="standart.VoLEF.Description" Disabled="!SwitchChecked11"></MudInput>
@@ -1087,11 +1087,13 @@
                     </MudSelect>
                 </MudItem>
             </MudGrid>
-
+            <MudItem Style="width: 10%;padding-top:20px;">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit">
+                    Отправить
+                </MudButton>
+            </MudItem>
         </MudPaper>
-
     </MudItem>
-
 </MudGrid>
 
 
@@ -1294,12 +1296,12 @@
 "Груздов М.С."
     };
 
-    StandartDiary? standart = new();
+    StandartDiary standart = new();
 
     DateTime? date; //дата
     TimeSpan? time; //время
     public bool vash { get; set; }
-    string Hemodynamic;
+    string Hemodynamic = default!;
     bool isWatered;
     string water = "cm H₂O";
     string noWater = "mm Hg";
@@ -1315,16 +1317,16 @@
         standart.FioTrac = new();
         standart.EsCCO = new();
         standart.VoLEF = new();
-
+#pragma warning disable BL0005
     }
 
     bool SwitchChecked, SwitchChecked2, SwitchChecked3, SwitchChecked4,
     SwitchChecked5, SwitchChecked6, SwitchChecked7, SwitchChecked8,
-    SwitchChecked9,SwitchChecked10,SwitchChecked11;
+    SwitchChecked9, SwitchChecked10, SwitchChecked11;
 
     private int Num1;
     private int Num2;
-    private string Result;
+    private string Result = default!;
 
     private void CalculateProduct()
     {
@@ -1416,5 +1418,9 @@
     {
         var change = selectValues.FirstOrDefault(x => x.Key == changedSelect).Key;
         select.SelectedValues = new List<string>() { change };
+    }
+    void Submit()
+    {
+        var temp = standart;
     }
 }

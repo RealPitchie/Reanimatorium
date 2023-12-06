@@ -78,7 +78,11 @@
                     </MudSelect>
                 </MudItem>
             </MudGrid>
-
+            <MudItem Style="width: 10%;padding-top:20px;">
+                <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit">
+                    Отправить
+                </MudButton>
+            </MudItem>
         </MudPaper>
     </MudItem>
 </MudGrid>
@@ -121,9 +125,13 @@
 
     }
 
-    Extubation? ex = new();
+    Extubation ex = new();
 
     DateTime? date; //дата
     TimeSpan? time; //время
 
+    void Submit()
+    {
+        var temp = ex;
+    }
 }
