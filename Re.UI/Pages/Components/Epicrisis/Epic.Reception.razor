@@ -1,8 +1,8 @@
 ﻿@using Re.Core.Models;
-@using Re.Services.Services;
 @using Re.UI.Data
 @using System.Diagnostics;
 @inject IDialogService DialogService
+@inject Re.Services.Services.ReceptEpicrisisService reService
 
 <MudGrid>
     <MudItem xs="9">
@@ -1032,8 +1032,8 @@
     }
     #endregion
 
-    // ReceptEpicrisisService reService;
     async Task Submit(){
         var temp = re;
+        await reService.SaveReceptEpicrisisAsync(temp);
     }
 }
