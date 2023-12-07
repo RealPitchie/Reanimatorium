@@ -10,6 +10,7 @@ namespace Re.Core.Models
 {
     public class Extubation
     {
+        public string Id { get; set; }
         public string MedSedation { get; set; } //мед седация
         public string MuscleTone { get; set; } //мышечный тонус
         public string Insuflation { get; set; } //инсуфляция
