@@ -20,6 +20,9 @@ public class DataContext : DbContext
         if (!optionsBuilder.IsConfigured) 
         {
             optionsBuilder.UseNpgsql("UserID=postgres;Password=passmein123;Server=localhost;Port=5432;Database=reanim;");
+            
+            // connection to Epicrisis
+            // "UserID=postgres;Password=123qweQWE;Server=localhost;Port=6699;Database=Reanimatorium;"
         } 
     }
 

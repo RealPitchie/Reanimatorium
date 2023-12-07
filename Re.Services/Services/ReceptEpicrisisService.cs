@@ -18,6 +18,10 @@ namespace Re.Services.Services
         }
         public async Task<ReceptionEpicrisis> SaveReceptEpicrisisAsync(ReceptionEpicrisis epicrisis)
         {
+            if(epicrisis.Id == null)
+            {
+                epicrisis.Id = Guid.NewGuid().ToString();
+            }
             return await _repo.SaveAsync(epicrisis);
         }
     }
