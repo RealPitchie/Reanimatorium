@@ -1,6 +1,7 @@
 ﻿using Re.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -11,6 +12,7 @@ namespace Re.Core.Models
 {
     public class StandartDiary
     {
+        public string Id { get; set; }
         public DateOnly Date { get; set; } //Дата
         public TimeOnly Time { get; set; } //Время
 
@@ -21,21 +23,22 @@ namespace Re.Core.Models
         public string[] Rass { get; set; } //RASS 
         public string[] Vash { get; set; } //ВАШ
         public string[] Conscience { get; set; } //сознание
-        public List<string[]> Skin { get; set; } //кожные  покровы
+        public string[] Skin { get; set; } = new string[3]; //кожные  покровы
         public string[] Breathing { get; set; } //дыхание
         public string[] Extubation { get; set; } //экстубация
         public string CddField { get; set; } //ЧДД
         public string[] InhalationO2 { get; set; } //ингаляция О2
         public string SpeedFlow { get; set; } //скорость потока
         public string[] Auscultatory { get; set; } //аускультативно
-        public List<string[]> ShortnessOfBreath { get; set; } //ослабление дыхания 
+        public string[] ShortnessOfBreath { get; set; } = new string[2]; //ослабление дыхания 
+
         public string ShortnessOfBreathInput { get; set; } //ослабление дыхания поле ввода
-        public List<string[]> Wheezes { get; set; } //хрипы
+        public string[] Wheezes { get; set; } = new string[3]; //хрипы
         public string[] RespiratorySupport { get; set; } //респираторная поддержка
-        public List<string[]> RespiratorySupportMachine { get; set; } //респираторная поддержка аппарат
-        public List<string[]> InotropicSupportOne { get; set; } //инотропная поддержка 1
+        public string[] RespiratorySupportMachine { get; set; } = new string[2]; //респираторная поддержка аппарат
+        public string[] InotropicSupportOne { get; set; } = new string[2]; //инотропная поддержка 1
         public string InotropicSupportOneInput { get; set; } //инотропная поддержка 1 поле
-        public List<string[]> InotropicSupportTwo { get; set; } //инотропная поддержка 2
+        public string[] InotropicSupportTwo { get; set; } = new string[2]; //инотропная поддержка 2
         public string[] Hemodynamics { get; set; } //Гемодинамика
         public string InotropicSupportTwoInput { get; set; } //инотропная поддержка 2 поле
         public string Do { get; set; } //ДО
@@ -50,14 +53,14 @@ namespace Re.Core.Models
         public string[] Stomach { get; set; } //Живот
         public string[] Pain { get; set; } //Болезненность
         public string PainAbout { get; set; } //ЧСС
-        public List<string[]> AbdominalBloating { get; set; } //Вздутие живота
+        public string[] AbdominalBloating { get; set; } = new string[2]; //Вздутие живота
         public string[] Peristalsis { get; set; } //Перистальтика
-        public List<string[]> Tongue { get; set; } //Язык
+        public string[] Tongue { get; set; } = new string[2]; //Язык
         public string Diuresis { get; set; } //диурез
         public string Intravenously { get; set; } //внутривенно
         public string[] Urine { get; set; } //Моча
         public string BodyTemperature { get; set; } //температура тела
-        public List<string[]> Drainage { get; set; } //дренаж
+        public string[] Drainage { get; set; } = new string[3]; //дренаж
         public string DrinageAbout { get; set; }
         public string Additionally { get; set; } //дополнительно
         public string Laboratory1 { get; set; }
@@ -81,6 +84,7 @@ namespace Re.Core.Models
     }
     public class PiCCO
     {
+        public string Id { get; set; }
         public int? CI { get; set; }
         public int? ITBI { get; set; }
         public int? CFI { get; set; }
@@ -95,6 +99,7 @@ namespace Re.Core.Models
     }
     public class PiCCO2
     {
+        public string Id { get; set; }
         public int CI { get; set; }
         public int PVPI { get; set; }
         public int CFI { get; set; }
@@ -106,11 +111,12 @@ namespace Re.Core.Models
         public int GEDI { get; set; }
         public int CVP { get; set; }
         public int SVRI { get; set; }
-        #nullable disable
+#nullable disable
         public string Description { get; set; }
     }
     public class FioTrac
     {
+        public string Id { get; set; }
         public int CCO { get; set; }
         public int SVR { get; set; }
         public int SVV { get; set; }
@@ -120,6 +126,7 @@ namespace Re.Core.Models
     }
     public class EsCCO
     {
+        public string Id { get; set; }
         public int EsHCB { get; set; }
         public int EsYO { get; set; }
         public int EsHCI { get; set; }
@@ -130,6 +137,7 @@ namespace Re.Core.Models
     }
     public class VoLEF
     {
+        public string Id { get; set; }
         public int RHEDV { get; set; }
         public int PCWP { get; set; }
         public int RL { get; set; }
