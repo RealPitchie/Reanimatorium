@@ -1,6 +1,6 @@
 ﻿namespace Re.Core.Models;
 
-public class PrescribedMedications
+public class PrescribedMedication
 {
 
     public int Id { get; set; }//ID
@@ -23,7 +23,7 @@ public class PrescribedMedications
 
     //public Doctor Doctor { get; set; }//Врач 
 
-    public PrescribedMedications(){
+    public PrescribedMedication(){
        
         Purpose = "";
         Medication = "";
