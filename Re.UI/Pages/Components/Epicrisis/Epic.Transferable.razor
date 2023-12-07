@@ -1,5 +1,7 @@
 ﻿@using Re.Core.Models.Epicrisis;
 @using Re.Core.Models;
+@inject Re.Services.Services.TransferEpicrisisService trService
+
 <MudGrid>
     <MudItem xs="9">
         <MudGrid Justify="Justify.Center">
@@ -351,6 +353,6 @@
     }
     async Task Submit()
     {
-        var temp = tr;
+        await trService.SaveTransferableAsync(tr);
     }
 }

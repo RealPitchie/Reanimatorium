@@ -79,6 +79,107 @@ namespace Re.Data.Migrations
                     b.ToTable("Doctor");
                 });
 
+            modelBuilder.Entity("Re.Core.Models.Epicrisis.Transferable", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Abdomen")
+                        .HasColumnType("text");
+
+                    b.Property<string>("AgreedWith")
+                        .HasColumnType("text");
+
+                    b.Property<int[]>("ArtherialPressure")
+                        .HasColumnType("integer[]");
+
+                    b.Property<string>("Auscultatory")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Breathing")
+                        .HasColumnType("text");
+
+                    b.Property<string>("ChiefId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Condition")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Conscience")
+                        .HasColumnType("text");
+
+                    b.Property<DateTime?>("DateFrom")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<DateTime?>("DateTo")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Department")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Diagnosis")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Diuresis")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DoctorId")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Drainage")
+                        .HasColumnType("text");
+
+                    b.Property<string>("DynamicsState")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Hemodynamics")
+                        .HasColumnType("text");
+
+                    b.Property<string>("InflammationSigns")
+                        .HasColumnType("text");
+
+                    b.Property<string>("OngoingTherapy")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Ps")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("ReasonsHere")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Recomended")
+                        .HasColumnType("text");
+
+                    b.Property<int>("RespiratoryRate")
+                        .HasColumnType("integer");
+
+                    b.Property<string[]>("SkinCovers")
+                        .HasColumnType("text[]");
+
+                    b.Property<int>("Temperature")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("TransferCavacatheter")
+                        .HasColumnType("text");
+
+                    b.Property<string>("TransferEpiduralCavacatheter")
+                        .HasColumnType("text");
+
+                    b.Property<int>("VentricularReduce")
+                        .HasColumnType("integer");
+
+                    b.Property<string[]>("Wheezes")
+                        .HasColumnType("text[]");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("ChiefId");
+
+                    b.HasIndex("DoctorId");
+
+                    b.ToTable("TransferableEpicrisis");
+                });
+
             modelBuilder.Entity("Re.Core.Models.Patient", b =>
                 {
                     b.Property<int>("Id")
@@ -498,6 +599,21 @@ namespace Re.Data.Migrations
                     b.HasIndex("IndicationsId");
 
                     b.HasDiscriminator().HasValue("CentralVeinProtocol");
+                });
+
+            modelBuilder.Entity("Re.Core.Models.Epicrisis.Transferable", b =>
+                {
+                    b.HasOne("Re.Core.Models.Doctor", "Chief")
+                        .WithMany()
+                        .HasForeignKey("ChiefId");
+
+                    b.HasOne("Re.Core.Models.Doctor", "Doctor")
+                        .WithMany()
+                        .HasForeignKey("DoctorId");
+
+                    b.Navigation("Chief");
+
+                    b.Navigation("Doctor");
                 });
 
             modelBuilder.Entity("Re.Core.Models.ReceptionEpicrisis", b =>

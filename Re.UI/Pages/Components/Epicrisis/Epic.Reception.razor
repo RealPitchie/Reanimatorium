@@ -1033,7 +1033,6 @@
     #endregion
 
     async Task Submit(){
-        var temp = re;
-        await reService.SaveReceptEpicrisisAsync(temp);
+        await reService.SaveReceptEpicrisisAsync(re);
     }
 }

@@ -1,6 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Re.Core.Models;
+using Re.Core.Models.Epicrisis;
 
 #nullable disable
 
@@ -19,7 +20,7 @@ public class DataContext : DbContext
     { 
         if (!optionsBuilder.IsConfigured) 
         {
-            optionsBuilder.UseNpgsql("UserID=postgres;Password=passmein123;Server=localhost;Port=5432;Database=reanim;");
+            optionsBuilder.UseNpgsql("UserID=postgres;Password=123qweQWE;Server=localhost;Port=6699;Database=Reanimatorium;");
             
             // connection to Epicrisis
             // "UserID=postgres;Password=123qweQWE;Server=localhost;Port=6699;Database=Reanimatorium;"
@@ -34,4 +35,5 @@ public class DataContext : DbContext
 
     //Эпикризы
     public DbSet<ReceptionEpicrisis> ReceptionEpicrises { get; set; }
+    public DbSet<Transferable> TransferableEpicrisis { get; set; }
 }
