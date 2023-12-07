@@ -32,6 +32,13 @@ services.AddTransient<ProtocolService>();
 services.AddTransient<ReceptEpicrisisService>();
 services.AddTransient<TransferEpicrisisService>();
 
+services.AddScoped<IRepo<StandartDiary>, DiaryStandartRepo>();
+services.AddScoped<IRepo<WeekendDiary>, DiaryWeekendRepo>();
+services.AddScoped<IRepo<Extubation>, DiaryExtubationRepo>();
+services.AddTransient<StandartDiaryService>();
+services.AddTransient<WeekendDiaryService>();
+services.AddTransient<ExtubationDiaryService>();
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

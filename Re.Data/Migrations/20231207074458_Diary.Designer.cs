@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Re.Data;
@@ -11,9 +12,10 @@ using Re.Data;
 namespace Re.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231207074458_Diary")]
+    partial class Diary
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -79,105 +81,94 @@ namespace Re.Data.Migrations
                     b.ToTable("Doctor");
                 });
 
-            modelBuilder.Entity("Re.Core.Models.Epicrisis.Transferable", b =>
+            modelBuilder.Entity("Re.Core.Models.EsCCO", b =>
                 {
                     b.Property<string>("Id")
                         .HasColumnType("text");
 
-                    b.Property<string>("Abdomen")
+                    b.Property<string>("Description")
                         .HasColumnType("text");
 
-                    b.Property<string>("AgreedWith")
-                        .HasColumnType("text");
-
-                    b.Property<int[]>("ArtherialPressure")
-                        .HasColumnType("integer[]");
-
-                    b.Property<string>("Auscultatory")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Breathing")
-                        .HasColumnType("text");
-
-                    b.Property<string>("ChiefId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Condition")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Conscience")
-                        .HasColumnType("text");
-
-                    b.Property<DateTime?>("DateFrom")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<DateTime?>("DateTo")
-                        .HasColumnType("timestamp with time zone");
-
-                    b.Property<string>("Department")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Diagnosis")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Diuresis")
-                        .HasColumnType("text");
-
-                    b.Property<string>("DoctorId")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Drainage")
-                        .HasColumnType("text");
-
-                    b.Property<string>("DynamicsState")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Hemodynamics")
-                        .HasColumnType("text");
-
-                    b.Property<string>("InflammationSigns")
-                        .HasColumnType("text");
-
-                    b.Property<string>("OngoingTherapy")
-                        .HasColumnType("text");
-
-                    b.Property<int>("Ps")
+                    b.Property<int>("EsCCC")
                         .HasColumnType("integer");
 
-                    b.Property<string>("ReasonsHere")
-                        .HasColumnType("text");
-
-                    b.Property<string>("Recomended")
-                        .HasColumnType("text");
-
-                    b.Property<int>("RespiratoryRate")
+                    b.Property<int>("EsHCB")
                         .HasColumnType("integer");
 
-                    b.Property<string[]>("SkinCovers")
-                        .HasColumnType("text[]");
-
-                    b.Property<int>("Temperature")
+                    b.Property<int>("EsHCI")
                         .HasColumnType("integer");
 
-                    b.Property<string>("TransferCavacatheter")
-                        .HasColumnType("text");
-
-                    b.Property<string>("TransferEpiduralCavacatheter")
-                        .HasColumnType("text");
-
-                    b.Property<int>("VentricularReduce")
+                    b.Property<int>("EsICCC")
                         .HasColumnType("integer");
 
-                    b.Property<string[]>("Wheezes")
-                        .HasColumnType("text[]");
+                    b.Property<int>("EsIYO")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("EsYO")
+                        .HasColumnType("integer");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ChiefId");
+                    b.ToTable("EsCCO");
+                });
 
-                    b.HasIndex("DoctorId");
+            modelBuilder.Entity("Re.Core.Models.Extubation", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
 
-                    b.ToTable("TransferableEpicrisis");
+                    b.Property<string>("Ad")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Chss")
+                        .HasColumnType("text");
+
+                    b.Property<string[]>("Doctor")
+                        .HasColumnType("text[]");
+
+                    b.Property<string>("Insuflation")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MedSedation")
+                        .HasColumnType("text");
+
+                    b.Property<string>("MuscleTone")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Sat")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ExtubationDiaries");
+                });
+
+            modelBuilder.Entity("Re.Core.Models.FioTrac", b =>
+                {
+                    b.Property<string>("Id")
+                        .HasColumnType("text");
+
+                    b.Property<int>("CCO")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("CVP")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<int>("SV")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SVR")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("SVV")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("FioTrac");
                 });
 
             modelBuilder.Entity("Re.Core.Models.Patient", b =>
@@ -1352,21 +1343,6 @@ namespace Re.Data.Migrations
                     b.HasIndex("IndicationsId");
 
                     b.HasDiscriminator().HasValue("CentralVeinProtocol");
-                });
-
-            modelBuilder.Entity("Re.Core.Models.Epicrisis.Transferable", b =>
-                {
-                    b.HasOne("Re.Core.Models.Doctor", "Chief")
-                        .WithMany()
-                        .HasForeignKey("ChiefId");
-
-                    b.HasOne("Re.Core.Models.Doctor", "Doctor")
-                        .WithMany()
-                        .HasForeignKey("DoctorId");
-
-                    b.Navigation("Chief");
-
-                    b.Navigation("Doctor");
                 });
 
             modelBuilder.Entity("Re.Core.Models.ReceptionEpicrisis", b =>

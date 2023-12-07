@@ -10,7 +10,7 @@ namespace Re.Data;
 
 public class DataContext : DbContext
 {
-    public DbSet<Patient> Patients { get; set; } 
+    
     
     public DataContext() {}
     public DataContext(DbContextOptions<DataContext> options)
@@ -26,6 +26,11 @@ public class DataContext : DbContext
             // "UserID=postgres;Password=123qweQWE;Server=localhost;Port=6699;Database=Reanimatorium;"
         } 
     }
+
+    //Наркотики
+    public DbSet<Patient> Patients { get; set; }
+    public DbSet<PrescribedMedication> Medications { get; set; }
+    public DbSet<Syndrom> Syndroms { get; set; }
 
     //Протоколы
     public DbSet<StandardProtocol> Protocols { get; set; }
