@@ -8,6 +8,7 @@ using Re.Data.Repo;
 using Re.Services.Services;
 using Re.Core.Models;
 using Re.Core.Models.Epicrisis;
+using Re.Data.Repo.Diary;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -22,8 +23,9 @@ services.AddDbContext<DataContext>(options =>
     options.UseNpgsql("UserID=postgres;Password=123qweQWE;Server=localhost;Port=6699;Database=Reanimatorium;"), 
     ServiceLifetime.Transient
 );
+AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 // connection to Epicrisis
-// "UserID=postgres;Password=123qweQWE;Server=localhost;Port=6699;Database=Reanimatorium;"
+// "UserID=postgres;Password=123qweQWE;Server=localhost;Port=5432;Database=Reanimatorium;"
 
 services.AddScoped<IRepo<StandardProtocol>, Repo>();
 services.AddScoped<IRepo<Transferable>, TransferableRepo>();
