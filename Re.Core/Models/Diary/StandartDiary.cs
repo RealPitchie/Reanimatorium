@@ -41,8 +41,8 @@ namespace Re.Core.Models
         public string[] InotropicSupportTwo { get; set; } = new string[2]; //инотропная поддержка 2
         public string[] Hemodynamics { get; set; } //Гемодинамика
         public string InotropicSupportTwoInput { get; set; } //инотропная поддержка 2 поле
-        public string Do { get; set; } //ДО
-        public string Cd { get; set; } //ЧД
+        public int Do { get; set; } //ДО
+        public int Cd { get; set; } //ЧД
         public string Pdkv { get; set; } //ПДКВ
         public string Fio2 { get; set; } //FiO2
         public string Dvdox { get; set; } //Двдох
