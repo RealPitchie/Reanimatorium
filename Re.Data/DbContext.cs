@@ -10,8 +10,6 @@ namespace Re.Data;
 
 public class DataContext : DbContext
 {
-    
-    
     public DataContext() {}
     public DataContext(DbContextOptions<DataContext> options)
         : base(options)
@@ -20,7 +18,7 @@ public class DataContext : DbContext
     { 
         if (!optionsBuilder.IsConfigured) 
         {
-            optionsBuilder.UseNpgsql("UserID=postgres;Password=123qweQWE;Server=localhost;Port=6699;Database=Reanimatorium;");
+            optionsBuilder.UseNpgsql("UserID=postgres;Password=passmein123;Server=localhost;Port=5432;Database=reanim;");
             
             // connection to Epicrisis
             // "UserID=postgres;Password=123qweQWE;Server=localhost;Port=6699;Database=Reanimatorium;"
