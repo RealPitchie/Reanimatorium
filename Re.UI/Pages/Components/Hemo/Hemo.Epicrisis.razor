@@ -10,7 +10,7 @@
         </MudGrid>
     </MudItem>
     <MudDivider Style="margin:35px 0;"></MudDivider>
-    <MudPaper Style="margin: 15px 0;" Height="705px">
+    <MudPaper Style="margin: 15px 0;" Height="775px">
         <MudText Style="margin-top:10px" Align="Align.Center" Typo="Typo.h6">@Name</MudText>
         <MudGrid Style="margin-top:10px; margin-left:150px;">
             <MudGrid>
@@ -120,6 +120,11 @@
         <MudText Style="margin-left:670px;">
             Глав. отделением <span style="text-decoration: underline;">Розенгард С.А.</span>,
         </MudText>
+        <MudItem>
+            <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit" Style="width:650px; margin-left:280px; margin-top:20px;">
+                Отправить
+            </MudButton>
+        </MudItem>
     </MudPaper>
     <MudGrid Style="width:925px; height:90px; background: #ffff99; display: flex; align-items: center; padding:0 20px; margin-top:50px; margin-left:145px; border:1px solid #c00000;">
         <MudImage Width="50" Src="../img/links.jpg" Style="margin-right:50px; margin-left:20px; border:1px solid #c00000;" />
@@ -209,5 +214,9 @@
     {
         date = DateTime.Now; //Дата
         time = DateTime.Now.TimeOfDay; //Время
+    }
+    void Submit()
+    {
+        var temp = ep;
     }
 }

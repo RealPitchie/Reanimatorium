@@ -2,6 +2,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Re.Core.Models;
 using Re.Core.Models.Epicrisis;
+using Re.Core.Models.Hemo;
 
 #nullable disable
 
@@ -44,4 +45,7 @@ public class DataContext : DbContext
     public DbSet<StandartDiary> StandartDiaries { get; set; }
     public DbSet<WeekendDiary> WeekendDiaries { get; set; }
     public DbSet<Extubation> ExtubationDiaries { get; set; }
+
+    //Гемотрансфузии
+    public DbSet<HemoEpicrisis> HemoEpicrises { get; set; }
 }
