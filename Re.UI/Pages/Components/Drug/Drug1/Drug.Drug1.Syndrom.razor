@@ -1,5 +1,6 @@
 ﻿@using Re.Core.Models
 @using Re.UI.Data
+@inject Re.Services.Services.DrugService reService
 
 <MudPaper Style="padding: 20px; margin: 15px 0">
     <MudText style="margin-top: 15px; font-weight: bolder;">
@@ -91,6 +92,11 @@
             <MudItem xs="12">
                 <MudTextField Style="height: 70px;" T="string" Label="Примечание:" Variant="Variant.Text" @bind-Value="@syndrom.Notes" Lines="3"/>
             </MudItem>
+            </MudGrid>
+        <MudGrid Justify="Justify.FlexEnd">
+             <MudItem>
+                 <MudButton OnClick="Submit" Variant="Variant.Outlined" Color="Color.Primary">Отправить</MudButton>
+            </MudItem>
 
         </MudGrid>
     </MudText>
@@ -102,6 +108,10 @@
 
     Syndrom syndrom = new Syndrom();
 
+     async Task Submit()
+    {
+        await reService.SaveSyndromAsync(syndrom); 
+    }
     string[] Status = new string[]
         {   "Сознание ясное, контактен, адекватен.",
             "Пациент спит."};
