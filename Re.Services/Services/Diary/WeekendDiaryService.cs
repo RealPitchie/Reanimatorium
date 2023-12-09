@@ -17,6 +17,10 @@ namespace Re.Services.Services
         }
         public async Task<WeekendDiary> SaveWeekendDiaryAsync(WeekendDiary weekend)
         {
+            if (weekend.Id == null)
+            {
+                weekend.Id = Guid.NewGuid().ToString();
+            }
             return await _repo.SaveAsync(weekend);
         }
     }

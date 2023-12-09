@@ -816,8 +816,8 @@ namespace Re.Data.Migrations
                     b.Property<string[]>("Breathing")
                         .HasColumnType("text[]");
 
-                    b.Property<string>("Cd")
-                        .HasColumnType("text");
+                    b.Property<int>("Cd")
+                        .HasColumnType("integer");
 
                     b.Property<string>("CddField")
                         .HasColumnType("text");
@@ -834,8 +834,8 @@ namespace Re.Data.Migrations
                     b.Property<string>("Diuresis")
                         .HasColumnType("text");
 
-                    b.Property<string>("Do")
-                        .HasColumnType("text");
+                    b.Property<int>("Do")
+                        .HasColumnType("integer");
 
                     b.Property<string[]>("Doctor")
                         .HasColumnType("text[]");

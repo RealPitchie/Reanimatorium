@@ -3,15 +3,16 @@
 @using Re.UI.Data
 @using System.Diagnostics;
 @inject IDialogService DialogService
+@inject Re.Services.Services.WeekendDiaryService WeekendService
 
 <MudGrid>
     <MudItem>
         <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
     </MudItem>
-    <MudItem>
+    <MudItem xs="3">
         <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
     </MudItem>
-    <MudItem style="padding-left:450px;">
+    <MudItem Class="d-flex flex-column justify-end">
         <MudRadioGroup @bind-SelectedOption="Dense_Radio">
             <MudRadio Option="true" Dense="true">Обход</MudRadio>
             <MudRadio Option="false" Dense="false">Запись дежурного врача</MudRadio>
@@ -20,13 +21,13 @@
 </MudGrid>
 
 
-<MudGrid>
+<MudGrid Justify="Justify.FlexStart">
     <MudItem xs="8">
-        <MudPaper Style="padding: 10px; margin: 15px 0 0 0; width:150%">
+        <MudPaper Style="padding: 20px; margin: 15px 0">
 
             <MudGrid>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>ОБХОД В СОСТАВЕ: </MudText></MudItem>
-                <MudItem Style="width: 34%;">
+                <MudItem  Class="d-flex flex-column justify-end"><MudText>ОБХОД В СОСТАВЕ: </MudText></MudItem>
+                <MudItem xs="3">
                     <MudSelect T="string" Dense="true" AnchorOrigin="Origin.BottomCenter" Disabled="!Dense_Radio">
                         @foreach (var item in Doctor.OrderBy(x => x))
                         {
@@ -34,7 +35,7 @@
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 34%;">
+                <MudItem xs="3">
                     <MudSelect T="string" Dense="true" AnchorOrigin="Origin.BottomCenter" Disabled="!Dense_Radio">
                         @foreach (var item in Doctor.OrderBy(x => x))
                         {
@@ -42,51 +43,46 @@
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>дежурных врачей. </MudText></MudItem>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>дежурных врачей. </MudText></MudItem>
             </MudGrid>
 
 
 
             <MudGrid>
-                <MudItem Style="width: 8%;" Class="d-flex flex-column justify-end"><MudText>Пациент</MudText> </MudItem>
-
-                <MudItem Style="width: 35%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Patient" />
+                <MudItem xs="4">
+                    <MudTextField Label="Пациент" T="string" Variant="Variant.Text" Text="@weekend.Patient" />
                 </MudItem>
 
-                <MudItem Style="width: 8%;" Class="d-flex flex-column justify-end"><MudText>возраст</MudText> </MudItem>
-
-                <MudItem Style="width: 10%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Age" />
+                <MudItem xs="3">
+                    <MudTextField Label="возраст" T="string" Variant="Variant.Text" Text="@weekend.Age" />
                 </MudItem>
 
-                <MudItem Style="width: 8%;" Class="d-flex flex-column justify-end"><MudText>в ОАРИТ</MudText> </MudItem>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>в ОАРИТ</MudText> </MudItem>
 
-                <MudItem Style="width: 10%;">
+                <MudItem xs="2">
                     <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Day" />
                 </MudItem>
-                <MudItem Style="width: 8%;" Class="d-flex flex-column justify-end"><MudText>сутки.</MudText> </MudItem>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>сутки.</MudText> </MudItem>
             </MudGrid>
 
             <MudGrid>
-                <MudItem Style="width: 13%;" Class="d-flex flex-column justify-end"><MudText>после операции</MudText> </MudItem>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>после операции</MudText> </MudItem>
 
-                <MudItem Style="width: 10%;">
+                <MudItem xs="2">
                     <MudTextField T="string" Variant="Variant.Text" Text="@weekend.OperationDay" Disabled="SwitchChecked3" />
                 </MudItem>
-                <MudItem Style="width: 8%;" Class="d-flex flex-column justify-end"><MudText>сутки.</MudText> </MudItem>
-                <MudItem Style="width: 50%;" Class="d-flex flex-column justify-end"><MudText Disabled="!Dense_Radio">Доложены данные объективного статуса, и результаты исследований.</MudText> </MudItem>
-                <MudItem Style=" padding: 38px 0 0 150px;">
+                <MudItem Class="d-flex flex-column justify-end"><MudText>сутки.</MudText> </MudItem>
+                <MudItem  Class="d-flex flex-column justify-end"><MudText Disabled="!Dense_Radio">Доложены данные объективного статуса, и результаты исследований.</MudText> </MudItem>
+                <MudItem xs="1" Class="d-flex flex-column justify-end">
 
                     <MudSwitch @bind-Checked="SwitchChecked3" />
 
                 </MudItem>
             </MudGrid>
 
-            <MudGrid>
-                <MudItem Style="width: 8%;" Class="d-flex flex-column justify-end"><MudText>Состояние</MudText> </MudItem>
-                <MudItem Style="width: 90%;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
+           <MudGrid>
+                <MudItem xs="12">
+                    <MudSelect Label="Состояние" T="string" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Сonditions)
                         {
                             <MudSelectItem Value="@item" />
@@ -96,45 +92,36 @@
             </MudGrid>
             <MudGrid>
 
-                <MudItem Style="width: 8%;" Class="d-flex flex-column justify-end"><MudText>Жалобы</MudText> </MudItem>
-
-
-                <MudItem Style="width: 30%;padding-left:10px;">
-
-                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
+                <MudItem xs="5">
+                    <MudSelect Label="Жалобы" T="string" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Сomplaints)
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
-
                 </MudItem>
-                <MudItem Style="width: 59%; padding: 11px 0 0 6px;">
 
+                <MudItem xs="5">
                     <MudTextField T="string" Label="Жалобы на" Variant="Variant.Text" Text="@weekend.ComplaintsAbout" />
-
                 </MudItem>
-            </MudGrid>
-
+                </MudGrid>
             <MudGrid>
-                <MudItem Style="width: 8%;" Class="d-flex flex-column justify-end"><MudText>Сознание </MudText> </MudItem>
-                <MudItem Style="width: 20%;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
+                <MudItem xs="3">
+                    <MudSelect Label="Сознание" T="string" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Conscience)
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 6%;" Class="d-flex flex-column justify-end"><MudText>GCS - </MudText> </MudItem>
-                <MudItem Style="width: 5%; padding: 40px 0 0 15px;">
+                <MudItem Class="d-flex flex-column justify-end"><MudText>GCS - </MudText> </MudItem>
+                <MudItem Class="d-flex flex-column justify-end">
                     <MudText> @totalSum</MudText>
                 </MudItem>
-                <MudItem Style="width: 8%;padding-left:30px;" Class="d-flex flex-column justify-end"><MudText>RASS</MudText></MudItem>
 
-                <MudItem Style="width: 17%;">
+                <MudItem xs="2">
 
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
+                        <MudSelect Label="RASS" T="string" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Rass)
                         {
                             <MudSelectItem Value="@item" />
@@ -142,21 +129,24 @@
                     </MudSelect>
 
                 </MudItem>
-                <MudItem Style="width: 28%; padding: 11px 0 0 6px;">
+                <MudItem xs="4">
 
                     <MudTextField T="string" Variant="Variant.Text" Text="@RassThis" Disabled="!SwitchChecked4" />
 
                 </MudItem>
-                <MudItem Style=" padding: 38px 0 0 15px;">
+                <MudItem xs="1" Class="d-flex flex-column justify-end">
 
                     <MudSwitch @bind-Checked="SwitchChecked4" />
 
                 </MudItem>
             </MudGrid>
 
+           
+                 <MudGrid>
+                <MudItem  Class="d-flex flex-column justify-end"><MudText>GCS - </MudText> </MudItem>
+                </MudGrid>
             <MudGrid>
-                <MudItem Style="width: 6%;" Class="d-flex flex-column justify-end"><MudText>GCS - </MudText> </MudItem>
-                <MudItem Style="width: 15%;padding-top:40px;">
+                <MudItem>
 
                     <select @onchange="HandleSelectionChange">
                         <option value="4">Произвольное</option>
@@ -166,13 +156,13 @@
                     </select>
                 </MudItem>
 
-                <MudItem Style="width: 5%;padding-top:40px;">
+                <MudItem xs="1">
 
                     <input type="text" @bind="selectedValue" disabled="!SwitchCheckedGCS" />
 
                 </MudItem>
 
-                <MudItem Style="width: 18%;padding-top:40px;">
+                <MudItem>
 
                     <select @onchange="HandleSelectionChangeTwo">
                         <option value="5">Отвечает</option>
@@ -183,13 +173,13 @@
                     </select>
                 </MudItem>
 
-                <MudItem Style="width: 5%;padding-top:40px;">
+                <MudItem xs="1">
 
                     <input type="text" @bind="selectedValueTwo" disabled="!SwitchCheckedGCS" />
 
                 </MudItem>
 
-                <MudItem Style="width: 18%;padding-top:40px;">
+                <MudItem>
 
                     <select @onchange="HandleSelectionChangeThree">
                         <option value="6">Выполняет команды</option>
@@ -201,7 +191,7 @@
                     </select>
                 </MudItem>
 
-                <MudItem Style="width: 5%;padding-top:40px;">
+                <MudItem xs="1">
 
                     <input type="text" @bind="selectedValueThree" disabled="!SwitchCheckedGCS" />
 
@@ -210,34 +200,31 @@
 
 
             <MudGrid>
-                <MudItem Style="width: 20%;" Class="d-flex flex-column justify-end"><MudText>Неврологический статус</MudText> </MudItem>
-                <MudItem Style="width: 78%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Neurologist" />
+                <MudItem xs="12">
+                    <MudTextField Label="Неврологический статус" T="string" Variant="Variant.Text" Text="@weekend.Neurologist" />
                 </MudItem>
             </MudGrid>
 
             <MudGrid>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Кожные покровы </MudText> </MudItem>
-                <MudItem Style="width: 20%;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
+                <MudItem xs="3">
+                    <MudSelect Label="Кожные покровы" T="string" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Skin[0])
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 10%;" Class="d-flex flex-column justify-end"><MudText>влажность </MudText> </MudItem>
-                <MudItem Style="width: 25%;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
+                <MudItem xs="5">
+                    <MudSelect Label="влажность" T="string" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Skin[1])
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 8%; padding-left:20px;" Class="d-flex flex-column justify-end"><MudText>цвет </MudText> </MudItem>
-                <MudItem Style="width: 20%;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
+
+                <MudItem xs="3">
+                    <MudSelect Label="цвет" T="string" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Skin[2])
                         {
                             <MudSelectItem Value="@item" />
@@ -247,9 +234,8 @@
             </MudGrid>
 
             <MudGrid>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Дыхание через</MudText> </MudItem>
-                <MudItem Style="width: 83%;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
+                <MudItem xs="12">
+                    <MudSelect Label="Дыхание через" T="string" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Breathing)
                         {
                             <MudSelectItem Value="@item" />
@@ -258,8 +244,8 @@
                 </MudItem>
             </MudGrid>
             <MudGrid>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Экстубирован</MudText></MudItem>
-                <MudItem Style="width: 10%;">
+                <MudItem Class="d-flex flex-column justify-end"><MudText>Экстубирован</MudText></MudItem>
+                <MudItem xs="2">
                     <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked5">
                         @foreach (var item in Extubation)
                         {
@@ -267,17 +253,18 @@
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 30%;" Class="d-flex flex-column justify-end"><MudText>самостоятельное дыхание эффективно.</MudText></MudItem>
-                <MudItem Style=" padding: 35px 0 0 0;">
+                <MudItem Class="d-flex flex-column justify-end"><MudText>самостоятельное дыхание эффективно.</MudText></MudItem>
+                <MudItem xs="1" Class="d-flex flex-column justify-end">
                     <MudSwitch @bind-Checked="SwitchChecked5" />
                 </MudItem>
             </MudGrid>
-
             <MudGrid>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Ингаляция O₂ через </MudText></MudItem>
-
-                <MudItem Style="width: 25%;">
-                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked6">
+                <MudItem Class="d-flex flex-column justify-end" Style="padding-top:40px"><MudText> Ингаляция O₂ через</MudText></MudItem>
+            </MudGrid>
+           
+            <MudGrid>
+                <MudItem xs="3">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked6">
                         @foreach (var item in InhalationO2)
                         {
                             <MudSelectItem Value="@item" />
@@ -285,24 +272,23 @@
                     </MudSelect>
                 </MudItem>
 
-                <MudItem Style="width: 16%;padding: 11px 22px;" Class="d-flex flex-column justify-end"><MudText>Скорость потока - </MudText></MudItem>
+                <MudItem  Class="d-flex flex-column justify-end"><MudText>Скорость потока - </MudText></MudItem>
 
-                <MudItem Style="width: 8%; padding: 11px 11px;">
+                <MudItem xs="1">
                     <MudTextField T="string" Label="" Variant="Variant.Text" Text="@weekend.SpeedFlow" Disabled="!SwitchChecked6" />
                 </MudItem>
-                <MudItem Style="width: 10%;padding: 11px 11px;" Class="d-flex flex-column justify-end"><MudText>л/мин.</MudText></MudItem>
-                <MudItem Style="width: 6%;" Class="d-flex flex-column justify-end"><MudText>ЧДД - </MudText></MudItem>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>л/мин.</MudText></MudItem>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>ЧДД - </MudText></MudItem>
 
-                <MudItem Style="width: 10%;">
+                <MudItem xs="1">
                     <MudTextField T="string" Variant="Variant.Text" Text="@weekend.CddField" Disabled="!SwitchChecked6" />
                 </MudItem>
-                <MudItem Style="width: 10%;padding: 11px 15px;" Class="d-flex flex-column justify-end"><MudText>в 1 минуту.</MudText></MudItem>
+                <MudItem  Class="d-flex flex-column justify-end"><MudText>в 1 минуту.</MudText></MudItem>
             </MudGrid>
 
             <MudGrid>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Аускультативно </MudText></MudItem>
-                <MudItem Style="width: 83%;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
+                <MudItem xs="12">
+                    <MudSelect T="string" Label="Аускультативно" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Auscultatory)
                         {
                             <MudSelectItem Value="@item" />
@@ -312,8 +298,8 @@
             </MudGrid>
 
             <MudGrid>
-                <MudItem Style="width: 20%;" Class="d-flex flex-column justify-end"><MudText>Ослабление дыхания </MudText></MudItem>
-                <MudItem Style="width: 30%;;">
+                <MudItem Class="d-flex flex-column justify-end"><MudText>Ослабление дыхания </MudText></MudItem>
+                <MudItem xs="2">
                     <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in ShortnessOfBreath[0])
                         {
@@ -322,7 +308,7 @@
                     </MudSelect>
                 </MudItem>
 
-                <MudItem Style="width: 20%; padding: 11px 6px;">
+                <MudItem xs="3">
                     <MudSelect T="string" Label="Стороны" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in ShortnessOfBreath[1])
                         {
@@ -330,14 +316,15 @@
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 28%; padding: 11px 11px;">
+
+                <MudItem xs="4">
                     <MudTextField T="string" Label="" Variant="Variant.Text" Text="@weekend.ShortnessOfBreathInput" />
                 </MudItem>
             </MudGrid>
 
             <MudGrid>
-                <MudItem Style="width: 20%;" Class="d-flex flex-column justify-end"><MudText>Хрипы </MudText></MudItem>
-                <MudItem Style="width: 30%;">
+                <MudItem xs="3" Class="d-flex flex-column justify-end"><MudText>Хрипы </MudText></MudItem>
+                <MudItem xs="2">
                     <MudSelect T="string" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Wheezes[0])
                         {
@@ -346,7 +333,7 @@
                     </MudSelect>
                 </MudItem>
 
-                <MudItem Style="width: 20%; padding: 11px 6px;">
+                <MudItem xs="3">
                     <MudSelect T="string" Label="Стороны" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Wheezes[1])
                         {
@@ -354,7 +341,8 @@
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 28%; padding: 11px 11px;">
+
+                <MudItem xs="4">
                     <MudSelect T="string" Label="Характер" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Wheezes[2])
                         {
@@ -362,14 +350,11 @@
                         }
                     </MudSelect>
                 </MudItem>
-
             </MudGrid>
 
             <MudGrid>
-                <MudItem Style="width: 20%;" Class="d-flex flex-column justify-end"><MudText>Респираторная поддержка </MudText></MudItem>
-                <MudItem Style="width: 78%;">
-
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Disabled="SwitchChecked6">
+                <MudItem xs="12">
+                    <MudSelect T="string" Label="Респираторная поддержка" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked4">
                         @foreach (var item in RespiratorySupport)
                         {
                             <MudSelectItem Value="@item" />
@@ -377,11 +362,10 @@
                     </MudSelect>
                 </MudItem>
             </MudGrid>
-            <MudGrid>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>аппаратом </MudText></MudItem>
 
-                <MudItem Style="width: 25%;">
-                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="SwitchChecked6">
+            <MudGrid>
+                <MudItem xs="6">
+                    <MudSelect T="string" Label="аппаратом" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked4">
                         @foreach (var item in RespiratorySupportMachine[0])
                         {
                             <MudSelectItem Value="@item" />
@@ -389,38 +373,32 @@
                     </MudSelect>
                 </MudItem>
 
-                <MudItem Style="width: 10%;padding: 11px 30px;" Class="d-flex flex-column justify-end"><MudText> режим </MudText></MudItem>
-
-                <MudItem Style="width: 15%; ;">
-                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="SwitchChecked6">
+                <MudItem xs="6">
+                    <MudSelect T="string" Label="режим" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked4">
                         @foreach (var item in RespiratorySupportMachine[1])
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
-
             </MudGrid>
 
-
-
-            <MudGrid Style="padding-left:300px;">
-                <MudItem Style="width: 7%;" Class="d-flex flex-column justify-end"><MudText>ДО - </MudText></MudItem>
-                <MudItem Style="width: 7%;">
-                    <MudTextField @bind-Value="@Num1" T="int" Variant="Variant.Text" Text="@weekend.Do" Disabled="SwitchChecked6" />
+            <MudGrid>
+                <MudItem xs="2">
+                    <MudTextField Label="ДО - " @bind-Value="@Num1" T="int" Variant="Variant.Text" Min="0" Disabled="!SwitchChecked4" />
                 </MudItem>
-                <MudItem Style="width: 10%;" Class="d-flex flex-column justify-end"><MudText>мл;</MudText></MudItem>
+                <MudItem xs="3" Class="d-flex flex-column justify-end"><MudText>мл;</MudText></MudItem>
 
-                <MudItem Style="width: 29%;padding-left:200px;" Class="d-flex flex-column justify-end"><MudText>FiO₂ - </MudText></MudItem>
-                <MudItem Style="width: 7%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Fio2" Disabled="SwitchChecked6" />
+                <MudItem xs="2">
+                    <MudTextField T="string" Label="FiO₂ - " Variant="Variant.Text" Text="@weekend.Fio2" Disabled="!SwitchChecked4" />
                 </MudItem>
-                <MudItem Style="width: 5%;" Class="d-flex flex-column justify-end"><MudText>%;</MudText></MudItem>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>%;</MudText></MudItem>
 
-                <MudItem Style="width: 15%; padding-left:90px; padding-top:40px;">
+                <MudItem xs="1">
                     <MudButton OnClick="CalculateProduct">МОД</MudButton>
                 </MudItem>
-                <MudItem Style="width: 20%;padding-top:45px;">
+
+                <MudItem Class="d-flex flex-column justify-end" Style="padding-bottom:40px;">
                     @if (Result != null)
                     {
                         <p> - @Result мл/мин;</p>
@@ -428,43 +406,38 @@
                 </MudItem>
             </MudGrid>
 
-            <MudGrid Style="padding-left:300px;">
-                <MudItem Style="width: 7%;" Class="d-flex flex-column justify-end"><MudText>ЧД - </MudText></MudItem>
-                <MudItem Style="width: 7%;">
-                    <MudTextField @bind-Value="@Num2" T="int" Variant="Variant.Text" Text="@weekend.Cd" Disabled="SwitchChecked6" />
+            <MudGrid>
+                <MudItem xs="2">
+                    <MudTextField @bind-Value="@Num2" Label="ЧД - " T="int" Variant="Variant.Text" Min="0" Disabled="!SwitchChecked4" />
                 </MudItem>
-                <MudItem Style="width: 10%;" Class="d-flex flex-column justify-end"><MudText>в мин;</MudText></MudItem>
+                <MudItem xs="3" Class="d-flex flex-column justify-end"><MudText>в мин;</MudText></MudItem>
 
-                <MudItem Style="width: 29%;padding-left:180px;" Class="d-flex flex-column justify-end"><MudText>Двдох - </MudText></MudItem>
-                <MudItem Style="width: 7%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Dvdox" Disabled="SwitchChecked6" />
+                <MudItem xs="2">
+                    <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Dvdox" Label="Двдох - " Disabled="!SwitchChecked4" />
                 </MudItem>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>см водн.ст.;</MudText></MudItem>
+                <MudItem xs="3" Class="d-flex flex-column justify-end"><MudText>см водн.ст.;</MudText></MudItem>
 
-                <MudItem Style=" padding: 35px 0 0 150px;">
-                    <MudSwitch @bind-Checked="SwitchChecked6" />
+                <MudItem Class="d-flex flex-column justify-end">
+                    <MudSwitch @bind-Checked="SwitchChecked4" />
                 </MudItem>
-            </MudGrid>
-
-            <MudGrid Style="padding-left:280px;">
-                <MudItem Style="width: 9%;" Class="d-flex flex-column justify-end"><MudText>ПДКВ -</MudText></MudItem>
-                <MudItem Style="width: 7%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Pdkv" Disabled="SwitchChecked6" />
-                </MudItem>
-                <MudItem Style="width: 14%;" Class="d-flex flex-column justify-end"><MudText>см водн.ст.;</MudText></MudItem>
-
-                <MudItem Style="width: 24%;padding-left:150px;" Class="d-flex flex-column justify-end"><MudText>Дпод - </MudText></MudItem>
-                <MudItem Style="width: 7%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Dpod" Disabled="SwitchChecked6" />
-                </MudItem>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>см водн.ст.;</MudText></MudItem>
             </MudGrid>
 
             <MudGrid>
-                <MudItem Style="width: 15%; padding-right: 6px;" Class="d-flex flex-column justify-end"><MudText>Гемодинамика</MudText></MudItem>
+                <MudItem xs="2">
+                    <MudTextField T="string" Variant="Variant.Text" Label="ПДКВ -" Text="@weekend.Pdkv" Disabled="!SwitchChecked4" />
+                </MudItem>
+                <MudItem xs="3" Class="d-flex flex-column justify-end"><MudText>см водн.ст.;</MudText></MudItem>
 
-                <MudItem Style="width: 83%; padding: 11px 1px;">
-                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
+                <MudItem xs="2">
+                    <MudTextField T="string" Variant="Variant.Text" Label="Дпод - " Text="@weekend.Dpod" Disabled="!SwitchChecked4" />
+                </MudItem>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>см водн.ст.;</MudText></MudItem>
+            </MudGrid>
+
+            <MudGrid>
+
+                <MudItem xs="12">
+                    <MudSelect Label="Гемодинамика" T="string" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Hemodynamics)
                         {
                             <MudSelectItem Value="@item" />
@@ -472,11 +445,12 @@
                     </MudSelect>
                 </MudItem>
             </MudGrid>
-            <MudGrid>
-                <MudItem Style="width: 20%; padding-right: 6px;" Class="d-flex flex-column justify-end"><MudText>Инотропная поддержка:</MudText></MudItem>
 
-                <MudItem Style="width: 25%; padding: 11px 1px;">
-                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
+            <MudGrid>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>Инотропная поддержка:</MudText></MudItem>
+
+                <MudItem xs="3">
+                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked5">
                         @foreach (var item in InotropicSupportOne[0])
                         {
                             <MudSelectItem Value="@item" />
@@ -484,78 +458,51 @@
                     </MudSelect>
                 </MudItem>
 
-                <MudItem Style="width: 10%; padding: 11px 6px;">
+                <MudItem xs="2">
 
-                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@weekend.InotropicSupportOneInput" Disabled="!SwitchChecked7" />
+                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@weekend.InotropicSupportOneInput" Disabled="!SwitchChecked5" />
                 </MudItem>
 
-                <MudItem Style="width: 10%; padding: 11px 1px;">
-                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
+                <MudItem xs="2">
+                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked5">
                         @foreach (var item in InotropicSupportOne[1])
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style=" padding: 35px 0 0 50px;">
-                    <MudSwitch @bind-Checked="SwitchChecked7" />
-                </MudItem>
-            </MudGrid>
-
-            <MudGrid Style="padding-left:230px;">
-                <MudItem Style="width: 32%; padding: 11px 1px;">
-                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
-                        @foreach (var item in InotropicSupportOne[0])
-                        {
-                            <MudSelectItem Value="@item" />
-                        }
-                    </MudSelect>
-                </MudItem>
-
-                <MudItem Style="width: 13%; padding: 11px 6px;">
-
-                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@weekend.InotropicSupportOneInput" Disabled="!SwitchChecked7" />
-                </MudItem>
-
-                <MudItem Style="width: 12%; padding: 11px 1px;">
-                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
-                        @foreach (var item in InotropicSupportOne[1])
-                        {
-                            <MudSelectItem Value="@item" />
-                        }
-                    </MudSelect>
+                <MudItem xs="1" Class="d-flex flex-column justify-end">
+                    <MudSwitch @bind-Checked="SwitchChecked5" />
                 </MudItem>
             </MudGrid>
 
             <MudGrid>
-                <MudItem Style="width: 6%;" Class="d-flex flex-column justify-end"><MudText>АД - </MudText></MudItem>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>АД - </MudText></MudItem>
 
-                <MudItem Style="width: 10%;">
+                <MudItem xs="2">
                     <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Ad" />
                 </MudItem>
-                <MudItem Style="width: 23%;" Class="d-flex flex-column justify-end"><MudText>мм рт.ст.</MudText></MudItem>
-                <MudItem Style="width: 6%;" Class="d-flex flex-column justify-end"><MudText>ЧСС - </MudText></MudItem>
+                <MudItem xs="2" Class="d-flex flex-column justify-end"><MudText>мм рт.ст.</MudText></MudItem>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>ЧСС - </MudText></MudItem>
 
-                <MudItem Style="width: 12%;">
+                <MudItem xs="2">
                     <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Сhss" />
                 </MudItem>
-                <MudItem Style="width: 30%;" Class="d-flex flex-column justify-end"><MudText>в 1 минуту.</MudText></MudItem>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>в 1 минуту.</MudText></MudItem>
             </MudGrid>
 
             <MudGrid>
-                <MudItem Style="width: 6%;" Class="d-flex flex-column justify-end"><MudText>SpO₂ - </MudText></MudItem>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>SpO₂ - </MudText></MudItem>
 
-                <MudItem Style="width: 10%;">
+                <MudItem xs="2">
                     <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Spo2" />
                 </MudItem>
                 <MudItem Style="width: 30%;" Class="d-flex flex-column justify-end"><MudText>%.</MudText></MudItem>
             </MudGrid>
 
             <MudGrid>
-                <MudItem Style="width: 6%;" Class="d-flex flex-column justify-end"><MudText>Живот </MudText></MudItem>
-
-                <MudItem Style="width: 93%;">
-                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
+                <MudItem xs="12">
+                    <MudSelect T="string" Label="Живот" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Stomach)
                         {
                             <MudSelectItem Value="@item" />
@@ -565,31 +512,26 @@
             </MudGrid>
 
             <MudGrid>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>Болезненность</MudText> </MudItem>
 
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Болезненность</MudText> </MudItem>
-
-
-                <MudItem Style="width: 10%;padding-left:10px;">
-
+                <MudItem xs="2">
                     <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Pain)
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
-
                 </MudItem>
-                <MudItem Style="width: 74%;">
 
+                <MudItem xs="7">
                     <MudTextField T="string" Variant="Variant.Text" Text="@weekend.PainAbout" />
-
                 </MudItem>
             </MudGrid>
 
             <MudGrid>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Живот </MudText></MudItem>
+                <MudItem xs="2" Class="d-flex flex-column justify-end"><MudText>Живот </MudText></MudItem>
 
-                <MudItem Style="width: 10%;">
+                <MudItem xs="2">
                     <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in AbdominalBloating[0])
                         {
@@ -597,8 +539,9 @@
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 10%;" Class="d-flex flex-column justify-end"><MudText>вздут.</MudText></MudItem>
-                <MudItem Style="width: 64%;">
+
+                <MudItem Class="d-flex flex-column justify-end"><MudText>вздут.</MudText></MudItem>
+                <MudItem xs="6">
                     <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in AbdominalBloating[1])
                         {
@@ -607,11 +550,10 @@
                     </MudSelect>
                 </MudItem>
             </MudGrid>
-            <MudGrid>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Перистальтика </MudText></MudItem>
 
-                <MudItem Style="width: 84%;">
-                    <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
+            <MudGrid>
+                <MudItem xs="12">
+                    <MudSelect T="string" Label="Перистальтика" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Peristalsis)
                         {
                             <MudSelectItem Value="@item" />
@@ -619,9 +561,10 @@
                     </MudSelect>
                 </MudItem>
             </MudGrid>
+          
             <MudGrid>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Язык</MudText></MudItem>
-                <MudItem Style="width: 42%;">
+                <MudItem Class="d-flex flex-column justify-end"><MudText>Язык</MudText></MudItem>
+                <MudItem xs="5">
                     <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Tongue[0])
                         {
@@ -629,7 +572,7 @@
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 42%;">
+                <MudItem xs="5">
                     <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Tongue[1])
                         {
@@ -640,15 +583,18 @@
             </MudGrid>
 
 
-            <MudGrid>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Суточный диурез - </MudText></MudItem>
 
-                <MudItem Style="width: 10%;">
+
+
+            <MudGrid>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>Суточный диурез - </MudText></MudItem>
+
+                <MudItem xs="3">
                     <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Diuresis" />
                 </MudItem>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>мл.</MudText></MudItem>
-                <MudItem Style="width: 10%;" Class="d-flex flex-column justify-end"><MudText>Моча</MudText></MudItem>
-                <MudItem Style="width: 25%;">
+                <MudItem Class="d-flex flex-column justify-end"><MudText>мл.</MudText></MudItem>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>Моча</MudText></MudItem>
+                <MudItem xs="3">
                     <MudSelect T="string" Label="" AnchorOrigin="Origin.BottomCenter">
                         @foreach (var item in Urine)
                         {
@@ -659,18 +605,18 @@
             </MudGrid>
 
             <MudGrid>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Температура тела - </MudText></MudItem>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>Температура тела - </MudText></MudItem>
 
-                <MudItem Style="width: 10%;">
+                <MudItem xs="2">
                     <MudTextField T="string" Variant="Variant.Text" Text="@weekend.BodyTemperature" />
                 </MudItem>
-                <MudItem Style="width: 23%;" Class="d-flex flex-column justify-end"><MudText>C°.</MudText></MudItem>
+                <MudItem Class="d-flex flex-column justify-end"><MudText>C°.</MudText></MudItem>
             </MudGrid>
 
             <MudGrid>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Дренаж: </MudText></MudItem>
-                <MudItem Style="width: 15%;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked8">
+                <MudItem Class="d-flex flex-column justify-end"><MudText>Дренаж: </MudText></MudItem>
+                <MudItem xs="3">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
                         @foreach (var item in Drainage[0])
                         {
                             <MudSelectItem Value="@item" />
@@ -678,72 +624,70 @@
                     </MudSelect>
                 </MudItem>
 
-                <MudItem Style="width: 20%; padding: 11px 6px;">
-                    <MudSelect T="string" Label="Стороны" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked8">
+                <MudItem xs="2">
+                    <MudSelect T="string" Label="Стороны" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
                         @foreach (var item in Drainage[1])
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 20%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@weekend.DrinageAbout" Disabled="!SwitchChecked8" />
+                <MudItem xs="2">
+                    <MudTextField T="string" Variant="Variant.Text" Text="@weekend.DrinageAbout" Disabled="!SwitchChecked7" />
                 </MudItem>
-                <MudItem Style="width: 20%; padding: 11px 6px;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked8">
+                <MudItem xs="2">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
                         @foreach (var item in Drainage[2])
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style=" padding: 35px 0 0 50px;">
+                <MudItem xs="1" Class="d-flex flex-column justify-end">
+                    <MudSwitch @bind-Checked="SwitchChecked7" />
+                </MudItem>
+            </MudGrid>
+
+            <MudGrid Style="padding-left:90px;">
+                <MudItem xs="4">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
+                        @foreach (var item in Drainage[0])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+
+                <MudItem xs="2">
+                    <MudSelect T="string" Label="Стороны" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
+                        @foreach (var item in Drainage[1])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="2">
+                    <MudTextField T="string" Variant="Variant.Text" Text="@weekend.DrinageAbout" Disabled="!SwitchChecked7" />
+                </MudItem>
+                <MudItem xs="2">
+                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
+                        @foreach (var item in Drainage[2])
+                        {
+                            <MudSelectItem Value="@item" />
+                        }
+                    </MudSelect>
+                </MudItem>
+            </MudGrid>
+
+
+            <MudGrid>
+                <MudItem xs="11">
+                    <MudTextField T="string" Label="Дополнительно:" Variant="Variant.Text" Text="@weekend.Additionally" Disabled="!SwitchChecked8" />
+                </MudItem>
+                <MudItem xs="1" Class="d-flex flex-column justify-end">
                     <MudSwitch @bind-Checked="SwitchChecked8" />
                 </MudItem>
             </MudGrid>
-
-            <MudGrid>
-                <MudItem Style="width: 30%;padding-left:190px;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked8">
-                        @foreach (var item in Drainage[0])
-                        {
-                            <MudSelectItem Value="@item" />
-                        }
-                    </MudSelect>
-                </MudItem>
-
-                <MudItem Style="width: 20%; padding: 11px 6px;">
-                    <MudSelect T="string" Label="Стороны" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked8">
-                        @foreach (var item in Drainage[1])
-                        {
-                            <MudSelectItem Value="@item" />
-                        }
-                    </MudSelect>
-                </MudItem>
-                <MudItem Style="width: 20%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@weekend.DrinageAbout" Disabled="!SwitchChecked8" />
-                </MudItem>
-                <MudItem Style="width: 20%; padding: 11px 6px;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked8">
-                        @foreach (var item in Drainage[2])
-                        {
-                            <MudSelectItem Value="@item" />
-                        }
-                    </MudSelect>
-                </MudItem>
-            </MudGrid>
-
-
-            <MudGrid>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Дополнительно: </MudText></MudItem>
-                <MudItem Style="width: 75%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Additionally" Disabled="!SwitchChecked9" />
-                </MudItem>
-                <MudItem Style=" padding: 35px 0 0 40px;">
-                    <MudSwitch @bind-Checked="SwitchChecked9" />
-                </MudItem>
-            </MudGrid>
-
 
             <MudStack Spacing="0" Row="true">
                 <MudItem Class="d-flex flex-column justify-center" xs="3">
@@ -751,99 +695,101 @@
                 </MudItem>
                 <MudItem Style="margin-right: 30px" xs="9">
                     <MudInput Style="width: 100%" @bind-Value="weekend.SeverityOfCondition" Lines="3">@string.Join(',', weekend.SeverityOfCondition)</MudInput>
-                </MudItem>
-                <MudButton Style="margin-right: -250px; width: 20%; padding: 0; height: 3rem;" StartIcon="@Icons.Material.Filled.FormatListNumbered"
-                           OnClick="OpenConditionDialog" Color="Color.Primary" Variant="Variant.Outlined">
-                    Тяжесть состояния
-                </MudButton>
-            </MudStack>
+                    </MudItem>
+                    <MudButton Style="margin-right: -250px; width: 27%; padding: 0; height: 3rem;" StartIcon="@Icons.Material.Filled.FormatListNumbered"
+                               OnClick="OpenConditionDialog" Color="Color.Primary" Variant="Variant.Outlined">
+                        Тяжесть состояния
+                    </MudButton>
+                </MudStack>
 
-            <MudGrid>
-                <MudItem Style="width: 10%;" Class="d-flex flex-column justify-end"><MudText>Лабораторно: </MudText></MudItem>
-                <MudItem Style="width: 6%;" Class="d-flex flex-column justify-end"><MudText>WBC - </MudText></MudItem>
+                <MudGrid>
+                    <MudItem xs="11">
+                        <MudTextField T="string" Label="Дополнительно:" Variant="Variant.Text" Text="@weekend.Additionally" Disabled="!SwitchChecked8" />
+                    </MudItem>
+                    <MudItem xs="1" Class="d-flex flex-column justify-end">
+                        <MudSwitch @bind-Checked="SwitchChecked8" />
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem Style="padding-top:30px;" Class="d-flex flex-column justify-end"><MudText>Лабораторно: </MudText></MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="2">
+                        <MudTextField T="string" Label="WBC - " Variant="Variant.Text" Text="@weekend.Laboratory1" Disabled="!SwitchChecked9" />
+                    </MudItem>
+                    <MudItem Class="d-flex flex-column justify-end"><MudText>x10⁹/л.</MudText></MudItem>
 
-                <MudItem Style="width: 8%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Laboratory1" Disabled="!SwitchChecked10" />
-                </MudItem>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>x10⁹/л.</MudText></MudItem>
-                <MudItem Style="width: 6%;" Class="d-flex flex-column justify-end"><MudText>RBC - </MudText></MudItem>
+                    <MudItem xs="2">
+                        <MudTextField Style="background-color:#E67171;" Label="HGB - " T="string" Variant="Variant.Text" Text="@weekend.Laboratory2" Disabled="!SwitchChecked9" />
+                    </MudItem>
+                    <MudItem Class="d-flex flex-column justify-end"><MudText>г/л.</MudText></MudItem>
 
-                <MudItem Style="width: 8%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Laboratory3" Disabled="!SwitchChecked10" />
-                </MudItem>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>x10¹²/л.</MudText></MudItem>
+                    <MudItem xs="2">
+                        <MudTextField Label="RBC - " T="string" Variant="Variant.Text" Text="@weekend.Laboratory3" Disabled="!SwitchChecked9" />
+                    </MudItem>
+                    <MudItem Class="d-flex flex-column justify-end"><MudText>x10¹²/л.</MudText></MudItem>
+                </MudGrid>
 
-                <MudItem Style="width: 6%;" Class="d-flex flex-column justify-end"><MudText>HGB - </MudText></MudItem>
+                <MudGrid>
+                    <MudItem xs="2">
+                        <MudTextField T="string" Label="HCT - " Variant="Variant.Text" Text="@weekend.Laboratory4" Disabled="!SwitchChecked9" />
+                    </MudItem>
+                    <MudItem Class="d-flex flex-column justify-end"><MudText>%.</MudText></MudItem>
 
-                <MudItem Style="width: 9%;">
-                    <MudTextField Style="background-color:#E67171;" T="string" Variant="Variant.Text" Text="@weekend.Laboratory2" Disabled="!SwitchChecked10" />
-                </MudItem>
-                <MudItem Style="width: 10%;" Class="d-flex flex-column justify-end"><MudText>г/л.</MudText></MudItem>
+
+                    <MudItem xs="2">
+                        <MudTextField Label="PLT - " T="string" Variant="Variant.Text" Text="@weekend.Laboratory5" Disabled="!SwitchChecked9" />
+                    </MudItem>
+                    <MudItem Class="d-flex flex-column justify-end"><MudText>x10⁹/л.</MudText></MudItem>
 
 
-                <MudItem Style=" padding: 35px 0 0 0;">
-                    <MudSwitch @bind-Checked="SwitchChecked10" />
-                </MudItem>
-            </MudGrid>
+                    <MudItem xs="2">
+                        <MudTextField Style="background-color:#E67171;" Label="Glu - " T="string" Variant="Variant.Text" Text="@weekend.Laboratory6" Disabled="!SwitchChecked9" />
+                    </MudItem>
+                    <MudItem Class="d-flex flex-column justify-end"><MudText>ммоль/л.</MudText></MudItem>
+                    <MudItem xs="1" Class="d-flex flex-column justify-end">
+                        <MudSwitch @bind-Checked="SwitchChecked9" />
+                    </MudItem>
+                </MudGrid>
 
-            <MudGrid Style="padding-left:100px;">
-                <MudItem Style="width: 8%;padding-left:25px;" Class="d-flex flex-column justify-end"><MudText>HCT - </MudText></MudItem>
-
-                <MudItem Style="width: 10%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Laboratory4" Disabled="!SwitchChecked10" />
-                </MudItem>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>%.</MudText></MudItem>
-
-                <MudItem Style="width: 7%;padding-left:25px;" Class="d-flex flex-column justify-end"><MudText>PLT - </MudText></MudItem>
-
-                <MudItem Style="width: 10%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@weekend.Laboratory5" Disabled="!SwitchChecked10" />
-                </MudItem>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>x10⁹/л.</MudText></MudItem>
-
-                <MudItem Style="width: 6%; " Class="d-flex flex-column justify-end"><MudText>Glu - </MudText></MudItem>
-                <MudItem Style="width: 10%;">
-                    <MudTextField Style="background-color:#E67171;" T="string" Variant="Variant.Text" Text="@weekend.Laboratory6" Disabled="!SwitchChecked10" />
-                </MudItem>
-                <MudItem Style="width: 10%;" Class="d-flex flex-column justify-end"><MudText>ммоль/л.</MudText></MudItem>
-            </MudGrid>
-
-            <MudGrid>
-                <MudItem xs="3">
-                    <MudStack Row="true">
-                        <MudIconButton Variant="Variant.Filled" Icon="@Icons.Material.Filled.Delete"
-                                       OnClick="Delete" Disabled="!SwitchChecked10" />
-                        <MudButton Variant="Variant.Filled" OnClick="Khs" Disabled="!SwitchChecked10">
-                            <MudText Typo="Typo.subtitle1">КЩС >></MudText>
-                        </MudButton>
-                        <MudButton Variant="Variant.Filled" OnClick="Electrolytes" Disabled="!SwitchChecked10">
-                            Электролиты >>
-                        </MudButton>
-                    </MudStack>
-                </MudItem>
-                <MudItem xs="3">
-                    <MudStack>
+                <MudGrid>
+                    <MudItem xs="4">
                         <MudStack Row="true">
-                            <MudSelect @ref="select1" T="string" ValueChanged="() => HandleChange(select1.Text, select1)" Disabled="!SwitchChecked10">
-                                @foreach (var item in selectValues.Keys)
+                            <MudIconButton Variant="Variant.Filled" Icon="@Icons.Material.Filled.Delete"
+                                           OnClick="Delete" Disabled="!SwitchChecked9" Style="margin-top:50px;" />
+                            <MudButton Variant="Variant.Filled" OnClick="Khs" Disabled="!SwitchChecked9" Style="margin-top:50px;">
+                                <MudText Typo="Typo.subtitle1">КЩС >></MudText>
+                            </MudButton>
+                            <MudButton Variant="Variant.Filled" OnClick="Electrolytes" Disabled="!SwitchChecked9" Style="margin-top:50px;">
+                                Электролиты >>
+                            </MudButton>
+                        </MudStack>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="4">
+                        <MudStack>
+                            <MudStack Row="true">
+                                <MudSelect @ref="select1" T="string" ValueChanged="() => HandleChange(select1.Text, select1)" Disabled="!SwitchChecked9">
+                                    @foreach (var item in selectValues.Keys)
                                 {
                                     <MudSelectItem Value="@item" />
                                 }
                             </MudSelect>
-                            <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.Analyses" Disabled="!SwitchChecked10" />
+                            <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.Analyses" Disabled="!SwitchChecked9" />
                             <MudText Class="d-flex flex-column justify-end">
                                 @(select1.Text != null ?
                                     selectValues[select1.Text] : "")
                             </MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudSelect @ref="select2" T="string" ValueChanged="() => HandleChange(select2.Text, select2)" Disabled="!SwitchChecked10">
+                            <MudSelect @ref="select2" T="string" ValueChanged="() => HandleChange(select2.Text, select2)" Disabled="!SwitchChecked9">
                                 @foreach (var item in selectValues.Keys)
                                 {
                                     <MudSelectItem Value="@item" />
                                 }
                             </MudSelect>
-                            <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.AnalysesTwo" Disabled="!SwitchChecked10" />
+                            <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.AnalysesTwo" Disabled="!SwitchChecked9" />
 
                             <MudText Class="d-flex flex-column justify-end">
                                 @(select2.Text != null ?
@@ -852,16 +798,16 @@
                         </MudStack>
                     </MudStack>
                 </MudItem>
-                <MudItem xs="3">
+                <MudItem xs="4">
                     <MudStack>
                         <MudStack Row="true">
-                            <MudSelect @ref="select3" T="string" ValueChanged="() => HandleChange(select3.Text, select3)" Disabled="!SwitchChecked10">
+                            <MudSelect @ref="select3" T="string" ValueChanged="() => HandleChange(select3.Text, select3)" Disabled="!SwitchChecked9">
                                 @foreach (var item in selectValues.Keys)
                                 {
                                     <MudSelectItem Value="@item" />
                                 }
                             </MudSelect>
-                            <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.AnalysesThree" Disabled="!SwitchChecked10" />
+                            <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.AnalysesThree" Disabled="!SwitchChecked9" />
 
                             <MudText Class="d-flex flex-column justify-end">
                                 @(select3.Text != null ?
@@ -869,13 +815,13 @@
                             </MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudSelect @ref="select4" T="string" ValueChanged="() => HandleChange(select4.Text, select4)" Disabled="!SwitchChecked10">
+                            <MudSelect @ref="select4" T="string" ValueChanged="() => HandleChange(select4.Text, select4)" Disabled="!SwitchChecked9">
                                 @foreach (var item in selectValues.Keys)
                                 {
                                     <MudSelectItem Value="@item" />
                                 }
                             </MudSelect>
-                            <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.AnalysesFour" Disabled="!SwitchChecked10" />
+                            <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.AnalysesFour" Disabled="!SwitchChecked9" />
 
                             <MudText Class="d-flex flex-column justify-end">
                                 @(select4.Text != null ?
@@ -884,16 +830,16 @@
                         </MudStack>
                     </MudStack>
                 </MudItem>
-                <MudItem xs="3">
+                <MudItem xs="4">
                     <MudStack>
                         <MudStack Row="true">
-                            <MudSelect @ref="select5" T="string" ValueChanged="() => HandleChange(select5.Text, select5)" Disabled="!SwitchChecked10">
+                            <MudSelect @ref="select5" T="string" ValueChanged="() => HandleChange(select5.Text, select5)" Disabled="!SwitchChecked9">
                                 @foreach (var item in selectValues.Keys)
                                 {
                                     <MudSelectItem Value="@item" />
                                 }
                             </MudSelect>
-                            <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.AnalysesFive" Disabled="!SwitchChecked10" />
+                            <MudNumericField HideSpinButtons="true" Min="0" @bind-Value="@weekend.AnalysesFive" Disabled="!SwitchChecked9" />
 
                             <MudText Class="d-flex flex-column justify-end">
                                 @(select5.Text != null ?
@@ -901,13 +847,13 @@
                             </MudText>
                         </MudStack>
                         <MudStack Row="true">
-                            <MudSelect Disabled="isDisabled || !SwitchChecked10" @ref="select6" T="string" ValueChanged="() => HandleChange(select6.Text, select6)">
+                            <MudSelect Disabled="isDisabled || !SwitchChecked9" @ref="select6" T="string" ValueChanged="() => HandleChange(select6.Text, select6)" >
                                 @foreach (var item in selectValues.Keys)
                                 {
                                     <MudSelectItem Value="@item" />
                                 }
                             </MudSelect>
-                            <MudNumericField Disabled="isDisabled || !SwitchChecked10" HideSpinButtons="true" Min="0" @bind-Value="@weekend.AnalysesSix" />
+                            <MudNumericField Disabled="isDisabled || !SwitchChecked9" HideSpinButtons="true" Min="0" @bind-Value="@weekend.AnalysesSix" />
                             <MudText Class="d-flex flex-column justify-end">
                                 @(select6.Text != null ?
                                     selectValues[select6.Text] : "")
@@ -916,16 +862,24 @@
                     </MudStack>
                 </MudItem>
             </MudGrid>
-
+            <MudItem xs="1" Class="d-flex flex-column justify-end">
+                <MudSwitch @bind-Checked="SwitchChecked10" />
+            </MudItem>
             <MudGrid>
-                <MudItem Style="padding-top:40px;">
+                <MudItem Style="padding-top:40px;" Class="d-flex flex-column justify-end">
                     <MudStack Row="true">
                         <MudText>Биохимия: </MudText>
+                        <MudItem xs="1">
+                            <MudSwitch @bind-Checked="SwitchChecked12" />
+                        </MudItem>
                     </MudStack>
                 </MudItem>
-                <MudItem Style="width:30%;">
+            </MudGrid>
+            <MudGrid>
+              
+                    <MudItem xs="4">
                     <MudStack Row="true">
-                        <MudNumericField Label="АЛТ -" HideSpinButtons="true" @bind-Value="weekend.BioChemistry" Disabled="!SwitchChecked12" />
+                     <MudNumericField Label="АЛТ -" HideSpinButtons="true" @bind-Value="weekend.BioChemistry" Disabled="!SwitchChecked12" />
                         <MudText Class="d-flex flex-column justify-end">Ед/л;</MudText>
                     </MudStack>
                     <MudStack Row="true">
@@ -937,7 +891,7 @@
                         <MudText Class="d-flex flex-column justify-end">мкмоль/л;</MudText>
                     </MudStack>
                 </MudItem>
-                <MudItem>
+                <MudItem xs="4">
                     <MudStack Row="true">
                         <MudNumericField Label="Мочевина -" HideSpinButtons="true" @bind-Value="weekend.BioChemistry4" Disabled="!SwitchChecked12" />
                         <MudText Class="d-flex flex-column justify-end">ммоль/л;</MudText>
@@ -952,7 +906,8 @@
                     </MudStack>
                 </MudItem>
 
-                <MudItem>
+                <MudItem xs="4">
+                    
                     <MudStack Row="true">
                         <MudNumericField Label="Альбумин -" HideSpinButtons="true" @bind-Value="weekend.BioChemistry7" Disabled="!SwitchChecked12" />
                         <MudText Class="d-flex flex-column justify-end">г/л;</MudText>
@@ -962,18 +917,21 @@
                         <MudText Class=" d-flex flex-column justify-end">Ед/л;</MudText>
                     </MudStack>
                 </MudItem>
-                <MudItem Style=" padding: 35px 0 0 47px;">
-                    <MudSwitch @bind-Checked="SwitchChecked12" />
-                </MudItem>
+    
             </MudGrid>
 
             <MudGrid>
                 <MudItem Style="padding-top:40px;">
                     <MudStack Row="true">
                         <MudText>Гемостаз: </MudText>
+                        <MudItem xs="1" Class="d-flex flex-column justify-end">
+                            <MudSwitch @bind-Checked="SwitchChecked14" />
+                        </MudItem>
                     </MudStack>
                 </MudItem>
-                <MudItem Style="width:25%;">
+            </MudGrid>
+                <MudGrid>
+                <MudItem xs="4">
                     <MudStack Row="true">
                         <MudNumericField Label="ПВ -" HideSpinButtons="true" @bind-Value="weekend.Hemostasis" Disabled="!SwitchChecked14" />
                         <MudText Class="d-flex flex-column justify-end">сек.;</MudText>
@@ -992,7 +950,7 @@
                         </MudText>
                     </MudStack>
                 </MudItem>
-                <MudItem Style="width:25%;">
+                <MudItem xs="4">
                     <MudStack Row="true">
                         <MudNumericField Label="АПТВ -" HideSpinButtons="true" @bind-Value="weekend.Hemostasis2" Disabled="!SwitchChecked14" />
                         <MudText Class="d-flex flex-column justify-end">сек.;</MudText>
@@ -1012,7 +970,7 @@
                     </MudStack>
                 </MudItem>
 
-                <MudItem Style="width:25%;">
+                <MudItem xs="4">
                     <MudStack Row="true">
                         <MudNumericField HideSpinButtons="true" @bind-Value="weekend.Hemostasis3" Disabled="!SwitchChecked14" />
                         <MudText Class="d-flex flex-column justify-end">;</MudText>
@@ -1031,18 +989,21 @@
                         </MudText>
                     </MudStack>
                 </MudItem>
-                <MudItem Style=" padding: 35px 0 0 110px;">
-                    <MudSwitch @bind-Checked="SwitchChecked14" />
-                </MudItem>
+            
             </MudGrid>
 
-            <MudGrid>
-                <MudItem Style="padding-top:40px; padding-left:50px;">
+            <MudGrid >
+                <MudItem Style="padding-top:40px;">
                     <MudStack Row="true">
                         <MudText>КЩС: </MudText>
+                        <MudItem xs="1" Class=" d-flex flex-column justify-end">
+                            <MudSwitch @bind-Checked="SwitchChecked13" />
+                        </MudItem>
                     </MudStack>
                 </MudItem>
-                <MudItem Style="width:30%;">
+            </MudGrid>
+                <MudGrid>
+                <MudItem xs="4">
                     <MudStack Row="true">
                         <MudNumericField Label="pH -" HideSpinButtons="true" @bind-Value="weekend.Kshs" Disabled="!SwitchChecked13" />
                         <MudText Class="d-flex flex-column justify-end">;</MudText>
@@ -1056,7 +1017,7 @@
                         <MudText Class="d-flex flex-column justify-end">ммоль/л;</MudText>
                     </MudStack>
                 </MudItem>
-                <MudItem>
+                <MudItem xs="4">
                     <MudStack Row="true">
                         <MudNumericField Label="PaO₂ –" HideSpinButtons="true" @bind-Value="weekend.Kshs4" Disabled="!SwitchChecked13" />
                         <MudText Class="d-flex flex-column justify-end">мм рт.ст;</MudText>
@@ -1070,7 +1031,7 @@
                         <MudText Class="d-flex flex-column justify-end">ммоль/л;</MudText>
                     </MudStack>
                 </MudItem>
-                <MudItem>
+                <MudItem xs="4">
                     <MudStack Row="true">
                         <MudNumericField Label="PaСO₂ –" HideSpinButtons="true" @bind-Value="weekend.Kshs7" Disabled="!SwitchChecked13" />
                         <MudText Class="d-flex flex-column justify-end">мм рт.ст;</MudText>
@@ -1084,18 +1045,21 @@
                         <MudText Class=" d-flex flex-column justify-end">ммоль/л;</MudText>
                     </MudStack>
                 </MudItem>
-                <MudItem Style=" padding: 35px 0 0 30px;">
-                    <MudSwitch @bind-Checked="SwitchChecked13" />
-                </MudItem>
+          
             </MudGrid>
 
             <MudGrid>
                 <MudItem Style="padding-top:40px;">
                     <MudStack Row="true">
                         <MudText>PICCO-тест: </MudText>
+                        <MudItem xs="1" Class=" d-flex flex-column justify-end">
+                            <MudSwitch @bind-Checked="SwitchChecked15" />
+                        </MudItem>
                     </MudStack>
                 </MudItem>
-                <MudItem Style="width:30%;">
+            </MudGrid>
+                <MudGrid>
+                <MudItem xs="4">
                     <MudStack Row="true">
                         <MudNumericField Label="Cl -" HideSpinButtons="true" @bind-Value="weekend.Picco" Disabled="!SwitchChecked15" />
                         <MudText Class="d-flex flex-column justify-end">л/мин/м²;</MudText>
@@ -1127,7 +1091,7 @@
                         </MudStack>
                     }
                 </MudItem>
-                <MudItem>
+                <MudItem xs="4">
                     <MudStack Row="true">
                         <MudNumericField Label="ELWI –" HideSpinButtons="true" @bind-Value="weekend.Picco5" Disabled="!SwitchChecked15" />
                         <MudText Class="d-flex flex-column justify-end">мл/кг;</MudText>
@@ -1145,7 +1109,7 @@
                         <MudText Class="d-flex flex-column justify-end">мм рт.ст;</MudText>
                     </MudStack>
                 </MudItem>
-                <MudItem>
+                <MudItem xs="4">
                     <MudStack Row="true">
                         <MudNumericField Label="SVRI –" HideSpinButtons="true" @bind-Value="weekend.Picco9" Disabled="!SwitchChecked15" />
                         <MudText Class="d-flex flex-column justify-end">дин*с*см⁻⁵ ;</MudText>
@@ -1171,9 +1135,7 @@
                         </MudStack>
                     }
                 </MudItem>
-                <MudItem Style=" padding: 35px 0 0 10px;">
-                    <MudSwitch @bind-Checked="SwitchChecked15" />
-                </MudItem>
+         
             </MudGrid>
 
             <MudItem xs="3">
@@ -1187,18 +1149,17 @@
             </MudItem>
 
             <MudGrid>
-                <MudItem Style="width: 15%;" Class="d-flex flex-column justify-end"><MudText>Рекомендовано: </MudText></MudItem>
-                <MudItem Style="width: 75%;">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@Recommended" Disabled="!SwitchChecked11" />
+                <MudItem xs="10">
+                    <MudTextField Label="Рекомендовано:" T="string" Variant="Variant.Text" Text="@Recommended" Disabled="!SwitchChecked11" />
                 </MudItem>
-                <MudItem Style=" padding: 35px 0 0 40px;">
+                <MudItem xs="1" Class=" d-flex flex-column justify-end">
                     <MudSwitch @bind-Checked="SwitchChecked11" />
                 </MudItem>
             </MudGrid>
 
             <MudGrid>
-                <MudItem Style="width: 25%;" Class="d-flex flex-column justify-end"><MudText>Зам.глав.врача по АиР: </MudText></MudItem>
-                <MudItem Style="width: 74%;">
+                <MudItem Class="d-flex flex-column justify-end"><MudText>Зам.глав.врача по АиР: </MudText></MudItem>
+                <MudItem xs="6">
                     <MudSelect T="string" Dense="true" AnchorOrigin="Origin.BottomCenter" Disabled="!Dense_Radio">
                         @foreach (var item in DoctorTwo.OrderBy(x => x))
                         {
@@ -1208,8 +1169,8 @@
                 </MudItem>
             </MudGrid>
             <MudGrid>
-                <MudItem Style="width: 25%;" Class="d-flex flex-column justify-end"><MudText>Заведующий отделением: </MudText></MudItem>
-                <MudItem Style="width: 74%;">
+                <MudItem  Class="d-flex flex-column justify-end"><MudText>Заведующий отделением: </MudText></MudItem>
+                <MudItem xs="6">
                     <MudSelect T="string" Dense="true" AnchorOrigin="Origin.BottomCenter" Disabled="!Dense_Radio">
                         @foreach (var item in DoctorTwo.OrderBy(x => x))
                         {
@@ -1219,8 +1180,8 @@
                 </MudItem>
             </MudGrid>
             <MudGrid>
-                <MudItem Style="width: 25%;" Class="d-flex flex-column justify-end"><MudText>Врач анестезиолог-реаниматолог: </MudText></MudItem>
-                <MudItem Style="width: 74%;">
+                <MudItem Class="d-flex flex-column justify-end"><MudText>Врач анестезиолог-реаниматолог: </MudText></MudItem>
+                <MudItem xs="6" Style="width: 74%;">
                     <MudSelect T="string" Dense="true" AnchorOrigin="Origin.BottomCenter" Disabled="!Dense_Radio">
                         @foreach (var item in DoctorTwo.OrderBy(x => x))
                         {
@@ -1228,7 +1189,7 @@
                         }
                     </MudSelect>
                 </MudItem>
-                <MudItem Style="width: 10%;padding-top:20px;">
+                <MudItem xs="3" Class="d-flex flex-column justify-end" Style="padding-top:20px">
                     <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit">
                         Отправить
                     </MudButton>
@@ -1237,8 +1198,7 @@
         </MudPaper>
     </MudItem>
 
-
-    <MudItem xs="3" Style="padding-left:390px;">
+    <MudItem xs="3">
         <MudGrid>
             <MudItem>
                 <MudBadge Color="Color.Error" Origin="Origin.TopCenter" Overlap="true" Content="@robodoc">
@@ -1723,9 +1683,10 @@
         var change = selectValues.FirstOrDefault(x => x.Key == changedSelect).Key;
         select.SelectedValues = new List<string>() { change };
     }
-    void Submit()
+    async Task Submit()
     {
         var temp = weekend;
+        await WeekendService.SaveWeekendDiaryAsync(temp);
     }
 }
 

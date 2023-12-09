@@ -17,6 +17,10 @@ namespace Re.Services.Services
         }
         public async Task<Extubation> SaveExtubationDiaryAsync(Extubation extubation)
         {
+            if (extubation.Id == null)
+            {
+                extubation.Id = Guid.NewGuid().ToString();
+            }
             return await _repo.SaveAsync(extubation);
         }
     }
