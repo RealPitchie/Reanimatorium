@@ -1,5 +1,6 @@
 ﻿@using Re.Core.Models
 @using Re.UI.Data
+@inject Re.Services.Services.DrugService reService
 
 <MudPaper Style="padding: 20px; margin: 15px 0">
     <MudText style="margin-top: 15px; font-weight: bolder;">
@@ -112,6 +113,11 @@
                         }
                 </MudSelect>
             </MudItem>
+            </MudGrid>
+        <MudGrid Justify="Justify.FlexEnd">
+             <MudItem>
+                 <MudButton OnClick="Submit" Variant="Variant.Outlined" Color="Color.Primary">Отправить</MudButton>
+            </MudItem>
 
         </MudGrid>
 
@@ -125,8 +131,11 @@
 
     PrescribedMedication medication = new PrescribedMedication();
 
+     async Task Submit()
+    {
+        await reService.SaveMedicationAsync(medication); 
+    }
     private string selectedStage {get; set;}
-
 
     string[] Presets = new string[]
             {   "Стандартный промедол",

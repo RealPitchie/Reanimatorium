@@ -2,7 +2,7 @@
 
 namespace Re.Data.Repo
 {
-    internal class DrugRepo : IRepo<Patient>, IRepo<Syndrom>, IRepo<PrescribedMedication>
+    public class DrugRepo : IRepo<Patient>, IRepo<Syndrom>, IRepo<PrescribedMedication>
     {
         DataContext _context;
         public DrugRepo(DataContext context)

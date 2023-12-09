@@ -30,6 +30,11 @@ services.AddScoped<IRepo<ReceptionEpicrisis>, ReceptEpicrisisRepo>();
 services.AddTransient<ProtocolService>();
 services.AddTransient<ReceptEpicrisisService>();
 
+services.AddScoped<IRepo<Patient>, DrugRepo>();
+services.AddScoped<IRepo<PrescribedMedication>, DrugRepo>();
+services.AddScoped<IRepo<Syndrom>, DrugRepo>();
+services.AddTransient<DrugService>();
+
 services.AddScoped<IRepo<StandartDiary>, DiaryStandartRepo>();
 services.AddScoped<IRepo<WeekendDiary>, DiaryWeekendRepo>();
 services.AddScoped<IRepo<Extubation>, DiaryExtubationRepo>();

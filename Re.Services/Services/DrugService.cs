@@ -13,18 +13,12 @@ namespace Re.Services.Services
         private readonly IRepo<Patient> _PatinetRepo = null!;
         private readonly IRepo<PrescribedMedication> _MedicationRepo = null!;
         private readonly IRepo<Syndrom> _SyndromRepo = null!;
-        public DrugService(IRepo<Patient> PatientRepo)
+        public DrugService(IRepo<Patient> PatientRepo,IRepo<PrescribedMedication> MeicationtRepo, IRepo<Syndrom> SyndromRepo)
         {
             _PatinetRepo = PatientRepo;
-        }
-        public DrugService(IRepo<PrescribedMedication> MeicationtRepo)
-        {
             _MedicationRepo = MeicationtRepo;
-        }
-        public DrugService(IRepo<Syndrom> SyndromRepo)
-        {
             _SyndromRepo = SyndromRepo;
-        }
+        }  
         public async Task<Patient> SavePatientAsync(Patient patient)
         {
             return await _PatinetRepo.SaveAsync(patient);
