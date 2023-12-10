@@ -7,6 +7,7 @@ using Re.Data;
 using Re.Data.Repo;
 using Re.Services.Services;
 using Re.Core.Models;
+using Re.Core.Models.Epicrisis;
 using Re.Data.Repo.Diary;
 using Re.Services.Interfaces;
 
@@ -26,7 +27,29 @@ services.AddDbContext<DataContext>(options =>
 // connection to Epicrisis
 // "UserID=postgres;Password=123qweQWE;Server=localhost;Port=6699;Database=Reanimatorium;"
 
-DependencyRegistrartion.RegisterDependencies(builder.Services);//Регистрация сервисов
+
+DependencyRegistrartion.RegisterDependencies(builder.Services);//пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ пїЅпїЅпїЅпїЅпїЅпїЅпїЅпїЅ
+
+
+services.AddScoped<IRepo<StandardProtocol>, Repo>();
+services.AddScoped<IRepo<Transferable>, TransferableRepo>();
+services.AddScoped<IRepo<ReceptionEpicrisis>, ReceptEpicrisisRepo>();
+services.AddTransient<ProtocolService>();
+services.AddTransient<ReceptEpicrisisService>();
+services.AddTransient<TransferEpicrisisService>();
+
+services.AddScoped<IRepo<Patient>, DrugRepo>();
+services.AddScoped<IRepo<PrescribedMedication>, DrugRepo>();
+services.AddScoped<IRepo<Syndrom>, DrugRepo>();
+services.AddTransient<DrugService>();
+
+services.AddScoped<IRepo<StandartDiary>, DiaryStandartRepo>();
+services.AddScoped<IRepo<WeekendDiary>, DiaryWeekendRepo>();
+services.AddScoped<IRepo<Extubation>, DiaryExtubationRepo>();
+services.AddTransient<StandartDiaryService>();
+services.AddTransient<WeekendDiaryService>();
+services.AddTransient<ExtubationDiaryService>();
+
 
 var app = builder.Build();
 

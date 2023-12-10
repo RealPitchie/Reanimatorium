@@ -5,11 +5,11 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.25"/>
-    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.22"/>
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.25"/>
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="6.0.25" />
+    <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="6.0.22" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.25" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="../Re.Core/Re.Core.csproj"/>
+    <ProjectReference Include="../Re.Core/Re.Core.csproj" />
   </ItemGroup>
 </Project>

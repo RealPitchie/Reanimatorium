@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Re.Data;
@@ -11,9 +12,10 @@ using Re.Data;
 namespace Re.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231208161309_TransferableInit")]
+    partial class TransferableInit
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -816,8 +818,8 @@ namespace Re.Data.Migrations
                     b.Property<string[]>("Breathing")
                         .HasColumnType("text[]");
 
-                    b.Property<int>("Cd")
-                        .HasColumnType("integer");
+                    b.Property<string>("Cd")
+                        .HasColumnType("text");
 
                     b.Property<string>("CddField")
                         .HasColumnType("text");
@@ -834,8 +836,8 @@ namespace Re.Data.Migrations
                     b.Property<string>("Diuresis")
                         .HasColumnType("text");
 
-                    b.Property<int>("Do")
-                        .HasColumnType("integer");
+                    b.Property<string>("Do")
+                        .HasColumnType("text");
 
                     b.Property<string[]>("Doctor")
                         .HasColumnType("text[]");

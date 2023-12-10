@@ -1,6 +1,8 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Options;
 using Re.Core.Models;
+using Re.Core.Models.Epicrisis;
+using Re.Core.Models.Hemo;
 
 #nullable disable
 
@@ -9,8 +11,6 @@ namespace Re.Data;
 
 public class DataContext : DbContext
 {
-    
-    
     public DataContext() {}
     public DataContext(DbContextOptions<DataContext> options)
         : base(options)
@@ -39,9 +39,13 @@ public class DataContext : DbContext
 
     //Эпикризы
     public DbSet<ReceptionEpicrisis> ReceptionEpicrises { get; set; }
+    public DbSet<Transferable> TransferableEpicrisis { get; set; }
 
     //Дневники
     public DbSet<StandartDiary> StandartDiaries { get; set; }
     public DbSet<WeekendDiary> WeekendDiaries { get; set; }
     public DbSet<Extubation> ExtubationDiaries { get; set; }
+
+    //Гемотрансфузии
+    public DbSet<HemoEpicrisis> HemoEpicrises { get; set; }
 }

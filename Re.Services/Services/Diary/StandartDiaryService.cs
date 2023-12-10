@@ -15,8 +15,13 @@ namespace Re.Services.Services
         {
             _repo = repo;
         }
+
         public async Task<StandartDiary> SaveStandartDiaryAsync(StandartDiary standart)
         {
+            if (standart.Id == null)
+            {
+                standart.Id = Guid.NewGuid().ToString();
+            }
             return await _repo.SaveAsync(standart);
         }
     }
