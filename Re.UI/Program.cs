@@ -8,6 +8,7 @@ using Re.Data.Repo;
 using Re.Services.Services;
 using Re.Core.Models;
 using Re.Data.Repo.Diary;
+using Re.Services.Interfaces;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -25,22 +26,7 @@ services.AddDbContext<DataContext>(options =>
 // connection to Epicrisis
 // "UserID=postgres;Password=123qweQWE;Server=localhost;Port=6699;Database=Reanimatorium;"
 
-services.AddScoped<IRepo<StandardProtocol>, Repo>();
-services.AddScoped<IRepo<ReceptionEpicrisis>, ReceptEpicrisisRepo>();
-services.AddTransient<ProtocolService>();
-services.AddTransient<ReceptEpicrisisService>();
-
-services.AddScoped<IRepo<Patient>, DrugRepo>();
-services.AddScoped<IRepo<PrescribedMedication>, DrugRepo>();
-services.AddScoped<IRepo<Syndrom>, DrugRepo>();
-services.AddTransient<DrugService>();
-
-services.AddScoped<IRepo<StandartDiary>, DiaryStandartRepo>();
-services.AddScoped<IRepo<WeekendDiary>, DiaryWeekendRepo>();
-services.AddScoped<IRepo<Extubation>, DiaryExtubationRepo>();
-services.AddTransient<StandartDiaryService>();
-services.AddTransient<WeekendDiaryService>();
-services.AddTransient<ExtubationDiaryService>();
+DependencyRegistrartion.RegisterDependencies(builder.Services);//Регистрация сервисов
 
 var app = builder.Build();
 
