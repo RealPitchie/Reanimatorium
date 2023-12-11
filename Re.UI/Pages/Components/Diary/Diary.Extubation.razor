@@ -18,13 +18,13 @@
         <MudPaper Style="padding: 20px; margin: 15px 0">
             <MudGrid>
                 <MudItem xs="12">
-                    <MudTextField T="string" Label="Мед. седация прекращена в" Variant="Variant.Text" Text="@ex.MedSedation" />
+                    <MudTextField T="string" Label="Мед. седация прекращена в" Variant="Variant.Text" @bind-Value="ex.MedSedation" />
                 </MudItem>
             </MudGrid>
 
             <MudGrid>
                 <MudItem xs="12">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@MuscleTone" Label="Мышечный тонус" />
+                    <MudTextField T="string" Variant="Variant.Text" @bind-Value="ex.MuscleTone" Label="Мышечный тонус" Text="удовлетворительный" />
                 </MudItem>
             </MudGrid>
             <MudGrid>
@@ -36,7 +36,7 @@
             <MudGrid>
                 <MudItem  Class="d-flex flex-column justify-end"><MudText>Инсуфляция O2 через носовые канюли -  </MudText></MudItem>
                 <MudItem xs="2">
-                    <MudTextField T="string" Label="" Variant="Variant.Text" Text="@ex.Insuflation" />
+                    <MudTextField T="string" Label="" Variant="Variant.Text" @bind-Value="ex.Insuflation" />
                 </MudItem>
                 <MudItem Class="d-flex flex-column justify-end"><MudText>л/мин. </MudText></MudItem>
             </MudGrid>
@@ -44,27 +44,27 @@
             <MudGrid>
                 <MudItem Class="d-flex flex-column justify-end"><MudText>Sat% -  </MudText></MudItem>
                 <MudItem xs="1">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@ex.Sat" />
+                    <MudTextField T="string" Variant="Variant.Text" @bind-Value="ex.Sat" />
                 </MudItem>
 
                 <MudItem Class="d-flex flex-column justify-end"><MudText>АД - </MudText></MudItem>
 
                 <MudItem xs="1">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@ex.Ad" />
+                    <MudTextField T="string" Variant="Variant.Text"  @bind-Value="ex.Ad"/>
                 </MudItem>
                 <MudItem Class="d-flex flex-column justify-end"><MudText>мм рт.ст.</MudText></MudItem>
                 <MudItem  Class="d-flex flex-column justify-end"><MudText>ЧСС - </MudText></MudItem>
 
                 <MudItem xs="1">
-                    <MudTextField T="string" Variant="Variant.Text" Text="@ex.Chss" />
+                    <MudTextField T="string" Variant="Variant.Text" @bind-Value="ex.Chss" />
                 </MudItem>
                 <MudItem  Class="d-flex flex-column justify-end"><MudText>в 1 минуту.</MudText></MudItem>
             </MudGrid>
 
             <MudGrid>
                 <MudItem xs="12">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Label="Врач АиР:">
-                        @foreach (var item in Doctor.OrderBy(x => x))
+                    <MudSelect @bind-Value="ex.Doctor"  ToStringFunc="@converter" Label="Врач АиР:">
+                        @foreach (var item in doctors)
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -83,8 +83,8 @@
 
 
 @code {
-    string MuscleTone = "удовлетворительный";
-    string[] Doctor = new string[]
+
+    string[] doctorNames = new string[]
     {
 "Розенгард С.А.",
 "Глущенко В.А.",
@@ -110,12 +110,28 @@
 "Хестанова Н.З.",
 "Шабут А.М."
     };
+
+    List<Doctor> doctors = new();
+    Func<Doctor, string> converter = d =>
+    {
+        if (d != null) return d.Name;
+        else return " ";
+    };
+    void DoctorAdd()
+    {
+        @for (int i = 0; i < doctorNames.Length; i++)
+        {
+            doctors.Add(new Doctor { Name = doctorNames[i], Id = Guid.NewGuid().ToString(), Position = i.ToString() });
+        }
+    }
+
+
     protected override void OnInitialized()
     {
 
         date = DateTime.Now; //Дата
         time = DateTime.Now.TimeOfDay; //Время
-
+        DoctorAdd();
     }
 
     Extubation ex = new();
