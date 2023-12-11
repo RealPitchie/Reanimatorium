@@ -1384,7 +1384,6 @@
     }
     async Task Submit()
     {
-        var temp = standart;
-        await StandartService.SaveStandartDiaryAsync(temp);
+        await StandartService.SaveStandartDiaryAsync(standart);
     }
 }

@@ -19,10 +19,6 @@ namespace Re.Data.Migrations
 
             migrationBuilder.DropColumn(
                 name: "Doctor",
-                table: "StandartDiaries");
-
-            migrationBuilder.DropColumn(
-                name: "Doctor",
                 table: "ExtubationDiaries");
 
             migrationBuilder.AlterColumn<string>(
@@ -334,12 +330,6 @@ namespace Re.Data.Migrations
                 oldType: "text[]",
                 oldNullable: true);
 
-            migrationBuilder.AddColumn<string>(
-                name: "DoctorId",
-                table: "StandartDiaries",
-                type: "text",
-                nullable: true);
-
             migrationBuilder.AlterColumn<DateTime>(
                 name: "Date",
                 table: "ReceptionEpicrises",
@@ -414,13 +404,6 @@ namespace Re.Data.Migrations
             migrationBuilder.AddForeignKey(
                 name: "FK_ExtubationDiaries_Doctor_DoctorId",
                 table: "ExtubationDiaries",
-                column: "DoctorId",
-                principalTable: "Doctor",
-                principalColumn: "Id");
-
-            migrationBuilder.AddForeignKey(
-                name: "FK_StandartDiaries_Doctor_DoctorId",
-                table: "StandartDiaries",
                 column: "DoctorId",
                 principalTable: "Doctor",
                 principalColumn: "Id");

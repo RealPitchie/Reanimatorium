@@ -110,7 +110,7 @@
 "Хестанова Н.З.",
 "Шабут А.М."
     };
-
+    
     List<Doctor> doctors = new();
     Func<Doctor, string> converter = d =>
     {
@@ -141,7 +141,6 @@
 
     async Task Submit()
     {
-        var temp = ex;
-         await ExtubService.SaveExtubationDiaryAsync(temp);
+         await ExtubService.SaveExtubationDiaryAsync(ex);
     }
 }
