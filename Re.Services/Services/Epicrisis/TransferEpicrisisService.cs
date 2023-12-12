@@ -1,14 +1,14 @@
 ﻿using Re.Core.Models;
 using Re.Core.Models.Epicrisis;
 using Re.Data.Repo;
-using Re.Services.Interfaces;
+using Re.Services.Interfaces.Epicrisis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Re.Services.Services
+namespace Re.Services.Services.Epicrisis
 {
     public class TransferEpicrisisService : ITransferable
     {

@@ -14,8 +14,8 @@ namespace Re.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp with time zone", nullable: false),
-                    Time = table.Column<TimeSpan>(type: "interval", nullable: false),
+                    Date = table.Column<DateTime>(type: "date", nullable: false),
+                    Time = table.Column<TimeSpan>(type: "time without time zone", nullable: false),
                     DeliveredFrom = table.Column<string>(type: "text", nullable: true),
                     AVLDueTransportation = table.Column<string>(type: "text", nullable: true),
                     Complaints = table.Column<string>(type: "text", nullable: true),

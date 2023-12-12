@@ -12,7 +12,6 @@ namespace Re.Core.Models.Epicrisis
         public string Id { get; set; }
         public DateOnly Date { get; set; }
         public TimeOnly Time { get; set; }
-        public string Name { get; set; }
         public string Other { get; set; }
         public string Location { get; set; }
         public string LocationPosition { get; set; }
@@ -39,15 +38,11 @@ namespace Re.Core.Models.Epicrisis
     {
         public string ExplorationType { get; set; }
         public bool IsContrasted { get; set; }
-        public ScanArea ScanArea { get; set; }
-        public string Indication { get; set; }
-    }
-    public class ScanArea
-    {
         public bool IsHead { get; set; }
-        public bool IsThoracicCavity { get; set; } 
-        public bool IsAbdominalCavity { get; set; } 
-        public bool IsCervicalSpine { get; set; } 
-        public bool IsPelvicCavity { get; set; } 
+        public bool IsThoracicCavity { get; set; }
+        public bool IsAbdominalCavity { get; set; }
+        public bool IsCervicalSpine { get; set; }
+        public bool IsPelvicCavity { get; set; }
+        public string Indication { get; set; }
     }
 }

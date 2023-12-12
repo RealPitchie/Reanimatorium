@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Re.Data.Repo
+namespace Re.Data.Repo.Epicrisis
 {
     public class TransferableRepo : IRepo<Transferable>
     {

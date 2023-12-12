@@ -1,18 +1,19 @@
 ﻿@using Re.Core.Models;
 @using Re.UI.Data
 @using System.Diagnostics;
+@using Re.Services.Services.Epicrisis;
 @inject IDialogService DialogService
-@inject Re.Services.Services.ReceptEpicrisisService reService
+@inject ReceptEpicrisisService reService
 
 <MudGrid>
     <MudItem xs="9">
         <MudText Align="Align.Center">Отделение анестезиологии-реанимации</MudText>
         <MudGrid Justify="Justify.Center">
             <MudItem>
-                <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
+                <MudDatePicker style="width: 150px;" Label="Дата" Date="re.Date" />
             </MudItem>
             <MudItem>
-                <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
+                <MudTimePicker style="width: 150px;" Label="Время" Time="re.Time" />
             </MudItem>
         </MudGrid>
         <MudPaper Style="padding: 20px; margin: 15px 0">
@@ -358,20 +359,31 @@
                         <MudText>%</MudText>
                     </MudItem>
                 </MudGrid>
-                <MudGrid>
-                    <MudItem xs="6">
-                        <MudSelect @bind-Value="re.Inotropes" T="string" Label="Инотропы/вазопрессоры">
+            }
+            <MudSelect Label="Гемодинамика" @bind-Value="re.Hemodynamics" T="string">
+                @foreach (var item in Hemodynamics)
+                {
+                    <MudSelectItem Value="@item" />
+                }
+            </MudSelect>
+            <MudGrid>
+                <MudItem Class="d-flex flex-column justify-end" xs="3">
+                    <MudSwitch @bind-Checked="IsInotropes" Label="Инотропы" Color="Color.Primary" />
+                </MudItem>
+                @if(IsInotropes){
+                    <MudItem xs="5">
+                        <MudSelect @bind-Value="re.Inotropes" Label="Инотропы/вазопрессоры">
                             @foreach (var item in Inotropes)
                             {
                                 <MudSelectItem Value="@item" />
                             }
                         </MudSelect>
                     </MudItem>
-                    <MudItem Class="d-flex flex-column justify-end" xs="2">
-                        <MudNumericField Class="d-flex flex-column justify-end" Style="margin-top: 0; padding-top: 0" HideSpinButtons="true" @bind-Value="re.InotropesValue" Variant="Variant.Text" Min="0"/>
+                    <MudItem Class="d-flex flex-column justify-end" xs="1">
+                        <MudNumericField Class="d-flex flex-column justify-end" Style="margin-top: 0; padding-top: 0" HideSpinButtons="true" @bind-Value="re.InotropesValue" Min="0" />
                     </MudItem>
-                    <MudItem Class="d-flex flex-column justify-end" xs="4">
-                        <MudSelect @bind-Value="re.InotropesUnits" T="string">
+                    <MudItem Class="d-flex flex-column justify-end" xs="3">
+                        <MudSelect @bind-Value="re.InotropesUnits">
                             @foreach (var item in InotropesUnits)
                             {
                                 <MudSelectItem Value="@item" />
@@ -381,14 +393,8 @@
                     <MudItem Style="padding-top: 0" xs="12">
                         <MudTextField @bind-Value="re.InotropesDescription" Label="Инотропы/вазопрессоры(описание)"></MudTextField>
                     </MudItem>
-                </MudGrid>
-            }
-            <MudSelect Label="Гемодинамика" @bind-Value="re.Hemodynamics" T="string">
-                @foreach (var item in Hemodynamics)
-                {
-                    <MudSelectItem Value="@item" />
                 }
-            </MudSelect>
+            </MudGrid>
             <MudGrid>
                 <MudItem Class="d-flex flex-column justify-end">
                     <MudText Typo="Typo.subtitle1">АД</MudText>
@@ -520,7 +526,7 @@
                 @if (IsDrainage)
                 {
                     <MudItem xs="9">
-                        <MudTextField @bind-Value="re.Drainage" Text="следы."/>
+                        <MudTextField @bind-Value="re.Drainage"/>
                     </MudItem>
                 }
             </MudGrid>
@@ -649,6 +655,7 @@
 </MudDialog>
 
 @code {
+    bool IsInotropes = false;
     string[] conditionList = new string[]
         {
             "объемом оперативного вмешательства",
@@ -855,8 +862,6 @@
             "Шабут А.М."};
 
     public ReceptionEpicrisis re = new();
-    DateTime? date;
-    TimeSpan? time;
     string robodoc = "ROBODOC";
     bool IsVashOn = false;
     bool IsIVL = false;
@@ -878,9 +883,11 @@
 
     protected override void OnInitialized()
     {
-        date = DateTime.Now;
-        time = DateTime.Now.TimeOfDay;
+        re.Date = DateTime.Now;
+        re.Time = DateTime.Now.TimeOfDay;
         DoctorAdd();
+        re.Drainage = "следы.";
+        re.InotropesValue = 0;
     }
 
     void HandleWithoutIVL()
@@ -985,6 +992,7 @@
 
         if (re.FiO2 == 0)
             re.FiO2 = 40;
+
         #endregion
         re.Hemodynamics = Hemodynamics[0];
         re.ArtherialPressure[0] = 120;
