@@ -12,34 +12,37 @@ namespace Re.Core.Models
     public class WeekendDiary
     {
         public string Id { get; set; }
-        public string[] Doctor { get; set; } //доктор
-        public string[] DoctorTwo { get; set; } //доктор 2
+        public Doctor Doctor { get; set; }
+        public Doctor DoctorTwo { get; set; }
+        public Doctor DoctorThree { get; set; }
+        public Doctor DoctorFour { get; set; }
+        public Doctor DoctorFive { get; set; }
         public string Patient { get; set; } //пациент
         public string Age { get; set; } //возраст
         public string Day { get; set; } //сутки
         public string OperationDay { get; set; } //после операции сутки
-        public string[] Сonditions { get; set; } // состояние
-        public string[] Сomplaints { get; set; } //жалобы
+        public string Сonditions { get; set; } // состояние
+        public string Сomplaints { get; set; } //жалобы
         public string ComplaintsAbout { get; set; } //жалобы на
-        public string[] Conscience { get; set; } //сознание
+        public string Conscience { get; set; } //сознание
         public string GcsSum { get; set; } //GCS сумма
         public string RassThis { get; set; } //RASS поле ввода
-        public string[] Rass { get; set; } //RASS 
+        public string Rass { get; set; } //RASS 
         public string Neurologist { get; set; } //Неврологический статус
         public string GcsOne { get; set; } //GCS 1
         public string GcsTwo { get; set; } //GCS 2
         public string GcsThree { get; set; } //GCS 3
         public string[] Skin { get; set; } = new string[3]; //кожные  покровы
-        public string[] Breathing { get; set; } //дыхание
-        public string[] Extubation { get; set; } //экстубация
+        public string Breathing { get; set; } //дыхание
+        public string Extubation { get; set; } //экстубация
         public string CddField { get; set; } //ЧДД
-        public string[] InhalationO2 { get; set; } //ингаляция О2
+        public string InhalationO2 { get; set; } //ингаляция О2
         public string SpeedFlow { get; set; } //скорость потока
-        public string[] Auscultatory { get; set; } //аускультативно
+        public string Auscultatory { get; set; } //аускультативно
         public string[] ShortnessOfBreath { get; set; } = new string[2]; //ослабление дыхания 
         public string ShortnessOfBreathInput { get; set; } //ослабление дыхания поле ввода
         public string[] Wheezes { get; set; } = new string[3]; //хрипы
-        public string[] RespiratorySupport { get; set; } //респираторная поддержка
+        public string RespiratorySupport { get; set; } //респираторная поддержка
         [NotMapped]
         public string[] RespiratorySupportMachine { get; set; } = new string[2]; //респираторная поддержка аппарат
         public string Do { get; set; } //ДО
@@ -48,7 +51,7 @@ namespace Re.Core.Models
         public string Fio2 { get; set; } //FiO2
         public string Dvdox { get; set; } //Двдох
         public string Dpod { get; set; } //Дпод
-        public string[] Hemodynamics { get; set; } //Гемодинамика
+        public string Hemodynamics { get; set; } //Гемодинамика
         public string[] InotropicSupportOne { get; set; } = new string[2]; //инотропная поддержка 1
         public string InotropicSupportOneInput { get; set; } //инотропная поддержка 1 поле
         public string[] InotropicSupportTwo { get; set; } = new string[2]; //инотропная поддержка 2
@@ -56,14 +59,14 @@ namespace Re.Core.Models
         public string Ad { get; set; } //АД
         public string Сhss { get; set; } //ЧСС
         public string Spo2 { get; set; } //ЧСС
-        public string[] Stomach { get; set; } //Живот
-        public string[] Pain { get; set; } //Болезненность
+        public string Stomach { get; set; } //Живот
+        public string Pain { get; set; } //Болезненность
         public string PainAbout { get; set; }
         public string[] AbdominalBloating { get; set; } = new string[2]; //Вздутие живота
-        public string[] Peristalsis { get; set; } //Перистальтика
+        public string Peristalsis { get; set; } //Перистальтика
         public string[] Tongue { get; set; } = new string[2]; //Язык
         public string Diuresis { get; set; } //диурез
-        public string[] Urine { get; set; } //Моча
+        public string Urine { get; set; } //Моча
         public string BodyTemperature { get; set; } //температура тела
         public string[] Drainage { get; set; } = new string[3]; //дренаж
         public string DrinageAbout { get; set; }

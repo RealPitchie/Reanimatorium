@@ -8,6 +8,7 @@ namespace Re.Core.Models.Hemo
 {
     public class HemoProtocol
     {
+        public string Id { get; set; }
         public DateOnly Date { get; set; }
         public TimeOnly Time { get; set; }
         public string[] Name { get; set; } //название протокола

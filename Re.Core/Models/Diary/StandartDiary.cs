@@ -16,30 +16,30 @@ namespace Re.Core.Models
         public DateOnly Date { get; set; } //Дата
         public TimeOnly Time { get; set; } //Время
 
-        public string[] Сonditions { get; set; } // состояние
-        public string[] Сomplaints { get; set; } //жалобы
+        public string Сonditions { get; set; } // состояние
+        public string Сomplaints { get; set; } //жалобы
         public string ComplaintsAbout { get; set; } //жалобы на
         public string RassThis { get; set; } //RASS поле ввода
-        public string[] Rass { get; set; } //RASS 
-        public string[] Vash { get; set; } //ВАШ
-        public string[] Conscience { get; set; } //сознание
+        public string Rass { get; set; } //RASS 
+        public string Vash { get; set; } //ВАШ
+        public string Conscience { get; set; } //сознание
         public string[] Skin { get; set; } = new string[3]; //кожные  покровы
-        public string[] Breathing { get; set; } //дыхание
-        public string[] Extubation { get; set; } //экстубация
+        public string Breathing { get; set; } //дыхание
+        public string Extubation { get; set; } //экстубация
         public string CddField { get; set; } //ЧДД
-        public string[] InhalationO2 { get; set; } //ингаляция О2
+        public string InhalationO2 { get; set; } //ингаляция О2
         public string SpeedFlow { get; set; } //скорость потока
-        public string[] Auscultatory { get; set; } //аускультативно
+        public string Auscultatory { get; set; } //аускультативно
         public string[] ShortnessOfBreath { get; set; } = new string[2]; //ослабление дыхания 
 
         public string ShortnessOfBreathInput { get; set; } //ослабление дыхания поле ввода
         public string[] Wheezes { get; set; } = new string[3]; //хрипы
-        public string[] RespiratorySupport { get; set; } //респираторная поддержка
+        public string RespiratorySupport { get; set; } //респираторная поддержка
         public string[] RespiratorySupportMachine { get; set; } = new string[2]; //респираторная поддержка аппарат
         public string[] InotropicSupportOne { get; set; } = new string[2]; //инотропная поддержка 1
         public string InotropicSupportOneInput { get; set; } //инотропная поддержка 1 поле
         public string[] InotropicSupportTwo { get; set; } = new string[2]; //инотропная поддержка 2
-        public string[] Hemodynamics { get; set; } //Гемодинамика
+        public string Hemodynamics { get; set; } //Гемодинамика
         public string InotropicSupportTwoInput { get; set; } //инотропная поддержка 2 поле
         public int Do { get; set; } //ДО
         public int Cd { get; set; } //ЧД
@@ -50,15 +50,15 @@ namespace Re.Core.Models
         public string Ad { get; set; } //АД
         public string Сhss { get; set; } //ЧСС
         public string Spo2 { get; set; } //ЧСС
-        public string[] Stomach { get; set; } //Живот
-        public string[] Pain { get; set; } //Болезненность
+        public string Stomach { get; set; } //Живот
+        public string Pain { get; set; } //Болезненность
         public string PainAbout { get; set; } //ЧСС
         public string[] AbdominalBloating { get; set; } = new string[2]; //Вздутие живота
-        public string[] Peristalsis { get; set; } //Перистальтика
+        public string Peristalsis { get; set; } //Перистальтика
         public string[] Tongue { get; set; } = new string[2]; //Язык
         public string Diuresis { get; set; } //диурез
         public string Intravenously { get; set; } //внутривенно
-        public string[] Urine { get; set; } //Моча
+        public string Urine { get; set; } //Моча
         public string BodyTemperature { get; set; } //температура тела
         public string[] Drainage { get; set; } = new string[3]; //дренаж
         public string DrinageAbout { get; set; }
@@ -69,7 +69,7 @@ namespace Re.Core.Models
         public string Laboratory4 { get; set; }
         public string Laboratory5 { get; set; }
         public string Laboratory6 { get; set; }
-        public string[] Doctor { get; set; } //доктор
+        public Doctor Doctor { get; set; } //доктор
         public PiCCO Picco { get; set; }
         public PiCCO2 Picco2 { get; set; }
         public FioTrac FioTrac { get; set; }

@@ -22,6 +22,11 @@ namespace Re.Services.Services
             {
                 standart.Id = Guid.NewGuid().ToString();
             }
+            standart.EsCCO.Id = Guid.NewGuid().ToString();
+            standart.Picco.Id = Guid.NewGuid().ToString();
+            standart.Picco2.Id = Guid.NewGuid().ToString();
+            standart.FioTrac.Id = Guid.NewGuid().ToString();
+            standart.VoLEF.Id = Guid.NewGuid().ToString();
             return await _repo.SaveAsync(standart);
         }
     }
