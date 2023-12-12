@@ -19,6 +19,10 @@ namespace Re.Services.Services.Hemo
         }
         public async Task<HemoEpicrisis> SaveHemoEpicrisisAsync(HemoEpicrisis ep)
         {
+            if (ep.Id == null)
+            {
+                ep.Id = Guid.NewGuid().ToString();
+            }
             return await _repo.SaveAsync(ep);
         }
     }
