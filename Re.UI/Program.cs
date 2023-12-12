@@ -9,6 +9,9 @@ using Re.Services.Services;
 using Re.Core.Models;
 using Re.Core.Models.Epicrisis;
 using Re.Data.Repo.Diary;
+using Re.Core.Models.Hemo;
+using Re.Data.Repo.Hemo;
+using Re.Services.Services.Hemo;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;
@@ -47,6 +50,9 @@ services.AddScoped<IRepo<Extubation>, DiaryExtubationRepo>();
 services.AddTransient<StandartDiaryService>();
 services.AddTransient<WeekendDiaryService>();
 services.AddTransient<ExtubationDiaryService>();
+
+services.AddScoped<IRepo<HemoEpicrisis>, HemoEpicrisisRepo>();
+services.AddTransient<HemoEpicrisisService>();
 
 var app = builder.Build();
 
