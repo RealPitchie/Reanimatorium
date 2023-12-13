@@ -54,7 +54,13 @@ services.AddScoped<IRepo<Syndrom>, DrugRepo>();
 services.AddTransient<DrugService>();
 
 services.AddScoped<IRepo<HemoEpicrisis>, HemoEpicrisisRepo>();
+services.AddScoped<IRepo<ErythrocyteProtocol>, ErythrocyteRepo>();
+services.AddScoped<IRepo<SZPProtocol>, SZPRepo>();
+services.AddScoped<IRepo<ThrombocyteProtocol>, ThrombocyteRepo>();
 services.AddTransient<HemoEpicrisisService>();
+services.AddTransient<ErythrocyteProtocolService>();
+services.AddTransient<SZPProtocolService>();
+services.AddTransient<ThrombocyteProtocolService>();
 
 services.AddScoped<IRepo<StandartDiary>, DiaryStandartRepo>();
 services.AddScoped<IRepo<WeekendDiary>, DiaryWeekendRepo>();
