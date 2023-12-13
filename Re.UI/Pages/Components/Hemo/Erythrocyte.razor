@@ -3,6 +3,7 @@
 @using Newtonsoft.Json;
 @using System.Diagnostics;
 @using Re.UI.Data
+@inject Re.Services.Services.Hemo.ErythrocyteProtocolService erService
 
 <MudGrid>
     <MudItem xs="12">
@@ -157,6 +158,13 @@
                     </MudSelect>
                 </MudItem>
             </MudGrid>
+            <MudGrid Justify="Justify.Center">
+                <MudItem xs="5" Class="d-flex flex-column justify-end" Style="padding-top:30px; padding-bottom:15px;">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit">
+                        Отправить
+                    </MudButton>
+                </MudItem>
+            </MudGrid>
         </MudPaper>
     </MudItem>
 </MudGrid>
@@ -236,4 +244,8 @@
     }
     //[Parameter]
     public ErythrocyteProtocol er = new();
+    async Task Submit()
+    {
+        await erService.SaveErythrocyteProtocolAsync(er);
+    }
 }
