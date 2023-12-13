@@ -17,13 +17,13 @@
         </MudRadioGroup>
         <MudGrid Style="margin-top:-80px; margin-left:200px;">
             <MudItem Style="margin-top:5px;"><MudText>Дата:</MudText></MudItem>
-            <MudItem xs="2"><MudDatePicker Style="margin-top:-5px;" @bind-Date="date" /></MudItem>
+            <MudItem xs="2"><MudDatePicker Style="margin-top:-5px;" Date="hp.Date" /></MudItem>
         </MudGrid>
         <MudGrid Style="margin-left:185px; margin-top:-50px;">
             <MudItem Style="margin-top:5px;"><MudText>начало:</MudText></MudItem>
-            <MudItem xs="2"><MudTimePicker Style="margin-top:-5px;" @bind-Time="StartTime" /></MudItem>
+            <MudItem xs="2"><MudTimePicker Style="margin-top:-5px;" Time="hp.StartTime" /></MudItem>
             <MudItem Style="margin-top:5px;"><MudText>конец:</MudText></MudItem>
-            <MudItem xs="2"><MudTimePicker Style="margin-top:-5px;" @bind-Time="EndTime" /></MudItem>
+            <MudItem xs="2"><MudTimePicker Style="margin-top:-5px;" Time="hp.EndTime" /></MudItem>
         </MudGrid>
         @if (SelectedOption == "Erythrocyte")
         {
@@ -51,12 +51,11 @@
 
 @code {
     HemoProtocol? hp = new();
-    DateTime? date; //дата
-    TimeSpan? StartTime;
-    TimeSpan? EndTime;
     protected override void OnInitialized()
     {
-        date = DateTime.Now; //Дата
+        hp.StartTime = DateTime.Now.TimeOfDay; //Время
+        hp.EndTime = DateTime.Now.TimeOfDay; //Время
+        hp.Date = DateTime.Now; //Время
     }
     string SelectedOption = "Erythrocyte";
 }

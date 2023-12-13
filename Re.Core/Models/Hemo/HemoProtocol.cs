@@ -10,10 +10,12 @@ namespace Re.Core.Models.Hemo
     public class HemoProtocol
     {
         public string Id { get; set; }
-        public DateOnly Date { get; set; }
-        public TimeOnly Time { get; set; }
+        public DateTime Date { get; set; }
+        public TimeSpan StartTime { get; set; }
+        public TimeSpan EndTime { get; set; }
+
         public string FIO { get; set; } //фио реципиента
-        public string Number { get; set; } //№ карты
+        public int Number { get; set; } //№ карты
         public string Group { get; set; } //группа крови реципиента
         public string Phenotype { get; set; } //фенотип
         public string Place { get; set; } //где определяли
@@ -21,9 +23,9 @@ namespace Re.Core.Models.Hemo
         public string Anamnesis { get; set; } //анамнез
         public string Component { get; set; } //компонент
         public string Mfr { get; set; } //изготовитель
-        public string NumberCont { get; set; } //номер контейнера
-        public string Volume { get; set; } //объем
-        public string Code { get; set; } //код донора
+        public int NumberCont { get; set; } //номер контейнера
+        public int Volume { get; set; } //объем
+        public int Code { get; set; } //код донора
         public string GroupDonor { get; set; } //группа крови донора
         public string Reagents { get; set; } //реактивы
         public string Compatibility { get; set; } //совместимость
@@ -47,16 +49,21 @@ namespace Re.Core.Models.Hemo
 
     public class ErythrocyteProtocol : HemoProtocol
     {
-        public ErythrocyteProtocol() { }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 
     public class SZPProtocol : HemoProtocol
     {
-        public SZPProtocol() { }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 
     public class ThrombocyteProtocol : HemoProtocol
     {
-        public ThrombocyteProtocol() { }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
+
+
     }
 }

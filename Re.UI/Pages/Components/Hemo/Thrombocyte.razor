@@ -16,7 +16,7 @@
                 </MudGrid>
                 <MudGrid>
                     <MudItem xs="10">
-                        <MudTextField T="string" Label="№ карты:" Variant="Variant.Text" @bind-Value="thr.Number"></MudTextField>
+                        <MudTextField T="int" Label="№ карты:" Variant="Variant.Text" @bind-Value="thr.Number"></MudTextField>
                     </MudItem>
                 </MudGrid>
                 <MudGrid>
@@ -61,23 +61,23 @@
                 </MudGrid>
                 <MudGrid Style="margin-top:15px;">
                     <MudItem Style="margin-top:5px;"><MudText>Дата заготовки:</MudText></MudItem>
-                    <MudItem xs="2"><MudDatePicker Style="margin-top:-5px;" @bind-Date="zagdate" /></MudItem>
+                    <MudItem xs="2"><MudDatePicker Style="margin-top:-5px;" Date="thr.StartDate" /></MudItem>
                     <MudItem Style="margin-top:5px;"><MudText>Годна до:</MudText></MudItem>
-                    <MudItem xs="2"> <MudDatePicker Style="margin-top:-5px;" @bind-Date="enddate" /></MudItem>
+                    <MudItem xs="2"> <MudDatePicker Style="margin-top:-5px;" Date="thr.EndDate" /></MudItem>
                 </MudGrid>
                 <MudGrid>
                     <MudItem xs="10">
-                        <MudTextField T="string" Label="N контейнера:" Variant="Variant.Text" @bind-Value="thr.NumberCont"></MudTextField>
+                        <MudTextField T="int" Label="N контейнера:" Variant="Variant.Text" @bind-Value="thr.NumberCont"></MudTextField>
                     </MudItem>
                 </MudGrid>
                 <MudGrid>
                     <MudItem xs="10">
-                        <MudTextField T="string" Label="Объем:" Variant="Variant.Text" @bind-Value="thr.Volume"></MudTextField>
+                        <MudTextField T="int" Label="Объем:" Variant="Variant.Text" @bind-Value="thr.Volume"></MudTextField>
                     </MudItem>
                 </MudGrid>
                 <MudGrid>
                     <MudItem xs="10">
-                        <MudTextField T="string" Label="Код донора:" Variant="Variant.Text" @bind-Value="thr.Code"></MudTextField>
+                        <MudTextField T="int" Label="Код донора:" Variant="Variant.Text" @bind-Value="thr.Code"></MudTextField>
                     </MudItem>
                 </MudGrid>
                 <MudGrid>
@@ -231,9 +231,9 @@
     protected override void OnInitialized()
     {
         DoctorAdd();
+        thr.StartDate = DateTime.Now;
+        thr.EndDate = DateTime.Now;
     }
     //[Parameter]
     public ThrombocyteProtocol thr = new();
-    DateTime? zagdate; //дата
-    DateTime? enddate;
 }
