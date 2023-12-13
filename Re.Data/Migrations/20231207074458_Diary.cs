@@ -213,8 +213,6 @@ namespace Re.Data.Migrations
                     Hemodynamics = table.Column<string[]>(type: "text[]", nullable: true),
                     InotropicSupportOne = table.Column<string[]>(type: "text[]", nullable: true),
                     InotropicSupportOneInput = table.Column<int>(type: "integer", nullable: false),
-                    InotropicSupportTwo = table.Column<string[]>(type: "text[]", nullable: true),
-                    InotropicSupportTwoInput = table.Column<string>(type: "text", nullable: true),
                     Ad = table.Column<int>(type: "integer", nullable: false),
                     Сhss = table.Column<int>(type: "integer", nullable: false),
                     Spo2 = table.Column<int>(type: "integer", nullable: false),
