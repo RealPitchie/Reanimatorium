@@ -68,7 +68,7 @@
                     <MudItem><MudText>Заявка на</MudText></MudItem>
                     <MudItem xs="1"><MudInput @bind-Value="ep.danerit" T="string" Style="margin-top:-10px;" /></MudItem>
                     <MudItem><MudText>эритроцитарной взвеси</MudText></MudItem>
-                    <MudItem xs="3">
+                    <MudItem xs="2">
                         <MudSelect @bind-Value="ep.EritGroup" T="string" AnchorOrigin="Origin.BottomCenter" Style="margin-top:-21px;">
                             @foreach (var item in EritGroup)
                             {
@@ -84,7 +84,7 @@
                     <MudItem Style="margin-top:10px; margin-left:-20px;"><MudText>и</MudText></MudItem>
                     <MudItem xs="1"><MudInput @bind-Value="ep.danszp" T="string" Style="margin-top:-10px;" Disabled="@SwitchChecked" /></MudItem>
                     <MudItem><MudText>свежезамороженной плазмы</MudText></MudItem>
-                    <MudItem xs="3">
+                    <MudItem xs="2">
                         <MudSelect @bind-Value="ep.SZPGroup" T="string" AnchorOrigin="Origin.BottomCenter" Style="margin-top:-21px;" Disabled="@SwitchChecked">
                             @foreach (var item in SZPGroup)
                             {
@@ -96,7 +96,7 @@
                 <MudGrid Style="margin-left:90px; margin-right:-90px;">
                     <MudItem xs="1"><MudInput @bind-Value="ep.dantromb" T="string" Style="margin-top:-10px;" Disabled="@(!SwitchChecked)" /></MudItem>
                     <MudItem><MudText>тромбоцитарного концентрата</MudText></MudItem>
-                    <MudItem xs="3">
+                    <MudItem xs="2">
                         <MudSelect @bind-Value="ep.TrombGroup" T="string" AnchorOrigin="Origin.BottomCenter" Style="margin-top:-21px;" Disabled="@(!SwitchChecked)">
                             @foreach (var item in TrombGroup)
                             {
@@ -105,14 +105,14 @@
                         </MudSelect>
                     </MudItem>
                 </MudGrid>
-                <MudGrid Style="margin-top:15px;">
+                <MudGrid Style="margin-top:15px; margin-left:0px;">
                     <MudText>Согласие больного(ой) на гемотрансфузию получено.</MudText>
                 </MudGrid>
-                <MudGrid Style="margin-top:15px;">
+                <MudGrid Style="margin-top:15px; margin-left:0px;">
                     <MudText>Противопоказаний к переливанию компонентов крови нет.</MudText>
                 </MudGrid>
                 <MudGrid>
-                    <MudItem xs="3"><MudDatePicker Style="margin-top:50px;" @bind-Date="date" /></MudItem>
+                    <MudItem xs="3"><MudDatePicker Style="margin-top:25px;" @bind-Date="date" /></MudItem>
                 </MudGrid>
                 <MudGrid>
                     <MudItem Class="d-flex flex-column justify-end"><MudText>Лечащий врач</MudText></MudItem>

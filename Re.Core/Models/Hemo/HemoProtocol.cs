@@ -11,10 +11,9 @@ namespace Re.Core.Models.Hemo
         public string Id { get; set; }
         public DateOnly Date { get; set; }
         public TimeOnly Time { get; set; }
-        public string[] Name { get; set; } //название протокола
         public string FIO { get; set; } //фио реципиента
         public string Number { get; set; } //№ карты
-        public string[] Group { get; set; } //группа крови реципиента
+        public string Group { get; set; } //группа крови реципиента
         public string Phenotype { get; set; } //фенотип
         public string Place { get; set; } //где определяли
         public string Indication { get; set; } //показания
@@ -24,7 +23,7 @@ namespace Re.Core.Models.Hemo
         public string NumberCont { get; set; } //номер контейнера
         public string Volume { get; set; } //объем
         public string Code { get; set; } //код донора
-        public string[] GroupDonor { get; set; } //группа крови донора
+        public string GroupDonor { get; set; } //группа крови донора
         public string Reagents { get; set; } //реактивы
         public string Compatibility { get; set; } //совместимость
         public string BiologicalSample { get; set; } //биологическая проба
@@ -42,7 +41,7 @@ namespace Re.Core.Models.Hemo
         public string Diuresis { get; set; } //диурез,цвет мочи перед переливанием
         public string Diuresishafter { get; set; } //диурез,цвет мочи через 1 час
         public string Diuresis2hafter { get; set; } //диурез,цвет мочи через 2 часа
-        public string[] Doctor { get; set; }
+        public Doctor Doctor { get; set; }
     }
 
     public class ErythrocyteProtocol : HemoProtocol
