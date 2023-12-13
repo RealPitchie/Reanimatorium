@@ -51,4 +51,8 @@ public class DataContext : DbContext
 
     //Гемотрансфузии
     public DbSet<HemoEpicrisis> HemoEpicrises { get; set; }
+    public DbSet<HemoProtocol> HemoProtocols { get; set; }
+    public DbSet<ErythrocyteProtocol> ErythrocyteProtocols { get; set; }
+    public DbSet<SZPProtocol> SZPProtocols { get; set; }
+    public DbSet<ThrombocyteProtocol> ThrombocyteProtocols { get; set ; }
 }

@@ -17,13 +17,13 @@
         </MudRadioGroup>
         <MudGrid Style="margin-top:-80px; margin-left:200px;">
             <MudItem Style="margin-top:5px;"><MudText>Дата:</MudText></MudItem>
-            <MudItem><MudDatePicker Style="width:150px; margin-top:-5px;" @bind-Date="date" /></MudItem>
+            <MudItem xs="2"><MudDatePicker Style="margin-top:-5px;" @bind-Date="date" /></MudItem>
         </MudGrid>
-        <MudGrid Style="margin-left:200px; margin-top:-50px;">
+        <MudGrid Style="margin-left:185px; margin-top:-50px;">
             <MudItem Style="margin-top:5px;"><MudText>начало:</MudText></MudItem>
-            <MudItem><MudTimePicker Style="width:150px; margin-top:-5px;" @bind-Time="StartTime" /></MudItem>
+            <MudItem xs="2"><MudTimePicker Style="margin-top:-5px;" @bind-Time="StartTime" /></MudItem>
             <MudItem Style="margin-top:5px;"><MudText>конец:</MudText></MudItem>
-            <MudItem><MudTimePicker Style="width:150px; margin-top:-5px;" @bind-Time="EndTime" /></MudItem>
+            <MudItem xs="2"><MudTimePicker Style="margin-top:-5px;" @bind-Time="EndTime" /></MudItem>
         </MudGrid>
         @if (SelectedOption == "Erythrocyte")
         {
@@ -39,11 +39,13 @@
         }
     </MudGrid>
     <MudGrid>
-        <MudLink Href="https://dokipedia.ru/document/5195465?pid=2" Target="_blank" Style="display: flex; flex-direction: column; align-items: center; margin-top:70px; margin-left:105px; background:white; border-radius:10px; width:1020px;">
-            <div>Приказ Министерства здравоохранения РФ от 2 апреля 2013 г. N 183н "Об утверждении правил клинического использования</div>
-            <div>донорской крови и (или) ее компонентов" (Докипедия: Приказ Министерства здравоохранения РФ от 2 апреля 2013 г. N 183н "Об</div>
-            <div>утверждении правил клинического использования донорской крови и (или) ее компонентов")</div>
-        </MudLink>
+        <MudItem xs="12">
+            <MudLink Href="https://dokipedia.ru/document/5195465?pid=2" Target="_blank" Style="display: flex; flex-direction: column; align-items: center; margin-top:70px; margin-left:105px; background:white; border-radius:10px;">
+                <div>Приказ Министерства здравоохранения РФ от 2 апреля 2013 г. N 183н "Об утверждении правил клинического использования</div>
+                <div>донорской крови и (или) ее компонентов" (Докипедия: Приказ Министерства здравоохранения РФ от 2 апреля 2013 г. N 183н "Об</div>
+                <div>утверждении правил клинического использования донорской крови и (или) ее компонентов")</div>
+            </MudLink>
+        </MudItem>
     </MudGrid>
 </MudGrid>
 
