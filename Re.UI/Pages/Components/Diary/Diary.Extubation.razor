@@ -6,10 +6,10 @@
 
 <MudGrid Justify="Justify.Center">
     <MudItem>
-        <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
+        <MudDatePicker style="width: 150px;" Label="Дата" Date="ex.Date" />
     </MudItem>
     <MudItem>
-        <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
+        <MudTimePicker style="width: 150px;" Label="Время" Time="ex.Time" />
     </MudItem>
 </MudGrid>
 
@@ -36,7 +36,7 @@
             <MudGrid>
                 <MudItem  Class="d-flex flex-column justify-end"><MudText>Инсуфляция O2 через носовые канюли -  </MudText></MudItem>
                 <MudItem xs="2">
-                    <MudTextField T="string" Label="" Variant="Variant.Text" @bind-Value="ex.Insuflation" />
+                    <MudTextField Label="" Variant="Variant.Text" @bind-Value="ex.Insuflation" Min="0"/>
                 </MudItem>
                 <MudItem Class="d-flex flex-column justify-end"><MudText>л/мин. </MudText></MudItem>
             </MudGrid>
@@ -44,19 +44,19 @@
             <MudGrid>
                 <MudItem Class="d-flex flex-column justify-end"><MudText>Sat% -  </MudText></MudItem>
                 <MudItem xs="1">
-                    <MudTextField T="string" Variant="Variant.Text" @bind-Value="ex.Sat" />
+                    <MudTextField Variant="Variant.Text" @bind-Value="ex.Sat" Min="0" />
                 </MudItem>
 
                 <MudItem Class="d-flex flex-column justify-end"><MudText>АД - </MudText></MudItem>
 
                 <MudItem xs="1">
-                    <MudTextField T="string" Variant="Variant.Text"  @bind-Value="ex.Ad"/>
+                    <MudTextField Variant="Variant.Text" @bind-Value="ex.Ad" Min="0" />
                 </MudItem>
                 <MudItem Class="d-flex flex-column justify-end"><MudText>мм рт.ст.</MudText></MudItem>
                 <MudItem  Class="d-flex flex-column justify-end"><MudText>ЧСС - </MudText></MudItem>
 
                 <MudItem xs="1">
-                    <MudTextField T="string" Variant="Variant.Text" @bind-Value="ex.Chss" />
+                    <MudTextField Variant="Variant.Text" @bind-Value="ex.Chss" Min="0" />
                 </MudItem>
                 <MudItem  Class="d-flex flex-column justify-end"><MudText>в 1 минуту.</MudText></MudItem>
             </MudGrid>
@@ -129,15 +129,12 @@
     protected override void OnInitialized()
     {
 
-        date = DateTime.Now; //Дата
-        time = DateTime.Now.TimeOfDay; //Время
+        ex.Date = DateTime.Now;
+        ex.Time = DateTime.Now.TimeOfDay;
         DoctorAdd();
     }
 
     Extubation ex = new();
-
-    DateTime? date; //дата
-    TimeSpan? time; //время
 
     async Task Submit()
     {

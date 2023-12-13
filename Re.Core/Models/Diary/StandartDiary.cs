@@ -13,8 +13,8 @@ namespace Re.Core.Models
     public class StandartDiary
     {
         public string Id { get; set; }
-        public DateOnly Date { get; set; } //Дата
-        public TimeOnly Time { get; set; } //Время
+        public DateTime Date { get; set; }
+        public TimeSpan Time { get; set; }
 
         public string Сonditions { get; set; } // состояние
         public string Сomplaints { get; set; } //жалобы
@@ -26,9 +26,9 @@ namespace Re.Core.Models
         public string[] Skin { get; set; } = new string[3]; //кожные  покровы
         public string Breathing { get; set; } //дыхание
         public string Extubation { get; set; } //экстубация
-        public string CddField { get; set; } //ЧДД
+        public int CddField { get; set; } //ЧДД
         public string InhalationO2 { get; set; } //ингаляция О2
-        public string SpeedFlow { get; set; } //скорость потока
+        public int SpeedFlow { get; set; } //скорость потока
         public string Auscultatory { get; set; } //аускультативно
         public string[] ShortnessOfBreath { get; set; } = new string[2]; //ослабление дыхания 
 
@@ -37,38 +37,38 @@ namespace Re.Core.Models
         public string RespiratorySupport { get; set; } //респираторная поддержка
         public string[] RespiratorySupportMachine { get; set; } = new string[2]; //респираторная поддержка аппарат
         public string[] InotropicSupportOne { get; set; } = new string[2]; //инотропная поддержка 1
-        public string InotropicSupportOneInput { get; set; } //инотропная поддержка 1 поле
-        public string[] InotropicSupportTwo { get; set; } = new string[2]; //инотропная поддержка 2
+        public int InotropicSupportOneInput { get; set; } //инотропная поддержка 1 поле
         public string Hemodynamics { get; set; } //Гемодинамика
-        public string InotropicSupportTwoInput { get; set; } //инотропная поддержка 2 поле
         public int Do { get; set; } //ДО
         public int Cd { get; set; } //ЧД
-        public string Pdkv { get; set; } //ПДКВ
-        public string Fio2 { get; set; } //FiO2
-        public string Dvdox { get; set; } //Двдох
-        public string Dpod { get; set; } //Дпод
-        public string Ad { get; set; } //АД
-        public string Сhss { get; set; } //ЧСС
-        public string Spo2 { get; set; } //ЧСС
+        public int Pdkv { get; set; } //ПДКВ
+        public int Fio2 { get; set; } //FiO2
+        public int Dvdox { get; set; } //Двдох
+        public int Dpod { get; set; } //Дпод
+        public int Ad { get; set; } //АД
+        public int Сhss { get; set; } //ЧСС
+        public int Spo2 { get; set; } //SpO2
         public string Stomach { get; set; } //Живот
         public string Pain { get; set; } //Болезненность
         public string PainAbout { get; set; } //ЧСС
         public string[] AbdominalBloating { get; set; } = new string[2]; //Вздутие живота
         public string Peristalsis { get; set; } //Перистальтика
         public string[] Tongue { get; set; } = new string[2]; //Язык
-        public string Diuresis { get; set; } //диурез
-        public string Intravenously { get; set; } //внутривенно
+        public int Diuresis { get; set; } //диурез
+        public int Intravenously { get; set; } //внутривенно
         public string Urine { get; set; } //Моча
-        public string BodyTemperature { get; set; } //температура тела
+        public int BodyTemperature { get; set; } //температура тела
         public string[] Drainage { get; set; } = new string[3]; //дренаж
+        public string[] DrainageTwo { get; set; } = new string[3]; //дренаж 2 поле
         public string DrinageAbout { get; set; }
+        public string DrinageAboutTwo { get; set; }
         public string Additionally { get; set; } //дополнительно
-        public string Laboratory1 { get; set; }
-        public string Laboratory2 { get; set; }
-        public string Laboratory3 { get; set; }
-        public string Laboratory4 { get; set; }
-        public string Laboratory5 { get; set; }
-        public string Laboratory6 { get; set; }
+        public int Laboratory1 { get; set; }
+        public int Laboratory2 { get; set; }
+        public int Laboratory3 { get; set; }
+        public int Laboratory4 { get; set; }
+        public int Laboratory5 { get; set; }
+        public int Laboratory6 { get; set; }
         public Doctor Doctor { get; set; } //доктор
         public PiCCO Picco { get; set; }
         public PiCCO2 Picco2 { get; set; }
@@ -81,6 +81,7 @@ namespace Re.Core.Models
         public int AnalysesFour { get; set; } //Анализы
         public int AnalysesFive { get; set; } //Анализы
         public int AnalysesSix { get; set; } //Анализы
+        public int Product { get; set; }
     }
     public class PiCCO
     {
