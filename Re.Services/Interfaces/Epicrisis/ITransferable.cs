@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Re.Services.Interfaces
+namespace Re.Services.Interfaces.Epicrisis
 {
     public interface ITransferable
     {

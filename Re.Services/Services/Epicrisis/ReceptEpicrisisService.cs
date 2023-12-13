@@ -1,13 +1,13 @@
 ﻿using Re.Core.Models;
 using Re.Data.Repo;
-using Re.Services.Interfaces;
+using Re.Services.Interfaces.Epicrisis;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Re.Services.Services
+namespace Re.Services.Services.Epicrisis
 {
     public class ReceptEpicrisisService : IReceptEpicrisisService
     {
@@ -18,7 +18,7 @@ namespace Re.Services.Services
         }
         public async Task<ReceptionEpicrisis> SaveReceptEpicrisisAsync(ReceptionEpicrisis epicrisis)
         {
-            if(epicrisis.Id == null)
+            if (epicrisis.Id == null)
             {
                 epicrisis.Id = Guid.NewGuid().ToString();
             }

@@ -22,8 +22,8 @@ public class DataContext : DbContext
             optionsBuilder.UseNpgsql("UserID=postgres;Password=passmein123;Server=localhost;Port=5432;Database=reanim;");
 
             // connection to Epicrisis
-            // "UserID=postgres;Password=123qweQWE;Server=localhost;Port=6699;Database=Reanimatorium;"
-        } 
+            // "UserID=postgres;Password=123qweQWE;Server=localhost;Port=6699;Database=reanim;"
+        }
     }
 
     //Наркотики
@@ -40,6 +40,9 @@ public class DataContext : DbContext
     //Эпикризы
     public DbSet<ReceptionEpicrisis> ReceptionEpicrises { get; set; }
     public DbSet<Transferable> TransferableEpicrisis { get; set; }
+    public DbSet<СhestСavityRoentgen> ChestСavityRoentgens { get; set; }
+    public DbSet<AbdominalCavityRoentgen> AbdominalRoentgens { get; set; }
+    public DbSet<TomographicExploration> TomographicExplorations { get; set; }
 
     //Дневники
     public DbSet<StandartDiary> StandartDiaries { get; set; }

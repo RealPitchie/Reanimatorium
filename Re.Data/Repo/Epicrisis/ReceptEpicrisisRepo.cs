@@ -1,6 +1,6 @@
 ﻿using Re.Core.Models;
 
-namespace Re.Data.Repo
+namespace Re.Data.Repo.Epicrisis
 {
     public class ReceptEpicrisisRepo : IRepo<ReceptionEpicrisis>
     {
