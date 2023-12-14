@@ -17,6 +17,11 @@ namespace Re.Data.Repo
             _dbSet = context.Set<T>();
         }
 
+        public async Task<IEnumerable<T>> GetAllAsync()
+        {
+            return await _dbSet.AsNoTracking().ToListAsync();
+        }
+
         public async Task<T> SaveAsync(T entity)
         {
             await _dbSet.AddAsync(entity);

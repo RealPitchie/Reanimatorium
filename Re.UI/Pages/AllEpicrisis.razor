@@ -1,0 +1,70 @@
+﻿@page "/allEpicrisis"
+
+@using Re.Core.Models;
+@using Re.UI.Pages.Components.Epicrisis
+@using Re.Services.Services.Epicrisis
+@inject ReceptEpicrisisService reService
+
+<MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary" PanelClass="pa-6">
+    <MudTabPanel Text="Приемный эпикриз">
+        <MudTable T="ReceptionEpicrisis" Items="@allReception">
+            <HeaderContent>
+                @foreach (var columnName in reService.GetPropertyNames())
+                {
+                    <MudTh>@columnName</MudTh>
+                }
+            </HeaderContent>
+            <RowTemplate>
+                @foreach (var all in allReception)
+                {
+                    @foreach (var name in reService.GetPropertyNames())
+                    {
+                        var prop = all.GetType().GetProperty(name);
+                        var bruh = prop.GetType();
+                        var haha = prop.GetValue(all);
+                        var ggg = prop.PropertyType;
+                        string result = "";
+                        @if (haha is string[])
+                        {
+                            var array = haha as Array;
+                            foreach (var arr in array)
+                            {
+                                result += $"{arr} ";
+                            }
+                            <MudTd>@result</MudTd>
+                        }
+                        else if (haha is int[])
+                        {
+                            var array = haha as Array;
+                            foreach (var arr in array)
+                            {
+                                result += $"{arr} / ";
+                            }
+                            <MudTd>@result</MudTd>
+                        }
+                        else
+                        {
+                            <MudTd>@prop.GetValue(all)</MudTd>
+                        }
+                    }
+                }
+            </RowTemplate>
+        </MudTable>
+    </MudTabPanel>
+    <MudTabPanel Text="Переводной эпикриз">
+        <Epic_Transferable />
+    </MudTabPanel>
+    <MudTabPanel Text="Рентген/КТ">
+        <Epic_RoentgenKT />
+    </MudTabPanel>
+</MudTabs>
+
+
+@code {
+    private IEnumerable<ReceptionEpicrisis> allReception = new List<ReceptionEpicrisis>();
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        allReception = await reService.GetAllAsync();
+    }
+}

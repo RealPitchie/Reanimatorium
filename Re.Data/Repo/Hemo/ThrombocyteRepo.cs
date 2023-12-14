@@ -14,6 +14,12 @@ namespace Re.Data.Repo.Hemo
         {
             _context = context;
         }
+
+        public Task<IEnumerable<ThrombocyteProtocol>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<ThrombocyteProtocol> SaveAsync(ThrombocyteProtocol thr)
         {
             await _context.ThrombocyteProtocols.AddAsync(thr);

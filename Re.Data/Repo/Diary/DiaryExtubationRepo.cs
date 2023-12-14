@@ -9,6 +9,12 @@ namespace Re.Data.Repo.Diary
         {
             _context = context;
         }
+
+        public Task<IEnumerable<Extubation>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Extubation> SaveAsync(Extubation extubation)
         {
             await _context.ExtubationDiaries.AddAsync(extubation);

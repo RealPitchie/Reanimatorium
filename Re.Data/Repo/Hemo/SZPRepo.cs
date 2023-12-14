@@ -14,6 +14,12 @@ namespace Re.Data.Repo.Hemo
         {
             _context = context;
         }
+
+        public Task<IEnumerable<SZPProtocol>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<SZPProtocol> SaveAsync(SZPProtocol szp)
         {
             await _context.SZPProtocols.AddAsync(szp);

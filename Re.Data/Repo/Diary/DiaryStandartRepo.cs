@@ -10,6 +10,10 @@ namespace Re.Data.Repo.Diary
         {
             _context = context;
         }
+        public Task<IEnumerable<StandartDiary>> GetAllAsync()
+        {
+            throw new NotImplementedException();
+        }
         public async Task<StandartDiary> SaveAsync(StandartDiary standart)
         {
             await _context.StandartDiaries.AddAsync(standart);

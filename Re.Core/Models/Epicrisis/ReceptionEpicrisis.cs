@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel.DataAnnotations;
 
 #nullable disable
 namespace Re.Core.Models
@@ -8,6 +9,7 @@ namespace Re.Core.Models
         public string Id { get; set; }
         public DateOnly Date { get; set; }
         public TimeOnly Time { get; set; }
+        [Display(Name = "Доставлен из")]
         public string DeliveredFrom { get; set; }
         public string AVLDueTransportation { get; set; }
         public string Complaints { get; set; }
