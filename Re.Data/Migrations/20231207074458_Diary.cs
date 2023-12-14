@@ -343,7 +343,7 @@ namespace Re.Data.Migrations
                     Laboratory4 = table.Column<string>(type: "text", nullable: true),
                     Laboratory5 = table.Column<string>(type: "text", nullable: true),
                     Laboratory6 = table.Column<string>(type: "text", nullable: true),
-                    Doctor = table.Column<string[]>(type: "text[]", nullable: true),
+                    DoctorId = table.Column<string[]>(type: "text", nullable: true),
                     PiccoId = table.Column<string>(type: "text", nullable: true),
                     Picco2Id = table.Column<string>(type: "text", nullable: true),
                     FioTracId = table.Column<string>(type: "text", nullable: true),
@@ -359,6 +359,11 @@ namespace Re.Data.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_StandartDiaries", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_StandartDiaries_Doctor_DoctorId",
+                        column: x => x.DoctorId,
+                        principalTable: "Doctor",
+                        principalColumn: "Id");
                     table.ForeignKey(
                         name: "FK_StandartDiaries_EsCCO_EsCCOId",
                         column: x => x.EsCCOId,
@@ -410,6 +415,11 @@ namespace Re.Data.Migrations
                 name: "IX_StandartDiaries_VoLEFId",
                 table: "StandartDiaries",
                 column: "VoLEFId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_StandartDiaries_DoctorId",
+                table: "StandartDiaries",
+                column: "DoctorId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

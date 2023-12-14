@@ -10,10 +10,10 @@
         <MudText Align="Align.Center">Отделение анестезиологии-реанимации</MudText>
         <MudGrid Justify="Justify.Center">
             <MudItem>
-                <MudDatePicker style="width: 150px;" Label="Дата" Date="re.Date" />
+                <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
             </MudItem>
             <MudItem>
-                <MudTimePicker style="width: 150px;" Label="Время" Time="re.Time" />
+                <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
             </MudItem>
         </MudGrid>
         <MudPaper Style="padding: 20px; margin: 15px 0">
@@ -880,11 +880,12 @@
             doctors.Add(new Doctor { Name = doctorNames[i], Id = Guid.NewGuid().ToString(), Position = i.ToString() });
         }
     }
-
+    DateTime? date;
+    TimeSpan? time;
     protected override void OnInitialized()
     {
-        re.Date = DateTime.Now;
-        re.Time = DateTime.Now.TimeOfDay;
+        date = DateTime.Now;
+        time = DateTime.Now.TimeOfDay;
         DoctorAdd();
         re.Drainage = "следы.";
         re.InotropesValue = 0;
@@ -1041,6 +1042,8 @@
     #endregion
 
     async Task Submit(){
+        re.Date = DateOnly.FromDateTime(date.Value);
+        re.Time = TimeOnly.FromTimeSpan(time.Value);
         await reService.SaveReceptEpicrisisAsync(re);
     }
 }

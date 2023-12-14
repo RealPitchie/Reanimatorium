@@ -6,8 +6,8 @@ namespace Re.Core.Models
     public class ReceptionEpicrisis
     {
         public string Id { get; set; }
-        public DateTime Date { get; set; }
-        public TimeSpan Time { get; set; }
+        public DateOnly Date { get; set; }
+        public TimeOnly Time { get; set; }
         public string DeliveredFrom { get; set; }
         public string AVLDueTransportation { get; set; }
         public string Complaints { get; set; }

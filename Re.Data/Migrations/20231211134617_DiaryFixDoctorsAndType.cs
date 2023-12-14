@@ -177,24 +177,6 @@ namespace Re.Data.Migrations
                 type: "text",
                 nullable: true);
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "DateTo",
-                table: "TransferableEpicrisis",
-                type: "timestamp without time zone",
-                nullable: true,
-                oldClrType: typeof(DateTime),
-                oldType: "timestamp with time zone",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "DateFrom",
-                table: "TransferableEpicrisis",
-                type: "timestamp without time zone",
-                nullable: true,
-                oldClrType: typeof(DateTime),
-                oldType: "timestamp with time zone",
-                oldNullable: true);
-
             migrationBuilder.AlterColumn<string>(
                 name: "Сonditions",
                 table: "StandartDiaries",
@@ -330,14 +312,6 @@ namespace Re.Data.Migrations
                 oldType: "text[]",
                 oldNullable: true);
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "Date",
-                table: "ReceptionEpicrises",
-                type: "timestamp without time zone",
-                nullable: false,
-                oldClrType: typeof(DateTime),
-                oldType: "timestamp with time zone");
-
             migrationBuilder.AddColumn<string>(
                 name: "DoctorId",
                 table: "ExtubationDiaries",
@@ -390,11 +364,6 @@ namespace Re.Data.Migrations
                 name: "IX_WeekendDiaries_DoctorTwoId",
                 table: "WeekendDiaries",
                 column: "DoctorTwoId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_StandartDiaries_DoctorId",
-                table: "StandartDiaries",
-                column: "DoctorId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ExtubationDiaries_DoctorId",
@@ -451,10 +420,6 @@ namespace Re.Data.Migrations
                 table: "ExtubationDiaries");
 
             migrationBuilder.DropForeignKey(
-                name: "FK_StandartDiaries_Doctor_DoctorId",
-                table: "StandartDiaries");
-
-            migrationBuilder.DropForeignKey(
                 name: "FK_WeekendDiaries_Doctor_DoctorFiveId",
                 table: "WeekendDiaries");
 
@@ -498,10 +463,6 @@ namespace Re.Data.Migrations
                 table: "WeekendDiaries");
 
             migrationBuilder.DropIndex(
-                name: "IX_StandartDiaries_DoctorId",
-                table: "StandartDiaries");
-
-            migrationBuilder.DropIndex(
                 name: "IX_ExtubationDiaries_DoctorId",
                 table: "ExtubationDiaries");
 
@@ -527,137 +488,7 @@ namespace Re.Data.Migrations
 
             migrationBuilder.DropColumn(
                 name: "DoctorId",
-                table: "StandartDiaries");
-
-            migrationBuilder.DropColumn(
-                name: "DoctorId",
                 table: "ExtubationDiaries");
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Сonditions",
-                table: "WeekendDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Сomplaints",
-                table: "WeekendDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Urine",
-                table: "WeekendDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Stomach",
-                table: "WeekendDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "RespiratorySupport",
-                table: "WeekendDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Rass",
-                table: "WeekendDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Peristalsis",
-                table: "WeekendDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Pain",
-                table: "WeekendDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "InhalationO2",
-                table: "WeekendDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Hemodynamics",
-                table: "WeekendDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Extubation",
-                table: "WeekendDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Conscience",
-                table: "WeekendDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Breathing",
-                table: "WeekendDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Auscultatory",
-                table: "WeekendDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
 
             migrationBuilder.AddColumn<string[]>(
                 name: "Doctor",
@@ -670,173 +501,6 @@ namespace Re.Data.Migrations
                 table: "WeekendDiaries",
                 type: "text[]",
                 nullable: true);
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "DateTo",
-                table: "TransferableEpicrisis",
-                type: "timestamp with time zone",
-                nullable: true,
-                oldClrType: typeof(DateTime),
-                oldType: "timestamp without time zone",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "DateFrom",
-                table: "TransferableEpicrisis",
-                type: "timestamp with time zone",
-                nullable: true,
-                oldClrType: typeof(DateTime),
-                oldType: "timestamp without time zone",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Сonditions",
-                table: "StandartDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Сomplaints",
-                table: "StandartDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Vash",
-                table: "StandartDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Urine",
-                table: "StandartDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Stomach",
-                table: "StandartDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "RespiratorySupport",
-                table: "StandartDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Rass",
-                table: "StandartDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Peristalsis",
-                table: "StandartDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Pain",
-                table: "StandartDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "InhalationO2",
-                table: "StandartDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Hemodynamics",
-                table: "StandartDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Extubation",
-                table: "StandartDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Conscience",
-                table: "StandartDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Breathing",
-                table: "StandartDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Auscultatory",
-                table: "StandartDiaries",
-                type: "text[]",
-                nullable: true,
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AddColumn<string[]>(
-                name: "Doctor",
-                table: "StandartDiaries",
-                type: "text[]",
-                nullable: true);
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "Date",
-                table: "ReceptionEpicrises",
-                type: "timestamp with time zone",
-                nullable: false,
-                oldClrType: typeof(DateTime),
-                oldType: "timestamp without time zone");
 
             migrationBuilder.AddColumn<string[]>(
                 name: "Doctor",
