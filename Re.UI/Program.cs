@@ -12,7 +12,6 @@ using Re.Data.Repo.Diary;
 using Re.Core.Models.Hemo;
 using Re.Data.Repo.Hemo;
 using Re.Services.Services.Hemo;
-using Re.Data.Repo.Epicrisis;
 using Re.Services.Services.Epicrisis;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -34,18 +33,18 @@ services.AddDbContext<DataContext>(options =>
 // To add date
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
 
-services.AddScoped<IRepo<StandardProtocol>, Repo>();
-
-services.AddScoped<IRepo<Transferable>, TransferableRepo>();
-services.AddScoped<IRepo<ReceptionEpicrisis>, ReceptEpicrisisRepo>();
-services.AddScoped<IRepo<ÑhestÑavityRoentgen>, ChestCavityRepo>();
-services.AddTransient<ChestCavityService>();
+services.AddScoped<IRepo<StandardProtocol>, Repo<StandardProtocol>>();
 services.AddTransient<ProtocolService>();
+
+services.AddScoped<IRepo<ReceptionEpicrisis>, Repo<ReceptionEpicrisis>>();
+services.AddScoped<IRepo<Transferable>, Repo<Transferable>>();
+services.AddScoped<IRepo<ÑhestÑavityRoentgen>, Repo<ÑhestÑavityRoentgen>>();
+services.AddScoped<IRepo<AbdominalCavityRoentgen>, Repo<AbdominalCavityRoentgen>>();
+services.AddScoped<IRepo<TomographicExploration>, Repo<TomographicExploration>>();
+services.AddTransient<ChestCavityService>();
 services.AddTransient<ReceptEpicrisisService>();
 services.AddTransient<TransferEpicrisisService>();
-services.AddScoped<IRepo<AbdominalCavityRoentgen>, AbdominalRepo>();
 services.AddTransient<AbdominalCavityService>();
-services.AddScoped<IRepo<TomographicExploration>, TomographicRepo>();
 services.AddTransient<TomographicService>();
 
 services.AddScoped<IRepo<Patient>, DrugRepo>();

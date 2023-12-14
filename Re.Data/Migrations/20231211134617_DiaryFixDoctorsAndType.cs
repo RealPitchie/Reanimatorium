@@ -177,24 +177,6 @@ namespace Re.Data.Migrations
                 type: "text",
                 nullable: true);
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "DateTo",
-                table: "TransferableEpicrisis",
-                type: "timestamp without time zone",
-                nullable: true,
-                oldClrType: typeof(DateTime),
-                oldType: "timestamp with time zone",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "DateFrom",
-                table: "TransferableEpicrisis",
-                type: "timestamp without time zone",
-                nullable: true,
-                oldClrType: typeof(DateTime),
-                oldType: "timestamp with time zone",
-                oldNullable: true);
-
             migrationBuilder.AlterColumn<string>(
                 name: "Сonditions",
                 table: "StandartDiaries",
@@ -330,14 +312,6 @@ namespace Re.Data.Migrations
                 oldType: "text[]",
                 oldNullable: true);
 
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "Date",
-                table: "ReceptionEpicrises",
-                type: "timestamp without time zone",
-                nullable: false,
-                oldClrType: typeof(DateTime),
-                oldType: "timestamp with time zone");
-
             migrationBuilder.AddColumn<string>(
                 name: "DoctorId",
                 table: "ExtubationDiaries",
@@ -353,8 +327,8 @@ namespace Re.Data.Migrations
                     Time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
                     Name = table.Column<string>(type: "text", nullable: false),
                     FIO = table.Column<string>(type: "text", nullable: false),
-                    Age = table.Column<string>(type: "text", nullable: false),
-                    Number = table.Column<string>(type: "text", nullable: false),
+                    Age = table.Column<int>(type: "integer", nullable: false),
+                    Number = table.Column<int>(type: "integer", nullable: false),
                     GroupRh = table.Column<string[]>(type: "text[]", nullable: false),
                     Diagnosis = table.Column<string>(type: "text", nullable: false),
                     Indications = table.Column<string[]>(type: "text[]", nullable: false),
@@ -527,32 +501,6 @@ namespace Re.Data.Migrations
                 table: "WeekendDiaries",
                 type: "text[]",
                 nullable: true);
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "DateTo",
-                table: "TransferableEpicrisis",
-                type: "timestamp with time zone",
-                nullable: true,
-                oldClrType: typeof(DateTime),
-                oldType: "timestamp without time zone",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "DateFrom",
-                table: "TransferableEpicrisis",
-                type: "timestamp with time zone",
-                nullable: true,
-                oldClrType: typeof(DateTime),
-                oldType: "timestamp without time zone",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "Date",
-                table: "ReceptionEpicrises",
-                type: "timestamp with time zone",
-                nullable: false,
-                oldClrType: typeof(DateTime),
-                oldType: "timestamp without time zone");
 
             migrationBuilder.AddColumn<string[]>(
                 name: "Doctor",
