@@ -1,150 +1,175 @@
 ﻿@using Re.Core.Models
 @using Re.Core.Models.Hemo;
+@using Newtonsoft.Json;
+@using System.Diagnostics;
 @using Re.UI.Data
+@inject Re.Services.Services.Hemo.ErythrocyteProtocolService erService
 
 <MudGrid>
-    <MudPaper Style="margin: 15px 0; margin-top:30px; height: 900px;" Width="1190px">
-        <MudText Style="margin-top:10px; margin-left:20px;" Typo="Typo.h6">@Name</MudText>
-        <MudGrid Style="margin-top:10px; margin-left:20px;">
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Ф.И.О. реципиента</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.FIO" Style="width:980px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>№ карты:</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Number" Style="width:1050px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Группа крови репициента</MudText></MudItem>
-                <MudItem Style="margin-top:-20px;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="width:925px">
-                        @foreach (var item in Group)
-                        {
-                            <MudSelectItem Value="@item" />
-                        }
-                    </MudSelect>
-                </MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Фенотип</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Phenotype" Style="width:1055px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Где определяли резус:</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Place" Style="width:950px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Показания к гемотрансфузии:</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Indication" Style="width:890px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Трансфузионный анамнез:</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Anamnesis" Style="width:915px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Наименование компонента:</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Component" Style="width:905px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Изготовитель:</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Mfr" Style="width:1010px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Дата заготовки:</MudText></MudItem>
-                <MudItem><MudDatePicker Style="width:150px; margin-top:-5px;" @bind-Date="zagdate" /></MudItem>
-                <MudItem Style="margin-top:5px;"><MudText>Годна до:</MudText></MudItem>
-                <MudItem> <MudDatePicker Style="width:150px; margin-top:-5px;" @bind-Date="enddate" /></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>N контейнера:</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.NumberCont" Style="width:1010px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Объем:</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Volume" Style="width:1060px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Код донора:</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Code" Style="width:1020px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Группа крови донора:</MudText></MudItem>
-                <MudItem Style="margin-top:-20px;">
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="width:945px">
-                        @foreach (var item in GroupDonor)
-                        {
-                            <MudSelectItem Value="@item" />
-                        }
-                    </MudSelect>
-                </MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Реактивы:</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Reagents" Style="width:1030px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Пробы на совместимость:</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Compatibility" Lines="2" Style="width:905px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Биологическая проба:</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.BiologicalSample" Style="width:937px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Способ трансфузии:</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Transfusion" Style="width:953px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Осложнения:</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Complications" Style="width:1005px"></MudInput></MudItem>
-            </MudGrid>
-            <MudGrid>
-                <MudItem Style="margin-top:5px;"><MudText>Пробы на совместимость:</MudText></MudItem>
-                <MudGrid Style="margin-top:-20px; margin-left:530px;">
-                    <MudText>АД</MudText>
-                    <MudText Style="margin-left:145px;">ЧСС</MudText>
-                    <MudText Style="margin-left:150px;">Т</MudText>
-                    <MudText Style="margin-left:100px;">Диурез, цвет мочи</MudText>
+    <MudItem xs="12">
+        <MudPaper Style="margin: 15px 0; margin-top:30px;">
+            <MudText Style="margin-top:10px; margin-left:20px;" Typo="Typo.h6">Трансфузия эритроцитарной взвеси</MudText>
+            <MudGrid Style="margin-top:0px; margin-left:20px;">
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudTextField T="string" Label="Ф.И.О. реципиента" Variant="Variant.Text" @bind-Value="er.FIO"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudTextField T="int" Label="№ карты:" Variant="Variant.Text" @bind-Value="er.Number"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudSelect @bind-Value="er.Group" Label="Группа крови репициента" T="string" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var item in Group)
+                            {
+                                <MudSelectItem Value="@item" />
+                            }
+                        </MudSelect>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudTextField T="string" Label="Фенотип" Variant="Variant.Text" @bind-Value="er.Phenotype"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudTextField T="string" Label="Где определяли резус:" Variant="Variant.Text" @bind-Value="er.Place"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudTextField T="string" Label="Показания к гемотрансфузии:" Variant="Variant.Text" @bind-Value="er.Indication"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudTextField T="string" Label="Трансфузионный анамнез:" Variant="Variant.Text" @bind-Value="er.Anamnesis"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudTextField T="string" Label="Наименование компонента:" Variant="Variant.Text" @bind-Value="er.Component"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudTextField T="string" Label="Изготовитель:" Variant="Variant.Text" @bind-Value="er.Mfr"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid Style="margin-top:15px;">
+                    <MudItem Style="margin-top:5px;"><MudText>Дата заготовки:</MudText></MudItem>
+                    <MudItem xs="2"><MudDatePicker Style="margin-top:-5px;" Date="er.StartDate" /></MudItem>
+                    <MudItem Style="margin-top:5px;"><MudText>Годна до:</MudText></MudItem>
+                    <MudItem xs="2"> <MudDatePicker Style="margin-top:-5px;" Date="er.EndDate" /></MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudTextField T="int" Label="N контейнера:" Variant="Variant.Text" @bind-Value="er.NumberCont"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudTextField T="int" Label="Объем:" Variant="Variant.Text" @bind-Value="er.Volume"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudTextField T="int" Label="Код донора:" Variant="Variant.Text" @bind-Value="er.Code"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudSelect @bind-Value="er.GroupDonor" Label="Группа крови донора:" T="string" AnchorOrigin="Origin.BottomCenter">
+                            @foreach (var item in GroupDonor)
+                            {
+                                <MudSelectItem Value="@item" />
+                            }
+                        </MudSelect>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudTextField T="string" Label="Реактивы:" Variant="Variant.Text" @bind-Value="er.Reagents"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudTextField T="string" Label="Пробы на совместимость:" Variant="Variant.Text" @bind-Value="er.Compatibility" Lines="2"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudTextField T="string" Label="Биологическая проба:" Variant="Variant.Text" @bind-Value="er.BiologicalSample"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudTextField T="string" Label="Способ трансфузии:" Variant="Variant.Text" @bind-Value="er.Transfusion"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem xs="10">
+                        <MudTextField T="string" Label="Осложнения:" Variant="Variant.Text" @bind-Value="er.Complications"></MudTextField>
+                    </MudItem>
+                </MudGrid>
+                <MudGrid>
+                    <MudItem Style="margin-top:5px;"><MudText>Наблюдение за состоянием:</MudText></MudItem>
+                    <MudGrid Style="margin-left:200px; margin-top:1px;">
+                        <MudText Typo="Typo.overline">АД</MudText>
+                        <MudText Typo="Typo.overline" Style="margin-left:185px;">ЧСС</MudText>
+                        <MudText Typo="Typo.overline" Style="margin-left:175px;">Т</MudText>
+                        <MudText Typo="Typo.overline" Style="margin-left:195px;">Диурез, цвет мочи</MudText>
+                    </MudGrid>
                 </MudGrid>
             </MudGrid>
-            <MudGrid Style="margin-left:255px; margin-top:5px;">
+            <MudGrid Style="margin-top:25px; margin-left:10px;">
                 <MudItem Style="margin-top:5px;"><MudText>перед переливанием</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.AD" Style="width:150px"></MudInput></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.HR" Style="width:150px"></MudInput></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.T" Style="width:150px"></MudInput></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Diuresis" Style="width:150px"></MudInput></MudItem>
+                <MudItem xs="2"><MudInput T="string" Variant="Variant.Text" @bind-Value="er.AD"></MudInput></MudItem>
+                <MudItem xs="2"><MudInput T="string" Variant="Variant.Text" @bind-Value="er.HR"></MudInput></MudItem>
+                <MudItem xs="2"><MudInput T="string" Variant="Variant.Text" @bind-Value="er.T"></MudInput></MudItem>
+                <MudItem xs="2"><MudInput T="string" Variant="Variant.Text" @bind-Value="er.Diuresis"></MudInput></MudItem>
             </MudGrid>
-            <MudGrid Style="margin-left:283px;">
+            <MudGrid Style="margin-left:35px;">
                 <MudItem Style="margin-top:5px;"><MudText>через 1 час после</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.ADhafter" Style="width:150px"></MudInput></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.HRhafter" Style="width:150px"></MudInput></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Thafter" Style="width:150px"></MudInput></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Diuresishafter" Style="width:150px"></MudInput></MudItem>
+                <MudItem xs="2"><MudInput T="string" Variant="Variant.Text" @bind-Value="er.ADhafter"></MudInput></MudItem>
+                <MudItem xs="2"><MudInput T="string" Variant="Variant.Text" @bind-Value="er.HRhafter"></MudInput></MudItem>
+                <MudItem xs="2"><MudInput T="string" Variant="Variant.Text" @bind-Value="er.Thafter"></MudInput></MudItem>
+                <MudItem xs="2"><MudInput T="string" Variant="Variant.Text" @bind-Value="er.Diuresishafter"></MudInput></MudItem>
             </MudGrid>
-            <MudGrid Style="margin-left:275px;">
-                <MudItem Style="margin-top:5px;"><MudText>через 2 часа после</MudText></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.AD2hafter" Style="width:150px"></MudInput></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.HR2hafter" Style="width:150px"></MudInput></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.T2hafter" Style="width:150px"></MudInput></MudItem>
-                <MudItem><MudInput T="string" Variant="Variant.Text" Text="@er.Diuresis2hafter" Style="width:150px"></MudInput></MudItem>
+            <MudGrid Style="margin-left:25px;">
+                <MudItem Style="margin-top:15px;"><MudText>через 2 часа после</MudText></MudItem>
+                <MudItem xs="2"><MudInput T="string" Variant="Variant.Text" @bind-Value="er.AD2hafter"></MudInput></MudItem>
+                <MudItem xs="2"><MudInput T="string" Variant="Variant.Text" @bind-Value="er.HR2hafter"></MudInput></MudItem>
+                <MudItem xs="2"><MudInput T="string" Variant="Variant.Text" @bind-Value="er.T2hafter"></MudInput></MudItem>
+                <MudItem xs="2"><MudInput T="string" Variant="Variant.Text" @bind-Value="er.Diuresis2hafter"></MudInput></MudItem>
             </MudGrid>
-            <MudGrid>
-                <MudItem><MudText>Врач</MudText></MudItem>
-                <MudItem>
-                    <MudSelect T="string" AnchorOrigin="Origin.BottomCenter" Style="margin-top:-8px; width:1070px;">
-                        @foreach (var item in Doctor.OrderBy(x => x))
+            <MudGrid Style="margin-left:10px;">
+                <MudItem><MudText>Врач:</MudText></MudItem>
+                <MudItem xs="5">
+                    <MudSelect @bind-Value="er.Doctor" ToStringFunc="@converter" AnchorOrigin="Origin.BottomCenter" Style="margin-top:-20px;">
+                        @foreach (var item in doctors)
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
             </MudGrid>
-        </MudGrid>
-    </MudPaper>
+            <MudGrid Justify="Justify.Center">
+                <MudItem xs="5" Class="d-flex flex-column justify-end" Style="padding-top:30px; padding-bottom:15px;">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit">
+                        Отправить
+                    </MudButton>
+                </MudItem>
+            </MudGrid>
+        </MudPaper>
+    </MudItem>
 </MudGrid>
 
 @code {
-    string Name = "Трансфузия эритроцитарной взвеси";
     string[] Group = new string[]
     {
         "0(I) Rh- (отрицательный)",
@@ -171,7 +196,7 @@
         "B(III) Rh+ (положительный)",
         "AB(IV) Rh+ (положительный)"
     };
-    string[] Doctor = new string[]
+    string[] doctorNames = new string[]
     {
         "Розенгард С.А.",
         "Глущенко В.А.",
@@ -198,8 +223,29 @@
         "Хестанова Н.З.",
         "Шабут А.М."
     };
+    List<Doctor> doctors = new();
+    Func<Doctor, string> converter = d =>
+    {
+        if (d != null) return d.Name;
+        else return " ";
+    };
+    void DoctorAdd()
+    {
+        @for (int i = 0; i < doctorNames.Length; i++)
+        {
+            doctors.Add(new Doctor { Name = doctorNames[i], Id = Guid.NewGuid().ToString(), Position = i.ToString() });
+        }
+    }
+    protected override void OnInitialized()
+    {
+        DoctorAdd();
+        er.StartDate = DateTime.Now;
+        er.EndDate = DateTime.Now;
+    }
     //[Parameter]
     public ErythrocyteProtocol er = new();
-    DateTime? zagdate; //дата
-    DateTime? enddate;
+    async Task Submit()
+    {
+        await erService.SaveErythrocyteProtocolAsync(er);
+    }
 }

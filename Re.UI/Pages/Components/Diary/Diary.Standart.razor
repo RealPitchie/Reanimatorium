@@ -5,10 +5,10 @@
 
 <MudGrid Justify="Justify.Center">
     <MudItem>
-        <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
+        <MudDatePicker style="width: 150px;" Label="Дата" Date="standart.Date" />
     </MudItem>
     <MudItem>
-        <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
+        <MudTimePicker style="width: 150px;" Label="Время" Time="standart.Time" />
     </MudItem>
 </MudGrid>
 
@@ -75,7 +75,7 @@
 
                 </MudItem>
                 <MudItem  xs="6">
-                    <MudTextField T="string" Variant="Variant.Text" @bind-Value="standart.RassThis" Text="С целью потенцирования эффекта анальгетической терапии вводится в /в микроструйно Дексмедетомидин в дозировке 0.7 мкг /кг/час." Disabled="!SwitchChecked2" />
+                    <MudTextField T="string" Variant="Variant.Text" @bind-Value="standart.RassThis" Disabled="!SwitchChecked2" />
                 </MudItem>
 
                 <MudItem xs="1" Class="d-flex flex-column justify-end">
@@ -148,7 +148,7 @@
                 <MudItem xs="2" Class="d-flex flex-column justify-end"><MudText>ЧДД - </MudText></MudItem>
 
                 <MudItem xs="2">
-                    <MudTextField T="string" Variant="Variant.Text" @bind-Value="standart.CddField" Disabled="SwitchChecked4" />
+                    <MudTextField Variant="Variant.Text" @bind-Value="standart.CddField" Disabled="SwitchChecked4" Min="0" />
                 </MudItem>
 
                 <MudItem Class="d-flex flex-column justify-end"><MudText>в 1 минуту.</MudText></MudItem>
@@ -169,7 +169,7 @@
                 <MudItem Class="d-flex flex-column justify-end"><MudText>Скорость потока - </MudText></MudItem>
 
                 <MudItem xs="1">
-                    <MudTextField  @bind-Value="standart.SpeedFlow" T="string" Label="" Variant="Variant.Text" Disabled="SwitchChecked4" />
+                    <MudTextField @bind-Value="standart.SpeedFlow" Variant="Variant.Text" Disabled="SwitchChecked4" Min="0" />
                 </MudItem>
 
                 <MudItem Class="d-flex flex-column justify-end"><MudText>л/мин.</MudText></MudItem>
@@ -274,12 +274,12 @@
 
             <MudGrid>
                 <MudItem xs="2">
-                    <MudTextField Label="ДО - " @bind-Value="@Num1" T="int" Variant="Variant.Text" Min="0" Disabled="!SwitchChecked4" />
+                    <MudTextField Label="ДО - " @bind-Value="standart.Do" Variant="Variant.Text" Min="0" Disabled="!SwitchChecked4" />
                 </MudItem>
                 <MudItem xs="3" Class="d-flex flex-column justify-end"><MudText>мл;</MudText></MudItem>
 
                 <MudItem xs="2">
-                    <MudTextField T="string" Label="FiO₂ - " Variant="Variant.Text" @bind-Value="standart.Fio2"  Disabled="!SwitchChecked4" />
+                    <MudTextField Label="FiO₂ - " Variant="Variant.Text" @bind-Value="standart.Fio2" Disabled="!SwitchChecked4" Min="0" />
                 </MudItem>
                 <MudItem  Class="d-flex flex-column justify-end"><MudText>%;</MudText></MudItem>
 
@@ -297,12 +297,12 @@
 
             <MudGrid>
                 <MudItem xs="2">
-                    <MudTextField @bind-Value="@Num2" Label="ЧД - " T="int" Variant="Variant.Text" Min="0" Disabled="!SwitchChecked4" />
+                    <MudTextField @bind-Value="standart.Cd" Label="ЧД - "  Variant="Variant.Text" Min="0" Disabled="!SwitchChecked4"/>
                 </MudItem>
                 <MudItem  xs="3" Class="d-flex flex-column justify-end"><MudText>в мин;</MudText></MudItem>
 
                 <MudItem xs="2">
-                    <MudTextField T="string" Variant="Variant.Text" @bind-Value="standart.Dvdox"  Label="Двдох - " Disabled="!SwitchChecked4" />
+                    <MudTextField Variant="Variant.Text" @bind-Value="standart.Dvdox" Label="Двдох - " Disabled="!SwitchChecked4" Min="0" />
                 </MudItem>
                 <MudItem  xs="3" Class="d-flex flex-column justify-end"><MudText>см водн.ст.;</MudText></MudItem>
 
@@ -313,12 +313,12 @@
 
             <MudGrid>
                 <MudItem xs="2">
-                    <MudTextField T="string" Variant="Variant.Text" Label="ПДКВ -" @bind-Value="standart.Pdkv" Disabled="!SwitchChecked4" />
+                    <MudTextField Variant="Variant.Text" Label="ПДКВ -" @bind-Value="standart.Pdkv" Disabled="!SwitchChecked4" Min="0" />
                 </MudItem>
                 <MudItem  xs="3" Class="d-flex flex-column justify-end"><MudText>см водн.ст.;</MudText></MudItem>
 
                 <MudItem xs="2">
-                    <MudTextField T="string" Variant="Variant.Text" Label="Дпод - " @bind-Value="standart.Dpod" Disabled="!SwitchChecked4" />
+                    <MudTextField  Variant="Variant.Text" Label="Дпод - " @bind-Value="standart.Dpod" Disabled="!SwitchChecked4" Min="0" />
                 </MudItem>
                 <MudItem Class="d-flex flex-column justify-end"><MudText>см водн.ст.;</MudText></MudItem>
             </MudGrid>
@@ -349,7 +349,7 @@
 
                 <MudItem xs="2">
 
-                    <MudTextField T="string" Label="" Variant="Variant.Text" @bind-Value="standart.InotropicSupportOneInput"  Disabled="!SwitchChecked5" />
+                    <MudTextField  Variant="Variant.Text" @bind-Value="standart.InotropicSupportOneInput"  Disabled="!SwitchChecked5" Min="0" />
                 </MudItem>
 
                 <MudItem xs="2">
@@ -369,13 +369,13 @@
                 <MudItem Class="d-flex flex-column justify-end"><MudText>АД - </MudText></MudItem>
 
                 <MudItem xs="2">
-                    <MudTextField T="string" Variant="Variant.Text"  @bind-Value="standart.Ad" />
+                    <MudTextField  Variant="Variant.Text"  @bind-Value="standart.Ad" Min="0" />
                 </MudItem>
                 <MudItem xs="2" Class="d-flex flex-column justify-end"><MudText>мм рт.ст.</MudText></MudItem>
                 <MudItem  Class="d-flex flex-column justify-end"><MudText>ЧСС - </MudText></MudItem>
 
                 <MudItem xs="2">
-                    <MudTextField T="string" Variant="Variant.Text"  @bind-Value="standart.Сhss" />
+                    <MudTextField  Variant="Variant.Text"  @bind-Value="standart.Сhss" Min="0" />
                 </MudItem>
                 <MudItem  Class="d-flex flex-column justify-end"><MudText>в 1 минуту.</MudText></MudItem>
             </MudGrid>
@@ -384,7 +384,7 @@
                 <MudItem Class="d-flex flex-column justify-end"><MudText>SpO₂ - </MudText></MudItem>
 
                 <MudItem xs="2">
-                    <MudTextField @bind-Value="standart.Spo2" T="string" Variant="Variant.Text"/>
+                    <MudTextField @bind-Value="standart.Spo2"  Variant="Variant.Text" Min="0"/>
                 </MudItem>
                 <MudItem Style="width: 30%;" Class="d-flex flex-column justify-end"><MudText>%.</MudText></MudItem>
             </MudGrid>
@@ -475,13 +475,13 @@
                 <MudItem Class="d-flex flex-column justify-end"><MudText>Диурез - </MudText></MudItem>
 
                 <MudItem xs="2">
-                    <MudTextField T="string" Variant="Variant.Text" @bind-Value="standart.Diuresis" />
+                    <MudTextField Variant="Variant.Text" @bind-Value="standart.Diuresis"  Min="0"/>
                 </MudItem>
                 <MudItem Class="d-flex flex-column justify-end"><MudText>мл.</MudText></MudItem>
                 <MudItem Class="d-flex flex-column justify-end"><MudText>Перелито в/в - </MudText></MudItem>
 
                 <MudItem xs="2">
-                    <MudTextField T="string" Variant="Variant.Text" @bind-Value="standart.Intravenously" Disabled="!SwitchChecked6" />
+                    <MudTextField Variant="Variant.Text" @bind-Value="standart.Intravenously" Disabled="!SwitchChecked6" Min="0" />
                 </MudItem>
                 <MudItem Class="d-flex flex-column justify-end"><MudText>мл.</MudText></MudItem>
                 <MudItem xs="1" Class="d-flex flex-column justify-end">
@@ -504,7 +504,7 @@
                 <MudItem Class="d-flex flex-column justify-end"><MudText>Температура тела - </MudText></MudItem>
 
                 <MudItem xs="2">
-                    <MudTextField T="string" Variant="Variant.Text" @bind-Value="standart.BodyTemperature" />
+                    <MudTextField Variant="Variant.Text" @bind-Value="standart.BodyTemperature" Min="0"/>
                 </MudItem>
                 <MudItem Class="d-flex flex-column justify-end"><MudText>C°.</MudText></MudItem>
             </MudGrid>
@@ -546,8 +546,8 @@
 
             <MudGrid Style="padding-left:90px;">
                 <MudItem xs="4">
-                    <MudSelect @bind-Value="standart.Drainage[0]" T="string" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
-                        @foreach (var item in Drainage[0])
+                    <MudSelect @bind-Value="standart.DrainageTwo[0]" T="string" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
+                        @foreach (var item in DrainageTwo[0])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -555,19 +555,19 @@
                 </MudItem>
 
                 <MudItem xs="2">
-                    <MudSelect @bind-Value="standart.Drainage[1]" T="string" Label="Стороны" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
-                        @foreach (var item in Drainage[1])
+                    <MudSelect @bind-Value="standart.DrainageTwo[1]" T="string" Label="Стороны" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
+                        @foreach (var item in DrainageTwo[1])
                         {
                             <MudSelectItem Value="@item" />
                         }
                     </MudSelect>
                 </MudItem>
                 <MudItem xs="2">
-                    <MudTextField T="string" Variant="Variant.Text" @bind-Value="standart.DrinageAbout" Disabled="!SwitchChecked7" />
+                    <MudTextField T="string" Variant="Variant.Text" @bind-Value="standart.DrinageAboutTwo" Disabled="!SwitchChecked7" />
                 </MudItem>
                 <MudItem xs="2">
-                    <MudSelect @bind-Value="standart.Drainage[2]" T="string" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
-                        @foreach (var item in Drainage[2])
+                    <MudSelect @bind-Value="standart.DrainageTwo[2]" T="string" AnchorOrigin="Origin.BottomCenter" Disabled="!SwitchChecked7">
+                        @foreach (var item in DrainageTwo[2])
                         {
                             <MudSelectItem Value="@item" />
                         }
@@ -589,36 +589,36 @@
             </MudGrid>
             <MudGrid>
                 <MudItem xs= "2">
-                    <MudTextField T="string" Label="WBC - " Variant="Variant.Text" @bind-Value="standart.Laboratory1" Disabled="!SwitchChecked9" />
+                    <MudTextField Label="WBC - " Variant="Variant.Text" @bind-Value="standart.Laboratory1" Disabled="!SwitchChecked9" Min="0" />
                 </MudItem>
                 <MudItem Class="d-flex flex-column justify-end"><MudText>x10⁹/л.</MudText></MudItem>
 
                 <MudItem xs="2">
-                    <MudTextField  Label="HGB - " T="string" Variant="Variant.Text" @bind-Value="standart.Laboratory2" Disabled="!SwitchChecked9" />
+                    <MudTextField  Label="HGB - " Variant="Variant.Text" @bind-Value="standart.Laboratory2" Disabled="!SwitchChecked9" Min="0"/>
                 </MudItem>
                 <MudItem Class="d-flex flex-column justify-end"><MudText>г/л.</MudText></MudItem>
 
                 <MudItem xs="2">
-                    <MudTextField Label="RBC - " T="string" Variant="Variant.Text" @bind-Value="standart.Laboratory3"  Disabled="!SwitchChecked9" />
+                    <MudTextField Label="RBC - "  Variant="Variant.Text" @bind-Value="standart.Laboratory3"  Disabled="!SwitchChecked9" Min="0"/>
                 </MudItem>
                 <MudItem Class="d-flex flex-column justify-end"><MudText>x10¹²/л.</MudText></MudItem>
             </MudGrid>
 
             <MudGrid>
                 <MudItem xs="2">
-                    <MudTextField T="string" Label="HCT - " Variant="Variant.Text" @bind-Value="standart.Laboratory4"  Disabled="!SwitchChecked9" />
+                    <MudTextField  Label="HCT - " Variant="Variant.Text" @bind-Value="standart.Laboratory4"  Disabled="!SwitchChecked9" Min="0"/>
                 </MudItem>
                 <MudItem  Class="d-flex flex-column justify-end"><MudText>%.</MudText></MudItem>
 
 
                 <MudItem xs="2">
-                    <MudTextField Label="PLT - " T="string" Variant="Variant.Text" @bind-Value="standart.Laboratory5"  Disabled="!SwitchChecked9" />
+                    <MudTextField Label="PLT - "  Variant="Variant.Text" @bind-Value="standart.Laboratory5"  Disabled="!SwitchChecked9" Min="0"/>
                 </MudItem>
                 <MudItem  Class="d-flex flex-column justify-end"><MudText>x10⁹/л.</MudText></MudItem>
 
   
                 <MudItem xs="2">
-                    <MudTextField  Label="Glu - " T="string" Variant="Variant.Text" @bind-Value="standart.Laboratory6" Disabled="!SwitchChecked9" />
+                    <MudTextField Label="Glu - " Variant="Variant.Text" @bind-Value="standart.Laboratory6" Disabled="!SwitchChecked9" Min="0" />
                 </MudItem>
                 <MudItem  Class="d-flex flex-column justify-end"><MudText>ммоль/л.</MudText></MudItem>
                 <MudItem xs="1" Class="d-flex flex-column justify-end">
@@ -1233,6 +1233,12 @@
         new string[] {"с двух сторон", "справа", "слева", "спрва снизу", "слева сверху", "слева снизу", "по центру"},
         new string[] {"следы", "серозного отделяемого", "серозно-геморрагического отделяемого", "сукровичного отделяемого", "геморрагического отделяемого", "гнойного отделяемого", "желчного отделяемого","кишечного отделяемого"}
     };
+      List<string[]> DrainageTwo = new List<string[]>()
+    {
+        new string[] {"плевральный", "брюшная полость", "груша", "вакуум", "нефростом", "пиелостома", "холецистостома", "колостома", "энтеростома", "зонд назогастральный", "зонд назоинтестинальный"},
+        new string[] {"с двух сторон", "справа", "слева", "спрва снизу", "слева сверху", "слева снизу", "по центру"},
+        new string[] {"следы", "серозного отделяемого", "серозно-геморрагического отделяемого", "сукровичного отделяемого", "геморрагического отделяемого", "гнойного отделяемого", "желчного отделяемого","кишечного отделяемого"}
+    };
     string[] doctorNames = new string[]
     {
 "Розенгард С.А.",
@@ -1260,8 +1266,6 @@
         }
     }
 
-    DateTime? date; //дата
-    TimeSpan? time; //время
     public bool vash { get; set; }
     string Hemodynamic = default!;
     bool isWatered;
@@ -1271,8 +1275,8 @@
     protected override void OnInitialized()
     {
 
-        date = DateTime.Now; //Дата
-        time = DateTime.Now.TimeOfDay; //Время
+        standart.Date = DateTime.Now;
+        standart.Time = DateTime.Now.TimeOfDay;
         vash = false;
         standart.Picco = new();
         standart.Picco2 = new();
@@ -1280,21 +1284,22 @@
         standart.EsCCO = new();
         standart.VoLEF = new();
         DoctorAdd();
-#pragma warning disable BL0005
+        #pragma warning disable BL0005
+        standart.RassThis = "С целью потенцирования эффекта анальгетической терапии вводится в /в микроструйно Дексмедетомидин в дозировке 0.7 мкг /кг/час.";
+        CalculateProduct();
     }
 
     bool SwitchChecked, SwitchChecked2, SwitchChecked3, SwitchChecked4,
     SwitchChecked5, SwitchChecked6, SwitchChecked7, SwitchChecked8,
     SwitchChecked9, SwitchChecked10, SwitchChecked11;
 
-    private int Num1;
-    private int Num2;
+
     private string Result = default!;
 
     private void CalculateProduct()
     {
-        int Product = Num1 * Num2;
-        Result = Product.ToString();
+        standart.Product = standart.Do * standart.Cd;
+        Result = standart.Product.ToString();
     }
     Dictionary<string, string> selectValues = new Dictionary<string, string>()
     {

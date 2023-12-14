@@ -24,11 +24,11 @@ services.AddServerSideBlazor();
 services.AddMudServices();
 
 services.AddDbContext<DataContext>(options =>
-    options.UseNpgsql("UserID=postgres;Password=passmein123;Server=localhost;Port=5432;Database=reanim;"), 
+    options.UseNpgsql("UserID=postgres;Password=123qweQWE;Server=localhost;Port=6699;Database=reanim;"), 
     ServiceLifetime.Transient
 );
 // connection to Epicrisis
-// "UserID=postgres;Password=123qweQWE;Server=localhost;Port=6699;Database=reanim;"
+// "UserID=postgres;Password=passmein123;Server=localhost;Port=5432;Database=reanim;"
 
 // To add date
 AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
@@ -53,7 +53,13 @@ services.AddScoped<IRepo<Syndrom>, DrugRepo>();
 services.AddTransient<DrugService>();
 
 services.AddScoped<IRepo<HemoEpicrisis>, HemoEpicrisisRepo>();
+services.AddScoped<IRepo<ErythrocyteProtocol>, ErythrocyteRepo>();
+services.AddScoped<IRepo<SZPProtocol>, SZPRepo>();
+services.AddScoped<IRepo<ThrombocyteProtocol>, ThrombocyteRepo>();
 services.AddTransient<HemoEpicrisisService>();
+services.AddTransient<ErythrocyteProtocolService>();
+services.AddTransient<SZPProtocolService>();
+services.AddTransient<ThrombocyteProtocolService>();
 
 services.AddScoped<IRepo<StandartDiary>, DiaryStandartRepo>();
 services.AddScoped<IRepo<WeekendDiary>, DiaryWeekendRepo>();
