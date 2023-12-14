@@ -3,6 +3,7 @@
 @using Newtonsoft.Json;
 @using System.Diagnostics;
 @using Re.UI.Data
+@inject Re.Services.Services.Hemo.SZPProtocolService szpService
 
 <MudGrid>
     <MudItem xs="12">
@@ -16,7 +17,7 @@
                 </MudGrid>
                 <MudGrid>
                     <MudItem xs="10">
-                        <MudTextField T="string" Label="№ карты:" Variant="Variant.Text" @bind-Value="szp.Number"></MudTextField>
+                        <MudTextField T="int" Label="№ карты:" Variant="Variant.Text" @bind-Value="szp.Number"></MudTextField>
                     </MudItem>
                 </MudGrid>
                 <MudGrid>
@@ -61,23 +62,23 @@
                 </MudGrid>
                 <MudGrid Style="margin-top:15px;">
                     <MudItem Style="margin-top:5px;"><MudText>Дата заготовки:</MudText></MudItem>
-                    <MudItem xs="2"><MudDatePicker Style="margin-top:-5px;" @bind-Date="zagdate" /></MudItem>
+                    <MudItem xs="2"><MudDatePicker Style="margin-top:-5px;" Date="szp.StartDate" /></MudItem>
                     <MudItem Style="margin-top:5px;"><MudText>Годна до:</MudText></MudItem>
-                    <MudItem xs="2"> <MudDatePicker Style="margin-top:-5px;" @bind-Date="enddate" /></MudItem>
+                    <MudItem xs="2"> <MudDatePicker Style="margin-top:-5px;" Date="szp.EndDate" /></MudItem>
                 </MudGrid>
                 <MudGrid>
                     <MudItem xs="10">
-                        <MudTextField T="string" Label="N контейнера:" Variant="Variant.Text" @bind-Value="szp.NumberCont"></MudTextField>
+                        <MudTextField T="int" Label="N контейнера:" Variant="Variant.Text" @bind-Value="szp.NumberCont"></MudTextField>
                     </MudItem>
                 </MudGrid>
                 <MudGrid>
                     <MudItem xs="10">
-                        <MudTextField T="string" Label="Объем:" Variant="Variant.Text" @bind-Value="szp.Volume"></MudTextField>
+                        <MudTextField T="int" Label="Объем:" Variant="Variant.Text" @bind-Value="szp.Volume"></MudTextField>
                     </MudItem>
                 </MudGrid>
                 <MudGrid>
                     <MudItem xs="10">
-                        <MudTextField T="string" Label="Код донора:" Variant="Variant.Text" @bind-Value="szp.Code"></MudTextField>
+                        <MudTextField T="int" Label="Код донора:" Variant="Variant.Text" @bind-Value="szp.Code"></MudTextField>
                     </MudItem>
                 </MudGrid>
                 <MudGrid>
@@ -157,6 +158,13 @@
                     </MudSelect>
                 </MudItem>
             </MudGrid>
+            <MudGrid Justify="Justify.Center">
+                <MudItem xs="5" Class="d-flex flex-column justify-end" Style="padding-top:30px; padding-bottom:15px;">
+                    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit">
+                        Отправить
+                    </MudButton>
+                </MudItem>
+            </MudGrid>
         </MudPaper>
     </MudItem>
 </MudGrid>
@@ -231,9 +239,13 @@
     protected override void OnInitialized()
     {
         DoctorAdd();
+        szp.StartDate = DateTime.Now;
+        szp.EndDate = DateTime.Now;
     }
     //[Parameter]
     public SZPProtocol szp = new();
-    DateTime? zagdate; //дата
-    DateTime? enddate;
+    async Task Submit()
+    {
+        await szpService.SaveSZPProtocolAsync(szp);
+    }
 }

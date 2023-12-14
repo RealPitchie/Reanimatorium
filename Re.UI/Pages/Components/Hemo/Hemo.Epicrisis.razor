@@ -9,8 +9,8 @@
 <MudGrid>
     <MudItem xs="8">
         <MudGrid Style="margin-left:80px;" Spacing="10" Justify="Justify.Center">
-            <MudItem xs="4"><MudDatePicker Label="Дата" @bind-Date="date" /></MudItem>
-            <MudItem xs="4"> <MudTimePicker Label="Время" @bind-Time="time" /></MudItem>
+            <MudItem xs="4"><MudDatePicker Label="Дата" Date="ep.Date" /></MudItem>
+            <MudItem xs="4"> <MudTimePicker Label="Время" Time="ep.Time" /></MudItem>
         </MudGrid>
     </MudItem>
 </MudGrid>
@@ -26,12 +26,12 @@
                 </MudGrid>
                 <MudGrid>
                     <MudItem xs="10">
-                        <MudTextField T="string" Label="Возраст" Variant="Variant.Text" @bind-Value="ep.Age"></MudTextField>
+                        <MudTextField T="int" Label="Возраст" Variant="Variant.Text" @bind-Value="ep.Age"></MudTextField>
                     </MudItem>
                 </MudGrid>
                 <MudGrid>
                     <MudItem xs="10">
-                        <MudTextField T="string" Label="История болезни №" Variant="Variant.Text" @bind-Value="ep.Number"></MudTextField>
+                        <MudTextField T="int" Label="История болезни №" Variant="Variant.Text" @bind-Value="ep.Number"></MudTextField>
                     </MudItem>
                 </MudGrid>
                 <MudGrid>
@@ -112,7 +112,7 @@
                     <MudText>Противопоказаний к переливанию компонентов крови нет.</MudText>
                 </MudGrid>
                 <MudGrid>
-                    <MudItem xs="3"><MudDatePicker Style="margin-top:25px;" @bind-Date="date" /></MudItem>
+                    <MudItem xs="3"><MudDatePicker Style="margin-top:25px;" Date="ep.Date" /></MudItem>
                 </MudGrid>
                 <MudGrid>
                     <MudItem Class="d-flex flex-column justify-end"><MudText>Лечащий врач</MudText></MudItem>
@@ -276,13 +276,11 @@
         }
     }
     HemoEpicrisis? ep = new();
-    DateTime? date; //дата
-    TimeSpan? time; //время
     private bool SwitchChecked = false;
     protected override void OnInitialized()
     {
-        date = DateTime.Now; //Дата
-        time = DateTime.Now.TimeOfDay; //Время
+        ep.Date = DateTime.Now; //Дата
+        ep.Time = DateTime.Now.TimeOfDay; //Время
         DoctorAdd();
     }
     async Task Submit()
