@@ -6,6 +6,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Re.Services.Services.Epicrisis
 {
@@ -17,9 +18,54 @@ namespace Re.Services.Services.Epicrisis
             _repo = repo;
         }
 
-        public async Task<IEnumerable<ReceptionEpicrisis>> GetAllAsync()
+        public string FormatValue(object value)
         {
-            return await _repo.GetAllAsync();
+            string result = "";
+            if (value is string[])
+            {
+                var array = value as Array;
+                foreach (var arr in array)
+                {
+                    result += $"{arr} ";
+                }
+                return result ;
+            }
+            else if (value is int[])
+            {
+                var array = value as Array;
+                foreach (var arr in array)
+                {
+                    result += $"{arr} ";
+                }
+                return result;
+            }
+            else if (value is Doctor)
+            {
+                var doctor = value as Doctor;
+                return doctor.Name;
+            }
+            else
+            {
+                return value?.ToString() ?? string.Empty;
+            }
+        }
+
+        public async Task<List<List<string>>> GetAllAsync()
+        {
+            var response = new List<List<string>>();
+            var data = await _repo.GetAllAsync();
+            foreach (var item in data)
+            {
+                var formatedData = new List<string>();
+                foreach (var name in GetPropertyNames())
+                {
+                    var value = item.GetType().GetProperty(name).GetValue(item);
+                    var formatValue = FormatValue(value);
+                    formatedData.Add(formatValue);
+                }
+                response.Add(formatedData);
+            }
+            return response;
         }
 
         public IEnumerable<string> GetPropertyNames()

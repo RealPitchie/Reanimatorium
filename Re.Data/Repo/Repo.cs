@@ -10,21 +10,20 @@ namespace Re.Data.Repo
     public class Repo<T> : IRepo<T> where T : class
     {
         DataContext _context;
-        DbSet<T> _dbSet;
         public Repo(DataContext context)
         {
             _context = context;
-            _dbSet = context.Set<T>();
         }
 
         public async Task<IEnumerable<T>> GetAllAsync()
         {
-            return await _dbSet.AsNoTracking().ToListAsync();
+            var tabledata = await _context.Set<T>().Include("Doctor").ToListAsync();
+            return tabledata;
         }
 
         public async Task<T> SaveAsync(T entity)
         {
-            await _dbSet.AddAsync(entity);
+            await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
