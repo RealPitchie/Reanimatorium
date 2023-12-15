@@ -16,12 +16,6 @@ namespace Re.Data.Repo
             _context = context;
         }
 
-        public async Task<IEnumerable<T>> GetAllAsync()
-        {
-            var tabledata = await _context.Set<T>().Include("Doctor").ToListAsync();
-            return tabledata;
-        }
-
         public async Task<T> SaveAsync(T entity)
         {
             await _context.AddAsync(entity);
@@ -31,7 +25,7 @@ namespace Re.Data.Repo
 
         public async Task<List<T>> GetAsync()
         {
-            return await _context.Set<T>().IncludeAll().ToListAsync();
+            return await _context.Set<T>().Include("Doctor").ToListAsync();
         }  
     }
 }

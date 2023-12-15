@@ -53,7 +53,7 @@ namespace Re.Services.Services.Epicrisis
         public async Task<List<List<string>>> GetAllAsync()
         {
             var response = new List<List<string>>();
-            var data = await _repo.GetAllAsync();
+            var data = await _repo.GetAsync();
             foreach (var item in data)
             {
                 var formatedData = new List<string>();
