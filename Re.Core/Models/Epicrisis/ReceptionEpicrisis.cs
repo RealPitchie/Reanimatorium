@@ -75,6 +75,6 @@ namespace Re.Core.Models
         public string Addition { get; set; }
         public string SeverityOfCondition { get; set; }
         public string TreatmentPlan { get; set; }
-        public Doctor Doctor { get; set; }
+        public virtual Doctor Doctor { get; set; }
     }
 }

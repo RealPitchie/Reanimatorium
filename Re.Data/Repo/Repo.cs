@@ -25,7 +25,7 @@ namespace Re.Data.Repo
 
         public async Task<List<T>> GetAsync()
         {
-            return await _context.Set<T>().Include("Doctor").ToListAsync();
+            return await _context.Set<T>().IncludeAll().ToListAsync();
         }  
     }
 }
