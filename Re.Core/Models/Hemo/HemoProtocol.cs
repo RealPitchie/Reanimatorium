@@ -13,7 +13,6 @@ namespace Re.Core.Models.Hemo
         public DateTime Date { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
-
         public string FIO { get; set; } //фио реципиента
         public int Number { get; set; } //№ карты
         public string Group { get; set; } //группа крови реципиента
