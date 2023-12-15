@@ -38,7 +38,7 @@ services.AddTransient<ProtocolService>();
 
 services.AddScoped<IRepo<ReceptionEpicrisis>, Repo<ReceptionEpicrisis>>();
 services.AddScoped<IRepo<Transferable>, Repo<Transferable>>();
-services.AddScoped<IRepo<裩est補vityRoentgen>, Repo<裩est補vityRoentgen>>();
+services.AddScoped<IRepo<小hest小avityRoentgen>, Repo<小hest小avityRoentgen>>();
 services.AddScoped<IRepo<AbdominalCavityRoentgen>, Repo<AbdominalCavityRoentgen>>();
 services.AddScoped<IRepo<TomographicExploration>, Repo<TomographicExploration>>();
 services.AddTransient<ChestCavityService>();

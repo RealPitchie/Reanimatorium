@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
+using Re.Core.Extensions;
 using Re.Core.Models;
 
 namespace Re.Data.Repo
@@ -19,9 +20,14 @@ namespace Re.Data.Repo
 
         public async Task<T> SaveAsync(T entity)
         {
-            await _dbSet.AddAsync(entity);
+            await _context.AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
+
+        public async Task<List<T>> GetAsync()
+        {
+            return await _context.Set<T>().IncludeAll().ToListAsync();
+        }  
     }
 }

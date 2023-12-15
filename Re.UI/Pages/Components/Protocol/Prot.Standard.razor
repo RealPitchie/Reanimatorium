@@ -1,5 +1,9 @@
 @using Re.Core.Models
 @using Re.UI.Data
+@using Re.Services.Services
+@using Re.UI.Pages.Components
+
+@inject ProtocolService _service
 
 <MudGrid Justify="Justify.FlexStart">
     <MudItem>
@@ -63,11 +67,32 @@
     </MudItem>
     
 </MudGrid>
-
- 
-
+<MudTable Style=""   
+        T="StandardProtocol"
+        Items="@_protocols" 
+        Dense="@true" 
+        Hover="@true"
+        Bordered="@false" 
+        Striped="@true"   >
+    <ToolBarContent>
+        <MudText Typo="Typo.h6">Протоколы</MudText>
+        <MudSpacer />
+    </ToolBarContent>
+    <HeaderContent>
+        <MudTh>Файл</MudTh> 
+        <MudTh>Автор</MudTh>
+    </HeaderContent>
+    <RowTemplate >
+        <MudTd style="cursor: pointer" DataLabel="Name">@context.Name</MudTd> 
+        <MudTd style="cursor: pointer" DataLabel="Date">@context.Doctor.Name</MudTd> 
+    </RowTemplate>
+     
+</MudTable>
+ <MudButton OnClick="GetARProtocols" Variant="Variant.Filled" >
+    Получить
+ </MudButton>
+@* ////////////////////// *@
 @code{
- 
     List<Doctor> Doctors = new();
     DateTime? date;
     TimeSpan? time; 
@@ -76,6 +101,7 @@
     Func<Doctor,string> converter = d => d?.Name;
 
     bool isCentralVein, isArteria, isEpidural;
+    List<StandardProtocol> _protocols = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -99,6 +125,10 @@
     {
         date = value;
         StateHasChanged();
+    }
+    async Task GetARProtocols()
+    {
+        _protocols = await _service.GetProtocolsAsync();
     }
     
 }

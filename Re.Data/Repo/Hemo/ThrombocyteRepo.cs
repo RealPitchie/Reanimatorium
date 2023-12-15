@@ -14,11 +14,22 @@ namespace Re.Data.Repo.Hemo
         {
             _context = context;
         }
+
+        public Task<IEnumerable<ThrombocyteProtocol>> GetAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<ThrombocyteProtocol> SaveAsync(ThrombocyteProtocol thr)
         {
             await _context.ThrombocyteProtocols.AddAsync(thr);
             await _context.SaveChangesAsync();
             return thr;
+        }
+
+        Task<List<ThrombocyteProtocol>> IRepo<ThrombocyteProtocol>.GetAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

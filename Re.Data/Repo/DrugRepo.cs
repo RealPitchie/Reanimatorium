@@ -9,6 +9,12 @@ namespace Re.Data.Repo
         {
             _context = context;
         }
+
+        public Task<IEnumerable<Patient>> GetAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Patient> SaveAsync(Patient patient)
         {
             await _context.Patients.AddAsync(patient);
@@ -31,6 +37,22 @@ namespace Re.Data.Repo
             await _context.SaveChangesAsync();
 
             return medication;
+        }
+ 
+
+        Task<List<Patient>> IRepo<Patient>.GetAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<Syndrom>> IRepo<Syndrom>.GetAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<PrescribedMedication>> IRepo<PrescribedMedication>.GetAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

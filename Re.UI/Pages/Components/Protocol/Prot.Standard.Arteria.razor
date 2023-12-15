@@ -1,5 +1,8 @@
 @using Re.Core.Models
 @using Re.UI.Data
+@using Re.Services.Services
+
+@inject ProtocolService _service
 
 <MudPaper Style="padding: 20px; margin: 15px 0">
     <MudText style="margin-top: 15px; font-weight: bolder;">
@@ -94,8 +97,7 @@
     <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit">
         Отправить
     </MudButton> 
-</MudPaper>
-<div></div>
+</MudPaper> 
 @code{
     #nullable disable
     
@@ -104,6 +106,7 @@
     DateTime date = DateTime.Now;
     TimeSpan? time = DateTime.Now.TimeOfDay;
     Func<Doctor,string> converter = d => d?.Name;
+    
 
     protected override void OnInitialized()
     {
@@ -113,5 +116,7 @@
     async Task Submit()
     {
         var ar = Protocol;
+        await _service.SaveProtocolAsync(ar);
     }
+    
 }
