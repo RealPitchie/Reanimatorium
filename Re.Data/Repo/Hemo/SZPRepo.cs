@@ -15,7 +15,7 @@ namespace Re.Data.Repo.Hemo
             _context = context;
         }
 
-        public Task<IEnumerable<SZPProtocol>> GetAllAsync()
+        public Task<IEnumerable<SZPProtocol>> GetAsync()
         {
             throw new NotImplementedException();
         }
@@ -25,6 +25,11 @@ namespace Re.Data.Repo.Hemo
             await _context.SZPProtocols.AddAsync(szp);
             await _context.SaveChangesAsync();
             return szp;
+        }
+
+        Task<List<SZPProtocol>> IRepo<SZPProtocol>.GetAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

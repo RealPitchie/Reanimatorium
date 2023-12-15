@@ -10,7 +10,7 @@ namespace Re.Data.Repo.Diary
             _context = context;
         }
 
-        public Task<IEnumerable<WeekendDiary>> GetAllAsync()
+        public Task<IEnumerable<WeekendDiary>> GetAsync()
         {
             throw new NotImplementedException();
         }
@@ -21,6 +21,11 @@ namespace Re.Data.Repo.Diary
             await _context.SaveChangesAsync();
 
             return weekend;
+        }
+
+        Task<List<WeekendDiary>> IRepo<WeekendDiary>.GetAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 

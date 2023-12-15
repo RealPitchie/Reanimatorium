@@ -9,6 +9,6 @@ namespace Re.Data.Repo
     public interface IRepo<T> where T : class
     {
         Task<T> SaveAsync(T entity);
-        Task<IEnumerable<T>> GetAllAsync();
+        Task<List<T>> GetAsync();
     }
 }

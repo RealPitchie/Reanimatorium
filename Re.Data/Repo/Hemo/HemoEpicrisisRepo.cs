@@ -16,7 +16,7 @@ namespace Re.Data.Repo.Hemo
             _context = context;
         }
 
-        public Task<IEnumerable<HemoEpicrisis>> GetAllAsync()
+        public Task<IEnumerable<HemoEpicrisis>> GetAsync()
         {
             throw new NotImplementedException();
         }
@@ -27,6 +27,11 @@ namespace Re.Data.Repo.Hemo
             await _context.SaveChangesAsync();
 
             return ep;
+        }
+
+        Task<List<HemoEpicrisis>> IRepo<HemoEpicrisis>.GetAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 }

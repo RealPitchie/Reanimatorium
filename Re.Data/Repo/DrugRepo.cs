@@ -10,6 +10,11 @@ namespace Re.Data.Repo
             _context = context;
         }
 
+        public Task<IEnumerable<Patient>> GetAsync()
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Patient> SaveAsync(Patient patient)
         {
             await _context.Patients.AddAsync(patient);
@@ -33,18 +38,19 @@ namespace Re.Data.Repo
 
             return medication;
         }
+ 
 
-        Task<IEnumerable<Patient>> IRepo<Patient>.GetAllAsync()
+        Task<List<Patient>> IRepo<Patient>.GetAsync()
         {
             throw new NotImplementedException();
         }
 
-        Task<IEnumerable<Syndrom>> IRepo<Syndrom>.GetAllAsync()
+        Task<List<Syndrom>> IRepo<Syndrom>.GetAsync()
         {
             throw new NotImplementedException();
         }
 
-        Task<IEnumerable<PrescribedMedication>> IRepo<PrescribedMedication>.GetAllAsync()
+        Task<List<PrescribedMedication>> IRepo<PrescribedMedication>.GetAsync()
         {
             throw new NotImplementedException();
         }

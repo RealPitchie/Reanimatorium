@@ -10,7 +10,7 @@ namespace Re.Data.Repo.Diary
             _context = context;
         }
 
-        public Task<IEnumerable<Extubation>> GetAllAsync()
+        public Task<IEnumerable<Extubation>> GetAsync()
         {
             throw new NotImplementedException();
         }
@@ -21,6 +21,11 @@ namespace Re.Data.Repo.Diary
             await _context.SaveChangesAsync();
 
             return extubation;
+        }
+
+        Task<List<Extubation>> IRepo<Extubation>.GetAsync()
+        {
+            throw new NotImplementedException();
         }
     }
 
