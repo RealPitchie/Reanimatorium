@@ -14,11 +14,11 @@ namespace Re.Core.Models
         public string Id { get; set; }
         public DateTime Date { get; set; }
         public TimeSpan Time { get; set; }
-        public Doctor Doctor { get; set; }
-        public Doctor DoctorTwo { get; set; }
-        public Doctor DoctorThree { get; set; }
-        public Doctor DoctorFour { get; set; }
-        public Doctor DoctorFive { get; set; }
+        public virtual Doctor Doctor { get; set; }
+        public virtual Doctor DoctorTwo { get; set; }
+        public virtual Doctor DoctorThree { get; set; }
+        public virtual Doctor DoctorFour { get; set; }
+        public virtual Doctor DoctorFive { get; set; }
         public string Patient { get; set; } //пациент
         public int Age { get; set; } //возраст
         public int Day { get; set; } //сутки

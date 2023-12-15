@@ -13,6 +13,7 @@ using Re.Core.Models.Hemo;
 using Re.Data.Repo.Hemo;
 using Re.Services.Services.Hemo;
 using Re.Services.Services.Epicrisis;
+using Re.Services.Services.Diary;
 
 var builder = WebApplication.CreateBuilder(args);
 var services = builder.Services;

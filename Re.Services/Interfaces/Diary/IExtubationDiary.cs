@@ -10,5 +10,8 @@ namespace Re.Services.Interfaces.Diary
     public interface IExtubationDiary
     {
         Task<Extubation> SaveExtubationDiaryAsync(Extubation extubation);
+        Task<List<List<string>>> GetAllAsync();
+        IEnumerable<string> GetPropertyNames();
+        string FormatValue(object value);
     }
 }

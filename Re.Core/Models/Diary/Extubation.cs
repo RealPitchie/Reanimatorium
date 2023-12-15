@@ -19,6 +19,6 @@ namespace Re.Core.Models
         public int Sat { get; set; } //Sat
         public int Ad { get; set; } //АД
         public int Chss { get; set; } //ЧСС
-        public Doctor Doctor { get; set; } //доктор
+        public virtual Doctor Doctor { get; set; } //доктор
     }
 }

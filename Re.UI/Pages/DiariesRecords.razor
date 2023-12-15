@@ -1,0 +1,81 @@
+﻿@page "/diariesRecords"
+@using Re.Core.Models;
+@using Re.UI.Pages.Components.Diary
+@using Re.Services.Services.Diary
+@inject Re.Services.Services.Diary.StandartDiaryService StandartService
+@inject Re.Services.Services.Diary.WeekendDiaryService WeekendService
+@inject Re.Services.Services.Diary.ExtubationDiaryService ExtubationService
+
+<MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary" PanelClass="pa-6">
+    <MudTabPanel Text="Стандартный дневник">
+        <MudTable Items="standartRecords">
+            <HeaderContent>
+                @foreach (var columnName in StandartService.GetPropertyNames())
+                {
+                    <MudTh>@columnName</MudTh>
+                }
+            </HeaderContent>
+            <RowTemplate>
+                @foreach (var value in context)
+                {
+                    <MudTd>@value</MudTd>
+                }
+            </RowTemplate>
+        </MudTable>
+    </MudTabPanel>
+    <MudTabPanel Text="Обход/Выходной день">
+        <MudTable Items="weekendRecords">
+            <HeaderContent>
+                @foreach (var columnName in WeekendService.GetPropertyNames())
+                {
+                    <MudTh>@columnName</MudTh>
+                }
+            </HeaderContent>
+            <RowTemplate>
+                @foreach (var value in context)
+                {
+                    <MudTd>@value</MudTd>
+                }
+            </RowTemplate>
+        </MudTable>
+    </MudTabPanel>
+    <MudTabPanel Text="Экстубация">
+        <MudTable Items="extubationRecords">
+            <HeaderContent>
+                @foreach (var columnName in ExtubationService.GetPropertyNames())
+                {
+                    <MudTh>@columnName</MudTh>
+                }
+            </HeaderContent>
+            <RowTemplate>
+                @foreach (var value in context)
+                {
+                    <MudTd>@value</MudTd>
+                }
+            </RowTemplate>
+        </MudTable>
+    </MudTabPanel>
+</MudTabs>
+
+
+@code {
+    private List<List<string>> standartRecords = new List<List<string>>();
+    private List<List<string>> weekendRecords = new List<List<string>>();
+    private List<List<string>> extubationRecords = new List<List<string>>();
+    List<string> context;
+    List<string> contextTwo;
+    List<string> contextThree;
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        standartRecords = await StandartService.GetAllAsync();
+        context = standartRecords.FirstOrDefault() ?? new List<string>();
+
+        weekendRecords = await WeekendService.GetAllAsync();
+        contextTwo = weekendRecords.FirstOrDefault() ?? new List<string>();
+
+        extubationRecords = await ExtubationService.GetAllAsync();
+        contextThree = extubationRecords.FirstOrDefault() ?? new List<string>();
+    }
+}

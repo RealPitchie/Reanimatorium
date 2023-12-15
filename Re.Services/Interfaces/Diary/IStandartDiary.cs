@@ -10,5 +10,8 @@ namespace Re.Services.Interfaces.Diary
     public interface IStandartDiary
     {
         Task<StandartDiary> SaveStandartDiaryAsync(StandartDiary standart);
+        Task<List<List<string>>> GetAllAsync();
+        IEnumerable<string> GetPropertyNames();
+        string FormatValue(object value);
     }
 }

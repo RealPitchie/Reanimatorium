@@ -69,7 +69,7 @@ namespace Re.Core.Models
         public int Laboratory4 { get; set; }
         public int Laboratory5 { get; set; }
         public int Laboratory6 { get; set; }
-        public Doctor Doctor { get; set; } //доктор
+        public virtual Doctor Doctor { get; set; } //доктор
         public PiCCO Picco { get; set; }
         public PiCCO2 Picco2 { get; set; }
         public FioTrac FioTrac { get; set; }

@@ -10,5 +10,8 @@ namespace Re.Services.Interfaces.Diary
     public interface IWeekendDiary
     {
         Task<WeekendDiary> SaveWeekendDiaryAsync(WeekendDiary weekend);
+        Task<List<List<string>>> GetAllAsync();
+        IEnumerable<string> GetPropertyNames();
+        string FormatValue(object value);
     }
 }
