@@ -922,11 +922,11 @@ namespace Re.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    StartTime = table.Column<TimeSpan>(type: "interval", nullable: false),
-                    EndTime = table.Column<TimeSpan>(type: "interval", nullable: false),
+                    StartDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    EndDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    Date = table.Column<DateOnly>(type: "date", nullable: false),
+                    StartTime = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
+                    EndTime = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
                     FIO = table.Column<string>(type: "text", nullable: true),
                     Number = table.Column<int>(type: "integer", nullable: false),
                     Group = table.Column<string>(type: "text", nullable: true),
@@ -974,11 +974,11 @@ namespace Re.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    StartTime = table.Column<TimeSpan>(type: "interval", nullable: false),
-                    EndTime = table.Column<TimeSpan>(type: "interval", nullable: false),
+                    StartDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    EndDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    Date = table.Column<DateOnly>(type: "date", nullable: false),
+                    StartTime = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
+                    EndTime = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
                     FIO = table.Column<string>(type: "text", nullable: true),
                     Number = table.Column<int>(type: "integer", nullable: false),
                     Group = table.Column<string>(type: "text", nullable: true),
@@ -1026,11 +1026,11 @@ namespace Re.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    StartDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    EndDate = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    Date = table.Column<DateTime>(type: "timestamp without time zone", nullable: false),
-                    StartTime = table.Column<TimeSpan>(type: "interval", nullable: false),
-                    EndTime = table.Column<TimeSpan>(type: "interval", nullable: false),
+                    StartDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    EndDate = table.Column<DateOnly>(type: "date", nullable: false),
+                    Date = table.Column<DateOnly>(type: "date", nullable: false),
+                    StartTime = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
+                    EndTime = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
                     FIO = table.Column<string>(type: "text", nullable: true),
                     Number = table.Column<int>(type: "integer", nullable: false),
                     Group = table.Column<string>(type: "text", nullable: true),
@@ -1848,32 +1848,12 @@ namespace Re.Data.Migrations
                 oldClrType: typeof(int),
                 oldType: "integer");
 
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Indications",
-                table: "HemoEpicrises",
-                type: "text[]",
-                nullable: false,
-                defaultValue: new string[0],
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
             migrationBuilder.AlterColumn<string>(
                 name: "Hemotransfusion",
                 table: "HemoEpicrises",
                 type: "text",
                 nullable: false,
                 defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "GroupRh",
-                table: "HemoEpicrises",
-                type: "text[]",
-                nullable: false,
-                defaultValue: new string[0],
                 oldClrType: typeof(string),
                 oldType: "text",
                 oldNullable: true);
