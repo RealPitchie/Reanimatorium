@@ -28,6 +28,18 @@ namespace Re.Data.Repo
         public async Task<List<T>> GetAsync()
         {
             return await _context.Set<T>().IncludeAll().ToListAsync();
-        }  
+        }
+        //public async Task<List<T>> GetByDate(DateTime date)
+        //{
+        //    return await _dbSet.Where(e => e.GetDate() == date);
+        //}
+        public async Task<List<T>> GetByDoctorName(string name)
+        {
+            return await _context.Set<T>().Where(e => e.GetType().Name == name).ToListAsync();
+        }
+        public async Task<List<T>> GetByType(Type type)
+        {
+            return await _context.Set<T>().Where(e => e.GetType() == type).ToListAsync();
+        }
     }
 }

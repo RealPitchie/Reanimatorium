@@ -4,6 +4,8 @@ public class PrescribedMedication
 {
 
     public int Id { get; set; }//ID
+    public DateOnly Date { get; set; }
+    public TimeOnly Time { get; set; }
 
     public int Volume { get; set; }//Кол-во мл
 

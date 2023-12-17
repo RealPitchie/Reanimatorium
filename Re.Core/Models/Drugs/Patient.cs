@@ -3,6 +3,8 @@ namespace Re.Core.Models;
 public class Patient{
 
     public int Id { get; set; }//ID
+    public DateOnly Date { get; set; }
+    public TimeOnly Time { get; set; }
 
     public string FIO { get; set; }//ิศฮ
 

@@ -4,6 +4,8 @@ public class Syndrom
 {
 
     public int Id { get; set; }//ID
+    public DateOnly Date { get; set; }
+    public TimeOnly Time { get; set; }
 
     public string Description { get; set; }//Описание синдрома
 
