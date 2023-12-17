@@ -201,12 +201,6 @@ namespace Re.Data.Migrations
                     b.Property<bool>("IsThoracicCavity")
                         .HasColumnType("boolean");
 
-                    b.Property<string>("Location")
-                        .HasColumnType("text");
-
-                    b.Property<string>("LocationPosition")
-                        .HasColumnType("text");
-
                     b.Property<string>("Other")
                         .HasColumnType("text");
 

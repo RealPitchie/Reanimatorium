@@ -7,7 +7,15 @@
 
 <MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary" PanelClass="pa-6">
     <MudTabPanel Text="Приемный эпикриз">
-        <MudTable Items="allReception">
+        <MudCard>
+            <MudCardContent>
+                @foreach (var value in context)
+                {
+                    <MudText>@value</MudText>
+                }
+            </MudCardContent>
+        </MudCard>
+        <MudTable Items="@dataList">
             <HeaderContent>
                 @foreach (var columnName in reService.GetPropertyNames())
                 {
@@ -32,13 +40,63 @@
 
 
 @code {
-    List<List<string>> allReception = new List<List<string>>();
-    List<string> context;
+    private List<ReceptionEpicrisis> allReception = new List<ReceptionEpicrisis>();
+    private List<List<string>> dataList = new List<List<string>>();
+    List<string> context = new();
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
         allReception = await reService.GetAllAsync();
-        context = allReception.FirstOrDefault() ?? new List<string>();
+        dataList = GetList();
+        context = dataList.FirstOrDefault() ?? new List<string>();
+    }
+
+    private string FormatValue(object value)
+    {
+        string result = "";
+        if (value is string[])
+        {
+            var array = value as Array;
+            foreach (var arr in array)
+            {
+                result += $"{arr} ";
+            }
+            return result;
+        }
+        else if (value is int[])
+        {
+            var array = value as Array;
+            foreach (var arr in array)
+            {
+                result += $"{arr} ";
+            }
+            return result;
+        }
+        else if (value is Doctor)
+        {
+            var doctor = value as Doctor;
+            return doctor.Name;
+        }
+        else
+        {
+            return value?.ToString() ?? string.Empty;
+        }
+    }
+    private List<List<string>> GetList()
+    {
+        var response = new List<List<string>>();
+        foreach (var item in allReception)
+        {
+            var formatedData = new List<string>();
+            foreach (var name in reService.GetPropertyNames())
+            {
+                var value = item.GetType().GetProperty(name).GetValue(item);
+                var formatValue = FormatValue(value);
+                formatedData.Add(formatValue);
+            }
+            response.Add(formatedData);
+        }
+        return response;
     }
 }

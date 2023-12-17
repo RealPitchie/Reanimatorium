@@ -779,14 +779,6 @@ namespace Re.Data.Migrations
                 oldClrType: typeof(DateTime),
                 oldType: "timestamp without time zone");
 
-            migrationBuilder.AlterColumn<TimeSpan>(
-                name: "Time",
-                table: "HemoEpicrises",
-                type: "interval",
-                nullable: false,
-                oldClrType: typeof(TimeOnly),
-                oldType: "time without time zone");
-
             migrationBuilder.AlterColumn<string>(
                 name: "Indications",
                 table: "HemoEpicrises",
@@ -826,14 +818,6 @@ namespace Re.Data.Migrations
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "text");
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "Date",
-                table: "HemoEpicrises",
-                type: "timestamp without time zone",
-                nullable: false,
-                oldClrType: typeof(DateOnly),
-                oldType: "date");
 
             migrationBuilder.AddColumn<string>(
                 name: "DoctorId",
@@ -1848,32 +1832,12 @@ namespace Re.Data.Migrations
                 oldClrType: typeof(int),
                 oldType: "integer");
 
-            migrationBuilder.AlterColumn<string[]>(
-                name: "Indications",
-                table: "HemoEpicrises",
-                type: "text[]",
-                nullable: false,
-                defaultValue: new string[0],
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
             migrationBuilder.AlterColumn<string>(
                 name: "Hemotransfusion",
                 table: "HemoEpicrises",
                 type: "text",
                 nullable: false,
                 defaultValue: "",
-                oldClrType: typeof(string),
-                oldType: "text",
-                oldNullable: true);
-
-            migrationBuilder.AlterColumn<string[]>(
-                name: "GroupRh",
-                table: "HemoEpicrises",
-                type: "text[]",
-                nullable: false,
-                defaultValue: new string[0],
                 oldClrType: typeof(string),
                 oldType: "text",
                 oldNullable: true);

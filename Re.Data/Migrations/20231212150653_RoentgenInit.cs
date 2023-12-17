@@ -78,8 +78,6 @@ namespace Re.Data.Migrations
                     Date = table.Column<DateOnly>(type: "date", nullable: false),
                     Time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
                     Other = table.Column<string>(type: "text", nullable: true),
-                    Location = table.Column<string>(type: "text", nullable: true),
-                    LocationPosition = table.Column<string>(type: "text", nullable: true),
                     DoctorId = table.Column<string>(type: "text", nullable: true)
                 },
                 constraints: table =>
