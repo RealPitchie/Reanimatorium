@@ -33,5 +33,33 @@ namespace Re.Services.Services
         {
             return await _SyndromRepo.SaveAsync(syndrom);
         }
+
+        public async Task<List<Patient>> GetAllPatientsAsync()
+        {
+            return await _PatinetRepo.GetAsync();
+        }
+        public async Task<List<Syndrom>> GetAllSyndromAsync()
+        {
+            return await _SyndromRepo.GetAsync();
+        }
+        public async Task<List<PrescribedMedication>> GetAllMedicationAsync()
+        {
+            return await _MedicationRepo.GetAsync();
+        }
+        public IEnumerable<string> GetPropertyPatientNames()
+        {
+            var type = typeof(Patient).GetProperties();
+            return type.Select(prop => prop.Name).ToList();
+        }
+        public IEnumerable<string> GetPropertyMedicationNames()
+        {
+            var type = typeof(PrescribedMedication).GetProperties();
+            return type.Select(prop => prop.Name).ToList();
+        }
+        public IEnumerable<string> GetPropertySyndromNames()
+        {
+            var type = typeof(Syndrom).GetProperties();
+            return type.Select(prop => prop.Name).ToList();
+        }
     }
 }

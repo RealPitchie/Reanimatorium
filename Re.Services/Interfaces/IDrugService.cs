@@ -11,5 +11,11 @@ namespace Re.Services.Interfaces
         Task<Patient> SavePatientAsync(Patient patient);
         Task<PrescribedMedication> SaveMedicationAsync(PrescribedMedication medication);
         Task<Syndrom> SaveSyndromAsync(Syndrom syndrom);
+        Task<List<Patient>> GetAllPatientsAsync();
+        Task<List<Syndrom>> GetAllSyndromAsync();
+        Task<List<PrescribedMedication>> GetAllMedicationAsync();
+        IEnumerable<string> GetPropertyPatientNames();
+        IEnumerable<string> GetPropertyMedicationNames();
+        IEnumerable<string> GetPropertySyndromNames();
     }
 }
