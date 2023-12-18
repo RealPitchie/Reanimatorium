@@ -1,8 +1,14 @@
-﻿using Re.Core.Models;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Re.Core.Extensions;
+using Re.Core.Models;
 
 namespace Re.Data.Repo
 {
-    public class DrugRepo : IRepo<Patient>, IRepo<Syndrom>, IRepo<PrescribedMedication>
+    public class DrugRepo<T> : IRepo<T> where T : class
     {
         DataContext _context;
         public DrugRepo(DataContext context)
@@ -10,49 +16,20 @@ namespace Re.Data.Repo
             _context = context;
         }
 
-        public Task<IEnumerable<Patient>> GetAsync()
-        {
-            throw new NotImplementedException();
-        }
+        
 
-        public async Task<Patient> SaveAsync(Patient patient)
+        public async Task<T> SaveAsync(T entity)
         {
-            await _context.Patients.AddAsync(patient);
+            await _context.AddAsync(entity);
             await _context.SaveChangesAsync();
 
-            return patient;
+            return entity;
         }
 
-        public async Task<Syndrom> SaveAsync(Syndrom syndrom)
+
+         async Task<List<T>> IRepo<T>.GetAsync()
         {
-            await _context.Syndroms.AddAsync(syndrom);
-            await _context.SaveChangesAsync();
-
-            return syndrom;
-        }
-
-        public async Task<PrescribedMedication> SaveAsync(PrescribedMedication medication)
-        {
-            await _context.Medications.AddAsync(medication);
-            await _context.SaveChangesAsync();
-
-            return medication;
-        }
- 
-
-        Task<List<Patient>> IRepo<Patient>.GetAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<List<Syndrom>> IRepo<Syndrom>.GetAsync()
-        {
-            throw new NotImplementedException();
-        }
-
-        Task<List<PrescribedMedication>> IRepo<PrescribedMedication>.GetAsync()
-        {
-            throw new NotImplementedException();
+            return await _context.Set<T>().IncludeAll().ToListAsync();
         }
     }
 }

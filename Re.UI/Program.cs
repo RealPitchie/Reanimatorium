@@ -47,9 +47,9 @@ services.AddTransient<TransferEpicrisisService>();
 services.AddTransient<AbdominalCavityService>();
 services.AddTransient<TomographicService>();
 
-services.AddScoped<IRepo<Patient>, DrugRepo>();
-services.AddScoped<IRepo<PrescribedMedication>, DrugRepo>();
-services.AddScoped<IRepo<Syndrom>, DrugRepo>();
+services.AddScoped<IRepo<Patient>, DrugRepo<Patient>>();
+services.AddScoped<IRepo<PrescribedMedication>, DrugRepo<PrescribedMedication>>();
+services.AddScoped<IRepo<Syndrom>, DrugRepo<Syndrom>>();
 services.AddTransient<DrugService>();
 
 services.AddScoped<IRepo<HemoEpicrisis>, HemoEpicrisisRepo>();

@@ -33,13 +33,13 @@ namespace Re.Data.Repo
         //{
         //    return await _dbSet.Where(e => e.GetDate() == date);
         //}
-        public async Task<List<T>> GetByDoctorName(string name)
-        {
-            return await _context.Set<T>().Where(e => e.GetType().Name == name).ToListAsync();
-        }
-        public async Task<List<T>> GetByType(Type type)
-        {
-            return await _context.Set<T>().Where(e => e.GetType() == type).ToListAsync();
-        }
+        //public async Task<List<T>> GetByDoctorName(string name)
+        //{
+        //    return await _context.Set<T>().Where(e => e.GetType().Name == name).ToListAsync();
+        //}
+        //public async Task<List<T>> GetByType(Type type)
+        //{
+        //    return await _context.Set<T>().Where(e => e.GetType() == type).ToListAsync();
+        //}
     }
 }

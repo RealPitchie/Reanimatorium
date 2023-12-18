@@ -3,81 +3,51 @@
 @using Re.Core.Models;
 @using Re.UI.Pages.Components.Drug
 @using Re.Services.Services
+@using System.ComponentModel
 @inject DrugService reService
 
 <MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary" PanelClass="pa-6">
-    <MudTabPanel Text="Пациенты">
-        <MudCard>
-            <MudCardContent>
-                @foreach (var value in PatientContext)
-                {
-                    <MudText>@value</MudText>
-                }
-            </MudCardContent>
-        </MudCard>
-        <MudTable Items="@dataPatientList">
-            <HeaderContent>
-                @foreach (var columnName in reService.GetPropertyPatientNames())
-                {
-                    <MudTh>@columnName</MudTh>
-                }
-            </HeaderContent>
-            <RowTemplate>
-                @foreach (var value in context)
-                {
-                    <MudTd>@value</MudTd>
-                }
-            </RowTemplate>
-        </MudTable>
-    </MudTabPanel>
-   <MudTabPanel Text="Пациенты">
-        <MudCard>
-            <MudCardContent>
-                @foreach (var value in SyndromContext)
-                {
-                    <MudText>@value</MudText>
-                }
-            </MudCardContent>
-        </MudCard>
-        <MudTable Items="@dataSyndromList">
-            <HeaderContent>
-                @foreach (var columnName in reService.GetPropertySyndromNames())
-                {
-                    <MudTh>@columnName</MudTh>
-                }
-            </HeaderContent>
-            <RowTemplate>
-                @foreach (var value in context)
-                {
-                    <MudTd>@value</MudTd>
-                }
-            </RowTemplate>
-        </MudTable>
-    </MudTabPanel>
-    <MudTabPanel Text="Пациенты">
-        <MudCard>
-            <MudCardContent>
-                @foreach (var value in MedicationContext)
-                {
-                    <MudText>@value</MudText>
-                }
-            </MudCardContent>
-        </MudCard>
-        <MudTable Items="@dataMedicationList">
-            <HeaderContent>
-                @foreach (var columnName in reService.GetPropertyMedicationNames())
-                {
-                    <MudTh>@columnName</MudTh>
-                }
-            </HeaderContent>
-            <RowTemplate>
-                @foreach (var value in context)
-                {
-                    <MudTd>@value</MudTd>
-                }
-            </RowTemplate>
-        </MudTable>
-    </MudTabPanel>
+    
+        <MudTabPanel Text="Пациент">
+        @foreach (var res in PatientResult)
+        {
+            <MudCard Style="background-color: lightblue; border-radius: 15px; margin-bottom: 15px;" Elevation="3" Outlined="true" >
+                <MudCardContent>
+                    @foreach (var value in res)
+                    {
+                        <MudText><b>@value.Key:</b> @value.Value</MudText>
+                    }
+                </MudCardContent>
+            </MudCard>
+        }
+        </MudTabPanel>
+   <MudTabPanel Text="Синдром">
+        @foreach (var res in SyndromResult)
+        {
+            <MudCard Style="background-color: lightblue; border-radius: 15px; margin-bottom: 15px;" Elevation="3" Outlined="true" >
+                <MudCardContent>
+                    @foreach (var value in res)
+                    {
+                        <MudText><b>@value.Key:</b> @value.Value</MudText>
+                    }
+                </MudCardContent>
+            </MudCard>
+        }
+        </MudTabPanel>
+        <MudTabPanel Text="Медикаменты">
+        @foreach (var res in MedicationResult)
+        {
+            <MudCard Style="background-color: lightblue; border-radius: 15px; margin-bottom: 15px;" Elevation="3" Outlined="true" >
+                <MudCardContent>
+                    @foreach (var value in res)
+                    {
+                        <MudText><b>@value.Key:</b> @value.Value</MudText>
+                    }
+                </MudCardContent>
+            </MudCard>
+        }
+        </MudTabPanel>
+    
 </MudTabs>
 
 
@@ -85,12 +55,9 @@
     private List<Patient> AllPatient = new List<Patient>();
     private List<Syndrom> AllSyndrom = new List<Syndrom>();
     private List<PrescribedMedication> AllMedication = new List<PrescribedMedication>();
-    private List<List<string>> dataPatientList = new List<List<string>>();
-    private List<List<string>> dataSyndromList = new List<List<string>>();
-    private List<List<string>> dataMedicationList = new List<List<string>>();
-    List<string> PatientContext = new();
-    List<string> SyndromContext = new();
-    List<string> MedicationContext = new();
+    List<Dictionary<string, string>> PatientResult = new();
+    List<Dictionary<string, string>> SyndromResult = new();
+    List<Dictionary<string, string>> MedicationResult = new();
 
     protected override async Task OnInitializedAsync()
     {
@@ -98,12 +65,9 @@
         AllPatient = await reService.GetAllPatientsAsync();
         AllSyndrom = await reService.GetAllSyndromAsync();
         AllMedication = await reService.GetAllMedicationAsync();
-        dataPatientList = GetPatientList();
-        dataSyndromList = GetSyndromList();
-        dataMedicationList = GetMedicationList();
-        PatientContext = dataPatientList.FirstOrDefault() ?? new List<string>();
-        SyndromContext = dataSyndromList.FirstOrDefault() ?? new List<string>();
-        MedicationContext = dataMedicationList.FirstOrDefault() ?? new List<string>();
+        GetPatientList();
+        GetSyndromList();
+        GetMedicationList();
     }
 
     private string FormatValue(object value)
@@ -137,52 +101,84 @@
             return value?.ToString() ?? string.Empty;
         }
     }
-    private List<List<string>> GetPatientList()
+     private void GetPatientList()
     {
-        var response = new List<List<string>>();
         foreach (var item in AllPatient)
         {
-            var formatedData = new List<string>();
-            foreach (var name in reService.GetPropertyPatientNames())
+            Dictionary<string, string> a = new();
+            foreach (var prop in item.GetType().GetProperties())
             {
-                var value = item.GetType().GetProperty(name).GetValue(item);
-                var formatValue = FormatValue(value);
-                formatedData.Add(formatValue);
+                var value = item.GetType().GetProperty(prop.Name).GetValue(item);
+                var displayNameAttribute = (DisplayNameAttribute)Attribute.GetCustomAttribute(prop, typeof(DisplayNameAttribute));
+                var displayName = displayNameAttribute?.DisplayName ?? prop.Name;
+
+                if(value != null)
+                {
+                    var formatValue = FormatValue(value);
+                    a.Add(displayName, formatValue);
+                }
             }
-            response.Add(formatedData);
+            PatientResult.Add(a);
         }
-        return response;
     }
-     private List<List<string>> GetSyndromList()
+     private void GetSyndromList()
     {
-        var response = new List<List<string>>();
         foreach (var item in AllSyndrom)
         {
-            var formatedData = new List<string>();
-            foreach (var name in reService.GetPropertySyndromNames())
+            Dictionary<string, string> a = new();
+            foreach (var prop in item.GetType().GetProperties())
             {
-                var value = item.GetType().GetProperty(name).GetValue(item);
-                var formatValue = FormatValue(value);
-                formatedData.Add(formatValue);
+                var value = item.GetType().GetProperty(prop.Name).GetValue(item);
+                var displayNameAttribute = (DisplayNameAttribute)Attribute.GetCustomAttribute(prop, typeof(DisplayNameAttribute));
+                var displayName = displayNameAttribute?.DisplayName ?? prop.Name;
+
+                if(value != null)
+                {
+                    var formatValue = FormatValue(value);
+                    a.Add(displayName, formatValue);
+                }
             }
-            response.Add(formatedData);
+            SyndromResult.Add(a);
         }
-        return response;
     }
-     private List<List<string>> GetMedicationList()
+    private void GetList()
     {
-        var response = new List<List<string>>();
+        foreach (var item in AllPatient)
+        {
+            Dictionary<string, string> a = new();
+            foreach (var prop in item.GetType().GetProperties())
+            {
+                var value = item.GetType().GetProperty(prop.Name).GetValue(item);
+                var displayNameAttribute = (DisplayNameAttribute)Attribute.GetCustomAttribute(prop, typeof(DisplayNameAttribute));
+                var displayName = displayNameAttribute?.DisplayName ?? prop.Name;
+
+                if(value != null)
+                {
+                    var formatValue = FormatValue(value);
+                    a.Add(displayName, formatValue);
+                }
+            }
+            PatientResult.Add(a);
+        }
+    }
+    private void GetMedicationList()
+    {
         foreach (var item in AllMedication)
         {
-            var formatedData = new List<string>();
-            foreach (var name in reService.GetPropertyMedicationNames())
+            Dictionary<string, string> a = new();
+            foreach (var prop in item.GetType().GetProperties())
             {
-                var value = item.GetType().GetProperty(name).GetValue(item);
-                var formatValue = FormatValue(value);
-                formatedData.Add(formatValue);
+                var value = item.GetType().GetProperty(prop.Name).GetValue(item);
+                var displayNameAttribute = (DisplayNameAttribute)Attribute.GetCustomAttribute(prop, typeof(DisplayNameAttribute));
+                var displayName = displayNameAttribute?.DisplayName ?? prop.Name;
+
+                if(value != null)
+                {
+                    var formatValue = FormatValue(value);
+                    a.Add(displayName, formatValue);
+                }
             }
-            response.Add(formatedData);
+            MedicationResult.Add(a);
         }
-        return response;
     }
 }
