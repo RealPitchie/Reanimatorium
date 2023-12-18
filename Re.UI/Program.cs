@@ -24,7 +24,7 @@ services.AddServerSideBlazor();
 services.AddMudServices();
 
 services.AddDbContext<DataContext>(options =>
-    options.UseNpgsql("UserID=postgres;Password=123qweQWE;Server=localhost;Port=6699;Database=reanim;"), 
+    options.UseNpgsql("UserID=postgres;Password=passmein123;Server=localhost;Port=5432;Database=reanim;"), 
     ServiceLifetime.Transient
 );
 // connection to Epicrisis
