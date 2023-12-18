@@ -26,23 +26,33 @@ public class StandardProtocol
     
     public string Features { get; set; }
     public string Complications { get; set; }
-    
-    public virtual Doctor Doctor { get; set; }
 
-    
-}
-public class CentralVeinProtocol : StandardProtocol
-{
-    public virtual CentralVeinIndications Indications { get; set; }
     public string VeinToBeCatheterized { get; set; }
     public string[] VeinsToBeCatheterized { get; set; }
     public int CVD { get; set; } //ЦВД см.водн.ст
     public bool IsRgControlNeeded { get; set; }
     public DateOnly RgControlDate { get; set; }
+    public string ArteriaToBeCatheterized { get; set; }
+    public string[] ArteriasToBeCatheterized { get; set; }
+    public string[] PunctionLevels { get; set; }
+    public string PunctionLevel { get; set; }
+    public string[] CathetersInserted { get; set; }
+    public string CatheterInserted { get; set; }
+    public string Notes { get; set; }
+    public virtual Doctor Doctor { get; set; }
+    public virtual CentralVeinIndications CentralVeinIndications { get; set; }
+    public virtual ArteriaIndications ArteriaIndications { get; set; }
+    public virtual EpiduralSpaceIndications EpiduralSpaceIndications { get; set; }
+    
+}
+public class CentralVeinProtocol : StandardProtocol
+{
+    
+    
     public CentralVeinProtocol()
     {
         Id = Guid.NewGuid().ToString();
-        Indications = new();
+        CentralVeinIndications = new();
         CathetersUsed = new string[] { "B|Braun Certofix mono S215", "B|Braun Certofix mono S220","B|Braun Certofix mono S315","B|Braun Certofix mono S330" };
         LocalAnesthesyTypes = new string[] { "Лидокаином 1%", "Новокаином 0,25%" };
         VeinsToBeCatheterized = new string[] {
@@ -60,13 +70,12 @@ public class CentralVeinProtocol : StandardProtocol
 }
 public class ArteriaProtocol : StandardProtocol
 {
-    public virtual ArteriaIndications Indications { get; set; }
-    public string ArteriaToBeCatheterized { get; set; }
-    public string[] ArteriasToBeCatheterized { get; set; }
+    
+    
     public ArteriaProtocol()
     {
         Id = Guid.NewGuid().ToString();
-        Indications = new();
+        ArteriaIndications = new();
         CathetersUsed = new string[] { "B|Braun Certofix mono S215", "B|Braun Certofix mono S220","B|Braun Certofix mono S315","B|Braun Certofix mono S330" };
         LocalAnesthesyTypes = new string[] { "Лидокаином 1%", "Новокаином 0,25%" };
         ArteriasToBeCatheterized = new string[] {
@@ -80,16 +89,12 @@ public class ArteriaProtocol : StandardProtocol
 }
 public class EpiduralSpaceProtocol : StandardProtocol
 {
-    public virtual EpiduralSpaceIndications Indications { get; set; }
-    public string[] PunctionLevels { get; set; }
-    public string PunctionLevel { get; set; }
-    public string[] CathetersInserted { get; set; }
-    public string CatheterInserted { get; set; }
-    public string Notes { get; set; }
+    
+    
     public EpiduralSpaceProtocol()
     {
         Id = Guid.NewGuid().ToString();
-        Indications = new();
+        EpiduralSpaceIndications = new();
         LocalAnesthesyTypes = new string[] { "Лидокаином 1%", "Новокаином 0,25%" };
         PunctionLevels = new string[] {
             "Th 1-2","Th 2-3","Th 3-4","Th 4-5","Th 5-6","Th 6-7","Th 7-8","Th 8-9","Th 9-10","Th 10-11",

@@ -1,0 +1,94 @@
+@page "/protocolsList"
+
+@using Core.Models
+@using Services.Services
+
+@inject ProtocolService _service
+
+@if(_list.Count > 0)
+{
+    <MudGrid>
+        @foreach(var item in _list)
+        {
+            <MudItem xs="6">
+                <MudCard>
+                    <MudCardHeader>
+                        <CardHeaderAvatar>
+                            <MudAvatar Color="Color.Secondary">@item.Name.First()</MudAvatar>
+                        </CardHeaderAvatar>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.body1">@item.Name</MudText> 
+                            <MudText Typo="Typo.body1">@item.Time @item.Date.ToShortDateString()</MudText> 
+                        </CardHeaderContent>
+                        <CardHeaderActions>
+                            <MudIconButton Icon="@Icons.Material.Filled.Print" Title="Печать" Color="Color.Default" />
+                        </CardHeaderActions>
+                    </MudCardHeader> 
+                    <MudCardContent>
+                        <strong>Показания для:</strong>
+                        <MudText Typo="Typo.body2">
+                            @if(item is ArteriaProtocol)
+                            {
+                                if(item.ArteriaIndications.AllowPressureMonitoring)
+                                {
+                                    <p>мониторинга инвазивного давления</p>
+                                }  
+                                if(item.ArteriaIndications.AllowPiccoMonitoring)
+                                {
+                                    <p>мониторинга центральной гемодинамики системой PICCO</p>
+                                }  
+                                if(item.ArteriaIndications.AllowControl)
+                                {
+                                    <p>контроля КЩС</p>
+                                }   
+                                <br>
+                                @if(item.IsLocalAnesthesyNeeded)
+                                {
+                                    <MudText Typo="Typo.body2">
+                                        <p>
+                                            под м.анестезией
+                                            @item.LocalAnesthesyType  @item.LocalAnesthesyDose мл.
+                                        </p>
+                                    </MudText>
+                                    
+                                }
+                                <MudText Typo="Typo.body2">
+                                    <strong>Катетеризирована артерия</strong>  
+                                    @item.ArteriaToBeCatheterized <br>
+                                    <strong>Количество попыток:</strong> @item.TriesNo
+                                </MudText>
+                                <MudText Typo="Typo.body2">
+                                    <strong>Особенности:</strong><br>
+                                    @item.Features
+                                </MudText>
+                                <MudText Typo="Typo.body2">
+                                    <strong>Осложнения:</strong><br>
+                                    @item.Complications
+                                </MudText>
+                            }
+                        </MudText>
+                        
+                    </MudCardContent>
+                    
+                    <MudCardActions style="justify-content: flex-end;">
+                        <MudText Typo="Typo.subtitle1" Align="Align.End">
+                            <strong>@item.Doctor.Name, @item.Doctor.Position</strong>
+                        </MudText>
+                         
+                    </MudCardActions>
+                </MudCard>
+            </MudItem>
+        }
+    </MudGrid>
+    
+}
+
+
+@code{
+    List<StandardProtocol> _list = new();
+    
+    protected override async Task OnInitializedAsync()
+    {
+        _list = await _service.GetProtocolsAsync();
+    }
+}

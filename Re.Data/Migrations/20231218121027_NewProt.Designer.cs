@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 using Re.Data;
@@ -11,9 +12,10 @@ using Re.Data;
 namespace Re.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20231218121027_NewProt")]
+    partial class NewProt
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -1308,26 +1310,11 @@ namespace Re.Data.Migrations
                     b.Property<string>("ArteriaIndicationsId")
                         .HasColumnType("text");
 
-                    b.Property<string>("ArteriaToBeCatheterized")
-                        .HasColumnType("text");
-
-                    b.Property<string[]>("ArteriasToBeCatheterized")
-                        .HasColumnType("text[]");
-
-                    b.Property<int>("CVD")
-                        .HasColumnType("integer");
-
-                    b.Property<string>("CatheterInserted")
-                        .HasColumnType("text");
-
                     b.Property<int>("CatheterInsertedCentimetres")
                         .HasColumnType("integer");
 
                     b.Property<string>("CatheterUsed")
                         .HasColumnType("text");
-
-                    b.Property<string[]>("CathetersInserted")
-                        .HasColumnType("text[]");
 
                     b.Property<string[]>("CathetersUsed")
                         .HasColumnType("text[]");
@@ -1357,9 +1344,6 @@ namespace Re.Data.Migrations
                     b.Property<bool>("IsLocalAnesthesyNeeded")
                         .HasColumnType("boolean");
 
-                    b.Property<bool>("IsRgControlNeeded")
-                        .HasColumnType("boolean");
-
                     b.Property<decimal>("LocalAnesthesyDose")
                         .HasColumnType("numeric");
 
@@ -1372,29 +1356,11 @@ namespace Re.Data.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("text");
 
-                    b.Property<string>("Notes")
-                        .HasColumnType("text");
-
-                    b.Property<string>("PunctionLevel")
-                        .HasColumnType("text");
-
-                    b.Property<string[]>("PunctionLevels")
-                        .HasColumnType("text[]");
-
-                    b.Property<DateOnly>("RgControlDate")
-                        .HasColumnType("date");
-
                     b.Property<TimeOnly>("Time")
                         .HasColumnType("time without time zone");
 
                     b.Property<int>("TriesNo")
                         .HasColumnType("integer");
-
-                    b.Property<string>("VeinToBeCatheterized")
-                        .HasColumnType("text");
-
-                    b.Property<string[]>("VeinsToBeCatheterized")
-                        .HasColumnType("text[]");
 
                     b.HasKey("Id");
 
@@ -2059,12 +2025,33 @@ namespace Re.Data.Migrations
                 {
                     b.HasBaseType("Re.Core.Models.StandardProtocol");
 
+                    b.Property<string>("ArteriaToBeCatheterized")
+                        .HasColumnType("text");
+
+                    b.Property<string[]>("ArteriasToBeCatheterized")
+                        .HasColumnType("text[]");
+
                     b.HasDiscriminator().HasValue("ArteriaProtocol");
                 });
 
             modelBuilder.Entity("Re.Core.Models.CentralVeinProtocol", b =>
                 {
                     b.HasBaseType("Re.Core.Models.StandardProtocol");
+
+                    b.Property<int>("CVD")
+                        .HasColumnType("integer");
+
+                    b.Property<bool>("IsRgControlNeeded")
+                        .HasColumnType("boolean");
+
+                    b.Property<DateOnly>("RgControlDate")
+                        .HasColumnType("date");
+
+                    b.Property<string>("VeinToBeCatheterized")
+                        .HasColumnType("text");
+
+                    b.Property<string[]>("VeinsToBeCatheterized")
+                        .HasColumnType("text[]");
 
                     b.HasDiscriminator().HasValue("CentralVeinProtocol");
                 });

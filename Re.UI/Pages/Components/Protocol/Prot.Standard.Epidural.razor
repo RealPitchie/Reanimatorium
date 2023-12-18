@@ -9,19 +9,19 @@
     <MudText Typo="Typo.body1" style="text-align: left; margin-bottom: 10px">Показания для: </MudText>
     <MudGrid Style="margin-bottom: 25px;">
         <MudItem style="padding: 0 15px;">
-            <MudSwitch @bind-Checked="@Protocol.Indications.AllowPostoperativeAnesthesia" Color="Color.Primary" 
+            <MudSwitch @bind-Checked="@Protocol.EpiduralSpaceIndications.AllowPostoperativeAnesthesia" Color="Color.Primary" 
                 Label="интра- и послеоперационного обезболивания"></MudSwitch>
         </MudItem>
         <MudItem style="padding: 0 15px;">
-            <MudSwitch @bind-Checked="@Protocol.Indications.AllowPainSyndromeTreatment" Color="Color.Primary"  
+            <MudSwitch @bind-Checked="@Protocol.EpiduralSpaceIndications.AllowPainSyndromeTreatment" Color="Color.Primary"  
                 Label="лечения болевого синдрома"></MudSwitch>
         </MudItem>
         <MudItem style="padding: 0 15px;">
-            <MudSwitch @bind-Checked="@Protocol.Indications.AllowAcutePancreatitisTreatment" Color="Color.Primary"  
+            <MudSwitch @bind-Checked="@Protocol.EpiduralSpaceIndications.AllowAcutePancreatitisTreatment" Color="Color.Primary"  
                 Label="лечения острого панкреатита"></MudSwitch>
         </MudItem>
         <MudItem style="padding: 0 15px;">
-            <MudSwitch @bind-Checked="@Protocol.Indications.AllowIntestinalStimulation" Color="Color.Primary"  
+            <MudSwitch @bind-Checked="@Protocol.EpiduralSpaceIndications.AllowIntestinalStimulation" Color="Color.Primary"  
                 Label="стимуляции перестальтики кишечника"></MudSwitch>
         </MudItem>
     </MudGrid>  

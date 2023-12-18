@@ -12,15 +12,15 @@
     <MudText Typo="Typo.body1" style="text-align: left; margin-bottom: 10px">Показания для: </MudText>
     <MudGrid Style="margin-bottom: 25px;"> 
         <MudItem style="padding: 0 15px;">
-            <MudSwitch @bind-Checked="@Protocol.Indications.AllowControl" Color="Color.Primary" 
+            <MudSwitch @bind-Checked="@Protocol.ArteriaIndications.AllowControl" Color="Color.Primary" 
                 Label="контроля КЩС"></MudSwitch>
         </MudItem>
         <MudItem style="padding: 0 15px;">
-            <MudSwitch @bind-Checked="@Protocol.Indications.AllowPressureMonitoring" Color="Color.Primary"  
+            <MudSwitch @bind-Checked="@Protocol.ArteriaIndications.AllowPressureMonitoring" Color="Color.Primary"  
                 Label="мониторинга инвазивного давления"></MudSwitch>
         </MudItem>
         <MudItem style="padding: 0 15px;">
-            <MudSwitch @bind-Checked="@Protocol.Indications.AllowPiccoMonitoring" Color="Color.Primary"  
+            <MudSwitch @bind-Checked="@Protocol.ArteriaIndications.AllowPiccoMonitoring" Color="Color.Primary"  
                 Label="мониторинга центральной гемодинамики системой PICCO"></MudSwitch>
         </MudItem>
     </MudGrid> 
