@@ -20,13 +20,6 @@ namespace Re.Services.Services.Epicrisis
             return await _repo.GetAsync();
         }
 
-        public IEnumerable<string> GetPropertyNames()
-        {
-            var bruh1 = typeof(ReceptionEpicrisis).GetProperties();
-            var bruh = bruh1.Select(prop => prop.Name).ToList();
-            return bruh;
-        }
-
         public async Task<ReceptionEpicrisis> SaveReceptEpicrisisAsync(ReceptionEpicrisis epicrisis)
         {
             if (epicrisis.Id == null)

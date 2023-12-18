@@ -6,6 +6,5 @@ namespace Re.Services.Interfaces.Epicrisis
     {
         Task<ReceptionEpicrisis> SaveReceptEpicrisisAsync(ReceptionEpicrisis epicrisis);
         Task<List<ReceptionEpicrisis>> GetAllAsync();
-        IEnumerable<string> GetPropertyNames();
     }
 }

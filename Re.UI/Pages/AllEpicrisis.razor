@@ -3,32 +3,26 @@
 @using Re.Core.Models;
 @using Re.UI.Pages.Components.Epicrisis
 @using Re.Services.Services.Epicrisis
+@using System.ComponentModel;
 @inject ReceptEpicrisisService reService
 
 <MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary" PanelClass="pa-6">
     <MudTabPanel Text="Приемный эпикриз">
-        <MudCard>
-            <MudCardContent>
-                @foreach (var value in context)
-                {
-                    <MudText>@value</MudText>
-                }
-            </MudCardContent>
-        </MudCard>
-        <MudTable Items="@dataList">
-            <HeaderContent>
-                @foreach (var columnName in reService.GetPropertyNames())
-                {
-                    <MudTh>@columnName</MudTh>
-                }
-            </HeaderContent>
-            <RowTemplate>
-                @foreach (var value in context)
-                {
-                    <MudTd>@value</MudTd>
-                }
-            </RowTemplate>
-        </MudTable>
+        <MudGrid>
+        @foreach (var res in result)
+        {
+            <MudItem xs="6">
+                <MudCard Style="background-color: #c0c3e8; border-radius: 15px;" Elevation="3" Outlined="true">
+                    <MudCardContent>
+                        @foreach (var value in res)
+                        {
+                            <MudText><b>@value.Key:</b> @value.Value</MudText>
+                        }
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+        }
+        </MudGrid>
     </MudTabPanel>
     <MudTabPanel Text="Переводной эпикриз">
         <Epic_Transferable />
@@ -41,15 +35,13 @@
 
 @code {
     private List<ReceptionEpicrisis> allReception = new List<ReceptionEpicrisis>();
-    private List<List<string>> dataList = new List<List<string>>();
-    List<string> context = new();
+    List<Dictionary<string, string>> result = new();
 
     protected override async Task OnInitializedAsync()
     {
         await base.OnInitializedAsync();
         allReception = await reService.GetAllAsync();
-        dataList = GetList();
-        context = dataList.FirstOrDefault() ?? new List<string>();
+        GetList();
     }
 
     private string FormatValue(object value)
@@ -83,20 +75,24 @@
             return value?.ToString() ?? string.Empty;
         }
     }
-    private List<List<string>> GetList()
+    private void GetList()
     {
-        var response = new List<List<string>>();
         foreach (var item in allReception)
         {
-            var formatedData = new List<string>();
-            foreach (var name in reService.GetPropertyNames())
+            Dictionary<string, string> a = new();
+            foreach (var prop in item.GetType().GetProperties())
             {
-                var value = item.GetType().GetProperty(name).GetValue(item);
-                var formatValue = FormatValue(value);
-                formatedData.Add(formatValue);
+                var value = item.GetType().GetProperty(prop.Name).GetValue(item);
+                var displayNameAttribute = (DisplayNameAttribute)Attribute.GetCustomAttribute(prop, typeof(DisplayNameAttribute));
+                var displayName = displayNameAttribute?.DisplayName ?? prop.Name;
+
+                if(value != null)
+                {
+                    var formatValue = FormatValue(value);
+                    a.Add(displayName, formatValue);
+                }
             }
-            response.Add(formatedData);
+            result.Add(a);
         }
-        return response;
     }
 }
