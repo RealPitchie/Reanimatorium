@@ -6,6 +6,16 @@
 @inject Re.Services.Services.Hemo.ThrombocyteProtocolService thrService
 
 <MudGrid>
+    <MudGrid Style="margin-top:-80px; margin-left:200px;">
+        <MudItem Style="margin-top:5px;"><MudText>Дата:</MudText></MudItem>
+        <MudItem xs="2"><MudDatePicker Style="margin-top:-5px;" Date="thr.Date" /></MudItem>
+    </MudGrid>
+    <MudGrid Style="margin-left:200px; margin-top:-50px;">
+        <MudItem Style="margin-top:5px;"><MudText>начало:</MudText></MudItem>
+        <MudItem xs="2"><MudTimePicker Style="margin-top:-5px;" Time="thr.StartTime" /></MudItem>
+        <MudItem Style="margin-top:5px;"><MudText>конец:</MudText></MudItem>
+        <MudItem xs="2"><MudTimePicker Style="margin-top:-5px;" Time="thr.EndTime" /></MudItem>
+    </MudGrid>
     <MudItem xs="12">
         <MudPaper Style="margin: 15px 0; margin-top:30px;">
             <MudText Style="margin-top:10px; margin-left:20px;" Typo="Typo.h6">Трансфузия тромбоцитарного концентрата</MudText>
@@ -239,6 +249,9 @@
     protected override void OnInitialized()
     {
         DoctorAdd();
+        thr.StartTime = DateTime.Now.TimeOfDay; //Время
+        thr.EndTime = DateTime.Now.TimeOfDay; //Время
+        thr.Date = DateTime.Now; //Время
         thr.StartDate = DateTime.Now;
         thr.EndDate = DateTime.Now;
     }
