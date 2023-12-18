@@ -15,7 +15,10 @@ namespace Re.Services.Services
         {
             _repo = repo;
         }
-
+        public async Task<List<StandartDiary>> GetAllAsync()
+        {
+            return await _repo.GetAsync();
+        }
         public async Task<StandartDiary> SaveStandartDiaryAsync(StandartDiary standart)
         {
             if (standart.Id == null)
@@ -29,5 +32,6 @@ namespace Re.Services.Services
             standart.VoLEF.Id = Guid.NewGuid().ToString();
             return await _repo.SaveAsync(standart);
         }
+
     }
 }

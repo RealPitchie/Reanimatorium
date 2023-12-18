@@ -15,6 +15,10 @@ namespace Re.Services.Services
         {
             _repo = repo;
         }
+        public async Task<List<Extubation>> GetAllAsync()
+        {
+            return await _repo.GetAsync();
+        }
         public async Task<Extubation> SaveExtubationDiaryAsync(Extubation extubation)
         {
             if (extubation.Id == null)

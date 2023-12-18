@@ -1,0 +1,535 @@
+﻿@page "/allDiaries"
+
+@using Re.Core.Models;
+@using Re.UI.Pages.Components.Diary
+@using Re.Services.Services
+@using System.ComponentModel;
+@inject StandartDiaryService StandartService
+
+
+<MudGrid>
+    @foreach (var item in allStandart)
+    {
+        <MudItem xs="6">
+            <MudCard>
+                <MudCardHeader>
+                    <CardHeaderAvatar>
+                        </CardHeaderAvatar>
+                        <CardHeaderContent>
+                            <MudText Typo="Typo.body1">@item.Time @item.Date.ToShortDateString()</MudText>
+                        </CardHeaderContent>
+                        <CardHeaderActions>
+                            <MudIconButton Icon="@Icons.Material.Filled.Print" Title="Печать" Color="Color.Default" />
+                        </CardHeaderActions>
+                    </MudCardHeader>
+                    <MudCardContent>
+                        <strong>Состояние:</strong>
+                        <MudText Typo="Typo.body2">
+
+                            <MudText Typo="Typo.body2">
+                                @item.Сonditions <br>
+                            </MudText>
+                    </MudText>
+
+                    <strong>Жалобы:</strong>
+                    <MudText Typo="Typo.body2">
+
+                        <MudText Typo="Typo.body2">
+                            @item.Сomplaints <br>
+                        </MudText>
+                    </MudText>
+
+                    <strong>Жалобы на:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            @item.ComplaintsAbout <br>
+                        </MudText>
+                    </MudText>
+
+                    <strong>ВАШ - </strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            @item.Vash <br>
+                        </MudText>
+                    </MudText>
+
+                    <strong>RASS:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            @item.Rass <br>
+                        </MudText>
+                    </MudText>
+
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            @item.RassThis <br>
+                        </MudText>
+                    </MudText>
+
+                    <strong>Кожные покровы:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            @item.Skin[0] <br>
+                        </MudText>
+                    </MudText>
+
+                    <strong>Влажность:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            @item.Skin[1] <br>
+                        </MudText>
+                    </MudText>
+
+                    <strong>Цвет:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            @item.Skin[2] <br>
+                        </MudText>
+                    </MudText>
+
+                    <strong>Дыхание через:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            @item.Breathing<br>
+                        </MudText>
+                    </MudText>
+
+                    <strong>Экстубирован:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                           <p> @item.Extubation  
+                               самостоятельное дыхание эффективно.
+                           </p>
+                        </MudText>
+                    </MudText>
+
+                    <strong>ЧДД:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p> 
+                            @item.CddField
+                            в 1 минуту.
+                            </p>
+                        </MudText>
+                    </MudText>
+
+                    <strong>Ингаляция O2 через:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                @item.InhalationO2
+                                Скорость потока -  @item.SpeedFlow л/мин
+                            </p>
+                        </MudText>
+                    </MudText>
+
+                    <strong>Аускультативно:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            @item.Auscultatory<br>
+                        </MudText>
+                    </MudText>
+
+                    <strong>Ослабление дыхания:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                @item.ShortnessOfBreath[0]
+                                @item.ShortnessOfBreath[1]
+                                @item.ShortnessOfBreathInput
+                            </p>
+                        </MudText>
+                    </MudText>
+
+                    <strong>Хрипы:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                @item.Wheezes[0]
+                                @item.Wheezes[1]
+                                @item.Wheezes[2]
+                            </p>
+                        </MudText>
+                    </MudText>
+
+                    <strong>Респираторная поддержка:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            @item.RespiratorySupport<br>
+                        </MudText>
+                    </MudText>
+
+                     <strong>Аппаратом:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                @item.RespiratorySupportMachine[0]
+                                <br>
+                                режим
+                                @item.RespiratorySupportMachine[1]
+                            </p>
+                        </MudText>
+                    </MudText>
+
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                ДО -
+                                @item.Do мл;
+                                FiO2 -
+                                @item.Fio2 %;
+
+                                ЧД -
+                                @item.Cd в мин;
+                                Двдох -
+                                @item.Dvdox см водн.ст;
+
+                                ПДКВ -
+                                @item.Pdkv см водн.ст;
+                                Дпод -
+                                @item.Dpod см водн.ст;
+
+                                МОД
+                                @item.Product мл/мин;
+                            </p>
+                        </MudText>
+                    </MudText>
+
+                    <strong>Гемодинамика:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            @item.Hemodynamics<br>
+                        </MudText>
+                    </MudText>
+
+                     <strong>Инотропная поддержка:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                @item.InotropicSupportOne[0]
+                                <br>            
+                                @item.InotropicSupportOneInput
+                                <br>
+                                @item.InotropicSupportOne[1]
+                            </p>
+                        </MudText>
+                    </MudText>
+
+                    <strong>АД -</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p>
+                            @item.Ad мм рт.ст.
+                            </p>
+                        </MudText>
+                    </MudText>
+
+                    <strong>ЧСС -</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p>
+                            @item.Сhss в 1 минуту. </p>
+                        </MudText>
+                    </MudText>
+
+                    <strong>SpO2 -</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                @item.Spo2 %
+                            </p>
+                        </MudText>
+                    </MudText>
+
+                     <strong>Живот:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            @item.Stomach<br>
+                        </MudText>
+                    </MudText>
+
+                      <strong>Болезненность:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                @item.Pain
+                                <br>
+                                @item.PainAbout
+                            </p>
+                        </MudText>
+                    </MudText>
+
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                Живот
+                                @item.AbdominalBloating[0] вздут,
+                                <br>
+                                @item.AbdominalBloating[1]
+                            </p>
+                        </MudText>
+                    </MudText>
+
+                    <strong>Перистальтика:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            @item.Peristalsis<br>
+                        </MudText>
+                    </MudText>
+
+                        <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                Язык
+                                @item.Tongue[0]
+                                <br>
+                                @item.Tongue[1]
+                            </p>
+                        </MudText>
+                    </MudText>
+
+                       <strong>Диурез -</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                @item.Diuresis мл.
+                            </p>
+                        </MudText>
+                    </MudText>
+
+                    <strong>Перелито В/В -</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                @item.Intravenously мл.
+                            </p>
+                        </MudText>
+                    </MudText>
+
+                     <strong>Моча:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            @item.Urine<br>
+                        </MudText>
+                    </MudText>
+
+                     <strong>Температура тела - </strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                             <p>
+                            @item.BodyTemperature C°. </p>
+                        </MudText>
+                    </MudText>
+
+                    <strong>Дренаж:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                @item.Drainage[0]
+                                <br>
+                                @item.Drainage[1]
+                                <br>
+                                @item.DrinageAbout
+                                <br>
+                                @item.Drainage[2]
+                                <br>
+                                @item.DrainageTwo[0]
+                                <br>
+                                @item.DrainageTwo[1]
+                                <br>
+                                @item.DrinageAboutTwo
+                                <br>
+                                @item.DrainageTwo[2]
+                            </p>
+                        </MudText>
+                    </MudText>
+
+                         <strong>Дополнительно:</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            @item.Additionally<br>
+                        </MudText>
+                    </MudText>
+
+                    <strong>Лабораторно:</strong>
+                     <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                WBC -
+                                @item.Laboratory1 x10⁹/л.                        
+                                HGB -
+                                @item.Laboratory2 г/л.
+
+                                RBC -
+                                @item.Laboratory3 x10¹²/л.
+                                HCT -
+                                @item.Laboratory4 %.
+
+                                PLT -
+                                @item.Laboratory5 x10⁹/л.
+                                Дпод -
+                                @item.Laboratory6 см водн.ст;
+
+                                Glu -
+                                @item.Product ммоль/л.
+                            </p>
+                        </MudText>
+                    </MudText>
+                    <strong>КЩС/Электролиты</strong>
+                    <MudText Typo="Typo.body2">
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                @item.Analyses <br>
+                                @item.AnalysesTwo <br>
+                                @item.AnalysesThree <br>
+                                @item.AnalysesFour <br>
+                                @item.AnalysesFive<br>
+                                @item.AnalysesSix<br>
+                            </p>
+                        </MudText>
+                    </MudText>
+
+                    @if (item.Picco != null)
+                    {
+                        <strong>PICCO:</strong>
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                 CI -    @item.Picco.CI I/min/m²
+                                <br>
+                                ITBI -   @item.Picco.ITBI ml/m²
+                                <br>
+                                CFI - @item.Picco.CFI I/min
+                                <br>
+                                SVV - @item.Picco.SVV %
+                                <br>
+                                SVI - @item.Picco.SVI ml/m²
+                                <br>
+                                ELWI - @item.Picco.ELWI ml/kg
+                                <br>
+                                MAP - @item.Picco.MAP mm Hg
+                                <br>
+                                GEDI - @item.Picco.GEDI ml/m²
+                                <br>
+                                CVP - @item.Picco.CVP H20
+                                <br>
+                                SVRI - @item.Picco.SVRI dyn*s*m*/cm⁻⁵
+                            </p>
+                        </MudText>
+                    }
+
+                          @if (item.FioTrac != null)
+                    {
+                        <strong>FioTrac:</strong>
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                CCO -   @item.FioTrac.CCO I/min
+                                <br>
+                                SVR - @item.FioTrac.SVR mm Hg
+                                <br>
+                                SVV - @item.FioTrac.SVV ml
+                                <br>
+                                SV - @item.FioTrac.SV ml
+                                <br>
+                                CVP - @item.FioTrac.CVP H20
+                                <br>
+                            </p>
+                        </MudText>
+                    }
+
+                    @if (item.Picco2 != null)
+                    {
+                        <strong>PICCO2:</strong>
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                CI -    @item.Picco2.CI I/min/m²
+                                <br>
+                                ITBI -   @item.Picco2.PVPI,
+                                <br>
+                                CFI - @item.Picco2.CFI I/min
+                                <br>
+                                SVV - @item.Picco2.SVV %
+                                <br>
+                                SVI - @item.Picco2.SVI ml/m²
+                                <br>
+                                ELWI - @item.Picco2.ELWI ml/kg
+                                <br>
+                                MAP - @item.Picco2.MAP mm Hg
+                                <br>
+                                ScvO2 - @item.Picco2.ScvO2 %
+                                <br>
+                                GEDI - @item.Picco2.GEDI ml/m²
+                                <br>
+                                CVP - @item.Picco2.CVP H20
+                                <br>
+                                SVRI - @item.Picco2.SVRI dyn*s*m*/cm⁻⁵
+                            </p>
+                        </MudText>
+                    }
+
+                    @if (item.EsCCO != null)
+                    {
+                        <strong>EsCCO:</strong>
+                        <MudText Typo="Typo.body2">
+                             <p>
+                                EsHCB - @item.EsCCO.EsHCB I/min
+                                <br>
+                                EsYO - @item.EsCCO.EsYO ml
+                                <br>
+                                EsHCI - @item.EsCCO.EsHCI I/min/m²
+                                <br>
+                                EsYO - @item.EsCCO.EsYO ml/m²
+                                <br>
+                                esССС - @item.EsCCO.EsCCC dyn*s*/cm⁵
+                                <br>
+                                esИССС - @item.EsCCO.EsICCC dyn*s*m*/cm⁻⁵
+                                <br>
+                             </p>
+                        </MudText>
+                    }
+
+
+                    @if (item.VoLEF != null)
+                    {
+                        <strong>VoLEF:</strong>
+                        <MudText Typo="Typo.body2">
+                            <p>
+                                RHEDV - @item.VoLEF.RHEDV ml
+                                <br>
+                                @item.VoLEF.PCWP mm Hg
+                                <br>
+                                R/L - @item.VoLEF.RL
+                                <br>
+                                RVEDV - @item.VoLEF.RVEDV ml
+                                <br>
+                                LHEDV - @item.VoLEF.LHEDV ml
+                                <br>
+                                PVR - @item.VoLEF.PVR dyn*s*m*/cm⁵
+                                <br>
+                                PAP - @item.VoLEF.PAP mm Hg
+                                <br>
+                                CVP - @item.VoLEF.CVP H2o
+                                <br>
+                                RVEF - @item.VoLEF.RVEF %
+                                <br>
+                            </p>
+                        </MudText>
+                    }
+
+   
+                </MudCardContent>
+            </MudCard>
+        </MudItem>
+    }
+</MudGrid>
+
+
+ 
+
+@code {
+     List<StandartDiary> allStandart = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        allStandart = await StandartService.GetAllAsync();
+    } 
+}

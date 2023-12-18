@@ -6,10 +6,12 @@
 
 <MudGrid Justify="Justify.Center">
     <MudItem>
-        <MudDatePicker style="width: 150px;" Label="Дата" Date="ex.Date" />
-    </MudItem>
-    <MudItem>
-        <MudTimePicker style="width: 150px;" Label="Время" Time="ex.Time" />
+        <MudItem>
+            <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
+        </MudItem>
+        <MudItem>
+            <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
+        </MudItem>
     </MudItem>
 </MudGrid>
 
@@ -24,7 +26,7 @@
 
             <MudGrid>
                 <MudItem xs="12">
-                    <MudTextField T="string" Variant="Variant.Text" @bind-Value="ex.MuscleTone" Label="Мышечный тонус" Text="удовлетворительный" />
+                    <MudTextField T="string" Variant="Variant.Text" @bind-Value="ex.MuscleTone" Label="Мышечный тонус"  />
                 </MudItem>
             </MudGrid>
             <MudGrid>
@@ -126,12 +128,14 @@
     }
 
 
+    DateTime? date;
+    TimeSpan? time;
     protected override void OnInitialized()
     {
-
-        ex.Date = DateTime.Now;
-        ex.Time = DateTime.Now.TimeOfDay;
+        date = DateTime.Now;
+        time = DateTime.Now.TimeOfDay;
         DoctorAdd();
+        ex.MuscleTone = "удовлетворительный";
     }
 
     Extubation ex = new();
@@ -139,5 +143,7 @@
     async Task Submit()
     {
          await ExtubService.SaveExtubationDiaryAsync(ex);
+        ex.Date = DateOnly.FromDateTime(date.Value);
+        ex.Time = TimeOnly.FromTimeSpan(time.Value);
     }
 }

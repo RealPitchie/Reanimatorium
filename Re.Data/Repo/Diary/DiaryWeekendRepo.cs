@@ -1,4 +1,6 @@
-﻿using Re.Core.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Re.Core.Extensions;
+using Re.Core.Models;
 
 namespace Re.Data.Repo.Diary
 {
@@ -10,11 +12,6 @@ namespace Re.Data.Repo.Diary
             _context = context;
         }
 
-        public Task<IEnumerable<WeekendDiary>> GetAsync()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<WeekendDiary> SaveAsync(WeekendDiary weekend)
         {
             await _context.WeekendDiaries.AddAsync(weekend);
@@ -22,11 +19,11 @@ namespace Re.Data.Repo.Diary
 
             return weekend;
         }
-
-        Task<List<WeekendDiary>> IRepo<WeekendDiary>.GetAsync()
+        public async Task<List<WeekendDiary>> GetAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Set<WeekendDiary>().IncludeAll().ToListAsync();
         }
+
     }
 
 }

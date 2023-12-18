@@ -15,6 +15,10 @@ namespace Re.Services.Services
         {
             _repo = repo;
         }
+        public async Task<List<WeekendDiary>> GetAllAsync()
+        {
+            return await _repo.GetAsync();
+        }
         public async Task<WeekendDiary> SaveWeekendDiaryAsync(WeekendDiary weekend)
         {
             if (weekend.Id == null)

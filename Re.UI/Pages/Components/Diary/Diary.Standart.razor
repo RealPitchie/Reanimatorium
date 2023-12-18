@@ -5,10 +5,10 @@
 
 <MudGrid Justify="Justify.Center">
     <MudItem>
-        <MudDatePicker style="width: 150px;" Label="Дата" Date="standart.Date" />
+        <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
     </MudItem>
     <MudItem>
-        <MudTimePicker style="width: 150px;" Label="Время" Time="standart.Time" />
+        <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
     </MudItem>
 </MudGrid>
 
@@ -747,7 +747,7 @@
                     <MudText Align="Align.Center">Показатели гемодинамики</MudText>
                     <MudRadioGroup @bind-SelectedOption="Hemodynamic">
                         <MudGrid>
-                        <MudRadio Option="@("PiCCO+")" Dense="false" Color="Color.Primary">PiCCO+</MudRadio>
+                        <MudRadio  Option="@("PiCCO+")" Dense="false" Color="Color.Primary">PiCCO+</MudRadio>
                         <MudRadio Option="@("FioTrac")" Dense="false" Color="Color.Primary">FloTrac</MudRadio>
                         </MudGrid>
                         <MudGrid>
@@ -1272,11 +1272,12 @@
     string water = "cm H₂O";
     string noWater = "mm Hg";
 
+    DateTime? date;
+    TimeSpan? time;
     protected override void OnInitialized()
     {
-
-        standart.Date = DateTime.Now;
-        standart.Time = DateTime.Now.TimeOfDay;
+        date = DateTime.Now;
+        time = DateTime.Now.TimeOfDay;
         vash = false;
         standart.Picco = new();
         standart.Picco2 = new();
@@ -1387,8 +1388,58 @@
         var change = selectValues.FirstOrDefault(x => x.Key == changedSelect).Key;
         select.SelectedValues = new List<string>() { change };
     }
-    async Task Submit()
+    void CheckInitialize()
+  {
+    if (Hemodynamic == "PiCCO+")
     {
-        await StandartService.SaveStandartDiaryAsync(standart);
+    standart.Picco.Id = Guid.NewGuid().ToString();
+    standart.FioTrac = null;
+    standart.EsCCO = null;
+    standart.VoLEF = null;
+    standart.Picco2 = null;
     }
+    if (Hemodynamic == "esCCO")
+    {
+
+    standart.EsCCO.Id = Guid.NewGuid().ToString();
+    standart.FioTrac = null;
+    standart.Picco = null;
+    standart.VoLEF = null;
+    standart.Picco2 = null;
+    }
+if (Hemodynamic == "VoLEF")
+{
+
+    standart.VoLEF.Id = Guid.NewGuid().ToString();
+    standart.FioTrac = null;
+    standart.Picco = null;
+    standart.EsCCO = null;
+    standart.Picco2 = null;
+}
+if (Hemodynamic == "PiCCO2")
+{
+
+    standart.Picco2.Id = Guid.NewGuid().ToString();
+    standart.FioTrac = null;
+    standart.Picco = null;
+    standart.EsCCO = null;
+    standart.VoLEF = null;
+}
+if (Hemodynamic == "FioTrac")
+{
+    standart.FioTrac.Id = Guid.NewGuid().ToString();
+    standart.Picco = null;
+    standart.EsCCO = null;
+    standart.VoLEF = null;
+    standart.Picco2 = null;
+}
+}
+async Task Submit()
+{
+    await StandartService.SaveStandartDiaryAsync(standart);
+        CheckInitialize();
+    standart.Date = DateOnly.FromDateTime(date.Value);
+    standart.Time = TimeOnly.FromTimeSpan(time.Value);
+}
+
 }

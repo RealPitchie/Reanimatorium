@@ -33,8 +33,8 @@ namespace Re.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Time = table.Column<TimeSpan>(type: "time without time zone", nullable: false),
+                    Date = table.Column<DateOnly>(type: "date", nullable: false),
+                    Time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
                     MedSedation = table.Column<string>(type: "text", nullable: true),
                     MuscleTone = table.Column<string>(type: "text", nullable: true),
                     Insuflation = table.Column<int>(type: "integer", nullable: false),
@@ -178,8 +178,8 @@ namespace Re.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Time = table.Column<TimeSpan>(type: "time without time zone", nullable: false),
+                    Date = table.Column<DateOnly>(type: "date", nullable: false),
+                    Time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
                     Doctor = table.Column<string[]>(type: "text[]", nullable: true),
                     DoctorTwo = table.Column<string[]>(type: "text[]", nullable: true),
                     Patient = table.Column<string>(type: "text", nullable: true),
@@ -192,7 +192,7 @@ namespace Re.Data.Migrations
                     Conscience = table.Column<string[]>(type: "text[]", nullable: true),
                     RassThis = table.Column<string>(type: "text", nullable: true),
                     Rass = table.Column<string[]>(type: "text[]", nullable: true),
-                    Neurologist = table.Column<string>(type: "text", nullable: true),                
+                    Neurologist = table.Column<string>(type: "text", nullable: true),
                     Skin = table.Column<string[]>(type: "text[]", nullable: true),
                     Breathing = table.Column<string[]>(type: "text[]", nullable: true),
                     Extubation = table.Column<string[]>(type: "text[]", nullable: true),
@@ -290,8 +290,8 @@ namespace Re.Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<string>(type: "text", nullable: false),
-                    Date = table.Column<DateTime>(type: "date", nullable: false),
-                    Time = table.Column<TimeSpan>(type: "time without time zone", nullable: false),
+                    Date = table.Column<DateOnly>(type: "date", nullable: false),
+                    Time = table.Column<TimeOnly>(type: "time without time zone", nullable: false),
                     Сonditions = table.Column<string[]>(type: "text[]", nullable: true),
                     Сomplaints = table.Column<string[]>(type: "text[]", nullable: true),
                     ComplaintsAbout = table.Column<string>(type: "text", nullable: true),

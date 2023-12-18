@@ -1,6 +1,7 @@
 ﻿using Re.Core.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
@@ -13,9 +14,8 @@ namespace Re.Core.Models
     public class StandartDiary
     {
         public string Id { get; set; }
-        public DateTime Date { get; set; }
-        public TimeSpan Time { get; set; }
-
+        public DateOnly Date { get; set; }
+        public TimeOnly Time { get; set; }
         public string Сonditions { get; set; } // состояние
         public string Сomplaints { get; set; } //жалобы
         public string ComplaintsAbout { get; set; } //жалобы на
@@ -69,12 +69,12 @@ namespace Re.Core.Models
         public int Laboratory4 { get; set; }
         public int Laboratory5 { get; set; }
         public int Laboratory6 { get; set; }
-        public Doctor Doctor { get; set; } //доктор
-        public PiCCO Picco { get; set; }
-        public PiCCO2 Picco2 { get; set; }
-        public FioTrac FioTrac { get; set; }
-        public EsCCO EsCCO { get; set; }
-        public VoLEF VoLEF { get; set; }
+        public virtual Doctor Doctor { get; set; } //доктор
+        public virtual PiCCO Picco { get; set; }
+        public virtual PiCCO2 Picco2 { get; set; }
+        public virtual FioTrac FioTrac { get; set; }
+        public virtual EsCCO EsCCO { get; set; }
+        public virtual VoLEF VoLEF { get; set; }
         public int Analyses { get; set; } //Анализы
         public int AnalysesTwo { get; set; } //Анализы
         public int AnalysesThree { get; set; } //Анализы
@@ -97,6 +97,7 @@ namespace Re.Core.Models
         public int? CVP { get; set; }
         public int? SVRI { get; set; }
         public string Description { get; set; }
+
     }
     public class PiCCO2
     {
