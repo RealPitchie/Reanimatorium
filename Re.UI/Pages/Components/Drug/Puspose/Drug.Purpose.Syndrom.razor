@@ -1,6 +1,7 @@
 ﻿@using Re.Core.Models
 @using Re.UI.Data
 @inject Re.Services.Services.DrugService reService
+@inject ISnackbar Snackbar
 
 <MudPaper Style="padding: 20px; margin: 15px 0">
     <MudText style="margin-top: 15px; font-weight: bolder;">
@@ -108,11 +109,13 @@
     DateTime? date = DateTime.Now;
     TimeSpan? time = DateTime.Now.TimeOfDay;
 
-    Syndrom syndrom = new Syndrom();
+    Syndrom syndrom = new Syndrom{Status = "Сознание ясное, контактен, адекватен.", Description = "Болевой синдром купирован."};
 
      async Task Submit()
     {
         await reService.SaveSyndromAsync(syndrom); 
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+        Snackbar.Add("Запись сохранена", Severity.Success);
     }
     string Status = "Сознание ясное, контактен, адекватен.";
 

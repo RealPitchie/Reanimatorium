@@ -15,7 +15,7 @@ public class Patient{
     [DisplayName("Адрес")]
 
     public string Adress { get; set; }//Место?
-    [DisplayName("Пульс")]
+    [DisplayName("Особенности пульса")]
 
     public string Peculiarity { get; set; }//Особенности пульса
     [DisplayName("ВАШ")]

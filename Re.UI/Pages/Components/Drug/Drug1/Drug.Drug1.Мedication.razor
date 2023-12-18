@@ -1,6 +1,7 @@
 ﻿@using Re.Core.Models
 @using Re.UI.Data
 @inject Re.Services.Services.DrugService reService
+@inject ISnackbar Snackbar
 
 <MudPaper Style="padding: 20px; margin: 15px 0">
     <MudText style="margin-top: 15px; font-weight: bolder;">
@@ -134,6 +135,8 @@
      async Task Submit()
     {
         await reService.SaveMedicationAsync(medication); 
+        Snackbar.Configuration.PositionClass = Defaults.Classes.Position.BottomRight;
+        Snackbar.Add("Запись сохранена", Severity.Success);
     }
     private string selectedStage {get; set;}
 

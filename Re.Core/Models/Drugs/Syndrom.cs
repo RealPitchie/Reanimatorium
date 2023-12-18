@@ -10,7 +10,7 @@ public class Syndrom
     public DateOnly Date { get; set; }
     [DisplayName("Время")]
     public TimeOnly Time { get; set; }
-    [DisplayName("Время")]
+    [DisplayName("Описание синдрома")]
 
     public string Description { get; set; }//Описание синдрома
     [DisplayName("ВАШ")]
@@ -35,10 +35,10 @@ public class Syndrom
     [DisplayName("Дежурный реаниматолог")]
 
     public string Resuscitator { get; set; }//Дежурный реаниматолог
-    [DisplayName("Дополнительно")]
+    [DisplayName("Особенности пульса")]
 
     public string Peculiarity { get; set; }//Особенности пульса
 
-    [DisplayName("Дополнительно")]
+    [DisplayName("Состояние пациента")]
     public string Status { get; set; }//Состояние пациента
 }
