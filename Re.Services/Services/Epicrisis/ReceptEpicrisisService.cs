@@ -1,11 +1,9 @@
 ﻿using Re.Core.Models;
 using Re.Data.Repo;
 using Re.Services.Interfaces.Epicrisis;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace Re.Services.Services.Epicrisis
 {
@@ -16,6 +14,12 @@ namespace Re.Services.Services.Epicrisis
         {
             _repo = repo;
         }
+
+        public async Task<List<ReceptionEpicrisis>> GetAllAsync()
+        {
+            return await _repo.GetAsync();
+        }
+
         public async Task<ReceptionEpicrisis> SaveReceptEpicrisisAsync(ReceptionEpicrisis epicrisis)
         {
             if (epicrisis.Id == null)

@@ -39,14 +39,6 @@ namespace Re.Data.Migrations
                 oldClrType: typeof(DateTime),
                 oldType: "timestamp without time zone");
 
-            migrationBuilder.AlterColumn<TimeSpan>(
-                name: "Time",
-                table: "HemoEpicrises",
-                type: "interval",
-                nullable: false,
-                oldClrType: typeof(TimeOnly),
-                oldType: "time without time zone");
-
             migrationBuilder.AlterColumn<string>(
                 name: "Indications",
                 table: "HemoEpicrises",
@@ -86,14 +78,6 @@ namespace Re.Data.Migrations
                 nullable: true,
                 oldClrType: typeof(string),
                 oldType: "text");
-
-            migrationBuilder.AlterColumn<DateTime>(
-                name: "Date",
-                table: "HemoEpicrises",
-                type: "timestamp without time zone",
-                nullable: false,
-                oldClrType: typeof(DateOnly),
-                oldType: "date");
 
             migrationBuilder.AddColumn<string>(
                 name: "DoctorId",

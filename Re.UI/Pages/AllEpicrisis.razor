@@ -1,0 +1,98 @@
+﻿@page "/allEpicrisis"
+
+@using Re.Core.Models;
+@using Re.UI.Pages.Components.Epicrisis
+@using Re.Services.Services.Epicrisis
+@using System.ComponentModel;
+@inject ReceptEpicrisisService reService
+
+<MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary" PanelClass="pa-6">
+    <MudTabPanel Text="Приемный эпикриз">
+        <MudGrid>
+        @foreach (var res in result)
+        {
+            <MudItem xs="6">
+                <MudCard Style="background-color: #c0c3e8; border-radius: 15px;" Elevation="3" Outlined="true">
+                    <MudCardContent>
+                        @foreach (var value in res)
+                        {
+                            <MudText><b>@value.Key:</b> @value.Value</MudText>
+                        }
+                    </MudCardContent>
+                </MudCard>
+            </MudItem>
+        }
+        </MudGrid>
+    </MudTabPanel>
+    <MudTabPanel Text="Переводной эпикриз">
+        <Epic_Transferable />
+    </MudTabPanel>
+    <MudTabPanel Text="Рентген/КТ">
+        <Epic_RoentgenKT />
+    </MudTabPanel>
+</MudTabs>
+
+
+@code {
+    private List<ReceptionEpicrisis> allReception = new List<ReceptionEpicrisis>();
+    List<Dictionary<string, string>> result = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        await base.OnInitializedAsync();
+        allReception = await reService.GetAllAsync();
+        GetList();
+    }
+
+    private string FormatValue(object value)
+    {
+        string result = "";
+        if (value is string[])
+        {
+            var array = value as Array;
+            foreach (var arr in array)
+            {
+                result += $"{arr} ";
+            }
+            return result;
+        }
+        else if (value is int[])
+        {
+            var array = value as Array;
+            foreach (var arr in array)
+            {
+                result += $"{arr} ";
+            }
+            return result;
+        }
+        else if (value is Doctor)
+        {
+            var doctor = value as Doctor;
+            return doctor.Name;
+        }
+        else
+        {
+            return value?.ToString() ?? string.Empty;
+        }
+    }
+    private void GetList()
+    {
+        foreach (var item in allReception)
+        {
+            Dictionary<string, string> a = new();
+            foreach (var prop in item.GetType().GetProperties())
+            {
+                var value = item.GetType().GetProperty(prop.Name).GetValue(item);
+                var displayNameAttribute = (DisplayNameAttribute)Attribute.GetCustomAttribute(prop, typeof(DisplayNameAttribute));
+                var displayName = displayNameAttribute?.DisplayName ?? prop.Name;
+
+                if(value != null)
+                {
+                    var formatValue = FormatValue(value);
+                    a.Add(displayName, formatValue);
+                }
+            }
+            result.Add(a);
+        }
+    }
+}

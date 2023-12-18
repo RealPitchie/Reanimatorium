@@ -11,11 +11,9 @@ namespace Re.Data.Repo
     public class Repo<T> : IRepo<T> where T : class
     {
         DataContext _context;
-        DbSet<T> _dbSet;
         public Repo(DataContext context)
         {
             _context = context;
-            _dbSet = context.Set<T>();
         }
 
         public async Task<T> SaveAsync(T entity)
@@ -28,6 +26,6 @@ namespace Re.Data.Repo
         public async Task<List<T>> GetAsync()
         {
             return await _context.Set<T>().IncludeAll().ToListAsync();
-        }  
+        }
     }
 }

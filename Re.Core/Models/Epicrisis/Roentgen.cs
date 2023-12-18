@@ -13,8 +13,7 @@ namespace Re.Core.Models.Epicrisis
         public DateOnly Date { get; set; }
         public TimeOnly Time { get; set; }
         public string Other { get; set; }
-        public string Location { get; set; }
-        public string LocationPosition { get; set; }
+        
         public Doctor Doctor { get; set; }
     }
 
@@ -25,6 +24,8 @@ namespace Re.Core.Models.Epicrisis
         public bool AllowPositionControl { get; set; }
         public bool AllowDiagnosticsChanges { get; set; }
         public bool AllowIdentificationInjuries { get; set; }
+        public string Location { get; set; }
+        public string LocationPosition { get; set; }
     }
 
     public class AbdominalCavityRoentgen : Roentgen
@@ -33,6 +34,8 @@ namespace Re.Core.Models.Epicrisis
         public bool AllowGasAvailable { get; set; }
         public bool AllowPassageRating { get; set; }
         public bool AllowPositionControl { get; set; }
+        public string Location { get; set; }
+        public string LocationPosition { get; set; }
     }
     public class TomographicExploration : Roentgen
     {
