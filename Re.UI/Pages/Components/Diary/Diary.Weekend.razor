@@ -7,10 +7,12 @@
 
 <MudGrid>
     <MudItem>
-        <MudDatePicker style="width: 150px;" Label="Дата" Date="weekend.Date" />
-    </MudItem>
-    <MudItem>
-        <MudTimePicker style="width: 150px;" Label="Время" Time="weekend.Time" />
+        <MudItem>
+            <MudDatePicker style="width: 150px;" Label="Дата" @bind-Date="date" />
+        </MudItem>
+        <MudItem>
+            <MudTimePicker style="width: 150px;" Label="Время" @bind-Time="time" />
+        </MudItem>
     </MudItem>
     <MudItem Class="d-flex flex-column justify-end">
         <MudRadioGroup @bind-SelectedOption="Dense_Radio">
@@ -1491,6 +1493,8 @@
 "Хестанова Н.З.",
 "Шабут А.М."
     };
+
+
      List<Doctor> doctors = new();
      List<Doctor> doctorsTwo = new();
     Func<Doctor, string> converter = d =>
@@ -1513,11 +1517,12 @@
         }
     }
 
+    DateTime? date;
+    TimeSpan? time;
     protected override void OnInitialized()
     {
-
-        weekend.Date = DateTime.Now;
-        weekend.Time = DateTime.Now.TimeOfDay;
+        date = DateTime.Now;
+        time = DateTime.Now.TimeOfDay;
 #pragma warning disable BL0005
         DoctorAdd();
         DoctorAddTwo();
@@ -1700,6 +1705,8 @@
     async Task Submit()
     {
         await WeekendService.SaveWeekendDiaryAsync(weekend);
+        weekend.Date = DateOnly.FromDateTime(date.Value);
+        weekend.Time = TimeOnly.FromTimeSpan(time.Value);
     }
 }
 

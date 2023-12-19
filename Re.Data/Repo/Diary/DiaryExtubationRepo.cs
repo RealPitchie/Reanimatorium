@@ -1,4 +1,6 @@
-﻿using Re.Core.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Re.Core.Extensions;
+using Re.Core.Models;
 
 namespace Re.Data.Repo.Diary
 {
@@ -10,10 +12,6 @@ namespace Re.Data.Repo.Diary
             _context = context;
         }
 
-        public Task<IEnumerable<Extubation>> GetAsync()
-        {
-            throw new NotImplementedException();
-        }
 
         public async Task<Extubation> SaveAsync(Extubation extubation)
         {
@@ -23,10 +21,11 @@ namespace Re.Data.Repo.Diary
             return extubation;
         }
 
-        Task<List<Extubation>> IRepo<Extubation>.GetAsync()
+        public async Task<List<Extubation>> GetAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Set<Extubation>().IncludeAll().ToListAsync();
         }
+
     }
 
 }
