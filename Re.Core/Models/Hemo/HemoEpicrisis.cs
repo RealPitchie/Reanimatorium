@@ -11,8 +11,9 @@ namespace Re.Core.Models.Hemo
     public class HemoEpicrisis
     {
         public string Id { get; set; }
-        public DateTime Date { get; set; }
-        public TimeSpan Time { get; set; }
+        public DateOnly DateOne { get; set; }
+        public DateOnly DateTwo { get; set; }
+        public TimeOnly Time { get; set; }
         public string FIO { get; set; } //больной(-ая)
         public int Age { get; set; } //возраст
         public int Number { get; set; } //история болезни
@@ -26,6 +27,6 @@ namespace Re.Core.Models.Hemo
         public string SZPGroup { get; set; } //группа свежезам. плазмы
         public string dantromb { get; set; } //кол-во тромбоцит. конц.
         public string TrombGroup { get; set; } //группа тромбоцит. конц.
-        public Doctor Doctor { get; set; } //доктор
+        public virtual Doctor Doctor { get; set; } //доктор
     }
 }

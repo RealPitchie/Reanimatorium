@@ -17,6 +17,10 @@ namespace Re.Services.Services.Hemo
         {
             _repo = repo;
         }
+        public async Task<List<HemoEpicrisis>> GetAllAsync()
+        {
+            return await _repo.GetAsync();
+        }
         public async Task<HemoEpicrisis> SaveHemoEpicrisisAsync(HemoEpicrisis ep)
         {
             if (ep.Id == null)

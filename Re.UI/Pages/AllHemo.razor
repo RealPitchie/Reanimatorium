@@ -1,0 +1,118 @@
+﻿@page "/allHemo" 
+ 
+@using Re.Core.Models.Hemo; 
+@using Re.Core.Models; 
+@using Re.UI.Pages.Components.Hemo 
+@using Re.Services.Services.Hemo 
+@using System.ComponentModel; 
+@inject HemoEpicrisisService HemoEpService 
+ 
+<MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary" PanelClass="pa-6"> 
+    <MudTabPanel Text="Эпикриз на гемотрансфузию"> 
+        <MudGrid> 
+            @foreach(var item in allHemoEp) 
+            { 
+                <MudItem xs="6"> 
+                    <MudCard> 
+                        <MudCardHeader> 
+                            <CardHeaderAvatar></CardHeaderAvatar> 
+                            <CardHeaderContent> 
+                                <MudText Typo="Typo.body1">@item.Time @item.DateOne.ToShortDateString()</MudText> 
+                            </CardHeaderContent> 
+                            <CardHeaderActions> 
+                                <MudIconButton Icon="@Icons.Material.Filled.Print" Title="Печать" Color="Color.Default" /> 
+                            </CardHeaderActions> 
+                        </MudCardHeader> 
+                        <MudCardContent>
+                            <div>
+                                <strong style="display: inline-block;">Больной(-ая)</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.FIO <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Возраст</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Age <br> </MudText>
+                                </MudText>
+                            </div> 
+                            <div>
+                                <strong style="display: inline-block;">История болезни №</strong>
+                                <MudText Typo="Typo.subtitle1"  style="display: inline-block;"> 
+                                    <MudText Typo="Typo.subtitle1"> @item.Number <br> </MudText> 
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Группа крови и Rh-принадлежность:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.GroupRh <br> </MudText> 
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Диагноз:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Diagnosis <br> </MudText> 
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Показания к переливанию компонентов крови:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Indications <br> </MudText> 
+                                </MudText>
+                            </div>
+                            <strong style="display: inline-block;">Ранее гемотрансфузии:</strong>
+                            <MudText Typo="Typo.subtitle1" style="display: inline-block;"> 
+                                <MudText Typo="Typo.subtitle1"> @item.Hemotransfusion <br> </MudText> 
+                            </MudText>
+                            <div>
+                                <strong>Заявка на:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.danerit </MudText> <strong>эритроцитарной взвеси</strong> <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.EritGroup <br> </MudText>
+                                </MudText>
+                            </div>
+                            @if (!string.IsNullOrEmpty(item.danszp))
+                            {
+                                <div>
+                                    <strong>и</strong>
+                                    <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                        <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.danszp </MudText> <strong>свежезамороженной плазмы</strong> <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.SZPGroup <br> </MudText>
+                                    </MudText>
+                                </div>
+                            }
+
+                            @if (!string.IsNullOrEmpty(item.dantromb))
+                            {
+                                <div>
+                                    <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                        <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.dantromb </MudText> <strong>тромбоцитарного концентрата</strong> <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.TrombGroup <br> </MudText>
+                                    </MudText>
+                                </div>
+                            }
+                            <strong>Согласие больного(ой) на гемотрансфузию получено.</strong> 
+                            <strong>Противопоказаний к переливанию компонентов крови нет.</strong>
+                            <strong>@item.DateTwo.ToShortDateString()</strong> 
+                            <div>
+                                <strong>Лечащий врач</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.Doctor.Name <br> </MudText>
+                                </MudText>
+                            </div>
+                            <strong>Глав. отделением Розенгард С.А.</strong>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            }
+        </MudGrid>
+    </MudTabPanel>
+</MudTabs>
+
+@code
+{
+    List<HemoEpicrisis> allHemoEp = new();
+
+    protected override async Task OnInitializedAsync()
+    {
+        allHemoEp = await HemoEpService.GetAllAsync();
+    }
+}
+                        
