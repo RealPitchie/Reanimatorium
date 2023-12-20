@@ -5,6 +5,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
+using Re.Core.Extensions;
 
 namespace Re.Data.Repo.Hemo
 {
@@ -16,11 +18,6 @@ namespace Re.Data.Repo.Hemo
             _context = context;
         }
 
-        public Task<IEnumerable<HemoEpicrisis>> GetAsync()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<HemoEpicrisis> SaveAsync(HemoEpicrisis ep)
         {
             await _context.HemoEpicrises.AddAsync(ep);
@@ -29,9 +26,9 @@ namespace Re.Data.Repo.Hemo
             return ep;
         }
 
-        Task<List<HemoEpicrisis>> IRepo<HemoEpicrisis>.GetAsync()
+        public async Task<List<HemoEpicrisis>> GetAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Set<HemoEpicrisis>().IncludeAll().ToListAsync();
         }
     }
 }
