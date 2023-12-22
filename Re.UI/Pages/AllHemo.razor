@@ -11,7 +11,7 @@
 @inject ThrombocyteProtocolService ThrService
  
 <MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary" PanelClass="pa-6"> 
-    @*<MudTabPanel Text="Эпикриз на гемотрансфузию"> 
+    <MudTabPanel Text="Эпикриз на гемотрансфузию"> 
         <MudGrid> 
             @foreach(var item in allHemoEp) 
             { 
@@ -107,7 +107,7 @@
                 </MudItem>
             }
         </MudGrid>
-    </MudTabPanel>*@
+    </MudTabPanel>
     <MudTabPanel Text="Протокол гемотрансфузии">
         <MudGrid>
             @foreach(var item in allEr)
