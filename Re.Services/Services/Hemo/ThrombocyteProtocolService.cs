@@ -17,6 +17,10 @@ namespace Re.Services.Services.Hemo
         {
             _repo = repo;
         }
+        public async Task<List<ThrombocyteProtocol>> GetAllAsync()
+        {
+            return await _repo.GetAsync();
+        }
         public async Task<ThrombocyteProtocol> SaveThrombocyteProtocolAsync(ThrombocyteProtocol thr)
         {
             if (thr.Id == null)

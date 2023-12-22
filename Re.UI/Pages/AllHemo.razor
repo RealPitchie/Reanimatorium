@@ -5,10 +5,13 @@
 @using Re.UI.Pages.Components.Hemo 
 @using Re.Services.Services.Hemo 
 @using System.ComponentModel; 
-@inject HemoEpicrisisService HemoEpService 
+@inject HemoEpicrisisService HemoEpService
+@inject ErythrocyteProtocolService ErService
+@inject SZPProtocolService SZPService
+@inject ThrombocyteProtocolService ThrService
  
 <MudTabs Elevation="4" Rounded="true" Centered="true" Color="@Color.Primary" PanelClass="pa-6"> 
-    <MudTabPanel Text="Эпикриз на гемотрансфузию"> 
+    @*<MudTabPanel Text="Эпикриз на гемотрансфузию"> 
         <MudGrid> 
             @foreach(var item in allHemoEp) 
             { 
@@ -25,19 +28,19 @@
                         </MudCardHeader> 
                         <MudCardContent>
                             <div>
-                                <strong style="display: inline-block;">Больной(-ая)</strong>
+                                <strong style="display: inline-block;">Больной(-ая):</strong>
                                 <MudText Typo="Typo.subtitle1" style="display: inline-block;">
                                     <MudText Typo="Typo.subtitle1"> @item.FIO <br> </MudText>
                                 </MudText>
                             </div>
                             <div>
-                                <strong style="display: inline-block;">Возраст</strong>
+                                <strong style="display: inline-block;">Возраст:</strong>
                                 <MudText Typo="Typo.subtitle1" style="display: inline-block;">
                                     <MudText Typo="Typo.subtitle1"> @item.Age <br> </MudText>
                                 </MudText>
                             </div> 
                             <div>
-                                <strong style="display: inline-block;">История болезни №</strong>
+                                <strong style="display: inline-block;">История болезни №:</strong>
                                 <MudText Typo="Typo.subtitle1"  style="display: inline-block;"> 
                                     <MudText Typo="Typo.subtitle1"> @item.Number <br> </MudText> 
                                 </MudText>
@@ -83,6 +86,7 @@
                             @if (!string.IsNullOrEmpty(item.dantromb))
                             {
                                 <div>
+                                    <strong>и</strong>
                                     <MudText Typo="Typo.subtitle1" style="display: inline-block;">
                                         <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.dantromb </MudText> <strong>тромбоцитарного концентрата</strong> <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.TrombGroup <br> </MudText>
                                     </MudText>
@@ -92,12 +96,440 @@
                             <strong>Противопоказаний к переливанию компонентов крови нет.</strong>
                             <strong>@item.DateTwo.ToShortDateString()</strong> 
                             <div>
-                                <strong>Лечащий врач</strong>
+                                <strong>Лечащий врач:</strong>
                                 <MudText Typo="Typo.subtitle1" style="display: inline-block;">
                                     <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.Doctor.Name <br> </MudText>
                                 </MudText>
                             </div>
                             <strong>Глав. отделением Розенгард С.А.</strong>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            }
+        </MudGrid>
+    </MudTabPanel>*@
+    <MudTabPanel Text="Протокол гемотрансфузии">
+        <MudGrid>
+            @foreach(var item in allEr)
+            {
+                <MudItem xs="6">
+                    <MudCard>
+                        <MudCardHeader> 
+                            <CardHeaderAvatar></CardHeaderAvatar> 
+                            <CardHeaderContent> 
+                                <MudText Typo="Typo.body1">@item.Date.ToShortDateString()</MudText>
+                                <MudText Typo="Typo.body1">Начало: @item.StartTime Конец: @item.EndTime</MudText>
+                                <strong>Трансфузия эритроцитарной взвеси</strong>
+                            </CardHeaderContent> 
+                            <CardHeaderActions> 
+                                <MudIconButton Icon="@Icons.Material.Filled.Print" Title="Печать" Color="Color.Default" /> 
+                            </CardHeaderActions> 
+                        </MudCardHeader>
+                        <MudCardContent>
+                            <div>
+                                    <strong style="display: inline-block;">Ф.И.О. реципиента:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.FIO <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">№ карты:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Number <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Группа крови репициента:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Group <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Фенотип:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Phenotype <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Где определяли резус:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Place <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Показания к гемотрансфузии:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Indication <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Трансфузионный анамнез:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Anamnesis <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Наименование компонента:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Component <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Изготовитель:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Mfr <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong>Дата загатовки:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.StartDate </MudText> <strong>Годна до:</strong> <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.EndDate <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">N контейнера:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.NumberCont <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Объем:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Volume <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Код донора:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Code <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Группа крови донора:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.GroupDonor <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Реактивы:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Reagents <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Пробы на совместимость:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Compatibility <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Биологическая проба:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.BiologicalSample <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Способ трансфузии:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Transfusion <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Осложнения:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Complications <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong>Врач:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.Doctor.Name <br> </MudText>
+                                </MudText>
+                            </div>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            }
+        </MudGrid>
+        <MudGrid>
+            @foreach (var item in allSZP)
+            {
+                <MudItem xs="6">
+                    <MudCard>
+                        <MudCardHeader>
+                            <CardHeaderAvatar></CardHeaderAvatar>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.body1">@item.Date.ToShortDateString()</MudText>
+                                    <MudText Typo="Typo.body1">Начало: @item.StartTime Конец: @item.EndTime</MudText>
+                                    <strong>Трансфузия свежезамороженной плазмы</strong>
+                                </CardHeaderContent>
+                                <CardHeaderActions>
+                                    <MudIconButton Icon="@Icons.Material.Filled.Print" Title="Печать" Color="Color.Default" />
+                                </CardHeaderActions>
+                            </MudCardHeader>
+                            <MudCardContent>
+                                <div>
+                                    <strong style="display: inline-block;">Ф.И.О. реципиента:</strong>
+                                    <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                        <MudText Typo="Typo.subtitle1"> @item.FIO <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">№ карты:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Number <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Группа крови репициента:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Group <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Фенотип:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Phenotype <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Где определяли резус:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Place <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Показания к гемотрансфузии:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Indication <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Трансфузионный анамнез:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Anamnesis <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Наименование компонента:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Component <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Изготовитель:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Mfr <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong>Дата загатовки:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.StartDate </MudText> <strong>Годна до:</strong> <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.EndDate <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">N контейнера:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.NumberCont <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Объем:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Volume <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Код донора:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Code <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Группа крови донора:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.GroupDonor <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Реактивы:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Reagents <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Пробы на совместимость:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Compatibility <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Биологическая проба:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.BiologicalSample <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Способ трансфузии:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Transfusion <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Осложнения:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Complications <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong>Врач:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.Doctor.Name <br> </MudText>
+                                </MudText>
+                            </div>
+                        </MudCardContent>
+                    </MudCard>
+                </MudItem>
+            }
+        </MudGrid>
+        <MudGrid>
+            @foreach (var item in allThr)
+            {
+                <MudItem xs="6">
+                    <MudCard>
+                        <MudCardHeader>
+                            <CardHeaderAvatar></CardHeaderAvatar>
+                            <CardHeaderContent>
+                                <MudText Typo="Typo.body1">@item.Date.ToShortDateString()</MudText>
+                                    <MudText Typo="Typo.body1">Начало: @item.StartTime Конец: @item.EndTime</MudText>
+                                    <strong>Трансфузия тромбоцитарного концентрата</strong>
+                                </CardHeaderContent>
+                                <CardHeaderActions>
+                                    <MudIconButton Icon="@Icons.Material.Filled.Print" Title="Печать" Color="Color.Default" />
+                                </CardHeaderActions>
+                            </MudCardHeader>
+                            <MudCardContent>
+                                <div>
+                                    <strong style="display: inline-block;">Ф.И.О. реципиента:</strong>
+                                    <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                        <MudText Typo="Typo.subtitle1"> @item.FIO <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">№ карты:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Number <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Группа крови репициента:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Group <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Фенотип:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Phenotype <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Где определяли резус:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Place <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Показания к гемотрансфузии:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Indication <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Трансфузионный анамнез:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Anamnesis <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Наименование компонента:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Component <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Изготовитель:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Mfr <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong>Дата загатовки:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.StartDate </MudText> <strong>Годна до:</strong> <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.EndDate <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">N контейнера:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.NumberCont <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Объем:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Volume <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Код донора:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Code <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Группа крови донора:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.GroupDonor <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Реактивы:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Reagents <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Пробы на совместимость:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Compatibility <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Биологическая проба:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.BiologicalSample <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Способ трансфузии:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Transfusion <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong style="display: inline-block;">Осложнения:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1"> @item.Complications <br> </MudText>
+                                </MudText>
+                            </div>
+                            <div>
+                                <strong>Врач:</strong>
+                                <MudText Typo="Typo.subtitle1" style="display: inline-block;">
+                                    <MudText Typo="Typo.subtitle1" style="display: inline-block;"> @item.Doctor.Name <br> </MudText>
+                                </MudText>
+                            </div>
                         </MudCardContent>
                     </MudCard>
                 </MudItem>
@@ -109,10 +541,16 @@
 @code
 {
     List<HemoEpicrisis> allHemoEp = new();
+    List<ErythrocyteProtocol> allEr = new();
+    List<SZPProtocol> allSZP = new();
+    List<ThrombocyteProtocol> allThr = new();
 
     protected override async Task OnInitializedAsync()
     {
         allHemoEp = await HemoEpService.GetAllAsync();
+        allEr = await ErService.GetAllAsync();
+        allSZP = await SZPService.GetAllAsync();
+        allThr = await ThrService.GetAllAsync();
     }
 }
                         

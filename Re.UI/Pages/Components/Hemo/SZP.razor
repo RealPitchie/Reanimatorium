@@ -8,13 +8,13 @@
 <MudGrid>
     <MudGrid Style="margin-top:-80px; margin-left:200px;">
         <MudItem Style="margin-top:5px;"><MudText>Дата:</MudText></MudItem>
-        <MudItem xs="2"><MudDatePicker Style="margin-top:-5px;" Date="szp.Date" /></MudItem>
+        <MudItem xs="2"><MudDatePicker Style="margin-top:-5px;" @bind-Date="date" /></MudItem>
     </MudGrid>
     <MudGrid Style="margin-left:200px; margin-top:-50px;">
         <MudItem Style="margin-top:5px;"><MudText>начало:</MudText></MudItem>
-        <MudItem xs="2"><MudTimePicker Style="margin-top:-5px;" Time="szp.StartTime" /></MudItem>
+        <MudItem xs="2"><MudTimePicker Style="margin-top:-5px;" @bind-Time="starttime" /></MudItem>
         <MudItem Style="margin-top:5px;"><MudText>конец:</MudText></MudItem>
-        <MudItem xs="2"><MudTimePicker Style="margin-top:-5px;" Time="szp.EndTime" /></MudItem>
+        <MudItem xs="2"><MudTimePicker Style="margin-top:-5px;" @bind-Time="endtime" /></MudItem>
     </MudGrid>
     <MudItem xs="12">
         <MudPaper Style="margin: 15px 0; margin-top:30px;">
@@ -72,9 +72,9 @@
                 </MudGrid>
                 <MudGrid Style="margin-top:15px;">
                     <MudItem Style="margin-top:5px;"><MudText>Дата заготовки:</MudText></MudItem>
-                    <MudItem xs="2"><MudDatePicker Style="margin-top:-5px;" Date="szp.StartDate" /></MudItem>
+                    <MudItem xs="2"><MudDatePicker Style="margin-top:-5px;" @bind-Date="startdate" /></MudItem>
                     <MudItem Style="margin-top:5px;"><MudText>Годна до:</MudText></MudItem>
-                    <MudItem xs="2"> <MudDatePicker Style="margin-top:-5px;" Date="szp.EndDate" /></MudItem>
+                    <MudItem xs="2"> <MudDatePicker Style="margin-top:-5px;" @bind-Date="enddate" /></MudItem>
                 </MudGrid>
                 <MudGrid>
                     <MudItem xs="10">
@@ -246,19 +246,28 @@
             doctors.Add(new Doctor { Name = doctorNames[i], Id = Guid.NewGuid().ToString(), Position = i.ToString() });
         }
     }
+    public SZPProtocol szp = new();
+    DateTime? date;
+    DateTime? startdate;
+    DateTime? enddate;
+    TimeSpan? starttime;
+    TimeSpan? endtime;
     protected override void OnInitialized()
     {
         DoctorAdd();
-        szp.StartTime = DateTime.Now.TimeOfDay; //Время
-        szp.EndTime = DateTime.Now.TimeOfDay; //Время
-        szp.Date = DateTime.Now; //Время
-        szp.StartDate = DateTime.Now;
-        szp.EndDate = DateTime.Now;
+        date = DateTime.Now;
+        startdate = DateTime.Now;
+        enddate = DateTime.Now;
+        starttime = DateTime.Now.TimeOfDay;
+        endtime = DateTime.Now.TimeOfDay;
     }
-    //[Parameter]
-    public SZPProtocol szp = new();
     async Task Submit()
     {
+        szp.Date = DateOnly.FromDateTime(date.Value);
+        szp.StartDate = DateOnly.FromDateTime(startdate.Value);
+        szp.EndDate = DateOnly.FromDateTime(enddate.Value);
+        szp.StartTime = TimeOnly.FromTimeSpan(starttime.Value);
+        szp.EndTime = TimeOnly.FromTimeSpan(endtime.Value);
         await szpService.SaveSZPProtocolAsync(szp);
     }
 }

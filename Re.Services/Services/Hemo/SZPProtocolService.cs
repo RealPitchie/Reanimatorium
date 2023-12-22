@@ -17,6 +17,10 @@ namespace Re.Services.Services.Hemo
         {
             _repo = repo;
         }
+        public async Task<List<SZPProtocol>> GetAllAsync()
+        {
+            return await _repo.GetAsync();
+        }
         public async Task<SZPProtocol> SaveSZPProtocolAsync(SZPProtocol szp)
         {
             if (szp.Id == null)

@@ -1,9 +1,11 @@
 ﻿using Re.Core.Models.Hemo;
 using System;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Re.Core.Extensions;
 
 namespace Re.Data.Repo.Hemo
 {
@@ -15,11 +17,6 @@ namespace Re.Data.Repo.Hemo
             _context = context;
         }
 
-        public Task<IEnumerable<ThrombocyteProtocol>> GetAsync()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<ThrombocyteProtocol> SaveAsync(ThrombocyteProtocol thr)
         {
             await _context.ThrombocyteProtocols.AddAsync(thr);
@@ -27,9 +24,10 @@ namespace Re.Data.Repo.Hemo
             return thr;
         }
 
-        Task<List<ThrombocyteProtocol>> IRepo<ThrombocyteProtocol>.GetAsync()
+        public async Task<List<ThrombocyteProtocol>> GetAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Set<ThrombocyteProtocol>().IncludeAll().ToListAsync();
+
         }
     }
 }

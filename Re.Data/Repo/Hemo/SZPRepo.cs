@@ -1,4 +1,6 @@
-﻿using Re.Core.Models.Hemo;
+﻿using Microsoft.EntityFrameworkCore;
+using Re.Core.Extensions;
+using Re.Core.Models.Hemo;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,11 +17,6 @@ namespace Re.Data.Repo.Hemo
             _context = context;
         }
 
-        public Task<IEnumerable<SZPProtocol>> GetAsync()
-        {
-            throw new NotImplementedException();
-        }
-
         public async Task<SZPProtocol> SaveAsync(SZPProtocol szp)
         {
             await _context.SZPProtocols.AddAsync(szp);
@@ -27,9 +24,9 @@ namespace Re.Data.Repo.Hemo
             return szp;
         }
 
-        Task<List<SZPProtocol>> IRepo<SZPProtocol>.GetAsync()
+        public async Task<List<SZPProtocol>> GetAsync()
         {
-            throw new NotImplementedException();
+            return await _context.Set<SZPProtocol>().IncludeAll().ToListAsync();
         }
     }
 }

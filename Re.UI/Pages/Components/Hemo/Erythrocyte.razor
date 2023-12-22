@@ -8,13 +8,13 @@
 <MudGrid>
     <MudGrid Style="margin-top:-80px; margin-left:200px;">
         <MudItem Style="margin-top:5px;"><MudText>Дата:</MudText></MudItem>
-        <MudItem xs="2"><MudDatePicker Style="margin-top:-5px;" Date="er.Date" /></MudItem>
+        <MudItem xs="2"><MudDatePicker Style="margin-top:-5px;" @bind-Date="date" /></MudItem>
     </MudGrid>
     <MudGrid Style="margin-left:200px; margin-top:-50px;">
         <MudItem Style="margin-top:5px;"><MudText>начало:</MudText></MudItem>
-        <MudItem xs="2"><MudTimePicker Style="margin-top:-5px;" Time="er.StartTime" /></MudItem>
+        <MudItem xs="2"><MudTimePicker Style="margin-top:-5px;" @bind-Time="starttime" /></MudItem>
         <MudItem Style="margin-top:5px;"><MudText>конец:</MudText></MudItem>
-        <MudItem xs="2"><MudTimePicker Style="margin-top:-5px;" Time="er.EndTime" /></MudItem>
+        <MudItem xs="2"><MudTimePicker Style="margin-top:-5px;" @bind-Time="endtime" /></MudItem>
     </MudGrid>
     <MudItem xs="12">
         <MudPaper Style="margin: 15px 0; margin-top:30px;">
@@ -72,9 +72,9 @@
                 </MudGrid>
                 <MudGrid Style="margin-top:15px;">
                     <MudItem Style="margin-top:5px;"><MudText>Дата заготовки:</MudText></MudItem>
-                    <MudItem xs="2"><MudDatePicker Style="margin-top:-5px;" Date="er.StartDate" /></MudItem>
+                    <MudItem xs="2"><MudDatePicker Style="margin-top:-5px;" @bind-Date="startdate" /></MudItem>
                     <MudItem Style="margin-top:5px;"><MudText>Годна до:</MudText></MudItem>
-                    <MudItem xs="2"> <MudDatePicker Style="margin-top:-5px;" Date="er.EndDate" /></MudItem>
+                    <MudItem xs="2"> <MudDatePicker Style="margin-top:-5px;" @bind-Date="enddate" /></MudItem>
                 </MudGrid>
                 <MudGrid>
                     <MudItem xs="10">
@@ -246,19 +246,28 @@
             doctors.Add(new Doctor { Name = doctorNames[i], Id = Guid.NewGuid().ToString(), Position = i.ToString() });
         }
     }
+    public ErythrocyteProtocol er = new();
+    DateTime? date;
+    DateTime? startdate;
+    DateTime? enddate;
+    TimeSpan? starttime;
+    TimeSpan? endtime;
     protected override void OnInitialized()
     {
         DoctorAdd();
-        er.StartTime = DateTime.Now.TimeOfDay; //Время
-        er.EndTime = DateTime.Now.TimeOfDay; //Время
-        er.Date = DateTime.Now; //Время
-        er.StartDate = DateTime.Now;
-        er.EndDate = DateTime.Now;
+        date = DateTime.Now;
+        startdate = DateTime.Now;
+        enddate = DateTime.Now;
+        starttime = DateTime.Now.TimeOfDay;
+        endtime = DateTime.Now.TimeOfDay;
     }
-    //[Parameter]
-    public ErythrocyteProtocol er = new();
     async Task Submit()
     {
+        er.Date = DateOnly.FromDateTime(date.Value);
+        er.StartDate = DateOnly.FromDateTime(startdate.Value);
+        er.EndDate = DateOnly.FromDateTime(enddate.Value);
+        er.StartTime = TimeOnly.FromTimeSpan(starttime.Value);
+        er.EndTime = TimeOnly.FromTimeSpan(endtime.Value);
         await erService.SaveErythrocyteProtocolAsync(er);
     }
 }
