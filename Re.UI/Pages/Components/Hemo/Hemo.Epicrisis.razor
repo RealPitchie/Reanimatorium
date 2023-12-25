@@ -275,12 +275,16 @@
             doctors.Add(new Doctor { Name = doctorNames[i], Id = Guid.NewGuid().ToString(), Position = i.ToString() });
         }
     }
-    HemoEpicrisis ep = new(); private bool SwitchChecked = false;
-    DateTime? dateOne; DateTime? dateTwo;
-    TimeSpan? time; protected override void OnInitialized()
+    HemoEpicrisis ep = new(); 
+    private bool SwitchChecked = false;
+    DateTime? dateOne; 
+    DateTime? dateTwo;
+    TimeSpan? time; 
+    protected override void OnInitialized()
     {
         dateOne = DateTime.Now;
-        dateTwo = DateTime.Now; time = DateTime.Now.TimeOfDay;
+        dateTwo = DateTime.Now; 
+        time = DateTime.Now.TimeOfDay;
         DoctorAdd();
     }
     async Task Submit()

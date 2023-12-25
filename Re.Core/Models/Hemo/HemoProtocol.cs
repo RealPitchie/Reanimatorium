@@ -10,9 +10,9 @@ namespace Re.Core.Models.Hemo
     public class HemoProtocol
     {
         public string Id { get; set; }
-        public DateTime Date { get; set; }
-        public TimeSpan StartTime { get; set; }
-        public TimeSpan EndTime { get; set; }
+        public DateOnly Date { get; set; }
+        public TimeOnly StartTime { get; set; }
+        public TimeOnly EndTime { get; set; }
         public string FIO { get; set; } //фио реципиента
         public int Number { get; set; } //№ карты
         public string Group { get; set; } //группа крови реципиента
@@ -43,25 +43,25 @@ namespace Re.Core.Models.Hemo
         public string Diuresis { get; set; } //диурез,цвет мочи перед переливанием
         public string Diuresishafter { get; set; } //диурез,цвет мочи через 1 час
         public string Diuresis2hafter { get; set; } //диурез,цвет мочи через 2 часа
-        public Doctor Doctor { get; set; }
+        public virtual Doctor Doctor { get; set; }
     }
 
     public class ErythrocyteProtocol : HemoProtocol
     {
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateOnly StartDate { get; set; }
+        public DateOnly EndDate { get; set; }
     }
 
     public class SZPProtocol : HemoProtocol
     {
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateOnly StartDate { get; set; }
+        public DateOnly EndDate { get; set; }
     }
 
     public class ThrombocyteProtocol : HemoProtocol
     {
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public DateOnly StartDate { get; set; }
+        public DateOnly EndDate { get; set; }
 
 
     }

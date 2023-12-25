@@ -17,12 +17,6 @@ namespace Re.Data.Migrations
                 name: "Name",
                 table: "HemoEpicrises");
 
-
-
-     
-   
-
-     
             migrationBuilder.AlterColumn<TimeOnly>(
                 name: "Time",
                 table: "ReceptionEpicrises",
