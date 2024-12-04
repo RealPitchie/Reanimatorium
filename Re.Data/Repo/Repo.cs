@@ -27,5 +27,9 @@ namespace Re.Data.Repo
         {
             return await _context.Set<T>().IncludeAll().ToListAsync();
         }
+        public async Task<List<T>> GetAsync(Type type)
+        {
+            return await _context.Set<T>().IncludeAll().ToListAsync();
+        }
     }
 }

@@ -28,5 +28,9 @@ namespace Re.Data.Repo.Hemo
         {
             return await _context.Set<SZPProtocol>().IncludeAll().ToListAsync();
         }
+        public async Task<List<SZPProtocol>> GetAsync(Type type)
+        {
+            return await _context.Set<SZPProtocol>().IncludeAll().ToListAsync();
+        }
     }
 }

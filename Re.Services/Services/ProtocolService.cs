@@ -19,9 +19,16 @@ namespace Re.Services.Services
         {
             return await _repo.SaveAsync(protocol);
         }
+
+        public async Task<List<StandardProtocol>> GetProtocolsAsync(Type protocolType)
+        {
+            return await _repo.GetAsync(protocolType);
+        }
+
         public async Task<List<StandardProtocol>> GetProtocolsAsync()
         {
             return await _repo.GetAsync();
         }
     }
+
 }

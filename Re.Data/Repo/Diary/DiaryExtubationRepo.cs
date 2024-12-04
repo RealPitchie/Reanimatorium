@@ -25,6 +25,11 @@ namespace Re.Data.Repo.Diary
         {
             return await _context.Set<Extubation>().IncludeAll().ToListAsync();
         }
+        public async Task<List<Extubation>> GetAsync(Type type)
+        {
+            return await _context.Set<Extubation>().IncludeAll().ToListAsync();
+        }
+
 
     }
 
