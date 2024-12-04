@@ -1,5 +1,8 @@
 @using Re.Core.Models
 @using Re.UI.Data
+@using Re.Services.Services
+
+@inject ProtocolService _service
 
 <MudPaper Style="padding: 20px; margin: 15px 0">
     <MudText style="margin-top: 15px; font-weight: bolder;"> 
@@ -127,6 +130,10 @@
             </MudSelect>
         </MudItem>
     </MudGrid>
+    <MudDivider></MudDivider>
+    <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="Submit">
+        Отправить
+    </MudButton>
 </MudPaper>
 
 @code{ 
@@ -142,5 +149,10 @@
     {
         Protocol = new();
         Doctors.Add(new Doctor { Name = "Test Doctor", Id = Guid.NewGuid().ToString(), Position = "Test position" });
+    }
+    async Task Submit()
+    {
+        var ar = Protocol;
+        await _service.SaveProtocolAsync(ar);
     }
 }
