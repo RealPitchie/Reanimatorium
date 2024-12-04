@@ -19,11 +19,12 @@ namespace Re.Data.Repo
 
         public async Task<T> SaveAsync(T entity)
         {
-            await _context.AddAsync(entity);
+            var entityType = entity.GetType();
+
+            await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
-
         public async Task<List<T>> GetAsync()
         {
 
@@ -39,5 +40,10 @@ namespace Re.Data.Repo
             }
             return allProtocols.Where(p => p.GetType() == protocolType).ToList();
         }
+        public async Task<T> GetAsync(String id)
+        {
+            return await _context.Set<T>().FindAsync(id);
+        }
+
     }
 }

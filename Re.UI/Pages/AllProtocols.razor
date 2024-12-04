@@ -8,6 +8,7 @@
 @using System.ComponentModel;
 
 @inject ProtocolService ProtocolService
+@inject NavigationManager Navigation
 
 <MudContainer>
     <MudButton Variant="Variant.Filled" Color="Color.Primary" OnClick="GetCentralVeinProtocols">Центральные Протоколы</MudButton>
@@ -19,54 +20,55 @@
 <MudTable Items="@allProtocols" Striped="true" Hover="true">
     <HeaderContent>
         <MudTh>Тип Протокола</MudTh>
-        <MudTh>Детали</MudTh>
+        <MudTh>Дата</MudTh>
+        <MudTh>Доктор</MudTh>
     </HeaderContent>
     <RowTemplate>
-        <MudTd>@context.GetType().Name</MudTd>
-            <MudTd>@context</MudTd>
-            <MudTd>@context.ArteriasToBeCatheterized</MudTd>
+        <MudTd>@context.Name</MudTd>
+        <MudTd @onclick="@(() => ShowProtocolDetails(@context))">
+            @context.Time @context.Date.ToShortDateString()
+        </MudTd>
+            <MudTd>@context.Doctor.Name</MudTd>
         </RowTemplate>
     </MudTable>
 
-
 @code {
 
+
+    private void ShowProtocolDetails(StandardProtocol protocol)
+    {
+        Navigation.NavigateTo($"/ProtocolCard/{protocol.Id}");
+    }
+
+
     List<StandardProtocol> allProtocols = new();
-    // protected override async Task OnInitializedAsync()
-    // {
-    //     var standardProtocols = await ProtocolService.GetProtocolsAsync(typeof(StandardProtocol));
 
-    //     centrprotocol = standardProtocols.OfType<CentralVeinProtocol>().ToList();
-    //     arteriaprotocol = standardProtocols.OfType<ArteriaProtocol>().ToList();
-    //     epiduralprotocol = standardProtocols.OfType<EpiduralSpaceProtocol>().ToList();
-    // }
-
-    private async Task GetCentralVeinProtocols()
+    private async Task GetCentralVeinProtocols() 
     {
 
         var protocols = await ProtocolService.GetProtocolsAsync(typeof(CentralVeinProtocol));
-        allProtocols = protocols.OfType<StandardProtocol>().ToList();
+        allProtocols = protocols.ToList();
         StateHasChanged();
     }
 
     private async Task GetArteriaProtocols()
     {
         var protocols = await ProtocolService.GetProtocolsAsync(typeof(ArteriaProtocol));
-        allProtocols = protocols.OfType<StandardProtocol>().ToList();
+        allProtocols = protocols.ToList();
         StateHasChanged();
     }
 
     private async Task GetEpiduralProtocols()
     {
         var protocols = await ProtocolService.GetProtocolsAsync(typeof(EpiduralSpaceProtocol));
-        allProtocols = protocols.OfType<StandardProtocol>().ToList();
+        allProtocols = protocols.ToList();
         StateHasChanged(); 
     }
 
     private async Task GetAllProtocols()
     {
         var standardProtocols = await ProtocolService.GetProtocolsAsync();
-        allProtocols = standardProtocols.OfType<StandardProtocol>().ToList();
+        allProtocols = standardProtocols.ToList();
         StateHasChanged(); // Обновление состояния для перерисовки таблицы
     }
 }

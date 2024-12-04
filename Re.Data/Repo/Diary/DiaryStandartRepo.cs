@@ -30,6 +30,10 @@ namespace Re.Data.Repo.Diary
             return await _context.Set<StandartDiary>().IncludeAll().ToListAsync();
         }
 
+        public Task<StandartDiary> GetAsync(String guid)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

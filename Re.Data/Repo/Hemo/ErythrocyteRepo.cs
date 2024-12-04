@@ -34,5 +34,10 @@ namespace Re.Data.Repo.Hemo
             return await _context.Set<ErythrocyteProtocol>().IncludeAll().ToListAsync();
 
         }
+
+        public Task<ErythrocyteProtocol> GetAsync(String guid)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
