@@ -32,11 +32,6 @@
 @code {
 
     List<StandardProtocol> allProtocols = new();
-
-    List<CentralVeinProtocol> centrprotocol = new();
-    List<ArteriaProtocol> arteriaprotocol = new();
-    List<EpiduralSpaceProtocol> epiduralprotocol = new();
-
     // protected override async Task OnInitializedAsync()
     // {
     //     var standardProtocols = await ProtocolService.GetProtocolsAsync(typeof(StandardProtocol));
@@ -46,11 +41,11 @@
     //     epiduralprotocol = standardProtocols.OfType<EpiduralSpaceProtocol>().ToList();
     // }
 
-    private async Task GetCentralVeinProtocols() //НЕ РАБОТАЕТ!!
+    private async Task GetCentralVeinProtocols()
     {
 
         var protocols = await ProtocolService.GetProtocolsAsync(typeof(CentralVeinProtocol));
-        centrprotocol = protocols.OfType<CentralVeinProtocol>().ToList(); 
+        allProtocols = protocols.OfType<StandardProtocol>().ToList();
         StateHasChanged();
     }
 
@@ -70,7 +65,7 @@
 
     private async Task GetAllProtocols()
     {
-        var standardProtocols = await ProtocolService.GetProtocolsAsync(typeof(StandardProtocol));
+        var standardProtocols = await ProtocolService.GetProtocolsAsync();
         allProtocols = standardProtocols.OfType<StandardProtocol>().ToList();
         StateHasChanged(); // Обновление состояния для перерисовки таблицы
     }
