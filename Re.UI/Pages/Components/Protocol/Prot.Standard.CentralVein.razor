@@ -142,8 +142,7 @@
     public List<Doctor> Doctors = new();
     DateTime? date = DateTime.Now;
     TimeSpan? time = DateTime.Now.TimeOfDay;
-    Func<Doctor,string> converter = d => d?.Name;
-     
+    Func<Doctor,string> converter = d => d?.Name;  
 
     protected override async Task OnInitializedAsync()
     {

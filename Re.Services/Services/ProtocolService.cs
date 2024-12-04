@@ -29,6 +29,10 @@ namespace Re.Services.Services
         {
             return await _repo.GetAsync();
         }
+        public async Task<StandardProtocol> GetProtocolByIdAsync(string id)
+        {
+            return await _repo.GetAsync(id);
+        }
     }
 
 }

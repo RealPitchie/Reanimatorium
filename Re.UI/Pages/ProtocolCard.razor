@@ -1,0 +1,43 @@
+﻿@page "/ProtocolCard/{Id:guid}"
+@using Re.Core.Models;
+@using Re.Core.Models.Hemo
+@using Re.Services.Services.Hemo
+@using Re.UI.Pages.Components.Protocol
+@using Re.Services.Services
+@using System.ComponentModel;
+
+@inject ProtocolService ProtocolService
+
+@code {
+    [Parameter]
+    public Guid Id { get; set; }
+
+    private StandardProtocol protocol;
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if (Id != Guid.Empty)
+        {
+            protocol = await ProtocolService.GetProtocolByIdAsync(Id.ToString());
+        }
+    }
+
+}
+<h3>Детали протокола</h3>
+@if (protocol != null)
+{
+    <MudCard>
+        <MudCardHeader>
+            <MudText>@protocol.Name</MudText>
+            </MudCardHeader>
+            <MudCardContent>
+                <MudText>Дата: @protocol.Date.ToShortDateString()</MudText>
+                <MudText>Доктор: @protocol.Doctor.Name</MudText>
+                <!-- Другие поля протокола -->
+            </MudCardContent>
+        </MudCard>
+}
+else
+{
+    <MudText>Загрузка...</MudText>
+}

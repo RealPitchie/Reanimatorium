@@ -32,5 +32,10 @@ namespace Re.Data.Repo.Hemo
         {
             return await _context.Set<SZPProtocol>().IncludeAll().ToListAsync();
         }
+
+        public Task<SZPProtocol> GetAsync(String guid)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

@@ -20,6 +20,11 @@ namespace Re.Data.Repo
             throw new NotImplementedException();
         }
 
+        public Task<Patient> GetAsync(String guid)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<Patient> SaveAsync(Patient patient)
         {
             await _context.Patients.AddAsync(patient);
@@ -65,6 +70,16 @@ namespace Re.Data.Repo
         }
 
         Task<List<Syndrom>> IRepo<Syndrom>.GetAsync()
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<Syndrom> IRepo<Syndrom>.GetAsync(String guid)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<PrescribedMedication> IRepo<PrescribedMedication>.GetAsync(String guid)
         {
             throw new NotImplementedException();
         }

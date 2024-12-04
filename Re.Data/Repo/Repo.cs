@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Sockets;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using Re.Core.Extensions;
@@ -18,18 +19,31 @@ namespace Re.Data.Repo
 
         public async Task<T> SaveAsync(T entity)
         {
-            await _context.AddAsync(entity);
+            var entityType = entity.GetType();
+
+            await _context.Set<T>().AddAsync(entity);
             await _context.SaveChangesAsync();
             return entity;
         }
-
         public async Task<List<T>> GetAsync()
         {
+
             return await _context.Set<T>().IncludeAll().ToListAsync();
         }
-        public async Task<List<T>> GetAsync(Type type)
+        public async Task<List<T>> GetAsync(Type protocolType = null)
         {
-            return await _context.Set<T>().IncludeAll().ToListAsync();
+
+            var allProtocols = await _context.Set<T>().IncludeAll().ToListAsync();
+            if (protocolType == null)
+            {
+                return allProtocols;
+            }
+            return allProtocols.Where(p => p.GetType() == protocolType).ToList();
         }
+        public async Task<T> GetAsync(String id)
+        {
+            return await _context.Set<T>().FindAsync(id);
+        }
+
     }
 }

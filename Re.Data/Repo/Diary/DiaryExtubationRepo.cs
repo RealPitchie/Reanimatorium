@@ -30,7 +30,10 @@ namespace Re.Data.Repo.Diary
             return await _context.Set<Extubation>().IncludeAll().ToListAsync();
         }
 
-
+        public Task<Extubation> GetAsync(String guid)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

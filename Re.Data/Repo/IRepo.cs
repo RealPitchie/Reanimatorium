@@ -11,5 +11,6 @@ namespace Re.Data.Repo
         Task<T> SaveAsync(T entity);
         Task<List<T>> GetAsync();
         Task<List<T>> GetAsync(Type type);
+        Task<T> GetAsync(String guid);
     }
 }
