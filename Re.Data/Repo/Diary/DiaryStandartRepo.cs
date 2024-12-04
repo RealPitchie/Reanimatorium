@@ -25,6 +25,11 @@ namespace Re.Data.Repo.Diary
         {
             return await _context.Set<StandartDiary>().IncludeAll().ToListAsync();
         }
+        public async Task<List<StandartDiary>> GetAsync(Type type)
+        {
+            return await _context.Set<StandartDiary>().IncludeAll().ToListAsync();
+        }
+
     }
 
 }

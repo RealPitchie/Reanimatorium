@@ -23,6 +23,10 @@ namespace Re.Data.Repo.Diary
         {
             return await _context.Set<WeekendDiary>().IncludeAll().ToListAsync();
         }
+        public async Task<List<WeekendDiary>> GetAsync(Type type)
+        {
+            return await _context.Set<WeekendDiary>().IncludeAll().ToListAsync();
+        }
 
     }
 

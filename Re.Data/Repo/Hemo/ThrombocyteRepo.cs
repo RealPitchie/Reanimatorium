@@ -29,5 +29,10 @@ namespace Re.Data.Repo.Hemo
             return await _context.Set<ThrombocyteProtocol>().IncludeAll().ToListAsync();
 
         }
+        public async Task<List<ThrombocyteProtocol>> GetAsync(Type type)
+        {
+            return await _context.Set<ThrombocyteProtocol>().IncludeAll().ToListAsync();
+
+        }
     }
 }

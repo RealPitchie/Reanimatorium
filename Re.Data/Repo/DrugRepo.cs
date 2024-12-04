@@ -1,4 +1,5 @@
-﻿using Re.Core.Models;
+﻿using Microsoft.EntityFrameworkCore;
+using Re.Core.Models;
 
 namespace Re.Data.Repo
 {
@@ -10,7 +11,11 @@ namespace Re.Data.Repo
             _context = context;
         }
 
-        public Task<IEnumerable<Patient>> GetAsync()
+        public Task<List<Patient>> GetAsync()
+        {
+            throw new NotImplementedException();
+        }
+        public Task<List<Patient>> GetAsync(Type type)
         {
             throw new NotImplementedException();
         }
@@ -45,12 +50,21 @@ namespace Re.Data.Repo
             throw new NotImplementedException();
         }
 
-        Task<List<Syndrom>> IRepo<Syndrom>.GetAsync()
+        Task<List<Syndrom>> IRepo<Syndrom>.GetAsync(Type type)
         {
             throw new NotImplementedException();
         }
 
         Task<List<PrescribedMedication>> IRepo<PrescribedMedication>.GetAsync()
+        {
+            throw new NotImplementedException();
+        }
+        Task<List<PrescribedMedication>> IRepo<PrescribedMedication>.GetAsync(Type type)
+        {
+            throw new NotImplementedException();
+        }
+
+        Task<List<Syndrom>> IRepo<Syndrom>.GetAsync()
         {
             throw new NotImplementedException();
         }
