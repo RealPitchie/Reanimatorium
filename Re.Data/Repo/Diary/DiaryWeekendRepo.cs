@@ -28,6 +28,10 @@ namespace Re.Data.Repo.Diary
             return await _context.Set<WeekendDiary>().IncludeAll().ToListAsync();
         }
 
+        public Task<WeekendDiary> GetAsync(String guid)
+        {
+            throw new NotImplementedException();
+        }
     }
 
 }

@@ -36,6 +36,7 @@ public class DataContext : DbContext
     public DbSet<SLRProtocol> SLRProtocols { get; set; }
     public DbSet<CentralVeinProtocol> CentralVeinProtocols { get; set; }
     public DbSet<ArteriaProtocol> ArteriaProtocols { get; set; }
+    public DbSet<EpiduralSpaceProtocol> EpiduralSpaceProtocol { get; set; }
 
     //Эпикризы
     public DbSet<ReceptionEpicrisis> ReceptionEpicrises { get; set; }

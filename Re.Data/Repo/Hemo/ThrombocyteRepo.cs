@@ -34,5 +34,11 @@ namespace Re.Data.Repo.Hemo
             return await _context.Set<ThrombocyteProtocol>().IncludeAll().ToListAsync();
 
         }
+
+        public Task<ThrombocyteProtocol> GetAsync(String guid)
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }
